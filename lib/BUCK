@@ -1,0 +1,3 @@
+include_defs('//lib/maven.defs')
+
+define_license(name = 'Apache2.0')
