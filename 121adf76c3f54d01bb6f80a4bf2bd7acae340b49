@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cd1c8154_a37c9a99",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-17T08:41:37Z",
+      "side": 1,
+      "message": "Should this have been changed?",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "121adf76c3f54d01bb6f80a4bf2bd7acae340b49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e7ae93_e2408652",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-01-17T08:41:37Z",
+      "side": 1,
+      "message": "Should this have been changed?",
+      "range": {
+        "startLine": 82,
+        "startChar": 63,
+        "endLine": 82,
+        "endChar": 70
+      },
+      "revId": "121adf76c3f54d01bb6f80a4bf2bd7acae340b49",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
