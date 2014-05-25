@@ -1,4 +1,4 @@
-// Copyright (C) 2013 The Android Open Source Project
+// Copyright (C) 2014 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,16 +14,23 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.gerrit.common.ChangeListener;
-import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.server.config.FactoryModule;
+import java.util.Set;
 
-class Module extends FactoryModule {
-  @Override
-  protected void configure() {
-    DynamicSet.bind(binder(), ChangeListener.class).to(
-        ChangeEventListener.class);
-    factory(DefaultReviewers.Factory.class);
-    factory(ReviewersConfig.Factory.class);
+class ReviewerFilterSection {
+  private final String filter;
+  private final Set<String> reviewers;
+
+  ReviewerFilterSection(String filter,
+      Set<String> reviewers) {
+    this.filter = filter;
+    this.reviewers = reviewers;
+  }
+
+  String getFilter() {
+    return filter;
+  }
+
+  Set<String> getReviewers() {
+    return reviewers;
   }
 }
