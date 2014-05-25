@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import java.io.IOException;
-import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
@@ -24,6 +24,8 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.ChangeListener;
@@ -44,7 +46,10 @@ import com.google.gerrit.server.events.PatchSetCreatedEvent;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
-import com.google.gerrit.server.project.NoSuchProjectException;
+import com.google.gerrit.server.query.Predicate;
+import com.google.gerrit.server.query.QueryParseException;
+import com.google.gerrit.server.query.change.ChangeData;
+import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
 import com.google.gwtorm.server.OrmException;
@@ -54,7 +59,6 @@ import com.google.inject.Provider;
 import com.google.inject.ProvisionException;
 
 class ChangeEventListener implements ChangeListener {
-
   private static final Logger log = LoggerFactory
       .getLogger(ChangeEventListener.class);
 
@@ -68,8 +72,10 @@ class ChangeEventListener implements ChangeListener {
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final ThreadLocalRequestContext tl;
   private final SchemaFactory<ReviewDb> schemaFactory;
-  private final PluginConfigFactory cfg;
-  private final String pluginName;
+  private final ChangeData.Factory changeDataFactory;
+  private final ReviewersConfig.Factory configFactory;
+  private final Provider<CurrentUser> user;
+  private final ChangeQueryBuilder.Factory queryBuilder;
   private ReviewDb db;
 
   @Inject
@@ -84,7 +90,11 @@ class ChangeEventListener implements ChangeListener {
       final IdentifiedUser.GenericFactory identifiedUserFactory,
       final ThreadLocalRequestContext tl,
       final SchemaFactory<ReviewDb> schemaFactory,
+      final ChangeData.Factory changeDataFactory,
+      final ReviewersConfig.Factory configFactory,
       final PluginConfigFactory cfg,
+      final Provider<CurrentUser> user,
+      final ChangeQueryBuilder.Factory queryBuilder,
       final @PluginName String pluginName) {
     this.accountResolver = accountResolver;
     this.byEmailCache = byEmailCache;
@@ -96,8 +106,10 @@ class ChangeEventListener implements ChangeListener {
     this.identifiedUserFactory = identifiedUserFactory;
     this.tl = tl;
     this.schemaFactory = schemaFactory;
-    this.cfg = cfg;
-    this.pluginName = pluginName;
+    this.changeDataFactory = changeDataFactory;
+    this.configFactory = configFactory;
+    this.user = user;
+    this.queryBuilder = queryBuilder;
   }
 
   @Override
@@ -107,17 +119,11 @@ class ChangeEventListener implements ChangeListener {
     }
     PatchSetCreatedEvent e = (PatchSetCreatedEvent) event;
     Project.NameKey projectName = new Project.NameKey(e.change.project);
-    Set<Account> reviewers;
-    try {
-      reviewers = reviewers(cfg
-          .getFromProjectConfigWithInheritance(projectName, pluginName)
-          .getStringList("reviewer"), projectName, e.uploader.email);
-    } catch (NoSuchProjectException x) {
-      log.error(x.getMessage(), x);
-      return;
-    }
+    // TODO(davido): we have to cache per project configuration
+    ReviewersConfig config = configFactory.create(projectName);
+    List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
 
-    if (reviewers.isEmpty()) {
+    if (sections.isEmpty()) {
       return;
     }
 
@@ -153,7 +159,14 @@ class ChangeEventListener implements ChangeListener {
           return;
         }
 
-        final Runnable task = reviewersFactory.create(change, reviewers);
+        ReviewerFilterSection found =
+            findReviewerSection(sections, reviewDb, change);
+        if (found == null || found.getReviewers().isEmpty()) {
+          return;
+        }
+
+        final Runnable task = reviewersFactory.create(change,
+            toAccounts(found.getReviewers(), projectName, e.uploader.email));
 
         workQueue.getDefaultQueue().submit(new Runnable() {
           public void run() {
@@ -192,7 +205,7 @@ class ChangeEventListener implements ChangeListener {
             }
           }
         });
-      } catch (OrmException x) {
+      } catch (OrmException | QueryParseException x) {
         log.error(x.getMessage(), x);
       } finally {
         reviewDb.close();
@@ -205,14 +218,44 @@ class ChangeEventListener implements ChangeListener {
     }
   }
 
-  private Set<Account> reviewers(String[] list, Project.NameKey p,
-      String uploaderEMail) {
-    if (list == null || list.length == 0) {
-      return Collections.emptySet();
+  private ReviewerFilterSection findReviewerSection(
+      List<ReviewerFilterSection> sections, final ReviewDb reviewDb,
+      final Change change) throws OrmException, QueryParseException {
+    ReviewerFilterSection found = null;
+    ChangeData changeData = null;
+    for (ReviewerFilterSection s : sections) {
+      if (Strings.isNullOrEmpty(s.getFilter())
+          || s.getFilter().equals("*")) {
+        found = s;
+        break;
+      }
+      if (changeData == null) {
+        changeData = changeDataFactory.create(reviewDb, change);
+      }
+      if (filterMatch(s.getFilter(), changeData)) {
+        found = s;
+        break;
+      }
     }
-    Set<Account> reviewers = Sets.newHashSetWithExpectedSize(list.length);
+    return found;
+  }
+
+  boolean filterMatch(String filter, ChangeData changeData)
+      throws OrmException, QueryParseException {
+    Preconditions.checkNotNull(filter);
+    ChangeQueryBuilder qb = queryBuilder.create(user.get());
+    Predicate<ChangeData> filterPredicate = qb.parse(filter);
+    // TODO(davido): check that the potential review can see this change
+    // by adding AND is_visible() predicate? Or is it OK to assume
+    // that reviewers always can see it?
+    return filterPredicate.match(changeData);
+  }
+
+  private Set<Account> toAccounts(Set<String> in, Project.NameKey p,
+      String uploaderEMail) {
+    Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
-    for (String r : list) {
+    for (String r : in) {
       try {
         Account account = accountResolver.find(r);
         if (account != null) {
