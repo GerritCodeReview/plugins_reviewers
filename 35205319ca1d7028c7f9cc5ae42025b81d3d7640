@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "1fda4833_df657beb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-05-28T13:52:48Z",
+      "side": 1,
+      "message": "I incline to say, this change is not backwards compatible and migration should happen manually. I don\u0027t think there is a lot of users of this plugin in the wild anyway, so we shouldn\u0027t care much.",
+      "parentUuid": "5f2be0c2_e909b54b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f2be0c2_890c795d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
         "patchSetId": 3
@@ -64,6 +88,53 @@
         "startChar": 7,
         "endLine": 250,
         "endChar": 40
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1fda4833_ff623fe0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-05-28T13:52:48Z",
+      "side": 1,
+      "message": "Cool, then we shouldn\u0027t care.",
+      "parentUuid": "5f2be0c2_890c795d",
+      "range": {
+        "startLine": 248,
+        "startChar": 7,
+        "endLine": 250,
+        "endChar": 40
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff19f4bf_a6b6c614",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-05-28T13:52:48Z",
+      "side": 1,
+      "message": "\"filter\"",
+      "range": {
+        "startLine": 21,
+        "startChar": 7,
+        "endLine": 21,
+        "endChar": 16
       },
       "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
