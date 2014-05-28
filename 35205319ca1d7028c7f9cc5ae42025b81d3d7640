@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f20ecdd_c8ef8f21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-05-28T00:44:32Z",
+      "side": 1,
+      "message": "Allow",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2be0c2_e909b54b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-05-28T00:44:32Z",
+      "side": 1,
+      "message": "What about maintaining backward compatibility with the project.config?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2be0c2_890c795d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-05-28T00:44:32Z",
+      "side": 1,
+      "message": "Won\u0027t it just fail to add the reviewer, if the reviewer can\u0027t see the change?",
+      "range": {
+        "startLine": 248,
+        "startChar": 7,
+        "endLine": 250,
+        "endChar": 40
+      },
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
