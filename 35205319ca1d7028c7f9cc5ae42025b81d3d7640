@@ -119,6 +119,23 @@
     },
     {
       "key": {
+        "uuid": "2442a1dc_7f402f48",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-06-27T16:47:57Z",
+      "side": 1,
+      "message": "The plugin doesn\u0027t work unless I pass pluginName appended with \".config\".",
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff19f4bf_a6b6c614",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
