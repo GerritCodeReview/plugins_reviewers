@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04475ded_deaaa5a8",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-06-30T17:00:08Z",
+      "side": 1,
+      "message": "How can we define a reviewer for any change in the project?\nDo we need to put an empty filter or there is another section for those?",
+      "revId": "6b3c614d30f045617f94559f1002af2865fa6db7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
