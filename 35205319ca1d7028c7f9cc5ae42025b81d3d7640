@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "04475ded_7e81113b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-06-30T15:17:13Z",
+      "side": 1,
+      "message": "Thanks for fixing it in [1]. Does it work for you now?\n\n [1] https://gerrit-review.googlesource.com/#/c/58127",
+      "parentUuid": "2442a1dc_7f402f48",
+      "revId": "35205319ca1d7028c7f9cc5ae42025b81d3d7640",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff19f4bf_a6b6c614",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
