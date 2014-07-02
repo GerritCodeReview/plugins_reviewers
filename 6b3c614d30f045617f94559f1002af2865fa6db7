@@ -63,6 +63,24 @@
       "revId": "6b3c614d30f045617f94559f1002af2865fa6db7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44b7954c_905d3423",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-07-02T13:02:09Z",
+      "side": 1,
+      "message": "Have you tried something like:\n\n  [filter \"\"]\n    reviewer \u003d john.doe@example.com\n\nor:\n\n  [filter \"*\"]\n    reviewer \u003d john.doe@example.com\n\nThis has to be documented.",
+      "parentUuid": "04475ded_deaaa5a8",
+      "revId": "6b3c614d30f045617f94559f1002af2865fa6db7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
