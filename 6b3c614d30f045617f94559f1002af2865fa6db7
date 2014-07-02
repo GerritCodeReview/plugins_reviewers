@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8408adda_9a5d6d23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2014-07-02T12:58:56Z",
+      "side": 1,
+      "message": "This is not possible. This change adds functionality that requires more complex git config, the section and its name are used to define the filter so I do not see how we could do this in the project.config because the section and its name are used to define to which plugin belongs the configuration.\n\nMy colleague Simon Lei is looking into doing a migration from the old config to the new one. What do you think about an ssh command that would migrate all the projects config into the reviewers.config or do you prefer to load reviewers.config then project.config to check if still configured the old way (down side of the second approach is that we will likely look in the project.config for nothing)?",
+      "parentUuid": "2469c174_c7fcfedb",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 4
+      },
+      "revId": "6b3c614d30f045617f94559f1002af2865fa6db7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04475ded_deaaa5a8",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 4
