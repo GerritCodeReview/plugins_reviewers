@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39448c56_0f41651e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-07-11T05:26:42Z",
+      "side": 1,
+      "message": "Wrap this line.",
+      "range": {
+        "startLine": 222,
+        "startChar": 2,
+        "endLine": 222,
+        "endChar": 98
+      },
+      "revId": "4d2e7c3ca48b8f3c1821338d705562445e50150e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39448c56_ef5501dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-07-11T05:26:42Z",
+      "side": 1,
+      "message": "One semicolon should be enough.",
+      "range": {
+        "startLine": 236,
+        "startChar": 71,
+        "endLine": 236,
+        "endChar": 72
+      },
+      "revId": "4d2e7c3ca48b8f3c1821338d705562445e50150e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
