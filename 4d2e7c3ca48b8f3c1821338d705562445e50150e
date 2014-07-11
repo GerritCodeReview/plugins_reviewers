@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "7915242e_79bf87be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-07-11T05:27:47Z",
+      "side": 1,
+      "message": "Allow",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "4d2e7c3ca48b8f3c1821338d705562445e50150e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39448c56_0f41651e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
         "patchSetId": 5
