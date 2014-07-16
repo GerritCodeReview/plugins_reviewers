@@ -22,6 +22,30 @@
       "revId": "4a2417741a761011e1847a1cdfa6a630c3ee9a8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1976e812_46f452ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-07-16T05:56:09Z",
+      "side": 1,
+      "message": "Yes you are right, that\u0027s confusing. But there is still dependencies between removing these dependencies and standalone build: it cannot be implemented. So we have two problems, to implement standalone build we have to remove this extra dependencies. To remove this dependencies we need another change in core, for in tree build to compile without it.",
+      "parentUuid": "f989143b_cdf06900",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 17
+      },
+      "revId": "4a2417741a761011e1847a1cdfa6a630c3ee9a8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
