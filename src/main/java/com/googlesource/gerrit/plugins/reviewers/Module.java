@@ -15,7 +15,9 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.common.ChangeListener;
+import com.google.gerrit.extensions.annotations.Exports;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.config.ConfigRegistration;
 import com.google.gerrit.server.config.FactoryModule;
 
 class Module extends FactoryModule {
@@ -25,5 +27,8 @@ class Module extends FactoryModule {
         ChangeEventListener.class);
     factory(DefaultReviewers.Factory.class);
     factory(ReviewersConfig.Factory.class);
+    bind(ConfigRegistration.class)
+      .annotatedWith(Exports.named(""))
+      .toInstance(new ConfigRegistration());
   }
 }
