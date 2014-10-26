@@ -1,5 +1,3 @@
-include_defs('//bucklets/gerrit_plugin.bucklet')
-
 gerrit_plugin(
   name = 'reviewers',
   srcs = glob(['src/main/java/**/*.java']),

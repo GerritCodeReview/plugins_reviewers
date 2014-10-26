@@ -1,0 +1,23 @@
+import os
+import sys
+d = os.getcwd()
+while not os.path.lexists(os.path.join(d, '.buckconfig')):
+  d = os.path.dirname(d)
+
+bd = os.path.join(d, 'bucklets')
+if not os.path.isdir(bd) or not os.listdir(bd):
+  sys.stderr.write(('Bucklets directory is missing or empty: %s\n'
+                    'Run `ln -s ../bucklets .`') % bd)
+  sys.exit(1)
+
+bucklets = [
+  'gerrit_plugin.bucklet',
+  'maven_jar.bucklet',
+]
+
+for bucklet in bucklets:
+  path = os.path.join(bd, bucklet)
+  if not os.path.isfile(path):
+    sys.stderr.write('Missing bucklet: %s\n' % path)
+    sys.exit(1)
+  include_defs('//bucklets/%s' % bucklet)
