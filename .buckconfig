@@ -5,6 +5,9 @@
 [java]
   src_roots = java, resources
 
+[buildfile]
+  includes = //bucklets.defs
+
 [project]
   ignore = .git
 
