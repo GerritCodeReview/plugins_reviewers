@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5bafe9a_4ad41301",
+        "filename": "bucklets.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2014-10-29T07:22:23Z",
+      "side": 1,
+      "message": "Is this the replacement for \n\n  include_defs(\u0027//bucklets/maven_jar.bucklet\u0027)\n  include_defs(\u0027//bucklets/gerrit_plugin.bucklet\u0027)\n\n?\n\nDoesn\u0027t look much simpler for me.\n\nWhat I really like is that it\u0027s now printing out a proper error message when you forgot the create the link to bucklets, this happens to me frequently after cloning a plugin project and I\u0027m always confused with the error.\n\nI was wondering whether it might actually be simpler to have a $BUCKLET_HOME environment variable instead of the symbolic link. We could use this variable from the BUCK scripts and print out an error if it is not set. The advantage with this approach would be that I only need to set this variable once and then it would work for all plugins, whilst now I need to create the symbolic link for each and every plugin.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 41
+      },
+      "revId": "6c6cf3434fae04b6a67436672f89236bf1924b8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
