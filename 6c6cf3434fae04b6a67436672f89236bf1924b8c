@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "55c2ea1e_2d7f6d4f",
+        "filename": "bucklets.defs",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2014-10-29T14:52:21Z",
+      "side": 1,
+      "message": "Hmm, I see :(\n\nIf it\u0027s the choice between an endless loop and the cryptic error that we had before, I would rather prefer that cryptic error.\n\nIn my opinion checking for \u0027.buckconfig\u0027 would be much better, as it works with the 95% error case where I just forgot to create the .buckversion link. Dave is of course right that then there is still an endless loop if the .buckconfig is missing but this should be less likely.",
+      "parentUuid": "f5bafe9a_aae7cfe7",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 24
+      },
+      "revId": "6c6cf3434fae04b6a67436672f89236bf1924b8c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5bafe9a_4ad41301",
         "filename": "bucklets.defs",
         "patchSetId": 2
