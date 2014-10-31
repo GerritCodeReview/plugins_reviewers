@@ -46,6 +46,30 @@
       "revId": "fcf65989a37e3486d12e0ad916f3223bf0d9879e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95daa231_1fd44300",
+        "filename": "bucklets.defs",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2014-10-31T08:44:44Z",
+      "side": 1,
+      "message": "\u003e Sure, this would work. But do we really want to do that \n \u003e in automagical way?\n\nI see that it\u0027s quite some steps in the implementation, but I think it could make the usage really easier.\n\nAs a user I would see this picture:\n\n 1. clone first plugin repo and try to build it with buck:\n    \"Error: $BUCKLET_HOME not set\n     Clone the bucklets repo from ... and set $BUCKLET_HOME \n     to the local directory of your bucklet clone\"\n\n 2. clone bucklets repo and set $BUCKLET_HOME\n\n 3. build the plugin with Buck and it works\n\n 4. clone more plugin repos and build them with Buck and it \n    just works\n\nSo as a user I only once need to set $BUCKLET_HOME and then it just works for all plugins. At the moment I still need to create the links for every plugin which is more work for me as a user.",
+      "parentUuid": "55dcaa2f_1da1b3b2",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "fcf65989a37e3486d12e0ad916f3223bf0d9879e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
