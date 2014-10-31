@@ -22,6 +22,30 @@
       "revId": "fcf65989a37e3486d12e0ad916f3223bf0d9879e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55dcaa2f_1da1b3b2",
+        "filename": "bucklets.defs",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-10-31T08:32:34Z",
+      "side": 1,
+      "message": "Sure, this would work. But do we really want to do that in automagical way? So the workflow would be:\n\n* 1. Check if bucklets exists in root directory (where .buckconfig is located)\n* 2. Optionally check that the root directory wasn\u0027t reached\n* 3. When bucklets directory/symbolic link doesn\u0027t exists, check for $BUCKLETS_HOME env var\n* 3.1 When $BUCKLETS_HOME doesn\u0027t exist, bail out\n* 3.2 When $BUCKLETS_HOME exists, create a symbolic links:\n\nAll three of them\n\n* ln -s $BUCKLETS_HOME ./bucklets\n* ln -s $BUCKLETS_HOME/buckversion ./.buckversion\n* ln -s $BUCKLETS_HOME/watchmanconfig ./.watchmanconfig\n\nSomething i was trying to achieve in its own shell script: [1]\n\n [1] https://gerrit-review.googlesource.com/59823",
+      "parentUuid": "55dcaa2f_1db8d3ee",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "fcf65989a37e3486d12e0ad916f3223bf0d9879e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
