@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55dcaa2f_1db8d3ee",
+        "filename": "bucklets.defs",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2014-10-31T08:06:10Z",
+      "side": 1,
+      "message": "Ok, I want to throw in another idea. You was saying that we can\u0027t use a $BUCKLET_HOME environment variable because we need an absolute path from the root directory of the project. Could we simply read $BUCKLET_HOME here and create the link to in the project root directory automatically if it is missing?",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "fcf65989a37e3486d12e0ad916f3223bf0d9879e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
