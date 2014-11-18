@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a76fb13_06bb3aec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-18T15:55:59Z",
+      "side": 1,
+      "message": "add permission so only project owner can see the new screen",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a76fb13_26c0365a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-18T15:55:59Z",
+      "side": 1,
+      "message": "the all filter is represented as \"*\" which doesn\u0027t look nice on the screen.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a76fb13_46c53269",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-18T15:55:59Z",
+      "side": 1,
+      "message": "Change name to ReviewersScreen?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
