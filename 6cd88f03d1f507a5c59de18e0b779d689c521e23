@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "9a900f9b_6f05f135",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T21:25:15Z",
+      "side": 1,
+      "message": "I don\u0027t think this is currently possible to restrict top menu to project owners, because we don\u0027t have project at hand to check against. As workaround, Reviewers plugin could define its own Global-Capability: ChangeReviewers or something and it would be very easy to make top menu visible only for users that were granted this capability, e. g. [1]. Another option is to show it to all, and check in rest-api calls if user allow to change project configuration.\n\n [1] https://gerrit.googlesource.com/plugins/serviceuser/+/master/src/main/java/com/googlesource/gerrit/plugins/serviceuser/ServiceUserMenu.java",
+      "parentUuid": "7a76fb13_06bb3aec",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a900f9b_afdbd97b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
         "patchSetId": 1
