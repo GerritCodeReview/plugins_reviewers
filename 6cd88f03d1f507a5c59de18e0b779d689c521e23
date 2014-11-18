@@ -2,6 +2,114 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a900f9b_6fde516c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Action.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_4fe10d2f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_0feb0511",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/HttpModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_2ee84711",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_2fe84911",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Concatenate exception with pipe (Java7)",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 63
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afd63e9_bccca1c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a76fb13_06bb3aec",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
         "patchSetId": 1
@@ -13,6 +121,57 @@
       "writtenOn": "2014-11-18T15:55:59Z",
       "side": 1,
       "message": "add permission so only project owner can see the new screen",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_afdbd97b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Nit: Unneeded new line.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_cff3bd01",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/Action.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afd63e9_9cd1e55f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
       "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -36,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "7a751b3d_eef8ffdf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "This looks OK.",
+      "parentUuid": "7a76fb13_26c0365a",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a76fb13_46c53269",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
         "patchSetId": 1
@@ -53,6 +230,190 @@
         "endLine": 21,
         "endChar": 31
       },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_cef3c301",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "7a76fb13_46c53269",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_8eedbb20",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "no this.",
+      "range": {
+        "startLine": 46,
+        "startChar": 31,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_eff801e0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Use GerritCallback?",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 25
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1afa5ff3_bbcca7c9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "no this, here and below.",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 8
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_8fedb520",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "return Objects.hash(filter, reviewer);",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 5
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_4e083351",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/Input.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_aef2f7f9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/Input.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "May be name it ChangeReviewersInput",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a900f9b_aff2f9f9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewerFilterSection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a751b3d_6e05ef35",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersPlugin.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-18T20:55:29Z",
+      "side": 1,
+      "message": "Add license header.",
       "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
