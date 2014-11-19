@@ -435,6 +435,29 @@
     },
     {
       "key": {
+        "uuid": "1a133f13_73024030",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-19T07:49:49Z",
+      "side": 1,
+      "message": "Nice to have: SuggestReviewerOracle to complete reviewer names. I think serviceuser plugin could also benefit from this feature.",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 28
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a900f9b_8fedb520",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AddReviewersScreen.java",
         "patchSetId": 1
