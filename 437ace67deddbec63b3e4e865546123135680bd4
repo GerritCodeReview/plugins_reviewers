@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1ac17fc3_63028230",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-19T19:52:08Z",
+      "side": 1,
+      "message": "inconsistent, some panels are properties but others are not",
+      "revId": "437ace67deddbec63b3e4e865546123135680bd4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
