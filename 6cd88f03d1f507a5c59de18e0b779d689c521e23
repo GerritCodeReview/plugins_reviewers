@@ -93,6 +93,76 @@
     },
     {
       "key": {
+        "uuid": "7a1c3b1f_76023030",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-11-19T05:44:38Z",
+      "side": 1,
+      "message": "These are different errors though.  \"Cannot read\" vs. \"Cannot update\".",
+      "parentUuid": "9a900f9b_2fe84911",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 63
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a072fcb_b7f32802",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-11-19T05:44:38Z",
+      "side": 1,
+      "message": "Use `Strings.isNullOrEmpty`?",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 68
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1c3b1f_56ff34c0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-11-19T05:44:38Z",
+      "side": 1,
+      "message": "Update",
+      "range": {
+        "startLine": 107,
+        "startChar": 25,
+        "endLine": 107,
+        "endChar": 32
+      },
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3afd63e9_bccca1c9",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersTopMenu.java",
         "patchSetId": 1
@@ -173,6 +243,24 @@
       "writtenOn": "2014-11-18T20:55:29Z",
       "side": 1,
       "message": "Add license header.",
+      "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1c3b1f_b61e8885",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/Action.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2014-11-19T05:44:38Z",
+      "side": 1,
+      "message": "The content of this file seems to be the same as src/main/java/com/googlesource/gerrit/plugins/reviewers/Action.java",
+      "parentUuid": "9a900f9b_cff3bd01",
       "revId": "6cd88f03d1f507a5c59de18e0b779d689c521e23",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
