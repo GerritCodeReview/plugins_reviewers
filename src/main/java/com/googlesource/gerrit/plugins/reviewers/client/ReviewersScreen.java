@@ -19,6 +19,7 @@ import com.google.gerrit.client.rpc.Natives;
 import com.google.gerrit.plugin.client.rpc.RestApi;
 import com.google.gerrit.plugin.client.screen.Screen;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -26,7 +27,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -127,8 +130,23 @@ public class ReviewersScreen extends HorizontalPanel {
   }
 
   Panel createInputPanel(){
+    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
     final TextBox filterBox = new TextBox();
-    final TextBox reviewerBox = new TextBox();
+    final SuggestBox reviewerBox = new SuggestBox(oracle);
+    reviewerBox.setLimit(5);
+    new RestApi("projects").id(projectName).view("suggest_reviewers").get(
+        new AsyncCallback<JsArrayString>() {
+
+      @Override
+      public void onSuccess(JsArrayString result) {
+        oracle.addAll(Natives.asList(result));
+      }
+
+      @Override
+      public void onFailure(Throwable caught) {
+      }
+    });
+
     filterBox.getElement().setPropertyString("placeholder", "filter");
     reviewerBox.getElement().setPropertyString("placeholder", "reviewer");
 
