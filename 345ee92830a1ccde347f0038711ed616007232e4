@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f4c758a_a4e96217",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-21T21:35:47Z",
+      "side": 1,
+      "message": "Well, this wouldn\u0027t scale for very big projects, that have hundreds or thousands of developers. So the idea is to restrict the suggestions for input string with configurable min. length say 3 chars. And query database to return only user that matched that query: use typed \"john\", and all user starting with that name are shown: john.doe@foo.com, john.smith@bar.com. Something what SuggestReviewers.java is doing [1].\n\n for (Account p : dbProvider.get().accounts()\n     .suggestByFullName(a, b, limit)) {\n        addSuggestion(r, p, new AccountInfo(p.getId()), visibilityControl);\n }\n\n [1] gerrit-server/src/main/java/com/google/gerrit/server/change/SuggestReviewers.java",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 5
+      },
+      "revId": "345ee92830a1ccde347f0038711ed616007232e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
