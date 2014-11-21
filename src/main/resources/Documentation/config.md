@@ -28,3 +28,12 @@ the file must be renamed to `reviewers.config`.
 filter.<filter>.reviewer
 :	An account (email or full user name) or a group name. Multiple
 	`reviewer` occurrences are allowed.
+
+The maximum number of reviewers suggested in the web ui and rest endpoint is
+configured in the gerrit.config. By default 10.
+
+```
+  [plugin "reviewers"]
+    maxSuggestedReviewers = 5
+
+```
