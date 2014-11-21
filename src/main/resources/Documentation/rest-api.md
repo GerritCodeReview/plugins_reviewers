@@ -97,6 +97,34 @@ As response the default reviewers are returned as a list of
 
 ```
 
+### <a id="suggest-reviewers"> Suggest Reviewers
+_GET /projects/project_name/suggest_reviewers?q=J&n=5_
+
+Suggest the reviewers for a given query q and result limit n.
+If result limit is not passed, then the default 10 is used.
+
+#### Request
+
+```
+  GET /projects/myproject/suggest_reviewers?q=J HTTP/1.0
+```
+
+As response a list of String is returned.
+
+#### Response
+
+```
+  HTTP/1.1 200 OK
+  Content-Disposition: attachment
+  Content-Type: application/json;charset=UTF-8
+  )]}'
+  [
+    "Jane Roe",
+    "Joiner"
+  ]
+
+```
+
 
 <a id="json-entities">JSON Entities
 -----------------------------------
