@@ -22,6 +22,30 @@
       "revId": "345ee92830a1ccde347f0038711ed616007232e4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f7da99e_95e9e417",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-24T18:33:39Z",
+      "side": 1,
+      "message": "Done, I\u0027ll use SuggestReviewers as a template.",
+      "parentUuid": "3f4c758a_a4e96217",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 5
+      },
+      "revId": "345ee92830a1ccde347f0038711ed616007232e4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
