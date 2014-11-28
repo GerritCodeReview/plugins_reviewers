@@ -27,6 +27,7 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
+import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
@@ -52,6 +53,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   private final String pluginName;
+  private final AccountResolver accountResolver;
   private final ReviewersConfig.Factory configFactory;
   private final MetaDataUpdate.User metaDataUpdateFactory;
   private final ProjectCache projectCache;
@@ -60,12 +62,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   @Inject
   PutReviewers(@PluginName String pluginName,
+      AccountResolver accountResolver,
       ReviewersConfig.Factory configFactory,
       MetaDataUpdate.User metaDataUpdateFactory,
       ProjectCache projectCache,
       ChangeHooks hooks,
       Provider<CurrentUser> currentUser) {
     this.pluginName = pluginName;
+    this.accountResolver = accountResolver;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
@@ -77,6 +81,11 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public List<ReviewerFilterSection> apply(ProjectResource rsrc, Input input)
       throws AuthException, BadRequestException, ResourceConflictException,
       Exception {
+    if (accountResolver.findByNameOrEmail(input.reviewer) == null) {
+      throw new BadRequestException(input.reviewer + " does not identify a "
+          + "registered user");
+    }
+
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig cfg = configFactory.create(projectName);
     if (!rsrc.getControl().isOwner() || cfg == null) {

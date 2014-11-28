@@ -1,3 +1,4 @@
+
 // Copyright (C) 2014 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -164,13 +165,13 @@ public class ReviewersScreen extends HorizontalPanel {
     in.setAction(action);
     in.setFilter(entry.filter);
     in.setReviewer(entry.reviewer);
-    reset();
 
     new RestApi("projects").id(projectName).view("reviewers").put(
         in, new AsyncCallback<JsArray<ReviewerFilterSection>>() {
 
       @Override
       public void onSuccess(JsArray<ReviewerFilterSection> result) {
+        reset();
         display(result);
       }
 
