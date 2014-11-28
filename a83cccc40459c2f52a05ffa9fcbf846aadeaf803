@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfd5c501_40fa6ed6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1016317
+      },
+      "writtenOn": "2014-11-28T22:09:02Z",
+      "side": 1,
+      "message": "unneeded new line",
+      "revId": "a83cccc40459c2f52a05ffa9fcbf846aadeaf803",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
