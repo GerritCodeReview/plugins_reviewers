@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5fabe956_0517f2b2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-28T18:13:44Z",
+      "side": 1,
+      "message": "Name it SuggestReviewers or similar?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c7cf8097706e42760d88bfd775a0f8e533fa620a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f117199_e33432ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-28T18:13:44Z",
+      "side": 1,
+      "message": "Nit: unneeded new line.",
+      "revId": "c7cf8097706e42760d88bfd775a0f8e533fa620a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f117199_23680ae7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-28T18:13:44Z",
+      "side": 1,
+      "message": "You are missing here: \"suggest.from\" configuration option. We could use one from gerrit core or let it overwritable? This is very important one and control starting from how long query pattern the search take place, e. g. only search starting from 3 letters.\n\n  this.suggestFrom \u003d cfg.getInt(\"suggest\", null, \"from\", 0);",
+      "revId": "c7cf8097706e42760d88bfd775a0f8e533fa620a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fabe956_251c6ed2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-28T18:13:44Z",
+      "side": 1,
+      "message": "Stop here, when query.length() \u003c suggestFrom not reached:\n\n  if (query.length() \u003c suggestFrom) {\n    return Collections.emptyList();\n  }",
+      "revId": "c7cf8097706e42760d88bfd775a0f8e533fa620a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f117199_c331360d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/GetSuggestion.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2014-11-28T18:13:44Z",
+      "side": 1,
+      "message": "We shoud use comination of \"Name + Mail\". When the user is known n x times in Gerrit, we wouldn\u0027t be abl to differentiate. Try to add reviewers on gerrit-review with low case \"david\". You see that DavidP is known twice? So to handle it we must return the combination.",
+      "revId": "c7cf8097706e42760d88bfd775a0f8e533fa620a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
