@@ -30,7 +30,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.gerrit.common.ChangeListener;
+import com.google.gerrit.common.EventListener;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
@@ -42,7 +42,8 @@ import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.account.AccountByEmailCache;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
-import com.google.gerrit.server.events.ChangeEvent;
+import com.google.gerrit.server.config.AllProjectsName;
+import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.PatchSetCreatedEvent;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
@@ -59,7 +60,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.ProvisionException;
 
-class ChangeEventListener implements ChangeListener {
+class ChangeEventListener implements EventListener {
   private static final Logger log = LoggerFactory
       .getLogger(ChangeEventListener.class);
 
@@ -76,7 +77,7 @@ class ChangeEventListener implements ChangeListener {
   private final ChangeData.Factory changeDataFactory;
   private final ReviewersConfig.Factory configFactory;
   private final Provider<CurrentUser> user;
-  private final ChangeQueryBuilder.Factory queryBuilder;
+  private final ChangeQueryBuilder queryBuilder;
   private ReviewDb db;
 
   @Inject
@@ -94,7 +95,8 @@ class ChangeEventListener implements ChangeListener {
       final ChangeData.Factory changeDataFactory,
       final ReviewersConfig.Factory configFactory,
       final Provider<CurrentUser> user,
-      final ChangeQueryBuilder.Factory queryBuilder,
+      final ChangeQueryBuilder queryBuilder,
+      final AllProjectsName allProjectName,
       final @PluginName String pluginName) {
     this.accountResolver = accountResolver;
     this.byEmailCache = byEmailCache;
@@ -113,7 +115,7 @@ class ChangeEventListener implements ChangeListener {
   }
 
   @Override
-  public void onChangeEvent(ChangeEvent event) {
+  public void onEvent(Event event) {
     if (!(event instanceof PatchSetCreatedEvent)) {
       return;
     }
@@ -247,7 +249,7 @@ class ChangeEventListener implements ChangeListener {
   boolean filterMatch(String filter, ChangeData changeData)
       throws OrmException, QueryParseException {
     Preconditions.checkNotNull(filter);
-    ChangeQueryBuilder qb = queryBuilder.create(user.get());
+    ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
     Predicate<ChangeData> filterPredicate = qb.parse(filter);
     // TODO(davido): check that the potential review can see this change
     // by adding AND is_visible() predicate? Or is it OK to assume
