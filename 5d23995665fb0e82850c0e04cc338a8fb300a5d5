@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6dfcd7d_42fad243",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-02-16T08:16:23Z",
+      "side": 1,
+      "message": "can filter or reviewer be null?",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 209,
+        "endChar": 53
+      },
+      "revId": "5d23995665fb0e82850c0e04cc338a8fb300a5d5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
