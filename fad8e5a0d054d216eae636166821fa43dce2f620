@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d7f014e_81507a31",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-05-27T07:23:27Z",
+      "side": 1,
+      "message": "This can also go in a try-with-resources together with the RevWalk.  Then the finally block at lines 212-214 can also be removed.",
+      "range": {
+        "startLine": 128,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 52
+      },
+      "revId": "fad8e5a0d054d216eae636166821fa43dce2f620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
