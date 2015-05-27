@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edd32994_a7192a34",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-05-27T07:04:13Z",
+      "side": 1,
+      "message": "The try must include the resources that should be auto-closed. Since we want to auto-close RevWalk, this should be\n\n try (RevWalk rw \u003d new RevWalk(git)( {\n   reviewDb \u003d schemaFactory.open();\n\nShouldn\u0027t it?",
+      "range": {
+        "startLine": 140,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 44
+      },
+      "revId": "833727d8021d7f371f9d76e60ff687c5f8e47dbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
