@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edd32994_47602e7e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2015-05-27T13:58:04Z",
+      "side": 1,
+      "message": "Remove this try and catch the OrmException with the try-with-resources block that does the auto-closing. This way one indention level can be removed.",
+      "revId": "daf1f1f763de63762eba36fa572d13e0a44b1ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
