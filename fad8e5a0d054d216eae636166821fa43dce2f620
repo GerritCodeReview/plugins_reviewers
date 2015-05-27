@@ -22,6 +22,23 @@
       "revId": "fad8e5a0d054d216eae636166821fa43dce2f620",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0dd15d8c_8847d70f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2015-05-27T07:31:49Z",
+      "side": 1,
+      "message": "Questtion: Also use try-with-resource here?",
+      "revId": "fad8e5a0d054d216eae636166821fa43dce2f620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
