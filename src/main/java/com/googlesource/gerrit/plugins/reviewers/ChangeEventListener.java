@@ -137,10 +137,9 @@ class ChangeEventListener implements EventListener {
     }
 
     final ReviewDb reviewDb;
-    final RevWalk rw = new RevWalk(git);
 
-    try {
-      reviewDb = schemaFactory.open();
+    try( RevWalk rw = new RevWalk(git) ){
+      reviewDb = schemaFactory.open() ;
       try {
         Change.Id changeId = new Change.Id(Integer.parseInt(e.change.number));
         PatchSet.Id psId = new PatchSet.Id(changeId,
@@ -211,7 +210,6 @@ class ChangeEventListener implements EventListener {
     } catch (OrmException x) {
       log.error(x.getMessage(), x);
     } finally {
-      rw.release();
       git.close();
     }
   }
