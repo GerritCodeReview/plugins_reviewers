@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "13534556_383829fe",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-06-29T18:37:03Z",
+      "side": 1,
+      "message": "What about standalone Gerrit API version?\n\n  VER \u003d \u00272.11-SNAPSHOT\u0027",
+      "revId": "5a9e23e71172c1b0e31b95923cde53864ab61a19",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
