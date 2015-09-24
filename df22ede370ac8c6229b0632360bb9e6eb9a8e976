@@ -22,6 +22,30 @@
       "revId": "df22ede370ac8c6229b0632360bb9e6eb9a8e976",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ea8b95b_84e1a607",
+        "filename": "BUCK",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2015-09-24T08:33:55Z",
+      "side": 1,
+      "message": "No idea.  I think it can be fixed in a follow-up change, if necessary.",
+      "parentUuid": "aed8553b_1fd44325",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "df22ede370ac8c6229b0632360bb9e6eb9a8e976",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
