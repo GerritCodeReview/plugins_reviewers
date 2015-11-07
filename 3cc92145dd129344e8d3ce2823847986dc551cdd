@@ -22,6 +22,30 @@
       "revId": "3cc92145dd129344e8d3ce2823847986dc551cdd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d698d291_c244e29d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-11-07T06:56:09Z",
+      "side": 1,
+      "message": "We can fix that in follow-up commit.",
+      "parentUuid": "f66b162f_23758ad7",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 59
+      },
+      "revId": "3cc92145dd129344e8d3ce2823847986dc551cdd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
