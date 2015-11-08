@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d698d291_4259f281",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2015-11-08T03:43:29Z",
+      "side": 1,
+      "message": "I imported the plugin in its own Eclipse project, but missed to customize \u0027Organize Imports\u0027 settings. Done.",
+      "parentUuid": "76800614_27759ad7",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "3cc92145dd129344e8d3ce2823847986dc551cdd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f66b162f_23758ad7",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
         "patchSetId": 5
