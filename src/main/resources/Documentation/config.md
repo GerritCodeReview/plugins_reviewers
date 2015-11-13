@@ -26,5 +26,5 @@ the file must be renamed to `reviewers.config`.
 ```
 
 filter.<filter>.reviewer
-:	An account (email or full user name) or a group name. Multiple
+:	An account (email or full user name) or a group name (only internals groups are supported). Multiple
 	`reviewer` occurrences are allowed.
