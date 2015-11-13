@@ -28,3 +28,21 @@ the file must be renamed to `reviewers.config`.
 filter.<filter>.reviewer
 :	An account (email or full user name) or a group name. Multiple
 	`reviewer` occurrences are allowed.
+
+###Multiple filter matches
+
+The plugin supports multiple filter matches.
+
+####For example:
+
+```
+  [filter "file:^build/modules/.*"]
+    reviewer = reviewer1@abc.com
+
+  [filter "file:^build/.*"]
+    reviewer = reviewer2@abc.com
+
+```
+
+1. Submit a change on file "build/modules/GLOBAL.pm".
+2. Both reviewer1@abc.com and reviewers2@abc.com are added as reviewers.
