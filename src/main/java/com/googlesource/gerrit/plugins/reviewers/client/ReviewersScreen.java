@@ -18,7 +18,6 @@ import com.google.gerrit.client.rpc.NativeMap;
 import com.google.gerrit.client.rpc.Natives;
 import com.google.gerrit.plugin.client.rpc.RestApi;
 import com.google.gerrit.plugin.client.screen.Screen;
-import com.google.gerrit.plugin.client.ui.GroupSuggestOracle;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -133,7 +132,7 @@ public class ReviewersScreen extends HorizontalPanel {
   Panel createInputPanel(){
     final NpTextBox filterBox = new NpTextBox();
     // TODO(davido): Remove hard coded start suggest char 3
-    final GroupSuggestOracle oracle = new GroupSuggestOracle(3);
+    final ReviewerSuggestOracle oracle = new ReviewerSuggestOracle(3, projectName);
     final SuggestBox reviewerBox = new SuggestBox(oracle, new NpTextBox());
     filterBox.getElement().setPropertyString("placeholder", "filter");
     reviewerBox.getElement().setPropertyString("placeholder", "reviewer");
