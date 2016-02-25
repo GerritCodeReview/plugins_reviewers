@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a285e15a_f1c30855",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-25T21:18:46Z",
+      "side": 1,
+      "message": "I agree! Thanks for the ideas and code samples. A patch set should come shortly.",
+      "parentUuid": "02522dad_bc7fa1ec",
+      "revId": "b603ef5ff0a14c9e38bbd4f4df4cc65a42122472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02522dad_9c7ae5fd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestReviewers.java",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2016-02-25T19:29:29Z",
       "side": 1,
       "message": "Stale comment and doesn\u0027t apply any more. You are not using change control, but project control.",
+      "range": {
+        "startLine": 216,
+        "startChar": 10,
+        "endLine": 217,
+        "endChar": 22
+      },
+      "revId": "b603ef5ff0a14c9e38bbd4f4df4cc65a42122472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "222c912d_352650fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-25T21:18:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02522dad_9c7ae5fd",
       "range": {
         "startLine": 216,
         "startChar": 10,
