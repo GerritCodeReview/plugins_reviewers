@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e24c3916_fb852f32",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T22:37:47Z",
+      "side": 1,
+      "message": "License header is missing.",
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e24c3916_9b7aebfd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T22:37:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t be needed, see my comment in core change.",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 78
+      },
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02522dad_5fd3ef25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T22:37:47Z",
+      "side": 1,
+      "message": "I don\u0027t think that project control has anything to do with change drafts. Just remove this comment.",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e24c3916_bb7fa7ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T22:37:47Z",
+      "side": 1,
+      "message": "Only 55 LoC left from 339 ;)",
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
