@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02522dad_bc7fa1ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T19:29:29Z",
+      "side": 1,
+      "message": "You haven\u0027t convinced me yet to copy/paste 339 LoC from Gerit core, with one small difference in the whole code: the visibility check. But hey, someone extracted already the VisibilityControl interface here:\n\n  private interface VisibilityControl {\n    boolean isVisibleTo(Account.Id account) throws OrmException;\n  }\n\nSo how about refactor the code in the core, extract the whole logic form the com.google.gerrit.server.change.SuggestReviewers in own class, say ReviewersUtil and add a method like:\n\n  List\u003cSuggestedReviewerInfo\u003e suggestReviewers(ProjectControl projectControl,\n    VisibilityControl visibilityControl);\n\nNow the SuggestReviewer in core and in plugin jjsut inject new class (ReviewersUtil) and use it, where com.google.gerrit.server.change.SuggestReviewers.apply() implementation in core would become:\n\n  public List\u003cSuggestedReviewerInfo\u003e apply(ChangeResource rsrc) {\n    return reviewersUtil.suggestReviewers(\n        rsrc.getControl().getProjectControl(),\n        getVisibility(rsrc));\n  }\n\nwhile the com.googlesource.gerrit.plugins.reviewers.SuggestReviewers.apply() in reviewers plugin would become:\n\n  public List\u003cSuggestedReviewerInfo\u003e apply(ProjectResource rsrc) {\n  return reviewersUtil.suggestReviewers(\n        rsrc.getControl(),\n        getVisibility(rsrc));\n  }",
+      "revId": "b603ef5ff0a14c9e38bbd4f4df4cc65a42122472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02522dad_9c7ae5fd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-02-25T19:29:29Z",
+      "side": 1,
+      "message": "Stale comment and doesn\u0027t apply any more. You are not using change control, but project control.",
+      "range": {
+        "startLine": 216,
+        "startChar": 10,
+        "endLine": 217,
+        "endChar": 22
+      },
+      "revId": "b603ef5ff0a14c9e38bbd4f4df4cc65a42122472",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
