@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "222c912d_75f7e83c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-26T15:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e24c3916_fb852f32",
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e24c3916_9b7aebfd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2016-02-25T22:37:47Z",
       "side": 1,
       "message": "Shouldn\u0027t be needed, see my comment in core change.",
+      "range": {
+        "startLine": 39,
+        "startChar": 48,
+        "endLine": 39,
+        "endChar": 78
+      },
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a285e15a_31c0b0f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-26T15:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e24c3916_9b7aebfd",
       "range": {
         "startLine": 39,
         "startChar": 48,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "a285e15a_11aa4c49",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-26T15:23:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02522dad_5fd3ef25",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e24c3916_bb7fa7ec",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
         "patchSetId": 2
@@ -76,6 +142,24 @@
       "writtenOn": "2016-02-25T22:37:47Z",
       "side": 1,
       "message": "Only 55 LoC left from 339 ;)",
+      "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "222c912d_150474f7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ProjectSuggestReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1023465
+      },
+      "writtenOn": "2016-02-26T15:23:21Z",
+      "side": 1,
+      "message": "Yay!",
+      "parentUuid": "e24c3916_bb7fa7ec",
       "revId": "ae2abdb8fb8f3acf3e7273dc2ee1e11a12e78627",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
