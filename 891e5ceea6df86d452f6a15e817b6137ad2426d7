@@ -16,6 +16,24 @@
       "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77a2cdc0_e0e122bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-09T09:40:18Z",
+      "side": 1,
+      "message": "I wasn\u0027t aware of Shawn\u0027s change.  I\u0027m not sure how much that is reusable given that it doesn\u0027t seem to be configurable.\n\nRegarding the stable branch, I don\u0027t think we need to be as strict about this as we are with core Gerrit.  Plenty of people are using Gerrit 2.11.x in production and I think it makes sense to make new plugin functionality available to those, as long as it doesn\u0027t depend on missing API functionality.",
+      "parentUuid": "37c9357a_d68004e8",
+      "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
