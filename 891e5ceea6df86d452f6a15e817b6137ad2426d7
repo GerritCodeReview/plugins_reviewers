@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37c9357a_d68004e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-03-09T09:17:25Z",
+      "side": 1,
+      "message": "Shawn already added disableUI case here: [1]. Can we partially reuse his code? I also wonder if this change really justified on stable 2.11 branch? Wouldn\u0027t be enough on 2.12 or master?\n\n* [1] https://gerrit-review.googlesource.com/#/c/69430/2/src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+      "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
