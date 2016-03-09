@@ -21,14 +21,19 @@ import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestModifyView;
+import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
+import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
+import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
+import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
+import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -56,6 +61,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final ProjectCache projectCache;
   private final Provider<CurrentUser> currentUser;
   private final ChangeHooks hooks;
+  private final AccountResolver accountResolver;
+  private final Provider<GroupsCollection> groupsCollection;
 
   @Inject
   PutReviewers(@PluginName String pluginName,
@@ -63,13 +70,17 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       ChangeHooks hooks,
-      Provider<CurrentUser> currentUser) {
+      Provider<CurrentUser> currentUser,
+      AccountResolver accountResolver,
+      Provider<GroupsCollection> groupsCollection) {
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.hooks = hooks;
     this.currentUser = currentUser;
+    this.accountResolver = accountResolver;
+    this.groupsCollection = groupsCollection;
   }
 
   @Override
@@ -91,6 +102,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       throw new ResourceNotFoundException(
           "Project" + projectName.get() + " not found", e);
     }
+    validateReviewer(input.reviewer);
     try {
       StringBuilder message = new StringBuilder(pluginName)
           .append(" plugin: ");
@@ -139,5 +151,23 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       md.close();
     }
     return cfg.getReviewerFilterSections();
+  }
+
+  private void validateReviewer(String reviewer) throws RestApiException {
+    Account account = null;
+    try {
+      account = accountResolver.find(reviewer);
+    } catch (OrmException e) {
+      // Ignore. AccountResolver is supposed to return null if the account
+      // is not found, but it seems to be throwing OrmException.
+    }
+    if (account == null) {
+      try {
+        groupsCollection.get().parse(reviewer);
+      } catch (UnprocessableEntityException e) {
+        throw new ResourceNotFoundException(
+            "Account or group " + reviewer + " not found");
+      }
+    }
   }
 }
