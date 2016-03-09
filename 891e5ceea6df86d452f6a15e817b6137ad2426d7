@@ -34,6 +34,24 @@
       "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b79a8576_32887013",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-03-09T09:46:22Z",
+      "side": 1,
+      "message": "OK. You are doing the merge then ;-)",
+      "parentUuid": "77a2cdc0_e0e122bc",
+      "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
