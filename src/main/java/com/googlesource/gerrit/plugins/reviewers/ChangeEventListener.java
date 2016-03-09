@@ -251,7 +251,8 @@ class ChangeEventListener implements EventListener {
         reviewers.addAll(groupMembers.listAccounts(groupsCollection.get()
             .parse(r).getGroupUUID(), p));
       } catch (Exception e) {
-        log.warn("Cannot resolve reviewer: " + r, e);
+        log.warn(String.format(
+            "Cannot resolve reviewer: %s: %s", r, e.getMessage()));
       }
     }
     return reviewers;
