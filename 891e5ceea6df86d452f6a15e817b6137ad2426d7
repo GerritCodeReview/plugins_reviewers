@@ -52,6 +52,24 @@
       "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77a2cdc0_404c4e42",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-10T08:34:28Z",
+      "side": 1,
+      "message": "Shawn/Dave/Edwin: is this change going to break your usage of the plugin at Google?",
+      "parentUuid": "b79a8576_32887013",
+      "revId": "891e5ceea6df86d452f6a15e817b6137ad2426d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
