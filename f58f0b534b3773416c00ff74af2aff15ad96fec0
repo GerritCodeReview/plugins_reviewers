@@ -22,6 +22,30 @@
       "revId": "f58f0b534b3773416c00ff74af2aff15ad96fec0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7207d84_2415125d",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2016-03-14T10:00:10Z",
+      "side": 1,
+      "message": "This information was added in 2.12 so we cannot fix it in 2.11. I will just remove it in this merge commit.",
+      "parentUuid": "1c20d690_95c7c45e",
+      "range": {
+        "startLine": 24,
+        "startChar": 29,
+        "endLine": 24,
+        "endChar": 65
+      },
+      "revId": "f58f0b534b3773416c00ff74af2aff15ad96fec0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
