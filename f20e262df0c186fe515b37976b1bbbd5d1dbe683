@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cf2faa7_2e0f4786",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2016-03-17T16:32:13Z",
+      "side": 1,
+      "message": "I can probably make this work but I think I would prefer this module being public like it is in master right now.",
+      "revId": "f20e262df0c186fe515b37976b1bbbd5d1dbe683",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
