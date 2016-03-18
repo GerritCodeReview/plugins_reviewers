@@ -16,6 +16,24 @@
       "revId": "f20e262df0c186fe515b37976b1bbbd5d1dbe683",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc92be65_2b147995",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-03-18T00:29:34Z",
+      "side": 1,
+      "message": "If it\u0027s already public on master there should be no problem.  This line isn\u0027t changed here, so there won\u0027t be any conflict and it should still be public on master after this gets merged up.",
+      "parentUuid": "3cf2faa7_2e0f4786",
+      "revId": "f20e262df0c186fe515b37976b1bbbd5d1dbe683",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
