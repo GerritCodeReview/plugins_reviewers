@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "48d52c29_99ac1fc6",
+        "filename": "lib/gerrit/BUCK",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-04-25T15:00:22Z",
+      "side": 1,
+      "message": "621012e67c64774d9743d7c7c8b0cae0998fae0d",
+      "revId": "f5b1415ff24bbabb69543f8b3098d91cfdc5b8bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28d0f83a_5b455b92",
+        "filename": "lib/gerrit/BUCK",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2016-04-25T15:00:22Z",
+      "side": 1,
+      "message": "272652e0a7a76e8eba27891823701ecd048305e5",
+      "revId": "f5b1415ff24bbabb69543f8b3098d91cfdc5b8bc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
