@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dbb863c_efdca122",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-07-08T00:02:27Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is necessary.  MetaDataUpdate already fires the GitReferenceUpdated event via VersionedMetaData.",
+      "range": {
+        "startLine": 129,
+        "startChar": 12,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "a39b0256c7721787f7c4bb4ea2760bfaa426e4fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
