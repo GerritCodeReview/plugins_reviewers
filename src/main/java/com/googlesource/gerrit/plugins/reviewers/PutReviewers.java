@@ -22,12 +22,13 @@ import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
-import com.google.gwtorm.server.OrmException;
+import com.google.gwtorm.server.OrmException;import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -59,6 +60,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
+  private final SchemaFactory<ReviewDb> schemaFactory;
 
   @Inject
   PutReviewers(@PluginName String pluginName,
@@ -66,13 +68,15 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
-      Provider<GroupsCollection> groupsCollection) {
+      Provider<GroupsCollection> groupsCollection,
+      SchemaFactory<ReviewDb> schemaFactory) {
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
+    this.schemaFactory = schemaFactory;
   }
 
   @Override
@@ -134,8 +138,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   private void validateReviewer(String reviewer) throws RestApiException {
-    try {
-      Account account = accountResolver.find(reviewer);
+    try (ReviewDb reviewDb = schemaFactory.open()) {
+      Account account = accountResolver.find(reviewDb, reviewer);
       if (account == null) {
         try {
           groupsCollection.get().parse(reviewer);
