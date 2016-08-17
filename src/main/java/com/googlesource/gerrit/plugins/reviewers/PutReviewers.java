@@ -22,6 +22,7 @@ import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
+import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
@@ -53,6 +54,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     public String reviewer;
   }
 
+  private final Provider<ReviewDb> db;
   private final String pluginName;
   private final ReviewersConfig.Factory configFactory;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
@@ -61,12 +63,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final Provider<GroupsCollection> groupsCollection;
 
   @Inject
-  PutReviewers(@PluginName String pluginName,
+  PutReviewers(Provider<ReviewDb> db,
+      @PluginName String pluginName,
       ReviewersConfig.Factory configFactory,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection) {
+    this.db = db;
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
@@ -135,7 +139,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   private void validateReviewer(String reviewer) throws RestApiException {
     try {
-      Account account = accountResolver.find(reviewer);
+      Account account = accountResolver.find(db.get(), reviewer);
       if (account == null) {
         try {
           groupsCollection.get().parse(reviewer);

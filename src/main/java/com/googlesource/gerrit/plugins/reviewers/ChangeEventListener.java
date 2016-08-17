@@ -227,38 +227,33 @@ class ChangeEventListener implements EventListener {
   }
 
   private Set<Account> toAccounts(Set<String> in, Project.NameKey p,
-      String uploaderEMail) {
+      String uploaderEMail) throws OrmException {
     Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
-    for (String r : in) {
-      try {
-        Account account = accountResolver.find(r);
+    try (ReviewDb db = schemaFactory.open()) {
+      for (String r : in) {
+        Account account = accountResolver.find(db, r);
         if (account != null) {
           reviewers.add(account);
           continue;
         }
-      } catch (OrmException e) {
-        // If the account doesn't exist, find() will return null.  We only
-        // get here if something went wrong accessing the database
-        log.error("Failed to resolve account " + r, e);
-        continue;
-      }
-      if (groupMembers == null) {
-        groupMembers =
-            groupMembersFactory.create(identifiedUserFactory.create(Iterables
-                .getOnlyElement(byEmailCache.get(uploaderEMail))));
-      }
-      try {
-        reviewers.addAll(groupMembers.listAccounts(
-            groupsCollection.get().parse(r).getGroupUUID(), p));
-      } catch (UnprocessableEntityException | NoSuchGroupException e) {
-        log.warn(String.format(
-            "Reviewer %s is neither an account nor a group", r));
-      } catch (NoSuchProjectException e) {
-        log.warn(String.format(
-            "Failed to list accounts for group %s and project %s", r, p));
-      } catch (IOException | OrmException e) {
-        log.warn(String.format("Failed to list accounts for group %s", r), e);
+        if (groupMembers == null) {
+          groupMembers =
+              groupMembersFactory.create(identifiedUserFactory.create(Iterables
+                  .getOnlyElement(byEmailCache.get(uploaderEMail))));
+        }
+        try {
+          reviewers.addAll(groupMembers.listAccounts(
+              groupsCollection.get().parse(r).getGroupUUID(), p));
+        } catch (UnprocessableEntityException | NoSuchGroupException e) {
+          log.warn(String.format(
+              "Reviewer %s is neither an account nor a group", r));
+        } catch (NoSuchProjectException e) {
+          log.warn(String.format(
+              "Failed to list accounts for group %s and project %s", r, p));
+        } catch (IOException | OrmException e) {
+          log.warn(String.format("Failed to list accounts for group %s", r), e);
+        }
       }
     }
     return reviewers;
