@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1b2397ed_47d70ef7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1b23b6_e6971e3a",
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b2397ed_47a26e91",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-08-17T07:10:25Z",
       "side": 1,
       "message": "Long line. The limit is 80 chars.",
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b2397ed_27c81a55",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2397ed_47a26e91",
       "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1b2397ed_07cd1665",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb1b23b6_868aaa0f",
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b2397ed_27a3fa98",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
         "patchSetId": 2
@@ -64,6 +118,30 @@
       "writtenOn": "2016-08-17T07:10:25Z",
       "side": 1,
       "message": "While you already here, I think Provider isn\u0027t needed here, as GroupsCollection is bound in singleton scope as well.",
+      "range": {
+        "startLine": 63,
+        "startChar": 16,
+        "endLine": 63,
+        "endChar": 24
+      },
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb1b23b6_86b3cae3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "this something for a separate patch set",
+      "parentUuid": "1b2397ed_27a3fa98",
       "range": {
         "startLine": 63,
         "startChar": 16,
@@ -99,6 +177,30 @@
     },
     {
       "key": {
+        "uuid": "fb1b23b6_e6b0bed8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2397ed_c7949e38",
+      "range": {
+        "startLine": 64,
+        "startChar": 16,
+        "endLine": 64,
+        "endChar": 54
+      },
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b2397ed_e797223a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
         "patchSetId": 2
@@ -110,6 +212,30 @@
       "writtenOn": "2016-08-17T07:10:25Z",
       "side": 1,
       "message": "Not necessary. While there is no magic with RewviewDb instance providing in listeners (ChangeEventListener), REST endpoints become a Review DB instance injected. So just inject Provider\u003cReviewDb\u003e in ctor and use it on line 143 with db.get().",
+      "range": {
+        "startLine": 142,
+        "startChar": 4,
+        "endLine": 142,
+        "endChar": 52
+      },
+      "revId": "3e66cf2c7a4df1ae3a73783410e767f5a1fc37fe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b2397ed_67d21209",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2016-08-17T07:54:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2397ed_e797223a",
       "range": {
         "startLine": 142,
         "startChar": 4,
