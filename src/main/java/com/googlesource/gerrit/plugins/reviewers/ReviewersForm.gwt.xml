@@ -27,5 +27,5 @@
   <!-- added in order to make this plugin as simple as possible   -->
   <!-- Specify the app entry point class.                         -->
   <entry-point class="com.googlesource.gerrit.plugins.reviewers.client.ReviewersPlugin"/>
-  <stylesheet src="/reviewers.css"/>
+  <stylesheet src="reviewers.css"/>
 </module>
