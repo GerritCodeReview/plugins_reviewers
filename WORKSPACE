@@ -1,0 +1,29 @@
+workspace(name = "reviewers")
+load("//:bazlets.bzl", "load_bazlets")
+
+load_bazlets(
+    tag = "v0.1",
+#    local_path = "/home/davido/projects/bazlets"
+)
+
+# Release Plugin API
+#load("@com_github_davido_bazlets//:gerrit_api.bzl",
+#     "gerrit_api")
+
+# Snapshot Plugin API
+load(
+    "@com_github_davido_bazlets//:gerrit_api_maven_local.bzl",
+    "gerrit_api_maven_local",
+)
+load(
+    "@com_github_davido_bazlets//:gerrit_gwt.bzl",
+    "gerrit_gwt",
+)
+
+# Load release Plugin API
+# gerrit_api()
+
+# Load snapshot Plugin API
+gerrit_api_maven_local()
+
+gerrit_gwt()
