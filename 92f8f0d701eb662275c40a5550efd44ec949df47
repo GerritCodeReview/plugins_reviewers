@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0847825_0ae09bb0",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-18T05:29:37Z",
+      "side": 1,
+      "message": "@Edwin, David: we pobably want to rather create bazlets repository in gerrit-review? Can you do that and import the current content form the repo mentioned above as the first commit?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
