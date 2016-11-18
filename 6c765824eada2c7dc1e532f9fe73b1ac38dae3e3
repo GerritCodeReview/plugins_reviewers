@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0847825_aad06fe3",
+        "filename": "BUID",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-18T07:39:47Z",
+      "side": 1,
+      "message": "What is that?",
+      "revId": "6c765824eada2c7dc1e532f9fe73b1ac38dae3e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
