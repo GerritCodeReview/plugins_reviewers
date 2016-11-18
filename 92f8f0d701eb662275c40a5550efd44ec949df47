@@ -46,6 +46,30 @@
       "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0847825_6adf57f7",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-18T07:39:28Z",
+      "side": 1,
+      "message": "Sure ;-) But I wanted to hear your opinion first, ...",
+      "parentUuid": "70a120aa_f0d420a7",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
