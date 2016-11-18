@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b0847825_ea00a768",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-18T13:18:14Z",
+      "side": 1,
+      "message": "My build is quite some days ago. But why this shouldn\u0027t be possible?\n\nGerit project:\n\n  WORKSPACE(gerrit)\n      tools/bzl/plugin.bzl # builds against gerrit tree\n      plugins/\n               replication\n               hooks\n               [more core plugins\n\nBalzest project\n\n  WORKSPACE(bazlets)\n      gerrit_api.bzl\n      gerrit_plugin.bzl\n\n\nPlugin project\n\n  WORKSPACE(reviewers)\n      tools/bzl/plugin.bzl  # should be ignored in standalone build mode, but used in Gerrit tree mode\n      srcs/[...]\n\nNow we would like to support two builds modes (as it was the case with Buck):\n\n* in Gerrit tree (against latest and greatest plugin API)\n* Standalone, Bazlets driven build, Gerrit plugin API is consumed from the Central\n\nSo basically, we have two different places, where gerrit_plugin() is denied: in Gerrit tree or in Bazlers, Depending on the plugin build mode, the former or the latter should be used.",
+      "parentUuid": "b0847825_4a19b3f1",
+      "range": {
+        "startLine": 18,
+        "startChar": 6,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "877553e5641bb32de83531792bf3efb1b57b2e8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d091ec62_2be559c1",
         "filename": "WORKSPACE",
         "patchSetId": 4
