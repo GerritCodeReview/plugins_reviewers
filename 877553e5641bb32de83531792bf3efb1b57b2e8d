@@ -90,6 +90,30 @@
     },
     {
       "key": {
+        "uuid": "b0847825_4a3e1321",
+        "filename": "WORKSPACE",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-19T19:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d091ec62_2be559c1",
+      "range": {
+        "startLine": 3,
+        "startChar": 10,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "877553e5641bb32de83531792bf3efb1b57b2e8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0847825_2a147fba",
         "filename": "WORKSPACE",
         "patchSetId": 4
@@ -101,6 +125,30 @@
       "writtenOn": "2016-11-18T09:07:08Z",
       "side": 1,
       "message": "Nit: You could do this with a skylark repository instead. So you select the local one or the remote one depending on the user configuration",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "877553e5641bb32de83531792bf3efb1b57b2e8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0847825_aa34ef3b",
+        "filename": "WORKSPACE",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-19T19:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0847825_2a147fba",
       "range": {
         "startLine": 2,
         "startChar": 0,
@@ -142,6 +190,24 @@
       "side": 1,
       "message": "You can replace this 2 lines by just:\nload(\"@io_bazlets//:gerrit_plugin.bzl\", \"gerrit_plugin\")\n\nThe otherr approach would be to simply define the remote repository io_bazlets from the parent repository as being a local_repository pointing to some sub-directory.",
       "parentUuid": "b0847825_0a0fbba8",
+      "revId": "877553e5641bb32de83531792bf3efb1b57b2e8d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0847825_ca31234b",
+        "filename": "tools/bzl/plugin.bzl",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2016-11-19T19:55:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d091ec62_4bdaa508",
       "revId": "877553e5641bb32de83531792bf3efb1b57b2e8d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
