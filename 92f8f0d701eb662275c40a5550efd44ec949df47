@@ -70,6 +70,24 @@
       "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50ec1c3c_ff273fde",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1024147
+      },
+      "writtenOn": "2016-11-23T18:13:32Z",
+      "side": 1,
+      "message": "yes, we can create this; do you need someone from google to do this? I thought the gerrit maintainers had access.",
+      "parentUuid": "b0847825_6adf57f7",
+      "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
