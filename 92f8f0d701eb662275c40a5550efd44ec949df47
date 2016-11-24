@@ -88,6 +88,24 @@
       "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "301ec818_b6f5e865",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2016-11-24T05:46:23Z",
+      "side": 1,
+      "message": "https://gerrit-review.googlesource.com/#/admin/projects/bazlets",
+      "parentUuid": "50ec1c3c_ff273fde",
+      "revId": "92f8f0d701eb662275c40a5550efd44ec949df47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
