@@ -133,7 +133,7 @@ class ChangeEventListener implements EventListener {
         RevWalk rw = new RevWalk(git);
         ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData = changeDataFactory.create(
-          reviewDb, projectName, new Change.Id(Integer.parseInt(c.number)));
+          reviewDb, projectName, new Change.Id(c.number));
       Set<String> reviewers = findReviewers(sections, changeData);
       if (reviewers.isEmpty()) {
         return;
