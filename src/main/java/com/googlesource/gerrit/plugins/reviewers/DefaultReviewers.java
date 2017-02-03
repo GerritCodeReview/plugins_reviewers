@@ -15,16 +15,19 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.extensions.api.GerritApi;
-import com.google.gerrit.extensions.api.changes.ChangeApi;
+import com.google.gerrit.extensions.api.changes.AddReviewerInput;
+import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 class DefaultReviewers implements Runnable {
@@ -32,40 +35,47 @@ class DefaultReviewers implements Runnable {
       .getLogger(DefaultReviewers.class);
 
   private final GerritApi gApi;
-  private final Change change;
+  private final PatchSet ps;
   private final Set<Account> reviewers;
 
   interface Factory {
-    DefaultReviewers create(Change change, Set<Account> reviewers);
+    DefaultReviewers create(PatchSet ps, Set<Account> reviewers);
   }
 
   @Inject
   DefaultReviewers(
       GerritApi gApi,
-      @Assisted Change change,
+      @Assisted PatchSet ps,
       @Assisted Set<Account> reviewers) {
     this.gApi = gApi;
-    this.change = change;
+    this.ps = ps;
     this.reviewers = reviewers;
   }
 
   @Override
   public void run() {
-    addReviewers(reviewers, change);
+    addReviewers(reviewers, ps);
   }
 
   /**
    * Append the reviewers to change#{@link Change}
    *
    * @param reviewers Set of reviewers to add
-   * @param change {@link Change} to add the reviewers to
+   * @param ps {@link PatchSet} to add the reviewers to
    */
-  private void addReviewers(Set<Account> reviewers, Change change) {
+  private void addReviewers(Set<Account> reviewers, PatchSet ps) {
     try {
-      ChangeApi cApi = gApi.changes().id(change.getId().get());
+      ReviewInput in = new ReviewInput();
+      in.reviewers = new ArrayList<>(reviewers.size());
       for (Account account : reviewers) {
-        cApi.addReviewer(account.getId().toString());
+        AddReviewerInput addReviewerInput = new AddReviewerInput();
+        addReviewerInput.reviewer = account.getId().toString();
+        in.reviewers.add(addReviewerInput);
       }
+      gApi.changes()
+          .id(ps.getId().getParentKey().get())
+          .revision(ps.getPatchSetId())
+          .review(in);
     } catch (RestApiException e) {
       log.error("Couldn't add reviewers to the change", e);
     }
