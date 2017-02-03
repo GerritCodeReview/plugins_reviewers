@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "162005bd_0594600a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "Feb 3, 2017 1:29:19 PM",
+      "side": 1,
+      "message": "It wouldn\u0027t work as you\u0027ve suggested, because in.reviewers is List\u003cAddReviewerInput\u003e and not List\u003cString\u003e. You would need another map:\n\n  in.reviewers \u003d reviewers.stream().map(a -\u003e a.getId().toString()).map(AddReviewerInput::new).collect(toList());\n\nto construct the AddReviewerInput instances from string, beside that such ctor doesn\u0027t exist. Of course it could be added. Another option is to mak it in lambda in place:\n\n  in.reviewers \u003d reviewers.stream().map(a -\u003e\n         {\n           AddReviewerInput addReviewerInput \u003d new AddReviewerInput();\n           addReviewerInput.reviewer \u003d a.getId().toString();\n           return addReviewerInput;\n         }\n     ).collect(toList());\n\nor add a static helper function, like:\n\n  private static AddReviewerInput fromAccount(Account a) {\n    AddReviewerInput addReviewerInput \u003d new AddReviewerInput();\n    addReviewerInput.reviewer \u003d a.getId().toString();\n    return addReviewerInput;\n  }\n\nand use it with method reference:\n\n  in.reviewers \u003d reviewers.stream().map(DefaultReviewers::fromAccount).collect(toList());\n\nNot sure, it\u0027s better as the current version?\n\nThe actual missing ctor is:\n\n  AddReviewerInput(Account) {...}\n\nThat\u0027s because we cannot reference reviewdb project from extension-api. I hope it should be possible once we move to NoteDb.",
+      "parentUuid": "b819ed48_e750fdfb",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 0
+      },
+      "revId": "82d5ec3ae1d8eb43ca5bd34938046d6fe1d10a6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3fa437b_68f282eb",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
         "patchSetId": 1
@@ -60,6 +84,24 @@
       "side": 1,
       "message": "That logic was added after the initial refactoring to batch reviewers up, because users were getting too many individual emails.\n\nIdeally, PostReviewers would support a batch input itself, and so would DeleteReviewers. We need both for PolyGerrit so we\u0027ll get to it sooner or later.",
       "parentUuid": "a3fa437b_68f282eb",
+      "revId": "82d5ec3ae1d8eb43ca5bd34938046d6fe1d10a6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "431baf8d_68e7fae9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "Feb 3, 2017 1:29:19 PM",
+      "side": 1,
+      "message": "Agree. So the suggested version in this ps would be the way to go for now, and adapt it to directly use PostReviewers in batch mode, through the API, when it\u0027s available.",
+      "parentUuid": "10a356cc_981f9fa5",
       "revId": "82d5ec3ae1d8eb43ca5bd34938046d6fe1d10a6c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
