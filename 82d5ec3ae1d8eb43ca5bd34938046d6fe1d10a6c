@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3fa437b_68f282eb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "Feb 3, 2017 2:07:05 AM",
+      "side": 1,
+      "message": "That feels just wrong to me, to lookup for a PatchSet, retrieve the revision API and call review on it, that would just call PostReviewers again, to work in batch mode.\n\nInstead, ChangeApi should be extended and offer, in addition to:\n\n  void addReviewer(AddReviewerInput in) throws RestApiException;\n  void addReviewer(String in) throws RestApiException;\n\ntwo new methods to add reviewers in batch modes:\n\n  void addReviewers(Set\u003cAddReviewerInput\u003e reviewers) throws RestApiException;\n  void addReviewers(Set\u003cString\u003e reviewers) throws RestApiException;\n\nOr even:\n\n  void addBatchReviewers(Set\u003cAddReviewerInput\u003e reviewers) throws RestApiException;\n  void addBatchReviewers(Set\u003cString\u003e reviewers) throws RestApiException;\n\nBut, looking the code in PostReview#apply:\n\n  if (input.reviewers !\u003d null) {\n      reviewerJsonResults \u003d Maps.newHashMap();\n      for (AddReviewerInput reviewerInput : input.reviewers) {\n        // Prevent notifications because setting reviewers is batched.\n        reviewerInput.notify \u003d NotifyHandling.NONE;\n\n        PostReviewers.Addition result \u003d postReviewers.prepareApplication(\n            revision.getChangeResource(), reviewerInput, true);\n        reviewerJsonResults.put(reviewerInput.reviewer, result.result);\n        if (result.result.error !\u003d null) {\n          hasError \u003d true;\n          continue;\n        }    \n        if (result.result.confirm !\u003d null) {\n          confirm \u003d true;\n          continue;\n        }    \n        reviewerResults.add(result);\n      }    \n    }\n\nand later, there...\n\n    private void emailReviewers(Change change,\n      List\u003cPostReviewers.Addition\u003e reviewerAdditions, NotifyHandling notify,\n      ListMultimap\u003cRecipientType, Account.Id\u003e accountsToNotify) {\n    List\u003cAccount.Id\u003e to \u003d new ArrayList\u003c\u003e();\n    List\u003cAccount.Id\u003e cc \u003d new ArrayList\u003c\u003e();\n    for (PostReviewers.Addition addition : reviewerAdditions) {\n      if (addition.op.state \u003d\u003d ReviewerState.REVIEWER) {\n        to.addAll(addition.op.reviewers.keySet());\n      } else if (addition.op.state \u003d\u003d ReviewerState.CC) {\n        cc.addAll(addition.op.reviewers.keySet());\n      }\n    }\n    postReviewers.emailReviewers(change, to, cc, notify, accountsToNotify);\n  }\n\nit seems, that quite some logic is done in PostReviewer, and not in PostReviewers. So, it looks, that some refactoring would be needed to reuse this code in ChangeAPIImpl#addBatchReviewers.",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "82d5ec3ae1d8eb43ca5bd34938046d6fe1d10a6c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
