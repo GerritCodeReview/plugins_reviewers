@@ -25,6 +25,7 @@ import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.client.PatchSet;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
@@ -132,15 +133,19 @@ class ChangeEventListener implements EventListener {
     try (Repository git = repoManager.openRepository(projectName);
         RevWalk rw = new RevWalk(git);
         ReviewDb reviewDb = schemaFactory.open()) {
+      Change.Id changeId = new Change.Id(Integer.parseInt(c.number));
       ChangeData changeData = changeDataFactory.create(
-          reviewDb, projectName, new Change.Id(Integer.parseInt(c.number)));
+          reviewDb, projectName, changeId);
       Set<String> reviewers = findReviewers(sections, changeData);
       if (reviewers.isEmpty()) {
         return;
       }
 
       final Change change = changeData.change();
-      final Runnable task = reviewersFactory.create(change,
+      final PatchSet ps =
+          changeData.patchSet(new PatchSet.Id(changeId,
+              Integer.parseInt(e.patchSet.get().number)));
+      final Runnable task = reviewersFactory.create(ps,
           toAccounts(reviewDb, reviewers, projectName,
               e.uploader.get().email));
 
