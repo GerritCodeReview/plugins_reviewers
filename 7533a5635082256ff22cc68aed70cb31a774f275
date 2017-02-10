@@ -22,6 +22,30 @@
       "revId": "7533a5635082256ff22cc68aed70cb31a774f275",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dc87d2e_8e67e5c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-10T13:24:34Z",
+      "side": 1,
+      "message": "Ah, right. It was already wrong in CL on master, that was abandoned: [1]. Done.\n\n* [1] https://gerrit-review.googlesource.com/#/c/96134/1/src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java@139",
+      "parentUuid": "c2e6f47a_71ff4a30",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 12
+      },
+      "revId": "7533a5635082256ff22cc68aed70cb31a774f275",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
