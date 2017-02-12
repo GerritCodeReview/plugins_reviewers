@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e78fb9d2_7d761df6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-12T17:58:20Z",
+      "side": 1,
+      "message": "I have even better idea. It seems wrong to retrieve the patch set and pass it here, to just produce URL on revision, that actually needs to be on change. But for now POST /changes/\u003cid\u003e/reviewers doesn\u0027t accept adding list of reviewers. So we need to abuse POST /changes/\u003cid\u003e/revisions/\u003cid\u003e/review... But, instead to retrieve the current revision on our own, in this plugin, we relly on the revision(\"current\"). That way it will be retrieved in core and not in paugin.",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "4eabfb54ca9e3449bc6af95b963612849afc56d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
