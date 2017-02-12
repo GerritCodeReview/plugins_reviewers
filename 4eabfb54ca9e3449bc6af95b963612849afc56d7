@@ -22,6 +22,30 @@
       "revId": "4eabfb54ca9e3449bc6af95b963612849afc56d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffddeeea_567480e9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-02-12T19:42:29Z",
+      "side": 1,
+      "message": "@Hugo, I switched to using current() revision:\n\n  gApi.changes()\n      .id(ps.getId().getParentKey().get())\n      .current()\n      [...]\n\nthat allows us to avoid fetching patch set and passing in here. I also added TODO comment to switch back to using changes API instead of revisions API.",
+      "parentUuid": "e78fb9d2_7d761df6",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "4eabfb54ca9e3449bc6af95b963612849afc56d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
