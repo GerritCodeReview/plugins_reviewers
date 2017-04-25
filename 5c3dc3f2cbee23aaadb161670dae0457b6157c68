@@ -1,4 +1,28 @@
 {
   "pushCert": "certificate version 0.1\npusher Dave Borowitz \u003cdborowitz@google.com\u003e 1493130215 -0400\npushee rpc://gerrit/plugins/reviewers\nnonce AFMZ2GwIRN66mQdDnDGmkEUgypLTHNcmWKDnsLbWdrEL5pJeqeCBrCxKnAu3/hyAInaIViA9Tgzq\n\n0000000000000000000000000000000000000000 5c3dc3f2cbee23aaadb161670dae0457b6157c68 refs/for/master%r\u003ddavid.ostrovsky@gmail.com,r\u003ddpursehouse@collab.net\n-----BEGIN PGP SIGNATURE-----\nVersion: GnuPG v1\n\niQIcBAABAgAGBQJY/1vnAAoJEF/XxZqaEoiMKw4P/iMaM4XkfqJxNkq7nKo19BmL\nGe/idg/SCbRcPUSh4GDsnB3TIXT/avbnR5TfS24XtblFiuAgPepJTs++x94i+26s\nsHnmBb2+Dq/FoRyFKKq/oE3WF4oq3cSF7QewHiBJhvWOeK8J5th1mTovvQy/WJO3\nXUOOzQW5YKmI1S5MVppz3ki6VI0/lspST/rxcRMIE/SKSKqhY04PT9XexcPXXEKU\n8p9zUJ9EdgW1V8qWy+xBTgjXeRbKLGQ3qqocosRWgg8Hym7dHuFxvaSLusQ6zJGs\naj1haiBIO49lUgkdgZ/jsKWjVd3OZb9NoGkLxAvqYfpxjX6sbXuYNqTU/6Lb5OaV\ntqQxtRWAWofjhKplFyb8NFz8riYUO/P4BZ2kgqR3kyjufsKp0fSQ0j7/u/1yevr0\nOGbouuPWcE+3kFYHos9a8WAVZyH4yqk433ZnR5a+1AccbHEWKQ2X5sV7a/U+2cEQ\n0H+6qwlinKuc29JSagMNEm1tPYscRIgXamKaH8bGpj0lIHzsu/C2Fc2MBrZWrUao\nYxmk5zNzco5ud/N9nm55d5mPBpfi7ZkHVS2GRjIGKTUZeyyfh+G7pHRTCdFX709B\nNzNxJHYjF/9hH5PFAfddU9+fNXWSRrc0nlkGZWaHPwuSwbg0uNa3rGCnJ9zJwlRu\n6lNDDulNmxTiasn5GrOv\n\u003dLEF3\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "key": {
+        "uuid": "920f3bc0_13fa9551",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestProjectReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001240
+      },
+      "writtenOn": "2017-04-25T15:05:24Z",
+      "side": 1,
+      "message": "This should be test, and then the entire try block could be testOrFalse. \n\nWhen you are probing for \"can user X do this\" you want to use test.\nWhen you are executing an action for user X to do this, use check.\n\nHere the suggestReviewers is probing for many users if they can do X, but the user isn\u0027t actually trying to do X yet. So test is the correct method to use.s",
+      "range": {
+        "startLine": 68,
+        "startChar": 65,
+        "endLine": 68,
+        "endChar": 70
+      },
+      "revId": "5c3dc3f2cbee23aaadb161670dae0457b6157c68",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
 }
