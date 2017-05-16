@@ -33,6 +33,7 @@ import com.google.gerrit.server.account.AccountByEmailCache;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.data.ChangeAttribute;
+import com.google.gerrit.server.events.DraftPublishedEvent;
 import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.PatchSetCreatedEvent;
 import com.google.gerrit.server.git.GitRepositoryManager;
@@ -115,12 +116,24 @@ class ChangeEventListener implements EventListener {
 
   @Override
   public void onEvent(Event event) {
-    if (!(event instanceof PatchSetCreatedEvent)) {
-      return;
+    if (event instanceof PatchSetCreatedEvent) {
+      PatchSetCreatedEvent e = (PatchSetCreatedEvent) event;
+      ChangeAttribute c = e.change.get();
+      onEvent(new Project.NameKey(c.project),
+          Integer.parseInt(e.change.get().number),
+          Integer.parseInt(e.patchSet.get().number), e.uploader.get().email);
+    } else if (event instanceof DraftPublishedEvent) {
+      DraftPublishedEvent e = (DraftPublishedEvent) event;
+      ChangeAttribute c = e.change.get();
+      onEvent(new Project.NameKey(c.project),
+          Integer.parseInt(e.change.get().number),
+          Integer.parseInt(e.patchSet.get().number), e.uploader.get().email);
     }
-    PatchSetCreatedEvent e = (PatchSetCreatedEvent) event;
-    ChangeAttribute c = e.change.get();
-    Project.NameKey projectName = new Project.NameKey(c.project);
+  }
+
+  private void onEvent(Project.NameKey projectName, int changeNumber,
+      int patchSetNumber, String email) {
+
     // TODO(davido): we have to cache per project configuration
     ReviewersConfig config = configFactory.create(projectName);
     List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
@@ -133,7 +146,7 @@ class ChangeEventListener implements EventListener {
         RevWalk rw = new RevWalk(git);
         ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData = changeDataFactory.create(
-          reviewDb, projectName, new Change.Id(Integer.parseInt(c.number)));
+          reviewDb, projectName, new Change.Id(changeNumber));
       Set<String> reviewers = findReviewers(sections, changeData);
       if (reviewers.isEmpty()) {
         return;
@@ -141,8 +154,7 @@ class ChangeEventListener implements EventListener {
 
       final Change change = changeData.change();
       final Runnable task = reviewersFactory.create(change,
-          toAccounts(reviewDb, reviewers, projectName,
-              e.uploader.get().email));
+          toAccounts(reviewDb, reviewers, projectName, email));
 
       workQueue.getDefaultQueue().submit(new Runnable() {
         ReviewDb db = null;
