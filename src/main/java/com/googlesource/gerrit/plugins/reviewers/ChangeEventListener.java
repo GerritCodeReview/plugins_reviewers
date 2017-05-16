@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.common.ChangeInfo;
+import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
@@ -58,7 +59,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-class ChangeEventListener implements RevisionCreatedListener {
+class ChangeEventListener implements RevisionCreatedListener, 
+    DraftPublishedListener {
   private static final Logger log = LoggerFactory.getLogger(ChangeEventListener.class);
 
   private final AccountResolver accountResolver;
@@ -109,9 +111,22 @@ class ChangeEventListener implements RevisionCreatedListener {
   }
 
   @Override
-  public void onRevisionCreated(Event event) {
+  public void onRevisionCreated(
+      com.google.gerrit.extensions.events.RevisionCreatedListener.Event event) {
     ChangeInfo c = event.getChange();
-    Project.NameKey projectName = new Project.NameKey(c.project);
+    onEvent(new Project.NameKey(c.project), c._number, event.getWho().email);
+  }
+
+  @Override
+  public void onDraftPublished(
+      com.google.gerrit.extensions.events.DraftPublishedListener.Event event) {
+    ChangeInfo c = event.getChange();
+    onEvent(new Project.NameKey(c.project), c._number, event.getWho().email);
+
+  }
+
+  private void onEvent(Project.NameKey projectName, int changeNumber,
+      String email) {
     // TODO(davido): we have to cache per project configuration
     ReviewersConfig config = configFactory.create(projectName);
     List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
@@ -124,7 +139,7 @@ class ChangeEventListener implements RevisionCreatedListener {
         RevWalk rw = new RevWalk(git);
         ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData =
-          changeDataFactory.create(reviewDb, projectName, new Change.Id(c._number));
+          changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
       Set<String> reviewers = findReviewers(sections, changeData);
       if (reviewers.isEmpty()) {
         return;
@@ -133,7 +148,7 @@ class ChangeEventListener implements RevisionCreatedListener {
       final Change change = changeData.change();
       final Runnable task =
           reviewersFactory.create(
-              change, toAccounts(reviewDb, reviewers, projectName, event.getWho().email));
+              change, toAccounts(reviewDb, reviewers, projectName, email));
 
       workQueue
           .getDefaultQueue()
