@@ -8,6 +8,7 @@ Global configuration of the @PLUGIN@ plugin is done in the
   [reviewers]
     enableREST = true
     enableUI = false
+    ignoreDrafts = true
 ```
 
 reviewers.enableREST
@@ -17,6 +18,11 @@ reviewers.enableREST
 reviewers.enableUI
 :	Enable the UI.  When set to false, the 'Reviewers' menu is not displayed
 	on the project screen. Defaults to true, or false when `enableREST` is false.
+
+reviewers.ignoreDrafts
+:	Ignore draft changes. When set to true draft changes are not considered when
+	adding reviewers. Defaults to false. To ignore drafts on a per-project basis
+	set this value to false and add "-status:draft" to filter in relevant projects.
 
 
 Per project configuration of the @PLUGIN@ plugin is done in the
