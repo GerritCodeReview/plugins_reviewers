@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa784820_826bf3f2",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-24T10:26:12Z",
+      "side": 1,
+      "message": "nit: unrelated change",
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df321b47_d80857a0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-24T10:26:12Z",
+      "side": 1,
+      "message": "nit: should be moved before L59",
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5622113e_ab8558d4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-24T10:26:12Z",
+      "side": 1,
+      "message": "ignoredrafts should be a class member, initialized in the constructor.  Then it will not be necessary to have cfgFactory and pluginName as class members.",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 92
+      },
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c33aa952_234ad04f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-24T10:26:12Z",
+      "side": 1,
+      "message": "Huh, if this was not there does it mean the draft published event was never handled?\n\nIf so think this should be fixed in a separate change and backported to other branches, at least stable-2.13 but possibly also stable-2.12.",
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86729adf_538642d6",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-05-24T10:26:12Z",
+      "side": 1,
+      "message": "use tabs for indentation like in the other sections.",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 23,
+        "endChar": 4
+      },
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
