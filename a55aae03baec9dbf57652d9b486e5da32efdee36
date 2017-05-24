@@ -136,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "031e42ed_68771b65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-05-24T15:17:29Z",
+      "side": 1,
+      "message": "Draft published were never handled on 2.14 and master branch only. 2.12 and 2.13 are using the old event listener which is one registered listener for all events types.\n\nHongkai made a mistake merging up to 2.14 and forgot that line.",
+      "parentUuid": "c33aa952_234ad04f",
+      "revId": "a55aae03baec9dbf57652d9b486e5da32efdee36",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86729adf_538642d6",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 1
