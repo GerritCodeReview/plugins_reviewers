@@ -19,6 +19,12 @@ The output is created in
   bazel-genfiles/@PLUGIN@.jar
 ```
 
+This project can be imported into the Eclipse IDE:
+
+```
+  ./tools/eclipse/project.sh
+```
+
 ### Build in Gerrit tree
 
 ```
