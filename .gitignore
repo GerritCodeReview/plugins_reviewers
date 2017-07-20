@@ -4,4 +4,6 @@
 /.settings
 /local.properties
 *.pyc
+/.primary_build_tool
 /bazel-*
+/eclipse-out
