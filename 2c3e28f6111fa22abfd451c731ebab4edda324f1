@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "558daf05_8e8432fd",
+        "filename": "tools/BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-07-21T04:10:54Z",
+      "side": 1,
+      "message": "Why this file is needed? This package doesn\u0027t seem to have any native or Skylark rules?",
+      "revId": "2c3e28f6111fa22abfd451c731ebab4edda324f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d290da5_1519a128",
+        "filename": "tools/eclipse/BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-07-21T04:10:54Z",
+      "side": 1,
+      "message": "Nit: Trailing coma is missing. It was found running the buildifier on all BUILD sources: http://paste.openstack.org/show/616120/.",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 21
+      },
+      "revId": "2c3e28f6111fa22abfd451c731ebab4edda324f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
