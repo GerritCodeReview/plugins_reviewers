@@ -81,6 +81,30 @@
       "revId": "2c3e28f6111fa22abfd451c731ebab4edda324f1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb299981_42ac18ca",
+        "filename": "tools/eclipse/BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2017-07-21T14:09:56Z",
+      "side": 1,
+      "message": "Not really, I\u0027m doing something similar. Also note, I\u0027ve uploaded a change for review to extend GerritForge CI to perform the buildifier check and report an Code-Style label.",
+      "parentUuid": "4aabbfc3_75956136",
+      "range": {
+        "startLine": 4,
+        "startChar": 4,
+        "endLine": 4,
+        "endChar": 21
+      },
+      "revId": "2c3e28f6111fa22abfd451c731ebab4edda324f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
