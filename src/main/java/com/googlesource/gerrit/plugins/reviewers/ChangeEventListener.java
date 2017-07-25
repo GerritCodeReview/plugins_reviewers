@@ -24,7 +24,6 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
-import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.index.query.Predicate;
@@ -62,7 +61,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-class ChangeEventListener implements RevisionCreatedListener, DraftPublishedListener {
+class ChangeEventListener implements RevisionCreatedListener {
   private static final Logger log = LoggerFactory.getLogger(ChangeEventListener.class);
 
   private final AccountResolver accountResolver;
@@ -78,7 +77,6 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
   private final ReviewersConfig.Factory configFactory;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
-  private final boolean ignoreDrafts;
 
   @Inject
   ChangeEventListener(
@@ -110,24 +108,10 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     this.configFactory = configFactory;
     this.user = user;
     this.queryBuilder = queryBuilder;
-    this.ignoreDrafts =
-        cfgFactory
-            .getGlobalPluginConfig(pluginName)
-            .getBoolean(pluginName, null, "ignoreDrafts", false);
   }
 
   @Override
   public void onRevisionCreated(RevisionCreatedListener.Event event) {
-    ChangeInfo c = event.getChange();
-    if (ignoreDrafts && c.status == ChangeStatus.DRAFT) {
-      log.debug("Ignoring draft change");
-      return;
-    }
-    onEvent(new Project.NameKey(c.project), c._number, event.getWho());
-  }
-
-  @Override
-  public void onDraftPublished(DraftPublishedListener.Event event) {
     ChangeInfo c = event.getChange();
     onEvent(new Project.NameKey(c.project), c._number, event.getWho());
   }
