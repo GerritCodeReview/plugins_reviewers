@@ -24,7 +24,6 @@ import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.common.ChangeInfo;
-import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
@@ -63,7 +62,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-class ChangeEventListener implements RevisionCreatedListener, DraftPublishedListener {
+class ChangeEventListener implements RevisionCreatedListener {
   private static final Logger log = LoggerFactory.getLogger(ChangeEventListener.class);
 
   private final AccountResolver accountResolver;
@@ -127,12 +126,6 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
       log.debug("Ignoring draft change");
       return;
     }
-    onEvent(new Project.NameKey(c.project), c._number, event.getWho().email);
-  }
-
-  @Override
-  public void onDraftPublished(DraftPublishedListener.Event event) {
-    ChangeInfo c = event.getChange();
     onEvent(new Project.NameKey(c.project), c._number, event.getWho().email);
   }
 
