@@ -55,7 +55,7 @@ public class SuggestProjectReviewers extends SuggestReviewers
   @Override
   public List<SuggestedReviewerInfo> apply(ProjectResource rsrc)
       throws BadRequestException, OrmException, IOException, ConfigInvalidException {
-    return reviewersUtil.suggestReviewers(null, this, rsrc.getControl(), getVisibility(rsrc), true);
+    return reviewersUtil.suggestReviewers(null, this, rsrc.getProjectState(), getVisibility(rsrc), true);
   }
 
   private VisibilityControl getVisibility(final ProjectResource rsrc) {
