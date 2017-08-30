@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "82a8e424_333fa21e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/SuggestProjectReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2017-08-30T12:05:46Z",
+      "side": 1,
+      "message": "nit: long line",
+      "revId": "1744bc12c85b76cee00a74be0b880f607726c6d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
