@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c904b82_7beef64d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-03T23:55:15Z",
+      "side": 1,
+      "message": "This is surprising. It should not be possible for multiple accounts to have the same email address.  See [1] for test of this.\n\n[1] https://gerrit-review.googlesource.com/124531",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 63
+      },
+      "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
