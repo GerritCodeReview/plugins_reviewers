@@ -22,6 +22,30 @@
       "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3257dcd3_8b2d5f91",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-09-05T12:21:49Z",
+      "side": 1,
+      "message": "I also thought that this was not possible but it is. Around 350 users in our installation managed to use their email in 2 different accounts.\n\nI tested it and I managed to use my email in more than one account. I do not know if this is the difference but we use LDAP. All I had to do, from the second account, is:\n\nAccount-\u003esettings-\u003eContact Information-\u003eRegister New Email and register my email.\n\nAnother strange thing is AccountByEmailCache.get returns a Set of Account, not a single Account which indicates that email is not unique.",
+      "parentUuid": "4c904b82_7beef64d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 63
+      },
+      "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
