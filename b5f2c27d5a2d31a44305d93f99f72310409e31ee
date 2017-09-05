@@ -46,6 +46,53 @@
       "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2839de_ae003259",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-05T13:11:31Z",
+      "side": 1,
+      "message": "OK, it seems that it\u0027s possible for multiple AD/LDAP users to have the same email address.  One use case being service accounts that have the email address of their owner.\n\nhttps://superuser.com/questions/1149522/accounts-with-same-mail-attribute",
+      "parentUuid": "3257dcd3_8b2d5f91",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 63
+      },
+      "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fea351de_108eddc7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-05T13:11:31Z",
+      "side": 1,
+      "message": "Use AccountResolver.findAllByNameOrEmail which is supposed to return only one account?",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 40
+      },
+      "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
