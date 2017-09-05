@@ -93,6 +93,30 @@
       "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17a27f0a_fef1cb64",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2017-09-05T14:57:02Z",
+      "side": 1,
+      "message": "You mean findByNameOrEmail, findAllByNameOrEmail returns a set.\n\nDone",
+      "parentUuid": "fea351de_108eddc7",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 40
+      },
+      "revId": "b5f2c27d5a2d31a44305d93f99f72310409e31ee",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
