@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55ae27a4_995af781",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-14T23:07:36Z",
+      "side": 1,
+      "message": "I would just make the commit message something like:\n\n Remove support for drafts",
+      "revId": "8b505ad644f7d879fe1c88d7dcb01675c7370138",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91e98262_60083376",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-14T23:07:36Z",
+      "side": 1,
+      "message": "This prefix is not necessary.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "8b505ad644f7d879fe1c88d7dcb01675c7370138",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7047503f_4d1f596c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-09-14T23:07:36Z",
+      "side": 1,
+      "message": "IIUC this concept of \"importing\" is something google-specific, so it shouldn\u0027t be mentioned in the commit message.",
+      "range": {
+        "startLine": 9,
+        "startChar": 41,
+        "endLine": 10,
+        "endChar": 47
+      },
+      "revId": "8b505ad644f7d879fe1c88d7dcb01675c7370138",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
