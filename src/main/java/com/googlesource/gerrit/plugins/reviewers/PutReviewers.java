@@ -56,7 +56,6 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
-  private final Provider<ReviewDb> reviewDbProvider;
 
   @Inject
   PutReviewers(
@@ -73,7 +72,6 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
-    this.reviewDbProvider = reviewDbProvider;
   }
 
   @Override
@@ -136,7 +134,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   private void validateReviewer(String reviewer) throws RestApiException {
     try {
-      Account account = accountResolver.find(reviewDbProvider.get(), reviewer);
+      Account account = accountResolver.find(reviewer);
       if (account == null) {
         try {
           groupsCollection.get().parse(reviewer);

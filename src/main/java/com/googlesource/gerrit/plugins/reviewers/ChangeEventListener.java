@@ -136,7 +136,7 @@ class ChangeEventListener implements RevisionCreatedListener {
 
       final Change change = changeData.change();
       final Runnable task =
-          reviewersFactory.create(change, toAccounts(reviewDb, reviewers, projectName, uploader));
+          reviewersFactory.create(change, toAccounts(reviewers, projectName, uploader));
 
       workQueue
           .getDefaultQueue()
@@ -223,13 +223,12 @@ class ChangeEventListener implements RevisionCreatedListener {
     return filterPredicate.asMatchable().match(changeData);
   }
 
-  private Set<Account> toAccounts(
-      ReviewDb reviewDb, Set<String> in, Project.NameKey p, AccountInfo uploader) {
+  private Set<Account> toAccounts(Set<String> in, Project.NameKey p, AccountInfo uploader) {
     Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
     for (String r : in) {
       try {
-        Account account = accountResolver.find(reviewDb, r);
+        Account account = accountResolver.find(r);
         if (account != null) {
           reviewers.add(account);
           continue;
@@ -245,7 +244,7 @@ class ChangeEventListener implements RevisionCreatedListener {
         // "Full name <email>" to increase chance of finding only one.
         String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
         try {
-          Account uploaderAccount = accountResolver.findByNameOrEmail(reviewDb, uploaderNameEmail);
+          Account uploaderAccount = accountResolver.findByNameOrEmail(uploaderNameEmail);
           if (uploaderAccount != null) {
             groupMembers =
                 groupMembersFactory.create(identifiedUserFactory.create(uploaderAccount.getId()));
