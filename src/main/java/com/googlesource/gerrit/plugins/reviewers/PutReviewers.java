@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.RestApiException;
@@ -22,10 +23,12 @@ import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
+import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
+import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
 import com.google.gwtorm.server.OrmException;
@@ -56,6 +59,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
+  private final PermissionBackend permissionBackend;
 
   @Inject
   PutReviewers(
@@ -65,21 +69,31 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
-      Provider<ReviewDb> reviewDbProvider) {
+      PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
+    this.permissionBackend = permissionBackend;
   }
 
   @Override
   public List<ReviewerFilterSection> apply(ProjectResource rsrc, Input input)
-      throws RestApiException {
+      throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig cfg = configFactory.create(projectName);
-    if (!rsrc.getControl().isOwner() || cfg == null) {
+    try {
+      permissionBackend
+          .user(rsrc.getUser())
+          .project(rsrc.getNameKey())
+          .check(ProjectPermission.WRITE_CONFIG);
+    } catch (AuthException e) {
+      throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
+    }
+
+    if (cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
 
