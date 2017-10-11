@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -65,7 +64,7 @@ class ChangeEventListener implements RevisionCreatedListener {
 
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
-  private final GroupMembers.Factory groupMembersFactory;
+  private final GroupMembers groupMembers;
   private final DefaultReviewers.Factory reviewersFactory;
   private final GitRepositoryManager repoManager;
   private final WorkQueue workQueue;
@@ -81,7 +80,7 @@ class ChangeEventListener implements RevisionCreatedListener {
   ChangeEventListener(
       final AccountResolver accountResolver,
       final Provider<GroupsCollection> groupsCollection,
-      final GroupMembers.Factory groupMembersFactory,
+      final GroupMembers groupMembers,
       final DefaultReviewers.Factory reviewersFactory,
       final GitRepositoryManager repoManager,
       final WorkQueue workQueue,
@@ -96,7 +95,7 @@ class ChangeEventListener implements RevisionCreatedListener {
       @PluginName String pluginName) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
-    this.groupMembersFactory = groupMembersFactory;
+    this.groupMembers = groupMembers;
     this.reviewersFactory = reviewersFactory;
     this.repoManager = repoManager;
     this.workQueue = workQueue;
@@ -112,10 +111,10 @@ class ChangeEventListener implements RevisionCreatedListener {
   @Override
   public void onRevisionCreated(RevisionCreatedListener.Event event) {
     ChangeInfo c = event.getChange();
-    onEvent(new Project.NameKey(c.project), c._number, event.getWho());
+    onEvent(new Project.NameKey(c.project), c._number);
   }
 
-  private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
+  private void onEvent(Project.NameKey projectName, int changeNumber) {
     // TODO(davido): we have to cache per project configuration
     ReviewersConfig config = configFactory.create(projectName);
     List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
@@ -135,8 +134,7 @@ class ChangeEventListener implements RevisionCreatedListener {
       }
 
       final Change change = changeData.change();
-      final Runnable task =
-          reviewersFactory.create(change, toAccounts(reviewers, projectName, uploader));
+      final Runnable task = reviewersFactory.create(change, toAccounts(reviewers, projectName));
 
       workQueue
           .getDefaultQueue()
@@ -223,9 +221,8 @@ class ChangeEventListener implements RevisionCreatedListener {
     return filterPredicate.asMatchable().match(changeData);
   }
 
-  private Set<Account> toAccounts(Set<String> in, Project.NameKey p, AccountInfo uploader) {
+  private Set<Account> toAccounts(Set<String> in, Project.NameKey p) {
     Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
-    GroupMembers groupMembers = null;
     for (String r : in) {
       try {
         Account account = accountResolver.find(r);
@@ -239,41 +236,15 @@ class ChangeEventListener implements RevisionCreatedListener {
         log.error("Failed to resolve account " + r, e);
         continue;
       }
-      if (groupMembers == null) {
-        // email is not unique to one account, try to locate the account using
-        // "Full name <email>" to increase chance of finding only one.
-        String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
-        try {
-          Account uploaderAccount = accountResolver.findByNameOrEmail(uploaderNameEmail);
-          if (uploaderAccount != null) {
-            groupMembers =
-                groupMembersFactory.create(identifiedUserFactory.create(uploaderAccount.getId()));
-          }
-        } catch (OrmException | IOException e) {
-          log.warn(
-              String.format(
-                  "Failed to list accounts for group %s, cannot retrieve uploader account %s",
-                  r, uploaderNameEmail),
-              e);
-        }
-
-        try {
-          if (groupMembers != null) {
-            reviewers.addAll(
-                groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
-          } else {
-            log.warn(
-                String.format(
-                    "Failed to list accounts for group %s; cannot retrieve uploader account for %s",
-                    r, uploader.email));
-          }
-        } catch (UnprocessableEntityException | NoSuchGroupException e) {
-          log.warn(String.format("Reviewer %s is neither an account nor a group", r));
-        } catch (NoSuchProjectException e) {
-          log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
-        } catch (IOException | OrmException e) {
-          log.warn(String.format("Failed to list accounts for group %s", r), e);
-        }
+      try {
+        reviewers.addAll(
+            groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
+      } catch (UnprocessableEntityException | NoSuchGroupException e) {
+        log.warn(String.format("Reviewer %s is neither an account nor a group", r));
+      } catch (NoSuchProjectException e) {
+        log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
+      } catch (IOException | OrmException e) {
+        log.warn(String.format("Failed to list accounts for group %s", r), e);
       }
     }
     return reviewers;
