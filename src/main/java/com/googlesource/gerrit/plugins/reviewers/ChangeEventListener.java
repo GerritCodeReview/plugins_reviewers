@@ -65,7 +65,7 @@ class ChangeEventListener implements RevisionCreatedListener {
 
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
-  private final GroupMembers.Factory groupMembersFactory;
+  private final GroupMembers groupMembers;
   private final DefaultReviewers.Factory reviewersFactory;
   private final GitRepositoryManager repoManager;
   private final WorkQueue workQueue;
@@ -81,7 +81,7 @@ class ChangeEventListener implements RevisionCreatedListener {
   ChangeEventListener(
       final AccountResolver accountResolver,
       final Provider<GroupsCollection> groupsCollection,
-      final GroupMembers.Factory groupMembersFactory,
+      final GroupMembers groupMembers,
       final DefaultReviewers.Factory reviewersFactory,
       final GitRepositoryManager repoManager,
       final WorkQueue workQueue,
@@ -96,7 +96,7 @@ class ChangeEventListener implements RevisionCreatedListener {
       @PluginName String pluginName) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
-    this.groupMembersFactory = groupMembersFactory;
+    this.groupMembers = groupMembers;
     this.reviewersFactory = reviewersFactory;
     this.repoManager = repoManager;
     this.workQueue = workQueue;
@@ -225,7 +225,6 @@ class ChangeEventListener implements RevisionCreatedListener {
 
   private Set<Account> toAccounts(Set<String> in, Project.NameKey p, AccountInfo uploader) {
     Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
-    GroupMembers groupMembers = null;
     for (String r : in) {
       try {
         Account account = accountResolver.find(r);
@@ -240,33 +239,9 @@ class ChangeEventListener implements RevisionCreatedListener {
         continue;
       }
       if (groupMembers == null) {
-        // email is not unique to one account, try to locate the account using
-        // "Full name <email>" to increase chance of finding only one.
-        String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
         try {
-          Account uploaderAccount = accountResolver.findByNameOrEmail(uploaderNameEmail);
-          if (uploaderAccount != null) {
-            groupMembers =
-                groupMembersFactory.create(identifiedUserFactory.create(uploaderAccount.getId()));
-          }
-        } catch (OrmException | IOException e) {
-          log.warn(
-              String.format(
-                  "Failed to list accounts for group %s, cannot retrieve uploader account %s",
-                  r, uploaderNameEmail),
-              e);
-        }
-
-        try {
-          if (groupMembers != null) {
-            reviewers.addAll(
-                groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
-          } else {
-            log.warn(
-                String.format(
-                    "Failed to list accounts for group %s; cannot retrieve uploader account for %s",
-                    r, uploader.email));
-          }
+          reviewers.addAll(
+              groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
         } catch (UnprocessableEntityException | NoSuchGroupException e) {
           log.warn(String.format("Reviewer %s is neither an account nor a group", r));
         } catch (NoSuchProjectException e) {
