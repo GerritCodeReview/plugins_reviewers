@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2973666b_9a928b66",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1010008
+      },
+      "writtenOn": "2017-10-11T16:10:01Z",
+      "side": 1,
+      "message": "I think you want to remove this line too. groupMembers is final and can never be null. And if it were null, calling listAccounts 3 lines down would fail.",
+      "revId": "85f1f00151a8d2e821c63a03e4988dd28e015943",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
