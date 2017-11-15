@@ -18,18 +18,35 @@ import java.util.Set;
 
 class ReviewerFilterSection {
   private final String filter;
+  private final String originFilter;
   private final Set<String> reviewers;
+  private final Set<String> excluded;
 
-  ReviewerFilterSection(String filter, Set<String> reviewers) {
+  ReviewerFilterSection(
+      String filter, Set<String> reviewers, Set<String> excluded, String originFilter) {
     this.filter = filter;
     this.reviewers = reviewers;
+    this.excluded = excluded;
+    this.originFilter = originFilter;
+  }
+
+  ReviewerFilterSection(String filter, Set<String> reviewers, Set<String> excluded) {
+    this(filter, reviewers, excluded, "");
   }
 
   String getFilter() {
     return filter;
   }
 
+  String getOriginFilter() {
+    return originFilter;
+  }
+
   Set<String> getReviewers() {
     return reviewers;
+  }
+
+  Set<String> getExcluded() {
+    return excluded;
   }
 }
