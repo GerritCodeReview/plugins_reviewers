@@ -23,11 +23,14 @@ import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
+import com.google.gerrit.server.query.QueryParseException;
+import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -48,6 +51,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     public Action action;
     public String filter;
     public String reviewer;
+    public String excluded;
+    public String origin;
   }
 
   private final String pluginName;
@@ -57,6 +62,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
   private final Provider<ReviewDb> reviewDbProvider;
+  private final ChangeQueryBuilder queryBuilder;
+  private final Provider<CurrentUser> currentUser;
 
   @Inject
   PutReviewers(
@@ -66,14 +73,18 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
-      Provider<ReviewDb> reviewDbProvider) {
+      Provider<ReviewDb> reviewDbProvider,
+      ChangeQueryBuilder queryBuilder,
+      Provider<CurrentUser> currentUser) {
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
+    this.queryBuilder = queryBuilder;
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.reviewDbProvider = reviewDbProvider;
+    this.currentUser = currentUser;
   }
 
   @Override
@@ -81,10 +92,11 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       throws RestApiException {
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig cfg = configFactory.create(projectName);
-    if (!rsrc.getControl().isOwner() || cfg == null) {
+    // FIXME: MDU: this allows all users that can see the project to change the config.
+    // This is required by us, but not upstream. Likely this should be a configuration option.
+    if (!rsrc.getControl().isVisible() || cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
-
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {
       if (input.action == Action.ADD) {
         validateReviewer(input.reviewer);
@@ -92,13 +104,30 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");
         cfg.load(md);
+        // TODO mtfk implement EDIT we should throw error when someone is trying
+        // to add entry with same filter
         if (input.action == Action.ADD) {
           message
               .append("Add reviewer ")
               .append(input.reviewer)
               .append(" to filter ")
               .append(input.filter);
-          cfg.addReviewer(input.filter, input.reviewer);
+          addNewEntry(input, cfg);
+        } else if (input.action == Action.EDIT) {
+          message
+              .append("Edit reviewer/filter ")
+              .append(input.reviewer)
+              .append(" filter ")
+              .append(input.filter);
+          cfg.removeFilter(input.origin);
+          addNewEntry(input, cfg);
+        } else if (input.action == Action.REMOVE_FILTER) {
+          message
+              .append("Remove Filter ")
+              .append(input.reviewer)
+              .append("  filter ")
+              .append(input.filter);
+          cfg.removeFilter(input.filter);
         } else {
           message
               .append("Remove reviewer ")
@@ -107,6 +136,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
               .append(input.filter);
           cfg.removeReviewer(input.filter, input.reviewer);
         }
+
         message.append("\n");
         md.setMessage(message.toString());
         try {
@@ -132,6 +162,16 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       throw new ResourceNotFoundException(projectName.get(), err);
     }
     return cfg.getReviewerFilterSections();
+  }
+
+  private void addNewEntry(Input input, ReviewersConfig cfg) {
+    ChangeQueryBuilder qb = queryBuilder.asUser(currentUser.get());
+    try {
+      qb.parse(input.filter);
+      cfg.addReviewer(input.filter, input.reviewer, input.excluded);
+    } catch (QueryParseException e) {
+      throw new RuntimeException("Filter is invalid\n: " + e);
+    }
   }
 
   private void validateReviewer(String reviewer) throws RestApiException {

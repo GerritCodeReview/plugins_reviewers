@@ -14,14 +14,21 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import com.google.common.base.Joiner;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
+import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+
+import org.eclipse.jgit.lib.Config;
+
 import java.util.ArrayList;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -33,16 +40,28 @@ class DefaultReviewers implements Runnable {
   private final GerritApi gApi;
   private final Change change;
   private final Set<Account> reviewers;
+  private final Set<ReviewerFilterSection> filters;
+  private final String plugin;
+
+  @Inject private PluginConfigFactory cfg;
 
   interface Factory {
-    DefaultReviewers create(Change change, Set<Account> reviewers);
+    DefaultReviewers create(
+        Change change, Set<Account> reviewers, Set<ReviewerFilterSection> filters);
   }
 
   @Inject
-  DefaultReviewers(GerritApi gApi, @Assisted Change change, @Assisted Set<Account> reviewers) {
+  DefaultReviewers(
+      GerritApi gApi,
+      @Assisted Change change,
+      @Assisted Set<Account> reviewers,
+      @Assisted Set<ReviewerFilterSection> filters,
+      @PluginName String plugin) {
     this.gApi = gApi;
     this.change = change;
     this.reviewers = reviewers;
+    this.filters = filters;
+    this.plugin = plugin;
   }
 
   @Override
@@ -67,9 +86,28 @@ class DefaultReviewers implements Runnable {
         addReviewerInput.reviewer = account.getId().toString();
         in.reviewers.add(addReviewerInput);
       }
+
+      Config config = cfg.getGlobalPluginConfig(plugin);
+      if (config.getBoolean("reviewers", "comment", false)) {
+        ReviewInput review = new ReviewInput().message(buildMessage());
+        review.notify = NotifyHandling.NONE;
+        gApi.changes().id(change.getId().get()).current().review(review);
+      }
+
       gApi.changes().id(change.getId().get()).current().review(in);
     } catch (RestApiException e) {
       log.error("Couldn't add reviewers to the change", e);
     }
+  }
+
+  private String buildMessage() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("Matched automatic invitation rules: \n\n");
+    for (ReviewerFilterSection filter : filters) {
+      builder.append(filter.getFilter()).append('\n');
+      builder.append('\t').append(Joiner.on(", ").join(filter.getReviewers())).append('\n');
+    }
+
+    return builder.toString();
   }
 }
