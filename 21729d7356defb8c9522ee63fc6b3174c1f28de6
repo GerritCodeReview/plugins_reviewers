@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a078bc4_26b98189",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-11-15T10:41:57Z",
+      "side": 1,
+      "message": "Unwanted reformatting.  Please format the code with google-java-format.",
+      "revId": "21729d7356defb8c9522ee63fc6b3174c1f28de6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff0c9d07_f491142c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-11-15T10:41:57Z",
+      "side": 1,
+      "message": "Conflict markers should be removed.",
+      "revId": "21729d7356defb8c9522ee63fc6b3174c1f28de6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bcf03a23_2c2c6bca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/AutoCompleteTextBox.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2017-11-15T10:41:57Z",
+      "side": 1,
+      "message": "Missing license/copyright header.",
+      "revId": "21729d7356defb8c9522ee63fc6b3174c1f28de6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
