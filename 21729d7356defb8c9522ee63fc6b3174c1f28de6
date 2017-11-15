@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "190175ff_9abb037f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2017-11-15T12:33:26Z",
+      "side": 1,
+      "message": "i reformatted using google-java-format eclipse plugin, but this did not change... is there something I missed? see newest patchset.",
+      "parentUuid": "8a078bc4_26b98189",
+      "revId": "21729d7356defb8c9522ee63fc6b3174c1f28de6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ff0c9d07_f491142c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
         "patchSetId": 2
