@@ -22,5 +22,9 @@ public class ReviewerFilterSection extends JavaScriptObject {
 
   public final native JsArrayString reviewers() /*-{ return this.reviewers; }-*/;
 
+  public final native JsArrayString excluded() /*-{return this.excluded; }-*/;
+
+  public final native JsArrayString origin() /*-{return this.origin;}-*/;
+
   protected ReviewerFilterSection() {}
 }
