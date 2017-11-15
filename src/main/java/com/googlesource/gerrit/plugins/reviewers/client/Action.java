@@ -15,6 +15,5 @@
 package com.googlesource.gerrit.plugins.reviewers.client;
 
 public enum Action {
-  ADD,
-  REMOVE
+  ADD, REMOVE, EDIT, REMOVE_FILTER
 }

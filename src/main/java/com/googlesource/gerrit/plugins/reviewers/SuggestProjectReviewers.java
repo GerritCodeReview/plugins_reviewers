@@ -14,6 +14,11 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.eclipse.jgit.lib.Config;
+
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
 import com.google.gerrit.extensions.restapi.BadRequestException;
 import com.google.gerrit.extensions.restapi.RestReadView;
@@ -29,9 +34,6 @@ import com.google.gerrit.server.project.ProjectResource;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.io.IOException;
-import java.util.List;
-import org.eclipse.jgit.lib.Config;
 
 public class SuggestProjectReviewers extends SuggestReviewers
     implements RestReadView<ProjectResource> {
