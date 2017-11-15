@@ -52,6 +52,7 @@ import com.google.inject.Provider;
 import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -60,6 +61,11 @@ import org.slf4j.LoggerFactory;
 @Singleton
 class ChangeEventListener implements RevisionCreatedListener, DraftPublishedListener {
   private static final Logger log = LoggerFactory.getLogger(ChangeEventListener.class);
+
+  private static final class ReviewersAndFilters {
+    Set<String> reviewers;
+    Set<ReviewerFilterSection> matched;
+  }
 
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
@@ -128,6 +134,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
   private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
     // TODO(davido): we have to cache per project configuration
     ReviewersConfig config = configFactory.create(projectName);
+
     List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
 
     if (sections.isEmpty()) {
@@ -137,14 +144,17 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     try (ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData =
           changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
-      Set<String> reviewers = findReviewers(sections, changeData);
+      ReviewersAndFilters matched = findReviewers(sections, changeData);
+
+      Set<String> reviewers = matched.reviewers;
       if (reviewers.isEmpty()) {
         return;
       }
 
       final Change change = changeData.change();
       final Runnable task =
-          reviewersFactory.create(change, toAccounts(reviewDb, reviewers, projectName, uploader));
+          reviewersFactory.create(
+              change, toAccounts(reviewDb, reviewers, projectName, uploader), matched.matched);
 
       workQueue
           .getDefaultQueue()
@@ -196,14 +206,20 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     }
   }
 
-  private Set<String> findReviewers(List<ReviewerFilterSection> sections, ChangeData changeData)
+  private ReviewersAndFilters findReviewers(
+      List<ReviewerFilterSection> sections, ChangeData changeData)
       throws OrmException, QueryParseException {
+    ReviewersAndFilters result = new ReviewersAndFilters();
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
+    ImmutableSet.Builder<ReviewerFilterSection> filters = ImmutableSet.builder();
     List<ReviewerFilterSection> found = findReviewerSections(sections, changeData);
     for (ReviewerFilterSection s : found) {
       reviewers.addAll(s.getReviewers());
+      filters.add(s);
     }
-    return reviewers.build();
+    result.reviewers = reviewers.build();
+    result.matched = filters.build();
+    return result;
   }
 
   private List<ReviewerFilterSection> findReviewerSections(
@@ -213,17 +229,59 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     for (ReviewerFilterSection s : sections) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
-      } else if (filterMatch(s.getFilter(), changeData)) {
+      } else if (excludePaths(s.getFilter(), s.getExcluded(), changeData)) {
         found.add(s);
       }
     }
     return found.build();
   }
 
+  /*
+   * Custom filter matching which take into consideration excluded paths. Remove
+   * all paths from changeData which later on will be check against filter.
+   */
+  boolean excludePaths(String filter, Set<String> excludedPaths, ChangeData changeData)
+      throws OrmException, QueryParseException {
+    List<String> allPaths = changeData.currentFilePaths();
+    try {
+      if (!excludedPaths.isEmpty()) {
+        List<String> filePaths = removeExcludedPaths(excludedPaths, allPaths);
+        changeData.setCurrentFilePaths(filePaths);
+      }
+      return filterMatch(filter, changeData);
+    } finally {
+      changeData.setCurrentFilePaths(allPaths);
+    }
+  }
+
+  private List<String> removeExcludedPaths(
+      Set<String> excludedPaths, List<String> currentFilePaths) {
+    List<String> filePaths = new ArrayList<>();
+    for (String path : currentFilePaths) {
+      boolean matches = false;
+      for (String excludePath : excludedPaths) {
+        if (path.matches(excludePath)) {
+          matches = true;
+        }
+      }
+      if (!matches) {
+        filePaths.add(path);
+      }
+    }
+
+    return filePaths;
+  }
+
   boolean filterMatch(String filter, ChangeData changeData)
       throws OrmException, QueryParseException {
     Preconditions.checkNotNull(filter);
+
     ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
+
+    // TODO since we do not have secondary index search here we can not use
+    // exactly same predicates as in main UI
+    // for example message: will not work, maybe we should handle that
+    // separately
     Predicate<ChangeData> filterPredicate = qb.parse(filter);
     // TODO(davido): check that the potential review can see this change
     // by adding AND is_visible() predicate? Or is it OK to assume
@@ -243,7 +301,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
           continue;
         }
       } catch (OrmException e) {
-        // If the account doesn't exist, find() will return null.  We only
+        // If the account doesn't exist, find() will return null. We only
         // get here if something went wrong accessing the database
         log.error("Failed to resolve account " + r, e);
         continue;

@@ -18,6 +18,7 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name="com.google.gwt.user.User"/>
   <!-- Other module inherits                                      -->
+  <inherits name="com.google.gerrit.GerritGwtUICommon"/>
   <inherits name="com.google.gerrit.Plugin"/>
   <inherits name="com.google.gwt.http.HTTP"/>
   <inherits name="com.google.gwt.json.JSON"/>
