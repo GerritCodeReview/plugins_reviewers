@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed9e78e9_fb4aeddd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2017-11-15T12:34:22Z",
+      "side": 1,
+      "message": "this is to be discussed :) happy to get some input.",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 94
+      },
+      "revId": "7d404b3139dd3a10d8218e17030704c0d0c6fb75",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
