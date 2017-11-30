@@ -19,7 +19,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -33,7 +32,6 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
@@ -89,9 +87,7 @@ class ChangeEventListener implements RevisionCreatedListener {
       final ChangeData.Factory changeDataFactory,
       final ReviewersConfig.Factory configFactory,
       final Provider<CurrentUser> user,
-      final ChangeQueryBuilder queryBuilder,
-      final PluginConfigFactory cfgFactory,
-      @PluginName String pluginName) {
+      final ChangeQueryBuilder queryBuilder) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.groupMembers = groupMembers;
