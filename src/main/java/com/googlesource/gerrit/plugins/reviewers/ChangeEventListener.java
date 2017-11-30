@@ -239,11 +239,11 @@ class ChangeEventListener implements RevisionCreatedListener {
       try {
         reviewers.addAll(
             groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
-      } catch (UnprocessableEntityException | NoSuchGroupException e) {
+      } catch (UnprocessableEntityException e) {
         log.warn(String.format("Reviewer %s is neither an account nor a group", r));
       } catch (NoSuchProjectException e) {
         log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
-      } catch (IOException | OrmException e) {
+      } catch (IOException e) {
         log.warn(String.format("Failed to list accounts for group %s", r), e);
       }
     }
