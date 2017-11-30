@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec2f41aa_f11ba57d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2017-11-30T13:38:05Z",
+      "side": 1,
+      "message": "Please remove unused imports",
+      "revId": "b4a28d9eeeedfd7b18461d3bff4852e27f29de92",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
