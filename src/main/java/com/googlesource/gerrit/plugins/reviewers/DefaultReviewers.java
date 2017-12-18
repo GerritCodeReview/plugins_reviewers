@@ -64,8 +64,10 @@ class DefaultReviewers implements Runnable {
       in.reviewers = new ArrayList<>(reviewers.size());
       for (Account account : reviewers) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
-        addReviewerInput.reviewer = account.getId().toString();
-        in.reviewers.add(addReviewerInput);
+        if(account.isActive()) {
+          addReviewerInput.reviewer = account.getId().toString();
+          in.reviewers.add(addReviewerInput);
+        }
       }
       gApi.changes().id(change.getId().get()).current().review(in);
     } catch (RestApiException e) {
