@@ -26,6 +26,7 @@ import com.google.gerrit.server.restapi.change.ReviewersUtil.VisibilityControl;
 import com.google.gerrit.server.restapi.change.SuggestReviewers;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.permissions.PermissionBackend;
+import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectResource;
 import com.google.gwtorm.server.OrmException;
@@ -54,7 +55,8 @@ public class SuggestProjectReviewers extends SuggestReviewers
 
   @Override
   public List<SuggestedReviewerInfo> apply(ProjectResource rsrc)
-      throws BadRequestException, OrmException, IOException, ConfigInvalidException {
+      throws BadRequestException, OrmException, IOException, ConfigInvalidException,
+          PermissionBackendException {
     return reviewersUtil.suggestReviewers(
         null, this, rsrc.getProjectState(), getVisibility(rsrc), true);
   }
