@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5391e5f9_a7a14bb6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-01-23T22:06:48Z",
+      "side": 1,
+      "message": "Note to reviewers: I was needed this change to be able to build in standalone build mode: [1].\n\n* [1] https://gerrit-review.googlesource.com/#/c/bazlets/+/154170",
+      "revId": "cb78ad7af269511a85b26b1ade345a61bfaf2bdf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
