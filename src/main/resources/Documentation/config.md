@@ -9,6 +9,7 @@ Global configuration of the @PLUGIN@ plugin is done in the
     enableREST = true
     enableUI = false
     ignoreDrafts = true
+    suggestOnly = false
 ```
 
 reviewers.enableREST
@@ -24,6 +25,12 @@ reviewers.ignoreDrafts
 	adding reviewers. Defaults to false. To ignore drafts on a per-project basis
 	set this value to false and add "-status:draft" to filter in relevant projects.
 
+reviewers.suggestOnly
+:	Provide the configured reviewers as suggestions in the "Add Reviewer" dialog
+	instead of automatically adding them to the change. Only supports accounts;
+	groups are not suggested. Defaults to false. The weighting of the suggestions
+	can be configured in the `[addreviewer]` section of `gerrit.config`. If this
+	is not set, it defaults to 1.
 
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
@@ -67,4 +74,4 @@ The plugin supports multiple filter matches.
 ```
 
 1. Push a change for review involving file "build/modules/GLOBAL.pm".
-2. Both john.doe@example.com and jane.doe@example.com get added as reviewers.
+2. Both john.doe@example.com and jane.doe@example.com get added or suggested as reviewers.
