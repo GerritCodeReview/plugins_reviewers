@@ -36,7 +36,6 @@ import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -55,8 +54,6 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.revwalk.RevWalk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,7 +65,6 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
   private final Provider<GroupsCollection> groupsCollection;
   private final GroupMembers.Factory groupMembersFactory;
   private final DefaultReviewers.Factory reviewersFactory;
-  private final GitRepositoryManager repoManager;
   private final WorkQueue workQueue;
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final ThreadLocalRequestContext tl;
@@ -85,7 +81,6 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
       final Provider<GroupsCollection> groupsCollection,
       final GroupMembers.Factory groupMembersFactory,
       final DefaultReviewers.Factory reviewersFactory,
-      final GitRepositoryManager repoManager,
       final WorkQueue workQueue,
       final IdentifiedUser.GenericFactory identifiedUserFactory,
       final ThreadLocalRequestContext tl,
@@ -100,7 +95,6 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     this.groupsCollection = groupsCollection;
     this.groupMembersFactory = groupMembersFactory;
     this.reviewersFactory = reviewersFactory;
-    this.repoManager = repoManager;
     this.workQueue = workQueue;
     this.identifiedUserFactory = identifiedUserFactory;
     this.tl = tl;
@@ -140,9 +134,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
       return;
     }
 
-    try (Repository git = repoManager.openRepository(projectName);
-        RevWalk rw = new RevWalk(git);
-        ReviewDb reviewDb = schemaFactory.open()) {
+    try (ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData =
           changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
       Set<String> reviewers = findReviewers(sections, changeData);
@@ -199,7 +191,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
                   }
                 }
               });
-    } catch (OrmException | IOException | QueryParseException x) {
+    } catch (OrmException | QueryParseException x) {
       log.error(x.getMessage(), x);
     }
   }
