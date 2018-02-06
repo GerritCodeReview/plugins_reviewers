@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd0a4f5c_a559f4db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-06T12:29:47Z",
+      "side": 1,
+      "message": "Also TODO: Clarify how the weighting works.  Currently it just sets \"1\" for all the accounts.",
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
