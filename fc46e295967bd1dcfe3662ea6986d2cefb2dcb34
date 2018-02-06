@@ -16,6 +16,47 @@
       "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bfdd090_3a48c376",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2018-02-06T13:24:05Z",
+      "side": 1,
+      "message": "The weight in SuggestedReviewer is just for weighting different accounts from within the plugin so that the plugin can set the ordering.\n\nHere, that doesn\u0027t make all that much sense as a reviewer either matches the expression or doesn\u0027t, so setting it to 1 consistently is OK.\n\nYou can then configure weights for the plugin itself so that the recommendations from this plugin always show at the very top of the list (assigning a higher value than the default weight in core - which is 1 - or lowering the core weight by using the gerrit.config).\n\nIf you want to have your plugin recommendations always show first and not bother with further config you could just assign a high value (say 1000) to SuggestedReviewer.weight, that would OC defeat the purpose of having a plugin weight :)",
+      "parentUuid": "fd0a4f5c_a559f4db",
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3536a39_a83c2c73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2018-02-06T13:24:05Z",
+      "side": 1,
+      "message": "nit: ImmutableSet.of()",
+      "range": {
+        "startLine": 156,
+        "startChar": 11,
+        "endLine": 156,
+        "endChar": 27
+      },
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
