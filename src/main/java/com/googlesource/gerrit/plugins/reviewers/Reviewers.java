@@ -14,11 +14,14 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import static java.util.stream.Collectors.toSet;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.client.ChangeStatus;
@@ -35,6 +38,8 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
+import com.google.gerrit.server.change.ReviewerSuggestion;
+import com.google.gerrit.server.change.SuggestedReviewer;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
@@ -58,8 +63,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-class ChangeEventListener implements RevisionCreatedListener, DraftPublishedListener {
-  private static final Logger log = LoggerFactory.getLogger(ChangeEventListener.class);
+class Reviewers implements RevisionCreatedListener, DraftPublishedListener, ReviewerSuggestion {
+  private static final Logger log = LoggerFactory.getLogger(Reviewers.class);
 
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
@@ -76,7 +81,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
   private final boolean ignoreDrafts;
 
   @Inject
-  ChangeEventListener(
+  Reviewers(
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
       GroupMembers.Factory groupMembersFactory,
@@ -125,10 +130,45 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
     onEvent(new Project.NameKey(c.project), c._number, event.getWho());
   }
 
-  private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
+  @Override
+  public Set<SuggestedReviewer> suggestReviewers(
+      Project.NameKey projectName,
+      @Nullable Change.Id changeId,
+      @Nullable String query,
+      Set<Account.Id> candidates) {
+    List<ReviewerFilterSection> sections = getSections(projectName);
+
+    if (!sections.isEmpty()) {
+      try (ReviewDb reviewDb = schemaFactory.open()) {
+        ChangeData changeData = changeDataFactory.create(reviewDb, projectName, changeId);
+        Set<String> reviewers = findReviewers(sections, changeData);
+        if (!reviewers.isEmpty()) {
+          return toAccounts(reviewDb, reviewers, projectName, null)
+              .stream()
+              .map(a -> suggestedReviewer(a))
+              .collect(toSet());
+        }
+      } catch (OrmException | QueryParseException x) {
+        log.error(x.getMessage(), x);
+      }
+    }
+    return ImmutableSet.of();
+  }
+
+  private SuggestedReviewer suggestedReviewer(Account account) {
+    SuggestedReviewer reviewer = new SuggestedReviewer();
+    reviewer.account = account.getId();
+    reviewer.score = 1;
+    return reviewer;
+  }
+
+  private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    ReviewersConfig config = configFactory.create(projectName);
-    List<ReviewerFilterSection> sections = config.getReviewerFilterSections();
+    return configFactory.create(projectName).getReviewerFilterSections();
+  }
+
+  private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
+    List<ReviewerFilterSection> sections = getSections(projectName);
 
     if (sections.isEmpty()) {
       return;
@@ -248,7 +288,7 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
         log.error("Failed to resolve account " + r, e);
         continue;
       }
-      if (groupMembers == null) {
+      if (groupMembers == null && uploader != null) {
         // email is not unique to one account, try to locate the account using
         // "Full name <email>" to increase chance of finding only one.
         String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
