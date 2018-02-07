@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da4feb8c_da2e6560",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigUpdatedHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T12:49:22Z",
+      "side": 1,
+      "message": "result is always \"\".",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "a1a5f7bf6e2e43139a80b0c93aed64b4df6350bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
