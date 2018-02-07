@@ -46,6 +46,30 @@
       "revId": "195ea5f44efc2eb0d5307ce0f190fcc24e13535a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75adcc5b_672aad98",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-07T07:29:47Z",
+      "side": 1,
+      "message": "\u003e IIUC from Patrick\u0027s answer on the first PS, the number here doesn\u0027t\n \u003e matter. The weight of plugin suggestions should be increased by\n \u003e setting the suggestReviewers.reviewers-reviewer-suggest.weight\n \u003e value in gerrit.config.\n\nDocument it in configuration documentation of this plugin? What value should I assign there to achive what I want (higher ranking of this plugin, compared to gerri core)? 2? Add example configuration, so that the plugin user, donÄt have to think and just copy/past the working configuration.\n\nI\u0027m getting complaints from its-jira plugin users, that it is totally unclear, how to configure that plugin. We should avoid this situation here.",
+      "parentUuid": "e1936d07_c95b9c27",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 22
+      },
+      "revId": "195ea5f44efc2eb0d5307ce0f190fcc24e13535a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
