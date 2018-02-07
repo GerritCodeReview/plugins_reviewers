@@ -57,6 +57,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
   private final Provider<ReviewDb> reviewDbProvider;
+  private final ReviewersConfigCache configCache;
 
   @Inject
   PutReviewers(
@@ -66,7 +67,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
-      Provider<ReviewDb> reviewDbProvider) {
+      Provider<ReviewDb> reviewDbProvider,
+      ReviewersConfigCache configCache) {
     this.pluginName = pluginName;
     this.configFactory = configFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
@@ -74,6 +76,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.reviewDbProvider = reviewDbProvider;
+    this.configCache = configCache;
   }
 
   @Override
@@ -131,6 +134,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     } catch (IOException err) {
       throw new ResourceNotFoundException(projectName.get(), err);
     }
+    configCache.evict(projectName);
     return cfg.getReviewerFilterSections();
   }
 
