@@ -52,6 +52,24 @@
       "revId": "b68acff8b4055ff06cc99940ed5052f5975def9c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e68c4c5_8906c56b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T10:30:20Z",
+      "side": 1,
+      "message": "The caching implemented here is only for the reviewers, not for any of the other config.  So we don\u0027t need to care about the global config here.\n\nAnother complication is that the ref-updated event will also come (IIUC) when the config is updated by the REST API.  We can probably solve that by not doing the eviction in the REST handler (as it is so far in this implementation) but deferring it to the ref updated handler.",
+      "parentUuid": "f995362c_9112fc37",
+      "revId": "b68acff8b4055ff06cc99940ed5052f5975def9c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
