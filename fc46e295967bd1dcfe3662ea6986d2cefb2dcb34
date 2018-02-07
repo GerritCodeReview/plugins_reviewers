@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5418228b_6568b216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T05:50:28Z",
+      "side": 1,
+      "message": "I don\u0027t think adding \"Mode\" suffix makes it any more clearer than it is.",
+      "parentUuid": "d0002cf6_a7f45a3c",
+      "range": {
+        "startLine": 12,
+        "startChar": 41,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd0a4f5c_a559f4db",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -78,6 +102,24 @@
     },
     {
       "key": {
+        "uuid": "6acc76f6_2768dc56",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T05:50:28Z",
+      "side": 1,
+      "message": "I\u0027ve mentioned that in the documentation that was added on PS2.",
+      "parentUuid": "f5489060_083dc7ad",
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b47385dd_a49032f3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
         "patchSetId": 1
@@ -89,6 +131,30 @@
       "writtenOn": "2018-02-07T05:36:25Z",
       "side": 1,
       "message": "Why is this line different as line 43? I would expect:\n\n  c.getBoolean(\"reviewers\", null, \"suggestOnly\", false);",
+      "range": {
+        "startLine": 45,
+        "startChar": 23,
+        "endLine": 45,
+        "endChar": 71
+      },
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "927ef931_854fbb2c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T05:50:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b47385dd_a49032f3",
       "range": {
         "startLine": 45,
         "startChar": 23,
