@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49a0b428_98ec96c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-07T07:18:02Z",
+      "side": 1,
+      "message": "Why is this 1 and not 2 or even made configurable in general config file of this plugin?\n\nIf I use this plugins in suggestion only mode, then I would certainly like that ranking of that plugin is higher then ranking of last 25 changes reviewers of that user (gerrit core logic). The default ranking of gerrit core is 1, (even though it can be overridden), default ranking here is also 1 (even though it cannot be overridden) so that from the user perspective, in the merged lists of candidates all suggested reviewers will become all weighted with 1.\n\nI would expect that there is a way to make weighting of this plugin higher, then the gerrit core. Unless I\u0027m missing something, the way to go would be to say 2 per default and allow to configure:\n\n  addReviewer.pluginWeight \u003d n\n\nto override the default, in case in core, the based weight was set highersa, say 10, then addReviewer.pluginWeight could be set to 11.",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 22
+      },
+      "revId": "195ea5f44efc2eb0d5307ce0f190fcc24e13535a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
