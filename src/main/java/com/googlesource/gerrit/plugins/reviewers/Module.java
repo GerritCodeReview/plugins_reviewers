@@ -20,6 +20,7 @@ import com.google.gerrit.extensions.annotations.Exports;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.events.DraftPublishedListener;
+import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.restapi.RestApiModule;
@@ -58,6 +59,12 @@ public class Module extends FactoryModule {
       DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
     }
 
+    factory(DefaultReviewers.Factory.class);
+    factory(ReviewersConfig.Factory.class);
+    install(new ReviewersConfigCache.Module());
+    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class)
+        .to(ReviewersConfigUpdatedHandler.class);
+
     if (suggestOnly) {
       install(
           new AbstractModule() {
@@ -72,9 +79,6 @@ public class Module extends FactoryModule {
       DynamicSet.bind(binder(), RevisionCreatedListener.class).to(Reviewers.class);
       DynamicSet.bind(binder(), DraftPublishedListener.class).to(Reviewers.class);
     }
-
-    factory(DefaultReviewers.Factory.class);
-    factory(ReviewersConfig.Factory.class);
 
     if (enableREST) {
       install(
