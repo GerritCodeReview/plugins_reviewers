@@ -22,6 +22,30 @@
       "revId": "ccd06737981412af1bed34e9eb5fd1a626f225f6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e728a63_7cbdd431",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T12:45:55Z",
+      "side": 1,
+      "message": "You can reproduce the problem by going to the reviewers plugin UI tab on a project admin page and entering some text in the name field where you would add a new reviewer.\n\nBefore [1] there would be no suggestions, and the server log showed NPEs in the file that [1] fixes.  With [1] applied, we now get null changeId into this method, which then causes provision exceptions at L146 when attempting to create ChangeData.\n\nHaving a null changeId is correct, because during reviewer suggestion invoked from the reviewers UI, there is of course no change.\n\n[1] https://gerrit-review.googlesource.com/c/gerrit/+/157893",
+      "parentUuid": "c71a2f09_8dc163d2",
+      "range": {
+        "startLine": 141,
+        "startChar": 27,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "ccd06737981412af1bed34e9eb5fd1a626f225f6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
