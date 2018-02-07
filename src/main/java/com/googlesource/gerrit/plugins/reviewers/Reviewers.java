@@ -75,7 +75,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final ThreadLocalRequestContext tl;
   private final SchemaFactory<ReviewDb> schemaFactory;
   private final ChangeData.Factory changeDataFactory;
-  private final ReviewersConfig.Factory configFactory;
+  private final ReviewersConfigCache configCache;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
   private final boolean ignoreDrafts;
@@ -91,7 +91,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       ThreadLocalRequestContext tl,
       SchemaFactory<ReviewDb> schemaFactory,
       ChangeData.Factory changeDataFactory,
-      ReviewersConfig.Factory configFactory,
+      ReviewersConfigCache configCache,
       Provider<CurrentUser> user,
       ChangeQueryBuilder queryBuilder,
       PluginConfigFactory cfgFactory,
@@ -105,7 +105,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.tl = tl;
     this.schemaFactory = schemaFactory;
     this.changeDataFactory = changeDataFactory;
-    this.configFactory = configFactory;
+    this.configCache = configCache;
     this.user = user;
     this.queryBuilder = queryBuilder;
     this.ignoreDrafts =
@@ -163,8 +163,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   }
 
   private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
-    // TODO(davido): we have to cache per project configuration
-    return configFactory.create(projectName).getReviewerFilterSections();
+    return configCache.get(projectName);
   }
 
   private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
