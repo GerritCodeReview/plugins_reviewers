@@ -46,6 +46,30 @@
       "revId": "a1a5f7bf6e2e43139a80b0c93aed64b4df6350bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3aa4cd4a_0a904882",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigUpdatedHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-07T23:19:37Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I based this on. I\u0027ll look into it some more today.",
+      "parentUuid": "7d045583_93a54183",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "a1a5f7bf6e2e43139a80b0c93aed64b4df6350bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
