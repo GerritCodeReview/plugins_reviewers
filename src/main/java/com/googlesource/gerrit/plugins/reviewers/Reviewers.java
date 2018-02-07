@@ -138,7 +138,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       Set<Account.Id> candidates) {
     List<ReviewerFilterSection> sections = getSections(projectName);
 
-    if (sections.isEmpty()) {
+    if (sections.isEmpty() || changeId == null) {
       return ImmutableSet.of();
     }
 
