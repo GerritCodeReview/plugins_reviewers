@@ -77,19 +77,19 @@ class ChangeEventListener implements RevisionCreatedListener, DraftPublishedList
 
   @Inject
   ChangeEventListener(
-      final AccountResolver accountResolver,
-      final Provider<GroupsCollection> groupsCollection,
-      final GroupMembers.Factory groupMembersFactory,
-      final DefaultReviewers.Factory reviewersFactory,
-      final WorkQueue workQueue,
-      final IdentifiedUser.GenericFactory identifiedUserFactory,
-      final ThreadLocalRequestContext tl,
-      final SchemaFactory<ReviewDb> schemaFactory,
-      final ChangeData.Factory changeDataFactory,
-      final ReviewersConfig.Factory configFactory,
-      final Provider<CurrentUser> user,
-      final ChangeQueryBuilder queryBuilder,
-      final PluginConfigFactory cfgFactory,
+      AccountResolver accountResolver,
+      Provider<GroupsCollection> groupsCollection,
+      GroupMembers.Factory groupMembersFactory,
+      DefaultReviewers.Factory reviewersFactory,
+      WorkQueue workQueue,
+      IdentifiedUser.GenericFactory identifiedUserFactory,
+      ThreadLocalRequestContext tl,
+      SchemaFactory<ReviewDb> schemaFactory,
+      ChangeData.Factory changeDataFactory,
+      ReviewersConfig.Factory configFactory,
+      Provider<CurrentUser> user,
+      ChangeQueryBuilder queryBuilder,
+      PluginConfigFactory cfgFactory,
       @PluginName String pluginName) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
