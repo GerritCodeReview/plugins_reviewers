@@ -233,7 +233,13 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
                   }
                 }
               });
-    } catch (OrmException | QueryParseException x) {
+    } catch (QueryParseException e) {
+      log.warn(
+          "Could not add default reviewers for change {} of project {}, filter is invalid: {}",
+          changeNumber,
+          projectName.get(),
+          e.getMessage());
+    } catch (OrmException x) {
       log.error(x.getMessage(), x);
     }
   }
