@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "d0002cf6_a7f45a3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-07T05:36:25Z",
+      "side": 1,
+      "message": "Just wonder if suggestOnlyMode would be more clear?",
+      "range": {
+        "startLine": 12,
+        "startChar": 41,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd0a4f5c_a559f4db",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -34,6 +57,47 @@
       "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5489060_083dc7ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-07T05:36:25Z",
+      "side": 1,
+      "message": "What about this statement in the documentat: \"Server administrators can configure the overall weight of each plugin using the weight config parameter on [addreviewer \"\u003cpluginName-exportName\u003e\"].\"?",
+      "parentUuid": "1bfdd090_3a48c376",
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b47385dd_a49032f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-07T05:36:25Z",
+      "side": 1,
+      "message": "Why is this line different as line 43? I would expect:\n\n  c.getBoolean(\"reviewers\", null, \"suggestOnly\", false);",
+      "range": {
+        "startLine": 45,
+        "startChar": 23,
+        "endLine": 45,
+        "endChar": 71
+      },
+      "revId": "fc46e295967bd1dcfe3662ea6986d2cefb2dcb34",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
