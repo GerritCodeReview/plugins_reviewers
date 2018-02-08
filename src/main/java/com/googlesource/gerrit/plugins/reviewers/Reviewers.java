@@ -306,7 +306,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       } catch (OrmException e) {
         // If the account doesn't exist, find() will return null.  We only
         // get here if something went wrong accessing the database
-        log.error("Failed to resolve account " + r, e);
+        log.error("Failed to resolve account {}", r, e);
         continue;
       }
       if (groupMembers == null && uploader != null) {
@@ -321,9 +321,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
           }
         } catch (OrmException e) {
           log.warn(
-              String.format(
-                  "Failed to list accounts for group %s, cannot retrieve uploader account %s",
-                  r, uploaderNameEmail),
+              "Failed to list accounts for group {}, cannot retrieve uploader account {}",
+              r,
+              uploaderNameEmail,
               e);
         }
 
@@ -333,16 +333,16 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
                 groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
           } else {
             log.warn(
-                String.format(
-                    "Failed to list accounts for group %s; cannot retrieve uploader account for %s",
-                    r, uploader.email));
+                "Failed to list accounts for group {}; cannot retrieve uploader account for {}",
+                r,
+                uploader.email);
           }
         } catch (UnprocessableEntityException | NoSuchGroupException e) {
-          log.warn(String.format("Reviewer %s is neither an account nor a group", r));
+          log.warn("Reviewer {} is neither an account nor a group", r);
         } catch (NoSuchProjectException e) {
-          log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
+          log.warn("Failed to list accounts for group {} and project {}", r, p);
         } catch (IOException | OrmException e) {
-          log.warn(String.format("Failed to list accounts for group %s", r), e);
+          log.warn("Failed to list accounts for group {}", r, e);
         }
       }
     }
