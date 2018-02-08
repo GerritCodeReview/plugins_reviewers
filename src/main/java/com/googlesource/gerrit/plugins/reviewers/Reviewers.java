@@ -146,7 +146,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       ChangeData changeData = changeDataFactory.create(reviewDb, projectName, changeId);
       Set<String> reviewers = findReviewers(sections, changeData);
       if (!reviewers.isEmpty()) {
-        return toAccounts(reviewDb, reviewers, projectName)
+        return toAccounts(reviewDb, reviewers, projectName, changeId.get())
             .stream()
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
@@ -186,7 +186,8 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
       final Change change = changeData.change();
       final Runnable task =
-          reviewersFactory.create(change, toAccounts(reviewDb, reviewers, projectName, uploader));
+          reviewersFactory.create(
+              change, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
 
       workQueue
           .getDefaultQueue()
@@ -279,8 +280,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return filterPredicate.asMatchable().match(changeData);
   }
 
-  private Set<Account> toAccounts(ReviewDb reviewDb, Set<String> in, Project.NameKey p) {
-    return toAccounts(reviewDb, in, p, null);
+  private Set<Account> toAccounts(
+      ReviewDb reviewDb, Set<String> in, Project.NameKey p, int changeNumber) {
+    return toAccounts(reviewDb, in, p, changeNumber, null);
   }
 
   /**
@@ -293,7 +295,11 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
    * @return set of {@link Account}s.
    */
   private Set<Account> toAccounts(
-      ReviewDb reviewDb, Set<String> in, Project.NameKey p, @Nullable AccountInfo uploader) {
+      ReviewDb reviewDb,
+      Set<String> in,
+      Project.NameKey p,
+      int changeNumber,
+      @Nullable AccountInfo uploader) {
     Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
     for (String r : in) {
@@ -306,7 +312,12 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       } catch (OrmException e) {
         // If the account doesn't exist, find() will return null.  We only
         // get here if something went wrong accessing the database
-        log.error("Failed to resolve account {}", r, e);
+        log.error(
+            "For the change {} of project {}: failed to resolve account {}.",
+            changeNumber,
+            p,
+            r,
+            e);
         continue;
       }
       if (groupMembers == null && uploader != null) {
@@ -321,7 +332,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
           }
         } catch (OrmException e) {
           log.warn(
-              "Failed to list accounts for group {}, cannot retrieve uploader account {}",
+              "For the change {} of project {}: failed to list accounts for group {}, cannot retrieve uploader account {}.",
+              changeNumber,
+              p,
               r,
               uploaderNameEmail,
               e);
@@ -333,16 +346,31 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
                 groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
           } else {
             log.warn(
-                "Failed to list accounts for group {}; cannot retrieve uploader account for {}",
+                "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
+                changeNumber,
+                p,
                 r,
                 uploader.email);
           }
         } catch (UnprocessableEntityException | NoSuchGroupException e) {
-          log.warn("Reviewer {} is neither an account nor a group", r);
+          log.warn(
+              "For the change {} of project {}: reviewer {} is neither an account nor a group.",
+              changeNumber,
+              p,
+              r);
         } catch (NoSuchProjectException e) {
-          log.warn("Failed to list accounts for group {} and project {}", r, p);
+          log.warn(
+              "For the change {} of project {}: failed to list accounts for group {}.",
+              changeNumber,
+              p,
+              r);
         } catch (IOException | OrmException e) {
-          log.warn("Failed to list accounts for group {}", r, e);
+          log.warn(
+              "For the change {} of project {}: failed to list accounts for group {}.",
+              changeNumber,
+              p,
+              r,
+              e);
         }
       }
     }
