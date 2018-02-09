@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "3578b0ac_1921ebc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-02-09T14:47:48Z",
+      "side": 1,
+      "message": "logs?",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "6a4b6f6ed460563dc1b679cb5897058b2e35488c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bd7214e_b56c15b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-02-09T14:47:48Z",
+      "side": 1,
+      "message": "Redundant as it is evident we are doing this change in this plugin.",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 68
+      },
+      "revId": "6a4b6f6ed460563dc1b679cb5897058b2e35488c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66d78ca6_00d3472f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1019328
+      },
+      "writtenOn": "2018-02-09T14:47:48Z",
+      "side": 1,
+      "message": "I would reword a bit the commit message to say not only what but also why we are doing this change.",
+      "revId": "6a4b6f6ed460563dc1b679cb5897058b2e35488c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e24645be_c25f2f6f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 1
