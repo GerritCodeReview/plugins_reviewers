@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e24645be_c25f2f6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-09T14:03:21Z",
+      "side": 1,
+      "message": "New param should be documented in the Javadoc.",
+      "revId": "6a4b6f6ed460563dc1b679cb5897058b2e35488c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
