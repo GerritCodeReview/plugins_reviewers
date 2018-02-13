@@ -22,6 +22,30 @@
       "revId": "e3c971e1715779b74df3a7a381fb9fbdce0ca75a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0659fdbe_c0f41096",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2018-02-13T02:14:25Z",
+      "side": 1,
+      "message": "Oh, any idea how we can support this please? :)",
+      "parentUuid": "91d9a454_f0627dcb",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 95,
+        "endChar": 14
+      },
+      "revId": "e3c971e1715779b74df3a7a381fb9fbdce0ca75a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
