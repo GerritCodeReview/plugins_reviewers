@@ -30,6 +30,7 @@ import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.reviewersbyblame.ReviewersByBlame;
 import org.eclipse.jgit.lib.Config;
 
 public class Module extends FactoryModule {
@@ -75,6 +76,7 @@ public class Module extends FactoryModule {
 
     factory(DefaultReviewers.Factory.class);
     factory(ReviewersConfig.Factory.class);
+    factory(ReviewersByBlame.Factory.class);
 
     if (enableREST) {
       install(
