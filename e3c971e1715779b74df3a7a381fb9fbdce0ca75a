@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91d9a454_f0627dcb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-13T01:57:52Z",
+      "side": 1,
+      "message": "getRefName is inherited from VersionedMetaData, so while this method can be used to change the source/dest ref that VersionedMetaData uses, it won\u0027t actually work here because cfg was initialized in the constructor with getProjectPluginConfigWithInheritance (see L52), and will always be the content of reviewers.config from the project\u0027s refs/meta/config.\n\nConfiguring the ref should be done globally in reviewers.config under the site\u0027s etc folder, and this configuration should be read by getGlobalPluginConfig.\n\nBut even then, it won\u0027t work as expected because getProjectPluginConfigWithInheritance still reads it from refs/meta/config.",
+      "range": {
+        "startLine": 95,
+        "startChar": 11,
+        "endLine": 95,
+        "endChar": 14
+      },
+      "revId": "e3c971e1715779b74df3a7a381fb9fbdce0ca75a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
