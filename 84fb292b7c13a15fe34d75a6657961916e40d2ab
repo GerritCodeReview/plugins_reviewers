@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e72fb32f_07214595",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-13T11:57:44Z",
+      "side": 1,
+      "message": "\u003e My proposal would be to have three major modes:\n \u003e * adding reviewers per configuration\n \u003e * adding reviewers by blame\n \u003e * suggesting reviewers per configuration\n \u003e * suggesting reviewers by blame\n\nThere are two hard things in computer science: cache invalidation, naming things, and off-by-one errors ;-)",
+      "parentUuid": "af6e6f14_a0005314",
+      "revId": "84fb292b7c13a15fe34d75a6657961916e40d2ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf5a6142_25902e37",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersByBlame.java",
         "patchSetId": 1
