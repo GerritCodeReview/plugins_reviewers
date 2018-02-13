@@ -92,7 +92,7 @@ class ReviewersConfig extends VersionedMetaData {
 
   @Override
   protected String getRefName() {
-    return RefNames.REFS_CONFIG;
+    return cfg.getString("reviewers", "ref", RefNames.REFS_CONFIG);
   }
 
   @Override
