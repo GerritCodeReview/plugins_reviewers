@@ -311,7 +311,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       try {
         Account account = accountResolver.find(reviewDb, r);
         if (account != null && account.isActive()) {
-          reviewers.add(account.getId());
+          if (uploader == null || uploader._accountId != account.getId().get()) {
+            reviewers.add(account.getId());
+          }
           continue;
         }
       } catch (OrmException e) {
