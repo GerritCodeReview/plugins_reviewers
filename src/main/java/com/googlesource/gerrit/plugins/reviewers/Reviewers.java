@@ -152,9 +152,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return ImmutableSet.of();
   }
 
-  private SuggestedReviewer suggestedReviewer(Account account) {
+  private SuggestedReviewer suggestedReviewer(Account.Id account) {
     SuggestedReviewer reviewer = new SuggestedReviewer();
-    reviewer.account = account.getId();
+    reviewer.account = account;
     reviewer.score = 1;
     return reviewer;
   }
@@ -284,7 +284,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return filterPredicate.asMatchable().match(changeData);
   }
 
-  private Set<Account> toAccounts(
+  private Set<Account.Id> toAccounts(
       ReviewDb reviewDb, Set<String> in, Project.NameKey p, int changeNumber) {
     return toAccounts(reviewDb, in, p, changeNumber, null);
   }
@@ -299,19 +299,19 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
    * @param uploader account to use to look up groups, or null if groups are not needed
    * @return set of {@link Account}s.
    */
-  private Set<Account> toAccounts(
+  private Set<Account.Id> toAccounts(
       ReviewDb reviewDb,
       Set<String> in,
       Project.NameKey p,
       int changeNumber,
       @Nullable AccountInfo uploader) {
-    Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
+    Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
     for (String r : in) {
       try {
         Account account = accountResolver.find(reviewDb, r);
-        if (account != null) {
-          reviewers.add(account);
+        if (account != null && account.isActive()) {
+          reviewers.add(account.getId());
           continue;
         }
       } catch (OrmException e) {
@@ -347,8 +347,14 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
         try {
           if (groupMembers != null) {
-            reviewers.addAll(
-                groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
+            Set<Account.Id> accounts =
+                groupMembers
+                    .listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p)
+                    .stream()
+                    .filter(a -> a.isActive())
+                    .map(a -> a.getId())
+                    .collect(toSet());
+            reviewers.addAll(accounts);
           } else {
             log.warn(
                 "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
