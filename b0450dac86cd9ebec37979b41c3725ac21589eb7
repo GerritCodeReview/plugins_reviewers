@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d21b850e_5cc33b00",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:12:34Z",
+      "side": 1,
+      "message": "Yes, that\u0027s my intention, although as yet I have not actually done it.",
+      "parentUuid": "b05d77ea_7117384c",
+      "revId": "b0450dac86cd9ebec37979b41c3725ac21589eb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2c12e0f_b1c5ff28",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewers.java",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "19accf12_cfa3f3d1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:12:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2c12e0f_b1c5ff28",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 6
+      },
+      "revId": "b0450dac86cd9ebec37979b41c3725ac21589eb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7307c7d5_e11e24ba",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2018-02-14T09:50:17Z",
       "side": 1,
       "message": "We should rename that class with something like: AddReveiwersByConfiguration or some such. I wouldn\u0027t disagree to do it already in this change.",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 22
+      },
+      "revId": "b0450dac86cd9ebec37979b41c3725ac21589eb7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6035d2d_621c58ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:12:34Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll do that in a separate change.",
+      "parentUuid": "7307c7d5_e11e24ba",
       "range": {
         "startLine": 28,
         "startChar": 6,
