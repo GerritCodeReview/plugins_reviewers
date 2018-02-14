@@ -15,23 +15,17 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.extensions.api.GerritApi;
-import com.google.gerrit.extensions.api.changes.AddReviewerInput;
-import com.google.gerrit.extensions.api.changes.ReviewInput;
-import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
+import com.google.gerrit.reviewdb.server.ReviewDb;
+import com.google.gerrit.server.IdentifiedUser;
+import com.google.gerrit.server.util.ThreadLocalRequestContext;
+import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import java.util.ArrayList;
 import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-class DefaultReviewers implements Runnable {
-  private static final Logger log = LoggerFactory.getLogger(DefaultReviewers.class);
-
-  private final GerritApi gApi;
-  private final Change change;
+class DefaultReviewers extends AddReviewers {
   private final Set<Account.Id> reviewers;
 
   interface Factory {
@@ -39,37 +33,19 @@ class DefaultReviewers implements Runnable {
   }
 
   @Inject
-  DefaultReviewers(GerritApi gApi, @Assisted Change change, @Assisted Set<Account.Id> reviewers) {
-    this.gApi = gApi;
-    this.change = change;
+  DefaultReviewers(
+      GerritApi gApi,
+      IdentifiedUser.GenericFactory identifiedUserFactory,
+      ThreadLocalRequestContext tl,
+      SchemaFactory<ReviewDb> schemaFactory,
+      @Assisted Change change,
+      @Assisted Set<Account.Id> reviewers) {
+    super(gApi, identifiedUserFactory, tl, schemaFactory, change);
     this.reviewers = reviewers;
   }
 
   @Override
-  public void run() {
-    addReviewers(reviewers, change);
-  }
-
-  /**
-   * Append the reviewers to change#{@link Change}
-   *
-   * @param reviewers Set of reviewer IDs to add
-   * @param change {@link Change} to add the reviewers to
-   */
-  private void addReviewers(Set<Account.Id> reviewers, Change change) {
-    try {
-      // TODO(davido): Switch back to using changes API again,
-      // when it supports batch mode for adding reviewers
-      ReviewInput in = new ReviewInput();
-      in.reviewers = new ArrayList<>(reviewers.size());
-      for (Account.Id account : reviewers) {
-        AddReviewerInput addReviewerInput = new AddReviewerInput();
-        addReviewerInput.reviewer = account.toString();
-        in.reviewers.add(addReviewerInput);
-      }
-      gApi.changes().id(change.getId().get()).current().review(in);
-    } catch (RestApiException e) {
-      log.error("Couldn't add reviewers to the change", e);
-    }
+  Set<Account.Id> getReviewers() {
+    return reviewers;
   }
 }
