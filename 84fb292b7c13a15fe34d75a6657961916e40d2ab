@@ -57,6 +57,30 @@
       "revId": "84fb292b7c13a15fe34d75a6657961916e40d2ab",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c10a1bac_0eb6b68d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersByBlame.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T01:48:49Z",
+      "side": 1,
+      "message": "Yes.  Apart from removing unnecessary \u0027final\u0027 modifiers from the constructor arguments, this file is included as-is from the reviewers-by-blame plugin.",
+      "parentUuid": "cf5a6142_25902e37",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "84fb292b7c13a15fe34d75a6657961916e40d2ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
