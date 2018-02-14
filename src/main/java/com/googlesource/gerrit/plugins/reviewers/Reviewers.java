@@ -49,13 +49,10 @@ import com.google.gerrit.server.query.Predicate;
 import com.google.gerrit.server.query.QueryParseException;
 import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
-import com.google.gerrit.server.util.RequestContext;
-import com.google.gerrit.server.util.ThreadLocalRequestContext;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.ProvisionException;
 import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
@@ -73,7 +70,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final DefaultReviewers.Factory reviewersFactory;
   private final WorkQueue workQueue;
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
-  private final ThreadLocalRequestContext tl;
   private final SchemaFactory<ReviewDb> schemaFactory;
   private final ChangeData.Factory changeDataFactory;
   private final ReviewersConfig.Factory configFactory;
@@ -89,7 +85,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       DefaultReviewers.Factory reviewersFactory,
       WorkQueue workQueue,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      ThreadLocalRequestContext tl,
       SchemaFactory<ReviewDb> schemaFactory,
       ChangeData.Factory changeDataFactory,
       ReviewersConfig.Factory configFactory,
@@ -103,7 +98,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.reviewersFactory = reviewersFactory;
     this.workQueue = workQueue;
     this.identifiedUserFactory = identifiedUserFactory;
-    this.tl = tl;
     this.schemaFactory = schemaFactory;
     this.changeDataFactory = changeDataFactory;
     this.configFactory = configFactory;
@@ -193,51 +187,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
           reviewersFactory.create(
               change, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
 
-      workQueue
-          .getDefaultQueue()
-          .submit(
-              new Runnable() {
-                ReviewDb db = null;
-
-                @Override
-                public void run() {
-                  RequestContext old =
-                      tl.setContext(
-                          new RequestContext() {
-
-                            @Override
-                            public CurrentUser getUser() {
-                              return identifiedUserFactory.create(change.getOwner());
-                            }
-
-                            @Override
-                            public Provider<ReviewDb> getReviewDbProvider() {
-                              return new Provider<ReviewDb>() {
-                                @Override
-                                public ReviewDb get() {
-                                  if (db == null) {
-                                    try {
-                                      db = schemaFactory.open();
-                                    } catch (OrmException e) {
-                                      throw new ProvisionException("Cannot open ReviewDb", e);
-                                    }
-                                  }
-                                  return db;
-                                }
-                              };
-                            }
-                          });
-                  try {
-                    task.run();
-                  } finally {
-                    tl.setContext(old);
-                    if (db != null) {
-                      db.close();
-                      db = null;
-                    }
-                  }
-                }
-              });
+      workQueue.getDefaultQueue().submit(task);
     } catch (QueryParseException e) {
       log.warn(
           "Could not add default reviewers for change {} of project {}, filter is invalid: {}",
