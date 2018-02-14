@@ -29,6 +29,7 @@ import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
+import com.google.gerrit.extensions.events.RevisionEvent;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
@@ -116,18 +117,12 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
   @Override
   public void onRevisionCreated(RevisionCreatedListener.Event event) {
-    ChangeInfo c = event.getChange();
-    if (ignoreDrafts && c.status == ChangeStatus.DRAFT) {
-      log.debug("Ignoring draft change");
-      return;
-    }
-    onEvent(new Project.NameKey(c.project), c._number, event.getWho());
+    onEvent(event);
   }
 
   @Override
   public void onDraftPublished(DraftPublishedListener.Event event) {
-    ChangeInfo c = event.getChange();
-    onEvent(new Project.NameKey(c.project), c._number, event.getWho());
+    onEvent(event);
   }
 
   @Override
@@ -169,13 +164,22 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return configFactory.create(projectName).getReviewerFilterSections();
   }
 
-  private void onEvent(Project.NameKey projectName, int changeNumber, AccountInfo uploader) {
+  private void onEvent(RevisionEvent event) {
+    ChangeInfo c = event.getChange();
+    if (ignoreDrafts && c.status == ChangeStatus.DRAFT) {
+      log.debug("Ignoring draft change");
+      return;
+    }
+    Project.NameKey projectName = new Project.NameKey(c.project);
+
     List<ReviewerFilterSection> sections = getSections(projectName);
 
     if (sections.isEmpty()) {
       return;
     }
 
+    AccountInfo uploader = event.getWho();
+    int changeNumber = c._number;
     try (ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData =
           changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
