@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "07e0e9db_f215c16d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78637401_40b7531e",
+      "range": {
+        "startLine": 56,
+        "startChar": 29,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b044182c_bb79ef90",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-14T09:36:52Z",
       "side": 1,
       "message": "Stale.",
+      "range": {
+        "startLine": 293,
+        "startChar": 46,
+        "endLine": 293,
+        "endChar": 53
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6c546b2_fe0c6c99",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b044182c_bb79ef90",
       "range": {
         "startLine": 293,
         "startChar": 46,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "da898ebf_91363279",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "230ea6bb_50511461",
+      "range": {
+        "startLine": 300,
+        "startChar": 27,
+        "endLine": 300,
+        "endChar": 34
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "937119ed_3cbffc61",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "1a73492e_075f8486",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "937119ed_3cbffc61",
+      "range": {
+        "startLine": 354,
+        "startChar": 28,
+        "endLine": 354,
+        "endChar": 45
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1c27f36_62a3aa1f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2018-02-14T09:36:52Z",
       "side": 1,
       "message": "Account::getId",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 39
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "438b5466_f413bc7b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-14T10:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1c27f36_62a3aa1f",
       "range": {
         "startLine": 355,
         "startChar": 25,
