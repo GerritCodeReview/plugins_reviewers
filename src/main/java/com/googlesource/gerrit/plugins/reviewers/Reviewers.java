@@ -152,9 +152,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return ImmutableSet.of();
   }
 
-  private SuggestedReviewer suggestedReviewer(Account account) {
+  private SuggestedReviewer suggestedReviewer(Account.Id account) {
     SuggestedReviewer reviewer = new SuggestedReviewer();
-    reviewer.account = account.getId();
+    reviewer.account = account;
     reviewer.score = 1;
     return reviewer;
   }
@@ -284,34 +284,34 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return filterPredicate.asMatchable().match(changeData);
   }
 
-  private Set<Account> toAccounts(
+  private Set<Account.Id> toAccounts(
       ReviewDb reviewDb, Set<String> in, Project.NameKey p, int changeNumber) {
     return toAccounts(reviewDb, in, p, changeNumber, null);
   }
 
   /**
-   * Convert a set of account names to {@link Account}s.
+   * Convert a set of account names to {@link com.google.gerrit.reviewdb.client.Account.Id}s.
    *
    * @param reviewDb DB
    * @param in the set of account names to convert
    * @param p the project name
    * @param changeNumber the change Id
    * @param uploader account to use to look up groups, or null if groups are not needed
-   * @return set of {@link Account}s.
+   * @return set of {@link com.google.gerrit.reviewdb.client.Account.Id}s.
    */
-  private Set<Account> toAccounts(
+  private Set<Account.Id> toAccounts(
       ReviewDb reviewDb,
       Set<String> in,
       Project.NameKey p,
       int changeNumber,
       @Nullable AccountInfo uploader) {
-    Set<Account> reviewers = Sets.newHashSetWithExpectedSize(in.size());
+    Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(in.size());
     GroupMembers groupMembers = null;
     for (String r : in) {
       try {
         Account account = accountResolver.find(reviewDb, r);
-        if (account != null) {
-          reviewers.add(account);
+        if (account != null && account.isActive()) {
+          reviewers.add(account.getId());
           continue;
         }
       } catch (OrmException e) {
@@ -347,8 +347,14 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
         try {
           if (groupMembers != null) {
-            reviewers.addAll(
-                groupMembers.listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p));
+            Set<Account.Id> accounts =
+                groupMembers
+                    .listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p)
+                    .stream()
+                    .filter(Account::isActive)
+                    .map(Account::getId)
+                    .collect(toSet());
+            reviewers.addAll(accounts);
           } else {
             log.warn(
                 "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
