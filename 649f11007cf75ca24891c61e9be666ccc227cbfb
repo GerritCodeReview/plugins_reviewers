@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78637401_40b7531e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-14T09:36:52Z",
+      "side": 1,
+      "message": "reviewer ids?",
+      "range": {
+        "startLine": 56,
+        "startChar": 29,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b044182c_bb79ef90",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-14T09:36:52Z",
+      "side": 1,
+      "message": "Stale.",
+      "range": {
+        "startLine": 293,
+        "startChar": 46,
+        "endLine": 293,
+        "endChar": 53
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "230ea6bb_50511461",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-14T09:36:52Z",
+      "side": 1,
+      "message": "Stale.",
+      "range": {
+        "startLine": 300,
+        "startChar": 27,
+        "endLine": 300,
+        "endChar": 34
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "937119ed_3cbffc61",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-14T09:36:52Z",
+      "side": 1,
+      "message": "Shorter: Use method reference Account::isActive instead of lambda expression.",
+      "range": {
+        "startLine": 354,
+        "startChar": 28,
+        "endLine": 354,
+        "endChar": 45
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1c27f36_62a3aa1f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-14T09:36:52Z",
+      "side": 1,
+      "message": "Account::getId",
+      "range": {
+        "startLine": 355,
+        "startChar": 25,
+        "endLine": 355,
+        "endChar": 39
+      },
+      "revId": "649f11007cf75ca24891c61e9be666ccc227cbfb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
