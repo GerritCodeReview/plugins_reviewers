@@ -32,14 +32,14 @@ class DefaultReviewers implements Runnable {
 
   private final GerritApi gApi;
   private final Change change;
-  private final Set<Account> reviewers;
+  private final Set<Account.Id> reviewers;
 
   interface Factory {
-    DefaultReviewers create(Change change, Set<Account> reviewers);
+    DefaultReviewers create(Change change, Set<Account.Id> reviewers);
   }
 
   @Inject
-  DefaultReviewers(GerritApi gApi, @Assisted Change change, @Assisted Set<Account> reviewers) {
+  DefaultReviewers(GerritApi gApi, @Assisted Change change, @Assisted Set<Account.Id> reviewers) {
     this.gApi = gApi;
     this.change = change;
     this.reviewers = reviewers;
@@ -56,18 +56,16 @@ class DefaultReviewers implements Runnable {
    * @param reviewers Set of reviewers to add
    * @param change {@link Change} to add the reviewers to
    */
-  private void addReviewers(Set<Account> reviewers, Change change) {
+  private void addReviewers(Set<Account.Id> reviewers, Change change) {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
       ReviewInput in = new ReviewInput();
       in.reviewers = new ArrayList<>(reviewers.size());
-      for (Account account : reviewers) {
+      for (Account.Id account : reviewers) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
-        if (account.isActive()) {
-          addReviewerInput.reviewer = account.getId().toString();
-          in.reviewers.add(addReviewerInput);
-        }
+        addReviewerInput.reviewer = account.toString();
+        in.reviewers.add(addReviewerInput);
       }
       gApi.changes().id(change.getId().get()).current().review(in);
     } catch (RestApiException e) {
