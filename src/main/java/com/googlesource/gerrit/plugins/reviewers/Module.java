@@ -73,7 +73,7 @@ public class Module extends FactoryModule {
       DynamicSet.bind(binder(), DraftPublishedListener.class).to(Reviewers.class);
     }
 
-    factory(DefaultReviewers.Factory.class);
+    factory(AddReviewersByConfiguration.Factory.class);
     factory(ReviewersConfig.Factory.class);
 
     if (enableREST) {

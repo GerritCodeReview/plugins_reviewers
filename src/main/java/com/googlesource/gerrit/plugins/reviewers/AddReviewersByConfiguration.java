@@ -25,15 +25,15 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Set;
 
-class DefaultReviewers extends AddReviewers {
+class AddReviewersByConfiguration extends AddReviewers {
   private final Set<Account.Id> reviewers;
 
   interface Factory {
-    DefaultReviewers create(Change change, Set<Account.Id> reviewers);
+    AddReviewersByConfiguration create(Change change, Set<Account.Id> reviewers);
   }
 
   @Inject
-  DefaultReviewers(
+  AddReviewersByConfiguration(
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       ThreadLocalRequestContext tl,

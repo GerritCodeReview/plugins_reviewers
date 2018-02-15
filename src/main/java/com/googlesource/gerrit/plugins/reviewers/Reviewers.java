@@ -67,7 +67,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
   private final GroupMembers.Factory groupMembersFactory;
-  private final DefaultReviewers.Factory reviewersFactory;
+  private final AddReviewersByConfiguration.Factory byConfigFactory;
   private final WorkQueue workQueue;
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final SchemaFactory<ReviewDb> schemaFactory;
@@ -82,7 +82,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
       GroupMembers.Factory groupMembersFactory,
-      DefaultReviewers.Factory reviewersFactory,
+      AddReviewersByConfiguration.Factory byConfigFactory,
       WorkQueue workQueue,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       SchemaFactory<ReviewDb> schemaFactory,
@@ -95,7 +95,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.groupMembersFactory = groupMembersFactory;
-    this.reviewersFactory = reviewersFactory;
+    this.byConfigFactory = byConfigFactory;
     this.workQueue = workQueue;
     this.identifiedUserFactory = identifiedUserFactory;
     this.schemaFactory = schemaFactory;
@@ -184,7 +184,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
       final Change change = changeData.change();
       final Runnable task =
-          reviewersFactory.create(
+          byConfigFactory.create(
               change, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
 
       workQueue.getDefaultQueue().submit(task);
