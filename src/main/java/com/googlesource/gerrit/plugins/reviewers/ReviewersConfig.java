@@ -18,13 +18,14 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.VersionedMetaData;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
+import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,79 +34,122 @@ import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Config;
 
-class ReviewersConfig extends VersionedMetaData {
-  private static final String FILENAME = "reviewers.config";
-  private static final String FILTER = "filter";
-  private static final String REVIEWER = "reviewer";
-  private Config cfg;
+@Singleton
+class ReviewersConfig {
+  private static final String KEY_IGNORE_DRAFTS = "ignoreDrafts";
+  private static final String KEY_ENABLE_REST = "enableREST";
+  private static final String KEY_ENABLE_UI = "enableUI";
+  private static final String KEY_SUGGEST_ONLY = "suggestOnly";
 
-  interface Factory {
-    ReviewersConfig create(Project.NameKey projectName);
-  }
+  private final PluginConfigFactory cfgFactory;
+  private final String pluginName;
+
+  private final boolean enableUI;
+  private final boolean enableREST;
+  private final boolean suggestOnly;
+  private final boolean ignoreDrafts;
 
   @Inject
-  ReviewersConfig(
-      PluginConfigFactory cfgFactory,
-      @PluginName String pluginName,
-      @Assisted Project.NameKey projectName)
-      throws NoSuchProjectException {
-    cfg = cfgFactory.getProjectPluginConfigWithInheritance(projectName, pluginName);
+  ReviewersConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
+    this.cfgFactory = cfgFactory;
+    this.pluginName = pluginName;
+    Config cfg = cfgFactory.getGlobalPluginConfig(pluginName);
+    this.ignoreDrafts = cfg.getBoolean(pluginName, null, KEY_IGNORE_DRAFTS, false);
+    this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
+    this.enableUI = enableREST ? cfg.getBoolean(pluginName, null, KEY_ENABLE_UI, true) : false;
+    this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
   }
 
-  List<ReviewerFilterSection> getReviewerFilterSections() {
-    ImmutableList.Builder<ReviewerFilterSection> b = ImmutableList.builder();
-    for (String f : cfg.getSubsections(FILTER)) {
-      b.add(newReviewerFilterSection(f));
-    }
-    return b.build();
-  }
-
-  void addReviewer(String filter, String reviewer) {
-    if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-      List<String> values =
-          new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
-      values.add(reviewer);
-      cfg.setStringList(FILTER, filter, REVIEWER, values);
+  public ForProject forProject(Project.NameKey projectName) throws ResourceNotFoundException {
+    try {
+      return new ForProject(
+          cfgFactory.getProjectPluginConfigWithInheritance(projectName, pluginName));
+    } catch (NoSuchProjectException e) {
+      throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
   }
 
-  void removeReviewer(String filter, String reviewer) {
-    if (newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-      List<String> values =
-          new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
-      values.remove(reviewer);
-      if (values.isEmpty()) {
-        cfg.unsetSection(FILTER, filter);
-      } else {
+  public boolean ignoreDrafts() {
+    return ignoreDrafts;
+  }
+
+  public boolean enableREST() {
+    return enableREST;
+  }
+
+  public boolean enableUI() {
+    return enableUI;
+  }
+
+  public boolean suggestOnly() {
+    return suggestOnly;
+  }
+
+  static class ForProject extends VersionedMetaData {
+    private static final String FILENAME = "reviewers.config";
+    private static final String FILTER = "filter";
+    private static final String REVIEWER = "reviewer";
+    private Config cfg;
+
+    ForProject(Config cfg) {
+      this.cfg = cfg;
+    }
+
+    List<ReviewerFilterSection> getReviewerFilterSections() {
+      ImmutableList.Builder<ReviewerFilterSection> b = ImmutableList.builder();
+      for (String f : cfg.getSubsections(FILTER)) {
+        b.add(newReviewerFilterSection(f));
+      }
+      return b.build();
+    }
+
+    void addReviewer(String filter, String reviewer) {
+      if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
+        List<String> values =
+            new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
+        values.add(reviewer);
         cfg.setStringList(FILTER, filter, REVIEWER, values);
       }
     }
-  }
 
-  private ReviewerFilterSection newReviewerFilterSection(String filter) {
-    ImmutableSet.Builder<String> b = ImmutableSet.builder();
-    for (String reviewer : cfg.getStringList(FILTER, filter, REVIEWER)) {
-      b.add(reviewer);
+    void removeReviewer(String filter, String reviewer) {
+      if (newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
+        List<String> values =
+            new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
+        values.remove(reviewer);
+        if (values.isEmpty()) {
+          cfg.unsetSection(FILTER, filter);
+        } else {
+          cfg.setStringList(FILTER, filter, REVIEWER, values);
+        }
+      }
     }
-    return new ReviewerFilterSection(filter, b.build());
-  }
 
-  @Override
-  protected String getRefName() {
-    return RefNames.REFS_CONFIG;
-  }
-
-  @Override
-  protected void onLoad() throws IOException, ConfigInvalidException {
-    cfg = readConfig(FILENAME);
-  }
-
-  @Override
-  protected boolean onSave(CommitBuilder commit) throws IOException, ConfigInvalidException {
-    if (Strings.isNullOrEmpty(commit.getMessage())) {
-      commit.setMessage("Update reviewers configuration\n");
+    private ReviewerFilterSection newReviewerFilterSection(String filter) {
+      ImmutableSet.Builder<String> b = ImmutableSet.builder();
+      for (String reviewer : cfg.getStringList(FILTER, filter, REVIEWER)) {
+        b.add(reviewer);
+      }
+      return new ReviewerFilterSection(filter, b.build());
     }
-    saveConfig(FILENAME, cfg);
-    return true;
+
+    @Override
+    protected String getRefName() {
+      return RefNames.REFS_CONFIG;
+    }
+
+    @Override
+    protected void onLoad() throws IOException, ConfigInvalidException {
+      cfg = readConfig(FILENAME);
+    }
+
+    @Override
+    protected boolean onSave(CommitBuilder commit) throws IOException, ConfigInvalidException {
+      if (Strings.isNullOrEmpty(commit.getMessage())) {
+        commit.setMessage("Update reviewers configuration\n");
+      }
+      saveConfig(FILENAME, cfg);
+      return true;
+    }
   }
 }

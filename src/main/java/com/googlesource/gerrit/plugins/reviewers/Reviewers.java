@@ -23,13 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.common.errors.NoSuchGroupException;
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.RevisionEvent;
+import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
@@ -41,7 +41,6 @@ import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -72,10 +71,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final SchemaFactory<ReviewDb> schemaFactory;
   private final ChangeData.Factory changeDataFactory;
-  private final ReviewersConfig.Factory configFactory;
+  private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
-  private final boolean ignoreDrafts;
 
   @Inject
   Reviewers(
@@ -87,11 +85,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       IdentifiedUser.GenericFactory identifiedUserFactory,
       SchemaFactory<ReviewDb> schemaFactory,
       ChangeData.Factory changeDataFactory,
-      ReviewersConfig.Factory configFactory,
+      ReviewersConfig config,
       Provider<CurrentUser> user,
-      ChangeQueryBuilder queryBuilder,
-      PluginConfigFactory cfgFactory,
-      @PluginName String pluginName) {
+      ChangeQueryBuilder queryBuilder) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.groupMembersFactory = groupMembersFactory;
@@ -100,13 +96,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.identifiedUserFactory = identifiedUserFactory;
     this.schemaFactory = schemaFactory;
     this.changeDataFactory = changeDataFactory;
-    this.configFactory = configFactory;
+    this.config = config;
     this.user = user;
     this.queryBuilder = queryBuilder;
-    this.ignoreDrafts =
-        cfgFactory
-            .getGlobalPluginConfig(pluginName)
-            .getBoolean(pluginName, null, "ignoreDrafts", false);
   }
 
   @Override
@@ -155,12 +147,17 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
 
   private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    return configFactory.create(projectName).getReviewerFilterSections();
+    try {
+      return config.forProject(projectName).getReviewerFilterSections();
+    } catch (ResourceNotFoundException e) {
+      log.error("Unable to get config for project {}", projectName.get());
+      return ImmutableList.of();
+    }
   }
 
   private void onEvent(RevisionEvent event) {
     ChangeInfo c = event.getChange();
-    if (ignoreDrafts && c.status == ChangeStatus.DRAFT) {
+    if (config.ignoreDrafts() && c.status == ChangeStatus.DRAFT) {
       log.debug("Ignoring draft change");
       return;
     }
