@@ -46,6 +46,10 @@ class ReviewersConfig {
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_ENABLE_UI = "enableUI";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
+  private static final String KEY_ENABLE_BLAME = "enableBlame";
+  private static final String KEY_MAX_REVIEWERS = "maxReviewers";
+  private static final int DEFAULT_MAX_REVIEWERS = 3;
+  private static final String KEY_IGNORE_FILES = "ignoreFiles";
 
   private final PluginConfigFactory cfgFactory;
   private final String pluginName;
@@ -54,6 +58,7 @@ class ReviewersConfig {
   private final boolean enableREST;
   private final boolean suggestOnly;
   private final boolean ignoreDrafts;
+  private final boolean enableBlame;
 
   @Inject
   ReviewersConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
@@ -64,6 +69,7 @@ class ReviewersConfig {
     this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
     this.enableUI = enableREST ? cfg.getBoolean(pluginName, null, KEY_ENABLE_UI, true) : false;
     this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
+    this.enableBlame = cfg.getBoolean(pluginName, null, KEY_ENABLE_BLAME, false);
   }
 
   public ForProject forProject(Project.NameKey projectName) {
@@ -74,7 +80,7 @@ class ReviewersConfig {
       log.error("Unable to get config for project {}", projectName.get());
       cfg = new Config();
     }
-    return new ForProject(cfg);
+    return new ForProject(cfg, pluginName);
   }
 
   public boolean ignoreDrafts() {
@@ -93,11 +99,29 @@ class ReviewersConfig {
     return suggestOnly;
   }
 
+  public boolean enableBlame() {
+    return enableBlame;
+  }
+
   static class ForProject extends VersionedMetaData {
+    private String pluginName;
     private Config cfg;
 
-    ForProject(Config cfg) {
+    ForProject(Config cfg, String pluginName) {
       this.cfg = cfg;
+      this.pluginName = pluginName;
+    }
+
+    boolean enableBlame() {
+      return cfg.getBoolean(this.pluginName, KEY_ENABLE_BLAME, false);
+    }
+
+    int maxReviewers() {
+      return cfg.getInt(this.pluginName, KEY_MAX_REVIEWERS, DEFAULT_MAX_REVIEWERS);
+    }
+
+    String ignoreFiles() {
+      return Strings.nullToEmpty(cfg.getString(this.pluginName, null, KEY_IGNORE_FILES));
     }
 
     List<ReviewerFilterSection> getReviewerFilterSections() {
