@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.reviewers;
 import static com.google.gerrit.server.project.ProjectResource.PROJECT_KIND;
 
 import com.google.gerrit.extensions.annotations.Exports;
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.events.DraftPublishedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
@@ -27,10 +26,8 @@ import com.google.gerrit.extensions.webui.GwtPlugin;
 import com.google.gerrit.extensions.webui.TopMenu;
 import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.gerrit.server.change.ReviewerSuggestion;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import org.eclipse.jgit.lib.Config;
 
 public class Module extends FactoryModule {
   private final boolean enableUI;
@@ -38,11 +35,10 @@ public class Module extends FactoryModule {
   private final boolean suggestOnly;
 
   @Inject
-  public Module(@PluginName String pluginName, PluginConfigFactory pluginCfgFactory) {
-    Config c = pluginCfgFactory.getGlobalPluginConfig(pluginName);
-    this.enableREST = c.getBoolean("reviewers", null, "enableREST", true);
-    this.enableUI = enableREST ? c.getBoolean("reviewers", null, "enableUI", true) : false;
-    this.suggestOnly = c.getBoolean("reviewers", null, "suggestOnly", false);
+  public Module(ReviewersConfig cfg) {
+    this.enableREST = cfg.enableREST();
+    this.enableUI = cfg.enableUI();
+    this.suggestOnly = cfg.suggestOnly();
   }
 
   public Module(boolean enableUI, boolean enableREST, boolean suggestOnly) {
@@ -74,7 +70,6 @@ public class Module extends FactoryModule {
     }
 
     factory(AddReviewersByConfiguration.Factory.class);
-    factory(ReviewersConfig.Factory.class);
 
     if (enableREST) {
       install(
