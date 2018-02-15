@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cfa2f838_f9cd5ad9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-15T06:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c372a66f_5f515af1",
+      "range": {
+        "startLine": 11,
+        "startChar": 21,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "d4e459f9275208876d8f3c3323b592001488d7b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ada592d5_fea09d67",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-02-15T06:22:53Z",
       "side": 1,
       "message": "The main reason why it was done currently that way is to not reload the plugin when configuration was changed.",
+      "revId": "d4e459f9275208876d8f3c3323b592001488d7b8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03815141_7797d454",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-15T06:48:19Z",
+      "side": 1,
+      "message": "I wasn\u0027t aware of that, but actually it was only working for the ignoreDraft setting. All the other settings are only referenced in the Module which is only called on plugin load.",
+      "parentUuid": "ada592d5_fea09d67",
       "revId": "d4e459f9275208876d8f3c3323b592001488d7b8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
