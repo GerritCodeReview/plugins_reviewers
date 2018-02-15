@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e866b3c_664cea3e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-15T07:19:47Z",
+      "side": 1,
+      "message": "This should just return an empty config, which will make usage of it easier.",
+      "revId": "6a8a9cb342a6ea6b2c199893b01115819b82b40f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
