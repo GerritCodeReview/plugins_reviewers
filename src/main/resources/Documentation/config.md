@@ -31,7 +31,13 @@ reviewers.suggestOnly
 	groups are not suggested. Defaults to false. By default Gerrit will consider
 	the suggestions with a weight of 1. To force the suggestions higher in the
 	list, set a higher value (like 1000) in `addReviewer.@PLUGIN@-reviewer-suggestion.weight`
-	in `gerrit.config`.
+	in `gerrit.config`. Reviewers are only suggested if they are configured in
+	the `reviewers.config` of the project.
+
+reviewers.enableBlame
+:	Enable adding reviewers by blame. When enabled, reviewers are added if they
+	are the author of a line that is modifed by the change under review. To be
+	effective, `reviewers.enableBlame` must also be enabled at project level.
 
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
@@ -41,6 +47,10 @@ Other projects can then override the configuration in their own
 `reviewers.config` file.
 
 ```
+  [reviewers]
+    enableBlame = true
+    maxReviewers = 5
+    ignoreFiles = "^foo*"
   [filter "*"]
     reviewer = john.doe@example.com
 
@@ -53,6 +63,18 @@ Other projects can then override the configuration in their own
   [filter "-status:draft"]
     reviewer = DevGroup
 ```
+reviewers.enableBlame
+:	Enable addition of reviewers by blame for this project. Defaults to false.
+	Only effective when `reviewers.enableBlame` is also set in the global
+	`reviewers.config` file.
+
+reviewers.maxReviewers
+:	Maximum number of reviewers to add by blame. Defaults to 3.
+
+reviewers.ignoreFiles
+:	Ignore files where the filename matches the given regular expression when
+	computing the reviewers by blame. If empty or not set, no files are ignored.
+	By default, not set.
 
 filter.\<filter\>.reviewer
 :	An account or a group name. Must be an exact match (case sensitive) with the
