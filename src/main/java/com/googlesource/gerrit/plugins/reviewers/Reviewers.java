@@ -66,6 +66,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final Provider<GroupsCollection> groupsCollection;
   private final GroupMembers.Factory groupMembersFactory;
   private final AddReviewersByConfiguration.Factory byConfigFactory;
+  private final AddReviewersByBlame.Factory byBlameFactory;
   private final WorkQueue workQueue;
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final SchemaFactory<ReviewDb> schemaFactory;
@@ -80,6 +81,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       Provider<GroupsCollection> groupsCollection,
       GroupMembers.Factory groupMembersFactory,
       AddReviewersByConfiguration.Factory byConfigFactory,
+      AddReviewersByBlame.Factory byBlameFactory,
       WorkQueue workQueue,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       SchemaFactory<ReviewDb> schemaFactory,
@@ -91,6 +93,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.groupsCollection = groupsCollection;
     this.groupMembersFactory = groupMembersFactory;
     this.byConfigFactory = byConfigFactory;
+    this.byBlameFactory = byBlameFactory;
     this.workQueue = workQueue;
     this.identifiedUserFactory = identifiedUserFactory;
     this.schemaFactory = schemaFactory;
@@ -116,7 +119,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       @Nullable Change.Id changeId,
       @Nullable String query,
       Set<Account.Id> candidates) {
-    List<ReviewerFilterSection> sections = getSections(projectName);
+    List<ReviewerFilterSection> sections = config(projectName).getReviewerFilterSections();
 
     if (sections.isEmpty() || changeId == null) {
       return ImmutableSet.of();
@@ -144,9 +147,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     return reviewer;
   }
 
-  private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
+  private ReviewersConfig.ForProject config(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    return config.forProject(projectName).getReviewerFilterSections();
+    return config.forProject(projectName);
   }
 
   private void onEvent(RevisionEvent event) {
@@ -157,31 +160,36 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     }
     Project.NameKey projectName = new Project.NameKey(c.project);
 
-    List<ReviewerFilterSection> sections = getSections(projectName);
+    ReviewersConfig.ForProject projectConfig = config(projectName);
+    List<ReviewerFilterSection> sections = projectConfig.getReviewerFilterSections();
 
-    if (sections.isEmpty()) {
+    if (sections.isEmpty() && !(config.enableBlame() && projectConfig.enableBlame())) {
       return;
     }
 
-    AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try (ReviewDb reviewDb = schemaFactory.open()) {
       ChangeData changeData =
           changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
+      Change change = changeData.change();
+
+      if (config.enableBlame() && projectConfig.enableBlame()) {
+        Runnable byBlame = byBlameFactory.create(change);
+        workQueue.getDefaultQueue().submit(byBlame);
+      }
+
       Set<String> reviewers = findReviewers(sections, changeData);
       if (reviewers.isEmpty()) {
         return;
       }
-
-      final Change change = changeData.change();
-      final Runnable task =
+      Runnable byConfig =
           byConfigFactory.create(
-              change, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
+              change, toAccounts(reviewDb, reviewers, projectName, changeNumber, event.getWho()));
 
-      workQueue.getDefaultQueue().submit(task);
+      workQueue.getDefaultQueue().submit(byConfig);
     } catch (QueryParseException e) {
       log.warn(
-          "Could not add default reviewers for change {} of project {}, filter is invalid: {}",
+          "Could not add reviewers for change {} of project {}, filter is invalid: {}",
           changeNumber,
           projectName.get(),
           e.getMessage());
