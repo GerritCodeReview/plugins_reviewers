@@ -37,23 +37,23 @@ import org.slf4j.LoggerFactory;
 abstract class AddReviewers implements Runnable {
   private static final Logger log = LoggerFactory.getLogger(AddReviewers.class);
 
-  private final GerritApi gApi;
-  private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final ThreadLocalRequestContext tl;
-  private final SchemaFactory<ReviewDb> schemaFactory;
+  protected final GerritApi gApi;
+  protected final IdentifiedUser.GenericFactory identifiedUserFactory;
+  protected final SchemaFactory<ReviewDb> schemaFactory;
   protected final Change change;
 
   private ReviewDb db = null;
 
   AddReviewers(
+      ThreadLocalRequestContext tl,
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      ThreadLocalRequestContext tl,
       SchemaFactory<ReviewDb> schemaFactory,
       Change change) {
+    this.tl = tl;
     this.gApi = gApi;
     this.identifiedUserFactory = identifiedUserFactory;
-    this.tl = tl;
     this.schemaFactory = schemaFactory;
     this.change = change;
   }

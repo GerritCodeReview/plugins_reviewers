@@ -34,13 +34,13 @@ class AddReviewersByConfiguration extends AddReviewers {
 
   @Inject
   AddReviewersByConfiguration(
+      ThreadLocalRequestContext tl,
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      ThreadLocalRequestContext tl,
       SchemaFactory<ReviewDb> schemaFactory,
       @Assisted Change change,
       @Assisted Set<Account.Id> reviewers) {
-    super(gApi, identifiedUserFactory, tl, schemaFactory, change);
+    super(tl, gApi, identifiedUserFactory, schemaFactory, change);
     this.reviewers = reviewers;
   }
 
