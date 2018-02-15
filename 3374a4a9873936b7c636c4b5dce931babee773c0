@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bbf30da2_a07e4e8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-15T23:49:30Z",
+      "side": 1,
+      "message": "OK, I can change this.",
+      "parentUuid": "77814300_318fbf2e",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "3374a4a9873936b7c636c4b5dce931babee773c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c22e4f7e_ef366acf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 3
