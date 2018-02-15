@@ -43,6 +43,7 @@ class ReviewersConfig {
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_ENABLE_UI = "enableUI";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
+  private static final String KEY_ENABLE_BLAME = "enableBlame";
 
   private final PluginConfigFactory cfgFactory;
   private final String pluginName;
@@ -51,6 +52,7 @@ class ReviewersConfig {
   private final boolean enableREST;
   private final boolean suggestOnly;
   private final boolean ignoreDrafts;
+  private final boolean enableBlame;
 
   @Inject
   ReviewersConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
@@ -61,6 +63,7 @@ class ReviewersConfig {
     this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
     this.enableUI = enableREST ? cfg.getBoolean(pluginName, null, KEY_ENABLE_UI, true) : false;
     this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
+    this.enableBlame = cfg.getBoolean(pluginName, null, KEY_ENABLE_BLAME, false);
   }
 
   public ForProject forProject(Project.NameKey projectName) {
@@ -88,6 +91,10 @@ class ReviewersConfig {
 
   public boolean suggestOnly() {
     return suggestOnly;
+  }
+
+  public boolean enableBlame() {
+    return enableBlame;
   }
 
   static class ForProject extends VersionedMetaData {
