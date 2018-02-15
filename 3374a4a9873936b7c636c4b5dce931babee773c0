@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77814300_318fbf2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-15T23:37:23Z",
+      "side": 1,
+      "message": "Should this really be that way? I would expect, these modes are mutually exclusive. If I enable by-blame on the project, we do only that and automatically disable per-configuration mode. Otherwise, we could get to many reviewers, say 3 from one and 3 from another?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "3374a4a9873936b7c636c4b5dce931babee773c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22e4f7e_ef366acf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-15T23:37:23Z",
+      "side": 1,
+      "message": "A mentioned in the comment in the commit message I would expect here an earlier return.to not to proceed with by-configuration mode.",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 179,
+        "endChar": 7
+      },
+      "revId": "3374a4a9873936b7c636c4b5dce931babee773c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
