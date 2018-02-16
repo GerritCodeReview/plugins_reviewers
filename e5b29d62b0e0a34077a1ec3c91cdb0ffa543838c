@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6fbed1d4_f0fee835",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T05:35:20Z",
+      "side": 1,
+      "message": "It\u0027s already done, but I forgot to remove the TODO from here.",
+      "parentUuid": "4eb7607d_43d98317",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cda44598_22ef03a3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
         "patchSetId": 5
