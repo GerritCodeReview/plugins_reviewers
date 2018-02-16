@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bf0d9565_75374705",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T00:46:51Z",
+      "side": 1,
+      "message": "Actually, thinking about this some more, I prefer it this way.\n\nConsider a project that has a couple of core maintainers and X number of contributors.\n\nThe core maintainers would be configured in the reviewers.config and always added as reviewer. But then any additional accounts would also be added by blame.\n\nIf there is overlap, i.e. the core maintainers are the ones that touched most of the code, it has no effect.\n\nIf there is concern about too many reviewers being added, this can be fixed by limiting the number of reviewers added by blame (this is already partially implemented; just need to wire in the configuration setting).\n\nWe could also consider adding a score threshold to limit which reviewers are added by blame.",
+      "parentUuid": "bbf30da2_a07e4e8e",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 42
+      },
+      "revId": "3374a4a9873936b7c636c4b5dce931babee773c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c22e4f7e_ef366acf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2018-02-15T23:37:23Z",
       "side": 1,
       "message": "A mentioned in the comment in the commit message I would expect here an earlier return.to not to proceed with by-configuration mode.",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 179,
+        "endChar": 7
+      },
+      "revId": "3374a4a9873936b7c636c4b5dce931babee773c0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0fab5e8_25aab069",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T00:46:51Z",
+      "side": 1,
+      "message": "See my answer in the commit message.\n\nOne thing that is not so good about this current approach is that we potentially have two tasks running to add reviewers, one for by-config and one for by-blame.  It might be better to roll them up into a single task, although that makes my previous refactoring (the AddReviewers base class) redundant.",
+      "parentUuid": "c22e4f7e_ef366acf",
       "range": {
         "startLine": 176,
         "startChar": 6,
