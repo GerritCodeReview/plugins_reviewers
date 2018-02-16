@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4eb7607d_43d98317",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-16T04:23:34Z",
+      "side": 1,
+      "message": "Should this be a part of this change? Or can be done later?",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cda44598_22ef03a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-16T04:23:34Z",
+      "side": 1,
+      "message": "Nit: make this class package visible to be consistent with other files.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 6
+      },
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
