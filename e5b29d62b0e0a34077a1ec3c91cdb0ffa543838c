@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6860fb72_b08deebb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T07:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fbed1d4_f0fee835",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cda44598_22ef03a3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
         "patchSetId": 5
@@ -48,6 +66,30 @@
       "writtenOn": "2018-02-16T04:23:34Z",
       "side": 1,
       "message": "Nit: make this class package visible to be consistent with other files.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 6
+      },
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59382cf6_867476cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T07:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cda44598_22ef03a3",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -77,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "1070ed5b_8f58b3b3",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T07:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edfcb9a0_ffbf2153",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df66125c_93ec84fd",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 5
@@ -88,6 +148,24 @@
       "writtenOn": "2018-02-16T05:56:47Z",
       "side": 1,
       "message": "Good that is mentioned here that the global flag needs to be set.",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b0f605b_314f5488",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T07:03:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "df66125c_93ec84fd",
       "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
