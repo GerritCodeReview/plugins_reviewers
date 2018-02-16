@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b4a11c2b_f0752c82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T13:35:59Z",
+      "side": 1,
+      "message": "Yes, it only applies to the reviewers added by blame. This is explicitly mentioned in the configuration documentation.",
+      "parentUuid": "9db1fb31_5b70d94f",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 70
+      },
+      "revId": "35cab58b6cd82b2729a8f8cabcf4c03e8a196c9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "941a1564_b536789c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-16T12:11:08Z",
       "side": 1,
       "message": "can be replaced with\n(Entry\u003cAccount.Id, Integer\u003e first, Entry\u003cAccount.Id, Integer\u003e second) -\u003e first.getValue() - second.getValue()",
+      "range": {
+        "startLine": 171,
+        "startChar": 16,
+        "endLine": 177,
+        "endChar": 17
+      },
+      "revId": "35cab58b6cd82b2729a8f8cabcf4c03e8a196c9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3be8750_06b91fd5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-16T13:35:59Z",
+      "side": 1,
+      "message": "This is taken from the implementation in the reviewers-by-blame plugin. I didn\u0027t want to make many changes to it to make it easier to compare.",
+      "parentUuid": "941a1564_b536789c",
       "range": {
         "startLine": 171,
         "startChar": 16,
