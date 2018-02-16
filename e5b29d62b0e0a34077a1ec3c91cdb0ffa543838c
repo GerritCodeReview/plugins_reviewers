@@ -57,6 +57,40 @@
       "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edfcb9a0_ffbf2153",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-16T05:56:47Z",
+      "side": 1,
+      "message": "Should we add here, that for that mode to be actually considered, both global and the project specific enableBlame need to be set, like it\u0027s the case below?",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df66125c_93ec84fd",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-16T05:56:47Z",
+      "side": 1,
+      "message": "Good that is mentioned here that the global flag needs to be set.",
+      "revId": "e5b29d62b0e0a34077a1ec3c91cdb0ffa543838c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
