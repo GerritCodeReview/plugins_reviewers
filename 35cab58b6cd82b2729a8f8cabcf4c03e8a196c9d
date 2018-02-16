@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9db1fb31_5b70d94f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2018-02-16T12:11:08Z",
+      "side": 1,
+      "message": "does that mean that it refers only to reviewers-by-blame? I get the part that reviewers added in reviewers.config should be all added regardless of their number. However, I get an impression that reviewers.maxReviewers refers to all - how about renaming it to reviewers.maxByBlameReviewers?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 70
+      },
+      "revId": "35cab58b6cd82b2729a8f8cabcf4c03e8a196c9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "941a1564_b536789c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewersByBlame.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2018-02-16T12:11:08Z",
+      "side": 1,
+      "message": "can be replaced with\n(Entry\u003cAccount.Id, Integer\u003e first, Entry\u003cAccount.Id, Integer\u003e second) -\u003e first.getValue() - second.getValue()",
+      "range": {
+        "startLine": 171,
+        "startChar": 16,
+        "endLine": 177,
+        "endChar": 17
+      },
+      "revId": "35cab58b6cd82b2729a8f8cabcf4c03e8a196c9d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
