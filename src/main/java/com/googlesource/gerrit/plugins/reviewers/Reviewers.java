@@ -43,10 +43,10 @@ import com.google.gerrit.server.change.SuggestedReviewer;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gerrit.server.query.Predicate;
 import com.google.gerrit.server.query.QueryParseException;
 import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
+import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.gwtorm.server.OrmException;
 import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
@@ -73,6 +73,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
+  private final Provider<InternalChangeQuery> queryProvider;
 
   @Inject
   Reviewers(
@@ -86,7 +87,8 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       ChangeData.Factory changeDataFactory,
       ReviewersConfig config,
       Provider<CurrentUser> user,
-      ChangeQueryBuilder queryBuilder) {
+      ChangeQueryBuilder queryBuilder,
+      Provider<InternalChangeQuery> queryProvider) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.groupMembersFactory = groupMembersFactory;
@@ -98,6 +100,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.config = config;
     this.user = user;
     this.queryBuilder = queryBuilder;
+    this.queryProvider = queryProvider;
   }
 
   @Override
@@ -123,8 +126,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     }
 
     try (ReviewDb reviewDb = schemaFactory.open()) {
-      ChangeData changeData = changeDataFactory.create(reviewDb, projectName, changeId);
-      Set<String> reviewers = findReviewers(sections, changeData);
+      Set<String> reviewers = findReviewers(sections);
       if (!reviewers.isEmpty()) {
         return toAccounts(reviewDb, reviewers, projectName, changeId.get())
             .stream()
@@ -166,13 +168,13 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try (ReviewDb reviewDb = schemaFactory.open()) {
-      ChangeData changeData =
-          changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
-      Set<String> reviewers = findReviewers(sections, changeData);
+      Set<String> reviewers = findReviewers(sections);
       if (reviewers.isEmpty()) {
         return;
       }
 
+      ChangeData changeData =
+          changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
       final Change change = changeData.change();
       final Runnable task =
           byConfigFactory.create(
@@ -190,39 +192,33 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     }
   }
 
-  private Set<String> findReviewers(List<ReviewerFilterSection> sections, ChangeData changeData)
+  private Set<String> findReviewers(List<ReviewerFilterSection> sections)
       throws OrmException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(sections, changeData);
+    List<ReviewerFilterSection> found = findReviewerSections(sections);
     for (ReviewerFilterSection s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilterSection> findReviewerSections(
-      List<ReviewerFilterSection> sections, ChangeData changeData)
+  private List<ReviewerFilterSection> findReviewerSections(List<ReviewerFilterSection> sections)
       throws OrmException, QueryParseException {
     ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
     for (ReviewerFilterSection s : sections) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
-      } else if (filterMatch(s.getFilter(), changeData)) {
+      } else if (filterMatch(s.getFilter())) {
         found.add(s);
       }
     }
     return found.build();
   }
 
-  boolean filterMatch(String filter, ChangeData changeData)
-      throws OrmException, QueryParseException {
+  boolean filterMatch(String filter) throws OrmException, QueryParseException {
     Preconditions.checkNotNull(filter);
     ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    Predicate<ChangeData> filterPredicate = qb.parse(filter);
-    // TODO(davido): check that the potential review can see this change
-    // by adding AND is_visible() predicate? Or is it OK to assume
-    // that reviewers always can see it?
-    return filterPredicate.asMatchable().match(changeData);
+    return !queryProvider.get().noFields().query(qb.parse(filter)).isEmpty();
   }
 
   private Set<Account.Id> toAccounts(
