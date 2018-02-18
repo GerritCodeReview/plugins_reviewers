@@ -44,7 +44,6 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.group.GroupsCollection;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.query.QueryParseException;
-import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.gwtorm.server.OrmException;
@@ -69,7 +68,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
   private final WorkQueue workQueue;
   private final IdentifiedUser.GenericFactory identifiedUserFactory;
   private final SchemaFactory<ReviewDb> schemaFactory;
-  private final ChangeData.Factory changeDataFactory;
   private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
@@ -84,7 +82,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       WorkQueue workQueue,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       SchemaFactory<ReviewDb> schemaFactory,
-      ChangeData.Factory changeDataFactory,
       ReviewersConfig config,
       Provider<CurrentUser> user,
       ChangeQueryBuilder queryBuilder,
@@ -96,7 +93,6 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     this.workQueue = workQueue;
     this.identifiedUserFactory = identifiedUserFactory;
     this.schemaFactory = schemaFactory;
-    this.changeDataFactory = changeDataFactory;
     this.config = config;
     this.user = user;
     this.queryBuilder = queryBuilder;
@@ -172,13 +168,9 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
       if (reviewers.isEmpty()) {
         return;
       }
-
-      ChangeData changeData =
-          changeDataFactory.create(reviewDb, projectName, new Change.Id(changeNumber));
-      final Change change = changeData.change();
       final Runnable task =
           byConfigFactory.create(
-              change, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
+              c, toAccounts(reviewDb, reviewers, projectName, changeNumber, uploader));
 
       workQueue.getDefaultQueue().submit(task);
     } catch (QueryParseException e) {
