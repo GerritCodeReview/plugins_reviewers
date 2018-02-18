@@ -1,0 +1,548 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45b1c957_3d9481de",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Action.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Should we also split EDIT in two parts EDIT/EDIT_FILTER, like for REMOVE to be consequent?",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5415978_f1b5c6d4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "This looks like a hack to me. Is this related to this thread: [1]? I change the logic to actually use secondary index, and hopefully, the result can be expressed by using secondary index predicate. In any event, after using the index, that \"hack\" wouldn\u0027t work any more: Manipulate ChangeData instance and call predicate evaluation, you would need to reindex a change: a no go.\n\n* [1] https://groups.google.com/d/topic/repo-discuss/dafjHsdkAgE/discussion",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 50
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f88c93fc_1016f19e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "This should be not applicable any more after this change is merged: [1].\n\n* [1] https://gerrit-review.googlesource.com/#/c/plugins/reviewers/+/160075/",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 17
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c33cd4a1_f7f0bdac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "The configuration was refactored on stable-2.14. This change should be rebased.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73290491_d137d680",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Should this header be also configurable? It Seems questionable, whether every site would like this noise for adding the comment from reviewers plugin:\n\nso instead:\n\n  comment \u003d true\n\njust say:\n\n  message \u003d \"Added by reviewers plugin\"\n\n?",
+      "range": {
+        "startLine": 107,
+        "startChar": 20,
+        "endLine": 107,
+        "endChar": 61
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80d6e75f_38599f75",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "How this changed permission check is related to this change? It wasn\u0027t mention in the commit message what the problem is...",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7db3f4a_ff1cd6f3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: unrelated new line change.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c03c05d2_d24759e6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "It seems, that now you expected the list of reviewers? But the name of this method wasn\u0027t changed? Should it now be addReviewers?",
+      "range": {
+        "startLine": 67,
+        "startChar": 41,
+        "endLine": 67,
+        "endChar": 50
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17f70fdb_c7112833",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "We always use CamelCase in Java files.",
+      "range": {
+        "startLine": 67,
+        "startChar": 59,
+        "endLine": 67,
+        "endChar": 72
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c189abc_5399c67b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Here CamelCase was correctly used.",
+      "range": {
+        "startLine": 116,
+        "startChar": 33,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afcb275e_8d7d1985",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Should this be called \"e\" for excluded path? \"r\" in repvious method was first letter from \"reviewer\".",
+      "range": {
+        "startLine": 36,
+        "startChar": 39,
+        "endLine": 36,
+        "endChar": 40
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6cc0a93_8dc56479",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: Missing blank before closing paren.",
+      "range": {
+        "startLine": 38,
+        "startChar": 79,
+        "endLine": 38,
+        "endChar": 80
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "501bc0d7_f520827d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Origin what? Filters/Reviewer/Excluded? Why it\u0027s neededed at all?",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "954d3bec_b142300d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewerFilterSection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: check the white spaces in existing code. You missed blanks before and after the statement.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b21e54a7_60f933fe",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: Use this form: \"TODO(davido): \u003ctodo text\u003e\".",
+      "range": {
+        "startLine": 266,
+        "startChar": 15,
+        "endLine": 266,
+        "endChar": 19
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28af489b_ca21f030",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "property.",
+      "range": {
+        "startLine": 267,
+        "startChar": 59,
+        "endLine": 267,
+        "endChar": 68
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d6f28a9_2f0a9c04",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/public/reviewers.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: No tabs and trailing blanks.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b297e16_4ceda730",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/public/reviewers.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: trailing blank.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5df617f1_1d0fc8ee",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "We usually don\u0027t track version number in pugin. Build tool chain generates Git version in META-INF/MANIFEST.MF. If you build from this commit, and extract the reviewers.jar:\n\n  $ cat META-INF/MANIFEST.MF | grep Implementation-Version\n  Implementation-Version: ff68653",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d7551fc_c76127c3",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Tere is an headless mode option, where the UI extension is not exposed at all (this mode is used on googelsource.com), so that statement is not always true.",
+      "range": {
+        "startLine": 4,
+        "startChar": 48,
+        "endLine": 4,
+        "endChar": 90
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fbf90a5_96421649",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Omit this? I don\u0027t know what is wrong installation should be.",
+      "range": {
+        "startLine": 4,
+        "startChar": 25,
+        "endLine": 4,
+        "endChar": 34
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb6977e0_3d8ea9bd",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Rephrase: Project inheritance is supported or similar.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 74
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe1f3bd0_6be0b24d",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Nit: Trailing blank.",
+      "range": {
+        "startLine": 20,
+        "startChar": 58,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6aaba52_557bcb45",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "This was fixed in: [1] and is not applicable any more.\n\n* [1] https://gerrit-review.googlesource.com/#/c/plugins/reviewers/+/160075",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4abaaed8_a91b35d0",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Just link to core documentation where refs/meta/config branch editing is mentioned? Storing config information on refs/meta/config is not unique to this plugin. It\u0027s standard and I would like to avoid too much details in this plugin\u0027s documentation for standard gerrit core feature(s).",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49a2e6b0_113eca7b",
+        "filename": "src/main/resources/static/reviewers.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 1,
+      "message": "Is this file not actually used and can be removed?",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
