@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a13eae7f_04862a60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 0,
+      "message": "Unrelated white space change.",
+      "range": {
+        "startLine": 237,
+        "startChar": 66,
+        "endLine": 237,
+        "endChar": 67
+      },
+      "revId": "458cdae30237442dd90ab05f88576ef1743343a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1e43a32_0741db2d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-02-18T18:35:42Z",
+      "side": 0,
+      "message": "We use google-java-format utility for this plugin and Gerrit core. See contribution guide how to set it up (run tools/setup_gjf.sh and follow the instructions).",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "458cdae30237442dd90ab05f88576ef1743343a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
