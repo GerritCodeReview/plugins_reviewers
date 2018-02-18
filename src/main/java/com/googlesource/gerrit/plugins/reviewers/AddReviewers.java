@@ -17,9 +17,9 @@ package com.googlesource.gerrit.plugins.reviewers;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Account;
-import com.google.gerrit.reviewdb.client.Change;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
@@ -41,7 +41,7 @@ abstract class AddReviewers implements Runnable {
   protected final GerritApi gApi;
   protected final IdentifiedUser.GenericFactory identifiedUserFactory;
   protected final SchemaFactory<ReviewDb> schemaFactory;
-  protected final Change change;
+  protected final ChangeInfo changeInfo;
 
   private ReviewDb db = null;
 
@@ -50,12 +50,12 @@ abstract class AddReviewers implements Runnable {
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       SchemaFactory<ReviewDb> schemaFactory,
-      Change change) {
+      ChangeInfo changeInfo) {
     this.tl = tl;
     this.gApi = gApi;
     this.identifiedUserFactory = identifiedUserFactory;
     this.schemaFactory = schemaFactory;
-    this.change = change;
+    this.changeInfo = changeInfo;
   }
 
   abstract Set<Account.Id> getReviewers();
@@ -68,7 +68,7 @@ abstract class AddReviewers implements Runnable {
 
               @Override
               public CurrentUser getUser() {
-                return identifiedUserFactory.create(change.getOwner());
+                return identifiedUserFactory.create(new Account.Id(changeInfo.owner._accountId));
               }
 
               @Override
@@ -89,7 +89,7 @@ abstract class AddReviewers implements Runnable {
               }
             });
     try {
-      addReviewers(getReviewers(), change);
+      addReviewers(getReviewers(), changeInfo);
     } finally {
       tl.setContext(old);
       if (db != null) {
@@ -99,7 +99,7 @@ abstract class AddReviewers implements Runnable {
     }
   }
 
-  private void addReviewers(Set<Account.Id> reviewers, Change change) {
+  private void addReviewers(Set<Account.Id> reviewers, ChangeInfo changeInfo) {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
@@ -110,7 +110,7 @@ abstract class AddReviewers implements Runnable {
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
       }
-      gApi.changes().id(change.getId().get()).current().review(in);
+      gApi.changes().id(changeInfo._number).current().review(in);
     } catch (RestApiException e) {
       log.error("Couldn't add reviewers to the change", e);
     }
