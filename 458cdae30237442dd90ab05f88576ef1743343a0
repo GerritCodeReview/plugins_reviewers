@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b2480b2a_b687c130",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a13eae7f_04862a60",
+      "range": {
+        "startLine": 237,
+        "startChar": 66,
+        "endLine": 237,
+        "endChar": 67
+      },
+      "revId": "458cdae30237442dd90ab05f88576ef1743343a0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1e43a32_0741db2d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
         "patchSetId": 1

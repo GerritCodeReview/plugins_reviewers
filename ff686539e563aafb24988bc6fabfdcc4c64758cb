@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f4849e8a_7d85dd4e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Action.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "In the current implementation this is not possible, I think. There is only one \"Add\" button, which either adds or updates the \"whole thing\" at once. OTOH there is a X (remove) button once on reviewer and once on filter (the whole thing) level.",
+      "parentUuid": "45b1c957_3d9481de",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 6
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5415978_f1b5c6d4",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "128d7d36_b3aa7595",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Hehe, Robert war the original author of this change :) The whole point of the excludePath feature is to be able to \"ignore\" certain paths in the list of changed files. This is to be able to express things like \"invite me whenever anything beneath xy/ changes, but ignore any changes in xy/yz/ for this filter\". This is not expressible with ANY query:\n\nTake into account the query \"path:^xy/.* AND NOT path:^xy/yz/.*\"\n\n1) change in xy/README -\u003e reviewer added correctly\n2) change in xy/yz/README -\u003e reviewer NOT added correctly\n2) change in xy/README AND xy/yz/README -\u003e reviewer NOT added, but this is NOT what we wanted to achieve.\n\nIf this is no longer working the future, can you point me to a different way to implement such behavior?",
+      "parentUuid": "f5415978_f1b5c6d4",
+      "range": {
+        "startLine": 237,
+        "startChar": 8,
+        "endLine": 238,
+        "endChar": 50
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d2bdaefd_07b9e760",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ChangeEventListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Well, as said above, I need a different way to filter paths from such queries then - any chance?",
+      "parentUuid": "f88c93fc_1016f19e",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 17
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c33cd4a1_f7f0bdac",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "The configuration was refactored on stable-2.14. This change should be rebased.",
+      "range": {
+        "startLine": 46,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc435e1a_9676055f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "has this hit stable-2.15 already? Must have missed it when fetching...",
+      "parentUuid": "c33cd4a1_f7f0bdac",
       "range": {
         "startLine": 46,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "c11b82d9_282248c0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/DefaultReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Nice idea. I will refactor the comment change out into a separate commit and do the change accordingly while doing so.",
+      "parentUuid": "73290491_d137d680",
+      "range": {
+        "startLine": 107,
+        "startChar": 20,
+        "endLine": 107,
+        "endChar": 61
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80d6e75f_38599f75",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
         "patchSetId": 1
@@ -134,6 +254,24 @@
     },
     {
       "key": {
+        "uuid": "eaaff89f_2e7db575",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "I can factor that out of this commit. The problem is that we have ~500 developers, and every developer maintains his/her automatic invitation rules himself. We don\u0027t want to make all of the owners though :D Better ideas? Probably should be configurable?",
+      "parentUuid": "80d6e75f_38599f75",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d7db3f4a_ff1cd6f3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
         "patchSetId": 1
@@ -145,6 +283,24 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Nit: unrelated new line change.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6678adda_5a95f1cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7db3f4a_ff1cd6f3",
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -197,6 +353,54 @@
     },
     {
       "key": {
+        "uuid": "ba53942b_acc471d9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17f70fdb_c7112833",
+      "range": {
+        "startLine": 67,
+        "startChar": 59,
+        "endLine": 67,
+        "endChar": 72
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54189068_d7606e5c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c03c05d2_d24759e6",
+      "range": {
+        "startLine": 67,
+        "startChar": 41,
+        "endLine": 67,
+        "endChar": 50
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c189abc_5399c67b",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 1
@@ -220,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "a011ff1b_bd8d0173",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6c189abc_5399c67b",
+      "range": {
+        "startLine": 116,
+        "startChar": 33,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afcb275e_8d7d1985",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
         "patchSetId": 1
@@ -231,6 +459,30 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Should this be called \"e\" for excluded path? \"r\" in repvious method was first letter from \"reviewer\".",
+      "range": {
+        "startLine": 36,
+        "startChar": 39,
+        "endLine": 36,
+        "endChar": 40
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8025987_6188e270",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afcb275e_8d7d1985",
       "range": {
         "startLine": 36,
         "startChar": 39,
@@ -289,6 +541,54 @@
     },
     {
       "key": {
+        "uuid": "3aca27af_66b1ab82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6cc0a93_8dc56479",
+      "range": {
+        "startLine": 38,
+        "startChar": 79,
+        "endLine": 38,
+        "endChar": 80
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f512ea3a_71b9bdb8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ChangeReviewersInput.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Robert used this as \"id\" to identify the filter on update. The filter string is the key in the config. He remembers the original filter string in case an update (EDIT) is requested to be able to find the filter to remove whilst adding the new filter.",
+      "parentUuid": "501bc0d7_f520827d",
+      "range": {
+        "startLine": 38,
+        "startChar": 20,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "954d3bec_b142300d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewerFilterSection.java",
         "patchSetId": 1
@@ -306,6 +606,24 @@
     },
     {
       "key": {
+        "uuid": "9f87a08e_ede5046e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewerFilterSection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "954d3bec_b142300d",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b21e54a7_60f933fe",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
         "patchSetId": 1
@@ -317,6 +635,30 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Nit: Use this form: \"TODO(davido): \u003ctodo text\u003e\".",
+      "range": {
+        "startLine": 266,
+        "startChar": 15,
+        "endLine": 266,
+        "endChar": 19
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ab4a7e_f878e4df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b21e54a7_60f933fe",
       "range": {
         "startLine": 266,
         "startChar": 15,
@@ -352,6 +694,30 @@
     },
     {
       "key": {
+        "uuid": "3c21c37a_af30253b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28af489b_ca21f030",
+      "range": {
+        "startLine": 267,
+        "startChar": 59,
+        "endLine": 267,
+        "endChar": 68
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3d6f28a9_2f0a9c04",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/public/reviewers.css",
         "patchSetId": 1
@@ -363,6 +729,24 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Nit: No tabs and trailing blanks.",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3b7a362_a1c9ec6e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/public/reviewers.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d6f28a9_2f0a9c04",
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -386,6 +770,24 @@
     },
     {
       "key": {
+        "uuid": "031dd132_bb07af26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/public/reviewers.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b297e16_4ceda730",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5df617f1_1d0fc8ee",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 1
@@ -397,6 +799,24 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "We usually don\u0027t track version number in pugin. Build tool chain generates Git version in META-INF/MANIFEST.MF. If you build from this commit, and extract the reviewers.jar:\n\n  $ cat META-INF/MANIFEST.MF | grep Implementation-Version\n  Implementation-Version: ff68653",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c6664b8_85a132ec",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "This was a mistake :) I removed it",
+      "parentUuid": "5df617f1_1d0fc8ee",
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -449,6 +869,54 @@
     },
     {
       "key": {
+        "uuid": "9e38c53b_ba948541",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fbf90a5_96421649",
+      "range": {
+        "startLine": 4,
+        "startChar": 25,
+        "endLine": 4,
+        "endChar": 34
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffc8b057_ad2df6ee",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d7551fc_c76127c3",
+      "range": {
+        "startLine": 4,
+        "startChar": 48,
+        "endLine": 4,
+        "endChar": 90
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb6977e0_3d8ea9bd",
         "filename": "src/main/resources/Documentation/usage.md",
         "patchSetId": 1
@@ -460,6 +928,30 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Rephrase: Project inheritance is supported or similar.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 74
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b887987f_e00688d4",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb6977e0_3d8ea9bd",
       "range": {
         "startLine": 11,
         "startChar": 0,
@@ -495,6 +987,30 @@
     },
     {
       "key": {
+        "uuid": "ac982c78_126baa0d",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe1f3bd0_6be0b24d",
+      "range": {
+        "startLine": 20,
+        "startChar": 58,
+        "endLine": 20,
+        "endChar": 59
+      },
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6aaba52_557bcb45",
         "filename": "src/main/resources/Documentation/usage.md",
         "patchSetId": 1
@@ -506,6 +1022,24 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "This was fixed in: [1] and is not applicable any more.\n\n* [1] https://gerrit-review.googlesource.com/#/c/plugins/reviewers/+/160075",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57104bf1_d3ae7406",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6aaba52_557bcb45",
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
@@ -529,6 +1063,24 @@
     },
     {
       "key": {
+        "uuid": "f6e7e9bd_539580cd",
+        "filename": "src/main/resources/Documentation/usage.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "I rephrased and removed most content.",
+      "parentUuid": "4abaaed8_a91b35d0",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49a2e6b0_113eca7b",
         "filename": "src/main/resources/static/reviewers.js",
         "patchSetId": 1
@@ -540,6 +1092,24 @@
       "writtenOn": "2018-02-18T18:35:42Z",
       "side": 1,
       "message": "Is this file not actually used and can be removed?",
+      "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d39b511_caf495d5",
+        "filename": "src/main/resources/static/reviewers.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015669
+      },
+      "writtenOn": "2018-02-19T09:07:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49a2e6b0_113eca7b",
       "revId": "ff686539e563aafb24988bc6fabfdcc4c64758cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
