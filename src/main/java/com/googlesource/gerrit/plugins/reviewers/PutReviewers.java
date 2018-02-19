@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import com.google.gerrit.common.data.Capable;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
@@ -88,7 +89,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       throws RestApiException {
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig cfg = configFactory.create(projectName);
-    if (!rsrc.getControl().isOwner() || cfg == null) {
+    if (rsrc.getControl().canPushToAtLeastOneRef() != Capable.OK || cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
 
@@ -160,7 +161,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     ChangeQueryBuilder qb = queryBuilder.asUser(currentUser.get());
     try {
       qb.parse(input.filter);
-      cfg.addReviewer(input.filter, input.reviewer, input.excluded);
+      cfg.addReviewers(input.filter, input.reviewer, input.excluded);
     } catch (QueryParseException e) {
       throw new RuntimeException("Filter is invalid\n: " + e);
     }
