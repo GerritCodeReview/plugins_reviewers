@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e0c76f9_738c546b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-19T01:53:17Z",
+      "side": 1,
+      "message": "In the existing implementation for reviewers by config, the reviewers are read from the configuration on every suggestion request as well as on every new patch set or draft. The background thread is only used to do the reviewer addition.\n\nFor reviewers-by-blame the blame calculation is done in the background thread. Doing it per suggestion request would be costly which is why it is not implemented yet.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "7681386ea9f941ab4aa69223516892ccfa12828a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
