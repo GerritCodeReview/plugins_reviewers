@@ -8,6 +8,7 @@ Global configuration of the @PLUGIN@ plugin is done in the
   [reviewers]
     enableREST = true
     enableUI = false
+    message = "Added by @PLUGIN@ plugin:"
 ```
 
 reviewers.enableREST
@@ -17,6 +18,10 @@ reviewers.enableREST
 reviewers.enableUI
 :	Enable the UI.  When set to false, the 'Reviewers' menu is not displayed
 	on the project screen. Defaults to true, or false when `enableREST` is false.
+
+reviewers.message
+:   If set, post a comment to each change upon automatically adding reviewers that shows
+    the rules that caused invitations, and who was invitied based on which rule
 
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
