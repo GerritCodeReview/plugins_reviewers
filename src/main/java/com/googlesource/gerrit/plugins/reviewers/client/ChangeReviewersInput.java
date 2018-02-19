@@ -32,4 +32,8 @@ public class ChangeReviewersInput extends JavaScriptObject {
   final native void setFilter(String f) /*-{ if(f)this.filter=f; }-*/;
 
   final native void setReviewer(String r) /*-{ if(r)this.reviewer=r; }-*/;
+
+  final native void setExcluded(String e) /*-{ if(r)this.excluded=r; }-*/;
+
+  final native void setOrigin(String origin) /*-{ if(origin)this.origin=origin; }-*/;
 }

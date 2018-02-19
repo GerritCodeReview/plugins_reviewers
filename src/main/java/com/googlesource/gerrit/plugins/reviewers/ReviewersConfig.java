@@ -14,6 +14,15 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.eclipse.jgit.errors.ConfigInvalidException;
+import org.eclipse.jgit.lib.CommitBuilder;
+import org.eclipse.jgit.lib.Config;
+
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -25,18 +34,13 @@ import com.google.gerrit.server.git.VersionedMetaData;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.lib.CommitBuilder;
-import org.eclipse.jgit.lib.Config;
 
 class ReviewersConfig extends VersionedMetaData {
   private static final String FILENAME = "reviewers.config";
   private static final String FILTER = "filter";
   private static final String REVIEWER = "reviewer";
+  private static final String EXCLUDED_PATHS = "excluded";
+
   private Config cfg;
 
   interface Factory {
@@ -60,12 +64,30 @@ class ReviewersConfig extends VersionedMetaData {
     return b.build();
   }
 
-  void addReviewer(String filter, String reviewer) {
-    if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-      List<String> values =
-          new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
-      values.add(reviewer);
-      cfg.setStringList(FILTER, filter, REVIEWER, values);
+  void addReviewers(String filter, String reviewers, String excludedPaths) {
+    List<String> items = new ArrayList<>(Arrays.asList(reviewers.split(",")));
+    List<String> values =
+        new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, REVIEWER)));
+    for (String reviewer : items) {
+      if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
+        if (!values.contains(reviewer.trim())) {
+          values.add(reviewer.trim());
+        }
+      }
+    }
+    cfg.setStringList(FILTER, filter, REVIEWER, values);
+    if (excludedPaths != null && !excludedPaths.isEmpty()) {
+      List<String> excluded_paths = new ArrayList<>(Arrays.asList(excludedPaths.split(",")));
+      List<String> current_paths =
+          new ArrayList<>(Arrays.asList(cfg.getStringList(FILTER, filter, EXCLUDED_PATHS)));
+      for (String path : excluded_paths) {
+        if (!newReviewerFilterSection(filter).getExcluded().contains(path)) {
+          if (!current_paths.contains(path.trim())) {
+            current_paths.add(path.trim());
+          }
+        }
+      }
+      cfg.setStringList(FILTER, filter, EXCLUDED_PATHS, current_paths);
     }
   }
 
@@ -82,12 +104,20 @@ class ReviewersConfig extends VersionedMetaData {
     }
   }
 
+  void removeFilter(String filter) {
+    cfg.unsetSection(FILTER, filter);
+  }
+
   private ReviewerFilterSection newReviewerFilterSection(String filter) {
     ImmutableSet.Builder<String> b = ImmutableSet.builder();
     for (String reviewer : cfg.getStringList(FILTER, filter, REVIEWER)) {
       b.add(reviewer);
     }
-    return new ReviewerFilterSection(filter, b.build());
+    ImmutableSet.Builder<String> excludedPaths = ImmutableSet.builder();
+    for (String excludedPath : cfg.getStringList(FILTER, filter, EXCLUDED_PATHS)) {
+      excludedPaths.add(excludedPath);
+    }
+    return new ReviewerFilterSection(filter, b.build(), excludedPaths.build());
   }
 
   @Override

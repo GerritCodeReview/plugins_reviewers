@@ -28,6 +28,7 @@ Other projects can then override the configuration in their own
 ```
   [filter "*"]
     reviewer = john.doe@example.com
+    exclude = ^some-path/dir/.*
 
   [filter "branch:main file:^lib/.*"]
     reviewer = jane.doe@example.com
@@ -41,6 +42,11 @@ filter.\<filter\>.reviewer
 :	An account or a group name. Must be an exact match (case sensitive) with the
 	account's email address or username, or the group name.  Multiple `reviewer`
 	occurrences are allowed.
+
+filter.<filter>.exclude
+:   A path that should be filtered from the list of changed paths. This will cause
+    the plugin to treat the change as if this path was not touched. Regular Expression.
+    Multiple `exclude` occurrences are allowed.
 
 ##Multiple filter matches
 

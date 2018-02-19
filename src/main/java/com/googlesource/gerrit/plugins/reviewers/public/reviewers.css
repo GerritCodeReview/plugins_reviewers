@@ -1,5 +1,6 @@
 .reviewers-panel {
   border-spacing: 10px 10px;
+  white-space: pre-line;
 }
 
 .reviewers-addButton {
@@ -11,12 +12,35 @@
   margin-left: 15px;
 }
 
+.reviewers-inputPanel input {
+  width: 500px;
+}
+
 .reviewers-filterLabel {
   font-size: 14px;
   font-weight: bold;
+  width: 500px;
+}
+
+.reviewers-container {
+  overflow: auto;
+  width: 100%;
 }
 
 .reviewers-reviewerLabel {
+  font-size: 14px;
+  margin-left: 15px;
+  float: left;
+}
+
+.reviewers-excluded-label, .reviewers-reviewers-section {
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: 10px;
+  clear: both;
+}
+
+.reviewers-excluded-path {
   font-size: 14px;
   margin-left: 15px;
 }
@@ -25,4 +49,16 @@
   margin-left: 10px;
   vertical-align: middle;
   cursor: pointer;
+}
+
+.reviewers-filter-container tbody tr td {
+  padding-bottom: 10px;
+}
+
+.reviewers-filter-container tbody tr td div {
+  background-color: aliceblue;
+}
+
+.reviewers-filterRemoveBtn, .reviewers-filterEditBtn {
+  float: right;
 }
