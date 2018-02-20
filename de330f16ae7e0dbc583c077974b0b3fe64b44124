@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89c747ad_de2a2677",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-02-20T01:11:22Z",
+      "side": 1,
+      "message": "This change belongs to the previous commit in the series.",
+      "range": {
+        "startLine": 164,
+        "startChar": 10,
+        "endLine": 164,
+        "endChar": 22
+      },
+      "revId": "de330f16ae7e0dbc583c077974b0b3fe64b44124",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
