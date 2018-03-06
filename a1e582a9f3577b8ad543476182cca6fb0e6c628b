@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaf956e5_e2c06cd3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059595
+      },
+      "writtenOn": "2018-03-06T09:21:39Z",
+      "side": 1,
+      "message": "Sorry about the empty lines google-java-format added them.",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
