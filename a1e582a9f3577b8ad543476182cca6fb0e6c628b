@@ -2,6 +2,115 @@
   "comments": [
     {
       "key": {
+        "uuid": "1eafc0cd_1d9461b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "ReviewersConfig:",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 10
+      },
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4853ebf_dc423db9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "Please use present time in commit message.",
+      "range": {
+        "startLine": 9,
+        "startChar": 38,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99dfc7cf_9c7c22fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "Optional: add \"... for the same filter.\" to make it more clear.",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55641dcf_79341304",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "present time: This change introduces...",
+      "range": {
+        "startLine": 13,
+        "startChar": 5,
+        "endLine": 13,
+        "endChar": 9
+      },
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3181ec02_6aa450b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "projects",
+      "range": {
+        "startLine": 17,
+        "startChar": 26,
+        "endLine": 17,
+        "endChar": 35
+      },
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaf956e5_e2c06cd3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 1
@@ -16,6 +125,58 @@
       "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d2d3bf_b49ac1ad",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "So, the current formatting is broken\u003d Then it should be dow in its own change. We never ever re-format and change the content in the same change.",
+      "parentUuid": "eaf956e5_e2c06cd3",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f214eac4_cea2c699",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "I see, this method is very similar to the existing: ProjectLevelConfig#getWithInheritance() one in gerrit core.\n\nAnd the problem this method is trying to solve: merging the sections instead of overwriting them, sounds like a valid addition to the existing access config plugins sections methods. So I wonder if it would make more sense to put it in gerrit core instead, and may be name it something like: ProjectLevelConfig#mergeProjectPluginConfigWithInheritance?",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "523e28af_b4d1839a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-06T10:16:52Z",
+      "side": 1,
+      "message": "Unrelated formatting change.",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
