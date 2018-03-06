@@ -163,6 +163,24 @@
     },
     {
       "key": {
+        "uuid": "b88bfeb5_72d21eed",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059595
+      },
+      "writtenOn": "2018-03-06T10:21:36Z",
+      "side": 1,
+      "message": "I had the same idea, but I didn\u0027t know if this was a special case, or something relevant for others.\nI can upload a fix to ProjectLevelConfig instead.",
+      "parentUuid": "f214eac4_cea2c699",
+      "revId": "a1e582a9f3577b8ad543476182cca6fb0e6c628b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "523e28af_b4d1839a",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 1
