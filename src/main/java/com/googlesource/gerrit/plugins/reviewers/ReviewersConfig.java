@@ -17,12 +17,14 @@ package com.googlesource.gerrit.plugins.reviewers;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.git.VersionedMetaData;
-import com.google.gerrit.server.project.NoSuchProjectException;
+import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.server.project.ProjectState;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
@@ -37,6 +39,7 @@ import org.slf4j.LoggerFactory;
 
 @Singleton
 class ReviewersConfig {
+
   private static final Logger log = LoggerFactory.getLogger(ReviewersConfig.class);
 
   private static final String FILENAME = "reviewers.config";
@@ -48,6 +51,7 @@ class ReviewersConfig {
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
 
   private final PluginConfigFactory cfgFactory;
+  private final ProjectCache projectCache;
   private final String pluginName;
 
   private final boolean enableUI;
@@ -56,8 +60,10 @@ class ReviewersConfig {
   private final boolean ignoreDrafts;
 
   @Inject
-  ReviewersConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
+  ReviewersConfig(
+      PluginConfigFactory cfgFactory, ProjectCache projectCache, @PluginName String pluginName) {
     this.cfgFactory = cfgFactory;
+    this.projectCache = projectCache;
     this.pluginName = pluginName;
     Config cfg = cfgFactory.getGlobalPluginConfig(pluginName);
     this.ignoreDrafts = cfg.getBoolean(pluginName, null, KEY_IGNORE_DRAFTS, false);
@@ -68,13 +74,41 @@ class ReviewersConfig {
 
   public ForProject forProject(Project.NameKey projectName) {
     Config cfg;
-    try {
-      cfg = cfgFactory.getProjectPluginConfigWithInheritance(projectName, pluginName);
-    } catch (NoSuchProjectException e) {
+    ProjectState project = projectCache.get(projectName);
+    if (project == null) {
       log.error("Unable to get config for project {}", projectName.get());
       cfg = new Config();
+    } else {
+      cfg = cfgFactory.getProjectPluginConfig(project, pluginName);
+      appendParentConfig(project, cfg);
     }
     return new ForProject(cfg);
+  }
+
+  private void appendParentConfig(ProjectState project, Config cfg) {
+    ProjectState parent = Iterables.getFirst(project.parents(), null);
+    if (parent != null) {
+      Config parentCfg = cfgFactory.getProjectPluginConfig(parent, pluginName);
+      appendParentConfig(parent, parentCfg);
+
+      for (String section : parentCfg.getSections()) {
+        for (String name : parentCfg.getNames(section)) {
+          List<String> values =
+              new ArrayList<>(Arrays.asList(cfg.getStringList(section, null, name)));
+          values.addAll(Arrays.asList(parentCfg.getStringList(section, null, name)));
+          cfg.setStringList(section, null, name, values);
+        }
+
+        for (String subsection : parentCfg.getSubsections(section)) {
+          for (String name : parentCfg.getNames(section, subsection)) {
+            List<String> values =
+                new ArrayList<>(Arrays.asList(cfg.getStringList(section, subsection, name)));
+            values.addAll(Arrays.asList(parentCfg.getStringList(section, subsection, name)));
+            cfg.setStringList(section, subsection, name, values);
+          }
+        }
+      }
+    }
   }
 
   public boolean ignoreDrafts() {
@@ -94,6 +128,7 @@ class ReviewersConfig {
   }
 
   static class ForProject extends VersionedMetaData {
+
     private Config cfg;
 
     ForProject(Config cfg) {
