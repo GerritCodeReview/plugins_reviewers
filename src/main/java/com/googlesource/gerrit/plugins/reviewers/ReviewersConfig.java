@@ -69,7 +69,7 @@ class ReviewersConfig {
   public ForProject forProject(Project.NameKey projectName) {
     Config cfg;
     try {
-      cfg = cfgFactory.getProjectPluginConfigWithInheritance(projectName, pluginName);
+      cfg = cfgFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
     } catch (NoSuchProjectException e) {
       log.error("Unable to get config for project {}", projectName.get());
       cfg = new Config();
