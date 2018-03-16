@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c6c87d0_a8945add",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-16T22:22:47Z",
+      "side": 1,
+      "message": "If we extract helper methods as suggested below, we may not need this comment?",
+      "range": {
+        "startLine": 260,
+        "startChar": 6,
+        "endLine": 260,
+        "endChar": 86
+      },
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baff2663_5568697a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-16T22:22:47Z",
+      "side": 1,
+      "message": "Extract a helper method for this condition? E.g.:\n\n      if (groupMembers \u003d\u003d null \u0026\u0026 uploader !\u003d null) {\n        groupMembers \u003d createGroupMembers(reviewDb, p, changeNumber, uploader, groupMembers, r);\n      }",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 7
+      },
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91a59750_7588d27a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-16T22:22:47Z",
+      "side": 1,
+      "message": "Same help, if we extract a helper method, we may avoid this comment?",
+      "range": {
+        "startLine": 282,
+        "startChar": 6,
+        "endLine": 282,
+        "endChar": 84
+      },
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "748d6587_9a68f673",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-16T22:22:47Z",
+      "side": 1,
+      "message": "Extract a helper method too? E.g.:\n\n  if (groupMembers \u003d\u003d null \u0026\u0026 uploader !\u003d null) {\n    groupMembers \u003d createGroupMembers(reviewDb, p, changeNumber, uploader, groupMembers, r);\n  }\n  resolveGroup(p, changeNumber, uploader, reviewers, groupMembers, r);",
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
