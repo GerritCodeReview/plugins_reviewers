@@ -256,6 +256,8 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
             e);
         continue;
       }
+
+      // find uploader's group in order to try to retrieve other groups' members later
       if (groupMembers == null && uploader != null) {
         // email is not unique to one account, try to locate the account using
         // "Full name <email>" to increase chance of finding only one.
@@ -275,45 +277,46 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
               uploaderNameEmail,
               e);
         }
+      }
 
-        try {
-          if (groupMembers != null) {
-            Set<Account.Id> accounts =
-                groupMembers
-                    .listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p)
-                    .stream()
-                    .filter(Account::isActive)
-                    .map(Account::getId)
-                    .collect(toSet());
-            reviewers.addAll(accounts);
-          } else {
-            log.warn(
-                "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
-                changeNumber,
-                p,
-                r,
-                uploader.email);
-          }
-        } catch (UnprocessableEntityException | NoSuchGroupException e) {
+      // if the reviewer entry is a group, find its members using uploader's account
+      try {
+        if (groupMembers != null) {
+          Set<Account.Id> accounts =
+              groupMembers
+                  .listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p)
+                  .stream()
+                  .filter(Account::isActive)
+                  .map(Account::getId)
+                  .collect(toSet());
+          reviewers.addAll(accounts);
+        } else {
           log.warn(
-              "For the change {} of project {}: reviewer {} is neither an account nor a group.",
-              changeNumber,
-              p,
-              r);
-        } catch (NoSuchProjectException e) {
-          log.warn(
-              "For the change {} of project {}: failed to list accounts for group {}.",
-              changeNumber,
-              p,
-              r);
-        } catch (IOException | OrmException e) {
-          log.warn(
-              "For the change {} of project {}: failed to list accounts for group {}.",
+              "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
               changeNumber,
               p,
               r,
-              e);
+              uploader.email);
         }
+      } catch (UnprocessableEntityException | NoSuchGroupException e) {
+        log.warn(
+            "For the change {} of project {}: reviewer {} is neither an account nor a group.",
+            changeNumber,
+            p,
+            r);
+      } catch (NoSuchProjectException e) {
+        log.warn(
+            "For the change {} of project {}: failed to list accounts for group {}.",
+            changeNumber,
+            p,
+            r);
+      } catch (IOException | OrmException e) {
+        log.warn(
+            "For the change {} of project {}: failed to list accounts for group {}.",
+            changeNumber,
+            p,
+            r,
+            e);
       }
     }
     return reviewers;
