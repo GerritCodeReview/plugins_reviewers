@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60056c8f_13db23f4",
+        "filename": "src/main/resources/Documentation/build.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-17T16:42:01Z",
+      "side": 1,
+      "message": "Move this before Eclipse project generation?",
+      "revId": "e5a2556a4e53dd575be5aa9179f51f3ff8b17195",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
