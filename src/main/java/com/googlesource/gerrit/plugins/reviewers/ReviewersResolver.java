@@ -65,103 +65,132 @@ class ReviewersResolver {
    * names are resolved to their account members.
    *
    * @param reviewDb DB
-   * @param in the set of account names to convert
-   * @param p the project name
+   * @param names the set of account names to convert
+   * @param project the project name
    * @param changeNumber the change Id
    * @param uploader account to use to look up groups, or null if groups are not needed
    * @return set of {@link com.google.gerrit.reviewdb.client.Account.Id}s.
    */
   Set<Account.Id> resolve(
       ReviewDb reviewDb,
-      Set<String> in,
-      Project.NameKey p,
+      Set<String> names,
+      Project.NameKey project,
       int changeNumber,
       @Nullable AccountInfo uploader) {
-    Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(in.size());
+    Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(names.size());
     GroupMembers groupMembers = null;
-    for (String r : in) {
-      try {
-        Account account = accountResolver.find(reviewDb, r);
-        if (account != null && account.isActive()) {
-          if (uploader == null || uploader._accountId != account.getId().get()) {
-            reviewers.add(account.getId());
-          }
-          continue;
-        }
-      } catch (OrmException e) {
-        // If the account doesn't exist, find() will return null.  We only
-        // get here if something went wrong accessing the database
-        log.error(
-            "For the change {} of project {}: failed to resolve account {}.",
-            changeNumber,
-            p,
-            r,
-            e);
+    for (String name : names) {
+      if (resolveAccount(reviewDb, project, changeNumber, uploader, reviewers, name)) {
         continue;
       }
 
-      // find uploader's group in order to try to retrieve other groups' members later
       if (groupMembers == null && uploader != null) {
-        // email is not unique to one account, try to locate the account using
-        // "Full name <email>" to increase chance of finding only one.
-        String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
-        try {
-          Account uploaderAccount = accountResolver.findByNameOrEmail(reviewDb, uploaderNameEmail);
-          if (uploaderAccount != null) {
-            groupMembers =
-                groupMembersFactory.create(identifiedUserFactory.create(uploaderAccount.getId()));
-          }
-        } catch (OrmException e) {
-          log.warn(
-              "For the change {} of project {}: failed to list accounts for group {}, cannot retrieve uploader account {}.",
-              changeNumber,
-              p,
-              r,
-              uploaderNameEmail,
-              e);
-        }
+        groupMembers = createGroupMembers(reviewDb, project, changeNumber, uploader, name);
       }
 
-      // if the reviewer entry is a group, find its members using uploader's account
-      try {
-        if (groupMembers != null) {
-          Set<Account.Id> accounts =
-              groupMembers
-                  .listAccounts(groupsCollection.get().parse(r).getGroupUUID(), p)
-                  .stream()
-                  .filter(Account::isActive)
-                  .map(Account::getId)
-                  .collect(toSet());
-          reviewers.addAll(accounts);
-        } else {
-          log.warn(
-              "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
-              changeNumber,
-              p,
-              r,
-              uploader.email);
-        }
-      } catch (UnprocessableEntityException | NoSuchGroupException e) {
+      if (groupMembers != null) {
+        resolveGroup(project, changeNumber, reviewers, groupMembers, name);
+      } else {
         log.warn(
-            "For the change {} of project {}: reviewer {} is neither an account nor a group.",
+            "For the change {} of project {}: failed to list accounts for group {}; cannot retrieve uploader account for {}.",
             changeNumber,
-            p,
-            r);
-      } catch (NoSuchProjectException e) {
-        log.warn(
-            "For the change {} of project {}: failed to list accounts for group {}.",
-            changeNumber,
-            p,
-            r);
-      } catch (IOException | OrmException e) {
-        log.warn(
-            "For the change {} of project {}: failed to list accounts for group {}.",
-            changeNumber,
-            p,
-            r,
-            e);
+            project,
+            name,
+            uploader.email);
       }
     }
     return reviewers;
+  }
+
+  private boolean resolveAccount(
+      ReviewDb reviewDb,
+      Project.NameKey project,
+      int changeNumber,
+      AccountInfo uploader,
+      Set<Account.Id> reviewers,
+      String accountName) {
+    try {
+      Account account = accountResolver.find(reviewDb, accountName);
+      if (account != null && account.isActive()) {
+        if (uploader == null || uploader._accountId != account.getId().get()) {
+          reviewers.add(account.getId());
+        }
+        return true;
+      }
+    } catch (OrmException e) {
+      // If the account doesn't exist, find() will return null.  We only
+      // get here if something went wrong accessing the database
+      log.error(
+          "For the change {} of project {}: failed to resolve account {}.",
+          changeNumber,
+          project,
+          accountName,
+          e);
+      return true;
+    }
+    return false;
+  }
+
+  private void resolveGroup(
+      Project.NameKey project,
+      int changeNumber,
+      Set<Account.Id> reviewers,
+      GroupMembers groupMembers,
+      String group) {
+    try {
+      Set<Account.Id> accounts =
+          groupMembers
+              .listAccounts(groupsCollection.get().parse(group).getGroupUUID(), project)
+              .stream()
+              .filter(Account::isActive)
+              .map(Account::getId)
+              .collect(toSet());
+      reviewers.addAll(accounts);
+    } catch (UnprocessableEntityException | NoSuchGroupException e) {
+      log.warn(
+          "For the change {} of project {}: reviewer {} is neither an account nor a group.",
+          changeNumber,
+          project,
+          group);
+    } catch (NoSuchProjectException e) {
+      log.warn(
+          "For the change {} of project {}: failed to list accounts for group {}.",
+          changeNumber,
+          project,
+          group);
+    } catch (IOException | OrmException e) {
+      log.warn(
+          "For the change {} of project {}: failed to list accounts for group {}.",
+          changeNumber,
+          project,
+          group,
+          e);
+    }
+  }
+
+  private GroupMembers createGroupMembers(
+      ReviewDb reviewDb,
+      Project.NameKey project,
+      int changeNumber,
+      AccountInfo uploader,
+      String group) {
+    // email is not unique to one account, try to locate the account using
+    // "Full name <email>" to increase chance of finding only one.
+    String uploaderNameEmail = String.format("%s <%s>", uploader.name, uploader.email);
+    try {
+      Account uploaderAccount = accountResolver.findByNameOrEmail(reviewDb, uploaderNameEmail);
+      if (uploaderAccount != null) {
+        return groupMembersFactory.create(identifiedUserFactory.create(uploaderAccount.getId()));
+      }
+    } catch (OrmException e) {
+      log.warn(
+          "For the change {} of project {}: failed to list accounts for group {}, cannot retrieve uploader account {}.",
+          changeNumber,
+          project,
+          group,
+          uploaderNameEmail,
+          e);
+    }
+    return null;
   }
 }
