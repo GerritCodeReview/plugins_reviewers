@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static java.util.stream.Collectors.toSet;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.common.errors.NoSuchGroupException;
@@ -71,6 +72,7 @@ class ReviewersResolver {
    * @param uploader account to use to look up groups, or null if groups are not needed
    * @return set of {@link com.google.gerrit.reviewdb.client.Account.Id}s.
    */
+  @VisibleForTesting
   Set<Account.Id> resolve(
       ReviewDb reviewDb,
       Set<String> in,

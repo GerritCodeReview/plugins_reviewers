@@ -19,6 +19,12 @@ The output is created in
   bazel-genfiles/@PLUGIN@.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test //...
+```
+
 This project can be imported into the Eclipse IDE:
 
 ```
@@ -35,6 +41,12 @@ The output is created in
 
 ```
   bazel-genfiles/plugins/@PLUGIN@/@PLUGIN@.jar
+```
+
+To execute the tests run:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@
 ```
 
 This project can be imported into the Eclipse IDE.
