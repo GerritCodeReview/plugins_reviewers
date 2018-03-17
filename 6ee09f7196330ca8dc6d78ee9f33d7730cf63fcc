@@ -25,6 +25,47 @@
     },
     {
       "key": {
+        "uuid": "b128a3d6_e166d671",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-17T14:20:16Z",
+      "side": 1,
+      "message": "Done in: [1].\n\n* [1] https://gerrit-review.googlesource.com/#/c/plugins/reviewers/+/166633/1/src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolverIT.java@66",
+      "parentUuid": "0dc0f5f2_38381d89",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9dbde750_265aaf05",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-17T14:20:16Z",
+      "side": 1,
+      "message": "I addressed all comments in follow-up changes: refactored and added tests.",
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c6c87d0_a8945add",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 1
