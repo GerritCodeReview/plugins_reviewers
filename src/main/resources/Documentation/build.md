@@ -19,6 +19,12 @@ The output is created in
   bazel-genfiles/@PLUGIN@.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test //...
+```
+
 This project can be imported into the Eclipse IDE:
 
 ```
@@ -43,6 +49,12 @@ Gerrit core in `tools/bzl/plugins.bzl`, and execute:
 
 ```
   ./tools/eclipse/project.py
+```
+
+To execute the tests run:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@
 ```
 
 Maven
