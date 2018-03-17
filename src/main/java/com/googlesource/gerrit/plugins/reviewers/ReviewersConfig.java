@@ -39,9 +39,9 @@ import org.slf4j.LoggerFactory;
 class ReviewersConfig {
   private static final Logger log = LoggerFactory.getLogger(ReviewersConfig.class);
 
-  private static final String FILENAME = "reviewers.config";
-  private static final String SECTION_FILTER = "filter";
-  private static final String KEY_REVIEWER = "reviewer";
+  static final String FILENAME = "reviewers.config";
+  static final String SECTION_FILTER = "filter";
+  static final String KEY_REVIEWER = "reviewer";
   private static final String KEY_IGNORE_DRAFTS = "ignoreDrafts";
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_ENABLE_UI = "enableUI";
