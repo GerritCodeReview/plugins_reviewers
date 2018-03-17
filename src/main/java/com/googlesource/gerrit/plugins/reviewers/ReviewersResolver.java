@@ -150,13 +150,7 @@ class ReviewersResolver {
           changeNumber,
           p,
           r);
-    } catch (NoSuchProjectException e) {
-      log.warn(
-          "For the change {} of project {}: failed to list accounts for group {}.",
-          changeNumber,
-          p,
-          r);
-    } catch (IOException | OrmException e) {
+    } catch (NoSuchProjectException | IOException | OrmException e) {
       log.warn(
           "For the change {} of project {}: failed to list accounts for group {}.",
           changeNumber,
