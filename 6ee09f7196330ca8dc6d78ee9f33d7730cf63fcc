@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "0dc0f5f2_38381d89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-17T12:44:57Z",
+      "side": 1,
+      "message": "It would be really great to have a test for it. I\u0027m working on adding these tests, that would catch this bug, that only first group is resolved and all other matched groups are silently ignored.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "6ee09f7196330ca8dc6d78ee9f33d7730cf63fcc",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c6c87d0_a8945add",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 1
