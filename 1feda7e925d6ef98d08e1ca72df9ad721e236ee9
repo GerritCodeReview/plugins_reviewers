@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a7df446_27dae346",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-03-18T01:37:48Z",
+      "side": 1,
+      "message": "Can we give this a more meaningful name than just \u0027r\u0027?",
+      "revId": "1feda7e925d6ef98d08e1ca72df9ad721e236ee9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
