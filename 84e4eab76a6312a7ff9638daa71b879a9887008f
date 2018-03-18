@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cba613f5_75f5d685",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-03-18T12:56:14Z",
+      "side": 1,
+      "message": "Can\u0027t we do these tests using mocks similar to how it\u0027s done in the HA plugin?",
+      "revId": "84e4eab76a6312a7ff9638daa71b879a9887008f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
