@@ -21,7 +21,16 @@ junit_tests(
     name = "reviewers_tests",
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["reviewers"],
-    deps = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
+    deps = [
+        ":reviewers__plugin_test_deps",
+    ],
+)
+
+java_library(
+    name = "reviewers__plugin_test_deps",
+    testonly = 1,
+    visibility = ["//visibility:public"],
+    exports = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
         ":reviewers__plugin",
     ],
 )
