@@ -16,6 +16,24 @@
       "revId": "1feda7e925d6ef98d08e1ca72df9ad721e236ee9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "003d0155_d7d06b82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolver.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-03-18T06:25:04Z",
+      "side": 1,
+      "message": "Done. Here and in other places in this class.",
+      "parentUuid": "9a7df446_27dae346",
+      "revId": "1feda7e925d6ef98d08e1ca72df9ad721e236ee9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
