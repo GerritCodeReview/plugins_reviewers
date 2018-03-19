@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5795f7d1_758f434a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-03-19T00:21:20Z",
+      "side": 1,
+      "message": "If reviewers plugin is not working, the test will just hang. Add a timeout and fail the test if timeout is reached?",
+      "range": {
+        "startLine": 68,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 32
+      },
+      "revId": "3dbf2df47ef0008bf4bd280ff1a6d7c565472f47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
