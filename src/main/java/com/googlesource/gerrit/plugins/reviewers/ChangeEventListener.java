@@ -19,6 +19,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -238,6 +239,8 @@ class ChangeEventListener implements RevisionCreatedListener {
         log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
       } catch (IOException e) {
         log.warn(String.format("Failed to list accounts for group %s", r), e);
+      } catch (NoSuchGroupException e) {
+        log.warn(String.format("Group %s does not exist", r), e);
       }
     }
     return reviewers;
