@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2ee37fe_9169c560",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2018-03-22T15:01:10Z",
+      "side": 1,
+      "message": "You could add link to the issue in the bug tracker\n\n    Bug: Issue \u003cissue id\u003e",
+      "revId": "e1fb55c0f371b93abaedcbbfebe92784a40a6722",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
