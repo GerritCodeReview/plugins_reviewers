@@ -104,7 +104,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     }
 
     try (ReviewDb reviewDb = schemaFactory.open()) {
-      Set<String> reviewers = findReviewers(sections);
+      Set<String> reviewers = findReviewers(changeId.get(), sections);
       if (!reviewers.isEmpty()) {
         return resolver
             .resolve(reviewDb, reviewers, projectName, changeId.get(), null)
@@ -147,7 +147,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try (ReviewDb reviewDb = schemaFactory.open()) {
-      Set<String> reviewers = findReviewers(sections);
+      Set<String> reviewers = findReviewers(changeNumber, sections);
       if (reviewers.isEmpty()) {
         return;
       }
@@ -167,32 +167,36 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     }
   }
 
-  private Set<String> findReviewers(List<ReviewerFilterSection> sections)
+  private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
       throws OrmException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(sections);
+    List<ReviewerFilterSection> found = findReviewerSections(change, sections);
     for (ReviewerFilterSection s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilterSection> findReviewerSections(List<ReviewerFilterSection> sections)
-      throws OrmException, QueryParseException {
+  private List<ReviewerFilterSection> findReviewerSections(
+      int change, List<ReviewerFilterSection> sections) throws OrmException, QueryParseException {
     ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
     for (ReviewerFilterSection s : sections) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
-      } else if (filterMatch(s.getFilter())) {
+      } else if (filterMatch(change, s.getFilter())) {
         found.add(s);
       }
     }
     return found.build();
   }
 
-  boolean filterMatch(String filter) throws OrmException, QueryParseException {
+  boolean filterMatch(int change, String filter) throws OrmException, QueryParseException {
     Preconditions.checkNotNull(filter);
     ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    return !queryProvider.get().noFields().query(qb.parse(filter)).isEmpty();
+    return !queryProvider
+        .get()
+        .noFields()
+        .query(qb.parse(String.format("change:%s %s", change, filter)))
+        .isEmpty();
   }
 }
