@@ -30,6 +30,7 @@ import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.extensions.common.AccountInfo;
+import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.RefNames;
 import java.util.Collection;
 import org.eclipse.jgit.lib.Config;
@@ -81,5 +82,43 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
         .containsExactlyElementsIn(ImmutableSet.of(admin.id.get(), user.id.get(), user2.id.get()));
+  }
+
+  @Test
+  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
+    RevCommit oldHead = getRemoteHead();
+    TestAccount user2 = accounts.user2();
+
+    Config cfg = new Config();
+    cfg.setStringList(
+        SECTION_FILTER, "branch:master", KEY_REVIEWER, ImmutableList.of(user.email, user2.email));
+
+    pushFactory
+        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    testRepo.reset(oldHead);
+
+    createBranch(new Branch.NameKey(project, "other-branch"));
+
+    // Create a change that matches the filter section.
+    createChange("refs/for/master");
+
+    // The actual change we want to test
+    String changeId = createChange("refs/for/other-branch").getChangeId();
+
+    Collection<AccountInfo> reviewers;
+    long wait = 0;
+    do {
+      Thread.sleep(10);
+      wait += 10;
+      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
+      // Wait for 100 ms until we are certain that the create patch set event
+      // has been processed by the reviewers plugin.
+    } while (reviewers == null && wait < 100);
+    if (reviewers != null) {
+      assertThat(reviewers).isEmpty();
+    }
   }
 }
