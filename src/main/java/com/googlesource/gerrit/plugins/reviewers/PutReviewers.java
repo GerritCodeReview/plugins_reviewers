@@ -51,7 +51,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   private final String pluginName;
-  private final ReviewersConfig.Factory configFactory;
+  private final ReviewersConfig config;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
@@ -60,14 +60,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   @Inject
   PutReviewers(
       @PluginName String pluginName,
-      ReviewersConfig.Factory configFactory,
+      ReviewersConfig config,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
       Provider<ReviewDb> reviewDbProvider) {
     this.pluginName = pluginName;
-    this.configFactory = configFactory;
+    this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
@@ -78,7 +78,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public List<ReviewerFilterSection> apply(ProjectResource rsrc, Input input)
       throws RestApiException {
     Project.NameKey projectName = rsrc.getNameKey();
-    ReviewersConfig cfg = configFactory.create(projectName);
+    ReviewersConfig.ForProject cfg = config.forProject(projectName);
     if (!rsrc.getControl().isOwner() || cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
