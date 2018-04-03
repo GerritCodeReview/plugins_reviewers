@@ -22,6 +22,30 @@
       "revId": "cbbed0300a16582078b6b6c99f34b32d4eb5fb78",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "212b11d2_18c7f752",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-04-03T19:35:29Z",
+      "side": 1,
+      "message": "Never mind, it\u0027s fine as is.",
+      "parentUuid": "a392f872_3344ed60",
+      "range": {
+        "startLine": 6,
+        "startChar": 14,
+        "endLine": 6,
+        "endChar": 54
+      },
+      "revId": "cbbed0300a16582078b6b6c99f34b32d4eb5fb78",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
