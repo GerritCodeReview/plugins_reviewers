@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import java.util.Objects;
 import java.util.Set;
 
 class ReviewerFilterSection {
@@ -31,5 +32,19 @@ class ReviewerFilterSection {
 
   Set<String> getReviewers() {
     return reviewers;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof ReviewerFilterSection) {
+      ReviewerFilterSection other = ((ReviewerFilterSection) o);
+      return Objects.equals(filter, other.filter) && Objects.equals(reviewers, other.reviewers);
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(filter, reviewers);
   }
 }
