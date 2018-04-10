@@ -19,6 +19,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
+import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -34,10 +35,10 @@ import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.server.git.WorkQueue;
-import com.google.gerrit.server.restapi.group.GroupsCollection;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
+import com.google.gerrit.server.restapi.group.GroupsCollection;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
 import com.google.gwtorm.server.OrmException;
@@ -236,7 +237,7 @@ class ChangeEventListener implements RevisionCreatedListener {
         log.warn(String.format("Reviewer %s is neither an account nor a group", r));
       } catch (NoSuchProjectException e) {
         log.warn(String.format("Failed to list accounts for group %s and project %s", r, p));
-      } catch (IOException e) {
+      } catch (IOException | NoSuchGroupException e) {
         log.warn(String.format("Failed to list accounts for group %s", r), e);
       }
     }
