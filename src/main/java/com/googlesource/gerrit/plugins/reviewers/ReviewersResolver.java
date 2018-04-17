@@ -73,8 +73,10 @@ class ReviewersResolver {
    */
   @VisibleForTesting
   Set<Account.Id> resolve(
-      Set<String> names, Project.NameKey project, int changeNumber, @Nullable AccountInfo uploader)
-      throws IOException {
+      Set<String> names,
+      Project.NameKey project,
+      int changeNumber,
+      @Nullable AccountInfo uploader) {
     Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(names.size());
     GroupMembers groupMembers = null;
     for (String name : names) {
@@ -105,8 +107,7 @@ class ReviewersResolver {
       int changeNumber,
       AccountInfo uploader,
       Set<Account.Id> reviewers,
-      String accountName)
-      throws IOException {
+      String accountName) {
     try {
       Account account = accountResolver.find(accountName);
       if (account != null && account.isActive()) {

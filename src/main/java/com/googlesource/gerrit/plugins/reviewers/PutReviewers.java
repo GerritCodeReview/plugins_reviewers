@@ -22,7 +22,6 @@ import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
@@ -64,8 +63,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
-      Provider<GroupsCollection> groupsCollection,
-      Provider<ReviewDb> reviewDbProvider) {
+      Provider<GroupsCollection> groupsCollection) {
     this.pluginName = pluginName;
     this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;

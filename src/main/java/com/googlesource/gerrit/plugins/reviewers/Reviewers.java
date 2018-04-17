@@ -39,7 +39,6 @@ import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -101,7 +100,7 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
       }
-    } catch (OrmException | QueryParseException | IOException x) {
+    } catch (OrmException | QueryParseException x) {
       log.error(x.getMessage(), x);
     }
     return ImmutableSet.of();
@@ -141,7 +140,7 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
               c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
 
       workQueue.getDefaultQueue().submit(task);
-    } catch (QueryParseException | IOException e) {
+    } catch (QueryParseException e) {
       log.warn(
           "Could not add default reviewers for change {} of project {}, filter is invalid: {}",
           changeNumber,
