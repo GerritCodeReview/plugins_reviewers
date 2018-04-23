@@ -113,11 +113,18 @@ class ReviewersResolver {
       String accountName) {
     try {
       Account account = accountResolver.find(reviewDb, accountName);
-      if (account != null && account.isActive()) {
-        if (uploader == null || uploader._accountId != account.getId().get()) {
-          reviewers.add(account.getId());
+      if (account != null) {
+        if (account.isActive()) {
+          if (uploader == null || uploader._accountId != account.getId().get()) {
+            reviewers.add(account.getId());
+          }
+          return true;
         }
-        return true;
+        log.warn(
+            "For the change {} of project {}: account {} is inactive.",
+            changeNumber,
+            project,
+            accountName);
       }
     } catch (OrmException e) {
       // If the account doesn't exist, find() will return null.  We only
