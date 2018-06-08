@@ -17,6 +17,24 @@
       "revId": "735c070a958ddaec9f184badf3f14009660758b6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "729f6041_f333d7e4",
+        "filename": "tools/eclipse/BUILD",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-06-08T15:40:47Z",
+      "side": 1,
+      "message": "You mean in gerrit tree and standalone build modes? In standalone you use this script and in tree build mode you use gerrit own tools/eclipse/project.py, after you have added the plugin name into the tools/bzl/plugins.bzl custom plugin section. Eclipse project generation machinery would find this plugins and would generate the .classpath accordingly.",
+      "parentUuid": "8c38792a_9027fe4d",
+      "revId": "735c070a958ddaec9f184badf3f14009660758b6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
