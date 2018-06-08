@@ -12,24 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.common;
 
-import java.util.Set;
-
-class ReviewerFilterSection {
-  private final String filter;
-  private final Set<String> reviewers;
-
-  ReviewerFilterSection(String filter, Set<String> reviewers) {
-    this.filter = filter;
-    this.reviewers = reviewers;
-  }
-
-  String getFilter() {
-    return filter;
-  }
-
-  Set<String> getReviewers() {
-    return reviewers;
-  }
+public enum Action {
+  ADD,
+  REMOVE
 }
