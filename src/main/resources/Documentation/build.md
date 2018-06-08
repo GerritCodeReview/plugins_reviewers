@@ -44,3 +44,11 @@ Gerrit core in `tools/bzl/plugins.bzl`, and execute:
 ```
   ./tools/eclipse/project.py
 ```
+
+### Backend-only
+
+There are two separate plugin targets, one containing UI components
+(`reviewers`), and one with only backend components (`reviewers-backend`). The
+UI plugin is only compatible with the GWT UI, and does not work with PolyGerrit.
+Both build instructions will work with either `reviewers` or
+`reviewers-backend`.

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.server;
 
 import com.google.gerrit.extensions.common.AccountVisibility;
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
@@ -21,14 +21,14 @@ import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.IdentifiedUser;
-import com.google.gerrit.server.restapi.change.ReviewersUtil;
-import com.google.gerrit.server.restapi.change.ReviewersUtil.VisibilityControl;
-import com.google.gerrit.server.restapi.change.SuggestReviewers;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectResource;
+import com.google.gerrit.server.restapi.change.ReviewersUtil;
+import com.google.gerrit.server.restapi.change.ReviewersUtil.VisibilityControl;
+import com.google.gerrit.server.restapi.change.SuggestReviewers;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
