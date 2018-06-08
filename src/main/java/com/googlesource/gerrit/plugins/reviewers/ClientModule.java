@@ -1,4 +1,4 @@
-// Copyright (C) 2018 The Android Open Source Project
+// Copyright (C) 2013 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,22 +14,31 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.inject.AbstractModule;
+import com.google.gerrit.extensions.config.FactoryModule;
+import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.extensions.webui.GwtPlugin;
+import com.google.gerrit.extensions.webui.TopMenu;
+import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.reviewers.server.BackendModule;
 import com.googlesource.gerrit.plugins.reviewers.server.ReviewersConfig;
 
-public class Module extends AbstractModule {
-  private final ReviewersConfig cfg;
+public class ClientModule extends FactoryModule {
+  private final boolean enableUI;
 
   @Inject
-  public Module(ReviewersConfig cfg) {
-    this.cfg = cfg;
+  public ClientModule(ReviewersConfig cfg) {
+    this(cfg.enableUI());
+  }
+
+  public ClientModule(boolean enableUI) {
+    this.enableUI = enableUI;
   }
 
   @Override
   protected void configure() {
-    install(new BackendModule(cfg.enableREST(), cfg.suggestOnly()));
-    install(new ClientModule(cfg.enableUI()));
+    if (enableUI) {
+      DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
+      DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
+    }
   }
 }
