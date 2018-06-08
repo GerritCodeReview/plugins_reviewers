@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.server;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
@@ -36,7 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
-class ReviewersConfig {
+public class ReviewersConfig {
   private static final Logger log = LoggerFactory.getLogger(ReviewersConfig.class);
 
   static final String FILENAME = "reviewers.config";
