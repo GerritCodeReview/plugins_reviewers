@@ -14,7 +14,11 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import static com.googlesource.gerrit.plugins.reviewers.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
+
 import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.api.access.PluginPermission;
+import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.RestApiException;
@@ -25,6 +29,7 @@ import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupsCollection;
+import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
 import com.google.gwtorm.server.OrmException;
@@ -55,6 +60,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
+  private final PermissionBackend permissionBackend;
 
   @Inject
   PutReviewers(
@@ -63,13 +69,15 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
-      Provider<GroupsCollection> groupsCollection) {
+      Provider<GroupsCollection> groupsCollection,
+      PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
     this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
+    this.permissionBackend = permissionBackend;
   }
 
   @Override
@@ -77,8 +85,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       throws RestApiException {
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig.ForProject cfg = config.forProject(projectName);
-    if (!rsrc.getControl().isOwner() || cfg == null) {
+    if (cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
+    }
+
+    PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());
+    if (!rsrc.getControl().isOwner()
+        && !userPermission.testOrFalse(new PluginPermission(pluginName, MODIFY_REVIEWERS_CONFIG))) {
+      throw new AuthException("not allowed to write reviewers config");
     }
 
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {

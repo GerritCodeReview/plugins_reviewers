@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.reviewers.client;
 
+import static com.googlesource.gerrit.plugins.reviewers.client.AccountCapabilities.MODIFY_REVIEWERS_CONFIG;
+
 import com.google.gerrit.client.rpc.NativeMap;
 import com.google.gerrit.client.rpc.Natives;
 import com.google.gerrit.plugin.client.rpc.RestApi;
@@ -48,10 +50,11 @@ public class ReviewersScreen extends HorizontalPanel {
   }
 
   private boolean isOwner;
+  private boolean hasModifyReviewersConfigCapability;
   private String projectName;
   private Set<ReviewerEntry> rEntries;
 
-  ReviewersScreen(final String projectName) {
+  ReviewersScreen(String projectName) {
     setStyleName("reviewers-panel");
     this.projectName = projectName;
     this.rEntries = new HashSet<>();
@@ -64,7 +67,24 @@ public class ReviewersScreen extends HorizontalPanel {
               @Override
               public void onSuccess(NativeMap<ProjectAccessInfo> result) {
                 isOwner = result.get(projectName).isOwner();
-                display();
+                if (isOwner) {
+                  display();
+                } else {
+                  // TODO(davido): Find a way to run above and below requests in parallel
+                  AccountCapabilities.queryPluginCapability(
+                      new AsyncCallback<AccountCapabilities>() {
+
+                        @Override
+                        public void onSuccess(AccountCapabilities result) {
+                          hasModifyReviewersConfigCapability =
+                              result.canPerform(MODIFY_REVIEWERS_CONFIG);
+                          display();
+                        }
+
+                        @Override
+                        public void onFailure(Throwable caught) {}
+                      });
+                }
               }
 
               @Override
@@ -124,7 +144,7 @@ public class ReviewersScreen extends HorizontalPanel {
             doSave(Action.REMOVE, e);
           }
         });
-    removeButton.setVisible(isOwner);
+    removeButton.setVisible(isModifiable());
 
     HorizontalPanel p = new HorizontalPanel();
     p.add(l);
@@ -161,15 +181,19 @@ public class ReviewersScreen extends HorizontalPanel {
             reviewerBox.setText("");
           }
         });
-    filterBox.setEnabled(isOwner);
-    reviewerBox.setEnabled(isOwner);
-    addButton.setEnabled(isOwner);
+    filterBox.setEnabled(isModifiable());
+    reviewerBox.setEnabled(isModifiable());
+    addButton.setEnabled(isModifiable());
 
     Panel p = new VerticalPanel();
     p.setStyleName("reviewers-inputPanel");
     p.add(inputGrid);
     p.add(addButton);
     return p;
+  }
+
+  boolean isModifiable() {
+    return isOwner || hasModifyReviewersConfigCapability;
   }
 
   void doSave(Action action, ReviewerEntry entry) {
