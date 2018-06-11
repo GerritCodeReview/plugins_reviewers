@@ -15,8 +15,10 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.gerrit.server.project.ProjectResource.PROJECT_KIND;
+import static com.googlesource.gerrit.plugins.reviewers.WriteReviewersConfigCapability.WRITE_REVIEWERS_CONFIG;
 
 import com.google.gerrit.extensions.annotations.Exports;
+import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
@@ -48,6 +50,10 @@ public class Module extends FactoryModule {
 
   @Override
   protected void configure() {
+    bind(CapabilityDefinition.class)
+        .annotatedWith(Exports.named(WRITE_REVIEWERS_CONFIG))
+        .to(WriteReviewersConfigCapability.class);
+
     if (enableUI) {
       DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
       DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
