@@ -56,6 +56,9 @@ Changes the default reviewers for the specified project.
 The change to reviewers must be provided in the request body inside
 a [ConfigReviewersInput](#config-reviewers-input) entity.
 
+Caller must be a member of a group that is granted the 'Modify Reviewers Config'
+capability (provided by this plugin) or be a Project Owner for the project.
+
 #### Request
 
 ```
