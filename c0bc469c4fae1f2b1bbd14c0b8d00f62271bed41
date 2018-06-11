@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9895df45_d33b28f6",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/WriteReviewersConfigCapability.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-06-11T14:50:32Z",
+      "side": 1,
+      "message": "[optional] I looked in the core and other plugins to see if we use \u0027write\u0027 or \u0027modify\u0027. I found only one other permission using one of those terms and it uses \u0027modify\u0027: Modify Accout.\n\nShould we use \u0027Modify\u0027 instead?",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "c0bc469c4fae1f2b1bbd14c0b8d00f62271bed41",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
