@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11fdd8c2_0568d11a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1012987
+      },
+      "writtenOn": "2018-06-12T01:01:39Z",
+      "side": 1,
+      "message": "modify?",
+      "range": {
+        "startLine": 95,
+        "startChar": 46,
+        "endLine": 95,
+        "endChar": 51
+      },
+      "revId": "47456114afc1d8fd98c7628a7b44ad13389ff103",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
