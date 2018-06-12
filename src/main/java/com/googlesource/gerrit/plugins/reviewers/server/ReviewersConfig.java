@@ -44,13 +44,11 @@ public class ReviewersConfig {
   static final String KEY_REVIEWER = "reviewer";
   private static final String KEY_IGNORE_DRAFTS = "ignoreDrafts";
   private static final String KEY_ENABLE_REST = "enableREST";
-  private static final String KEY_ENABLE_UI = "enableUI";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
 
   private final PluginConfigFactory cfgFactory;
   private final String pluginName;
 
-  private final boolean enableUI;
   private final boolean enableREST;
   private final boolean suggestOnly;
   private final boolean ignoreDrafts;
@@ -62,7 +60,6 @@ public class ReviewersConfig {
     Config cfg = cfgFactory.getGlobalPluginConfig(pluginName);
     this.ignoreDrafts = cfg.getBoolean(pluginName, null, KEY_IGNORE_DRAFTS, false);
     this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
-    this.enableUI = enableREST ? cfg.getBoolean(pluginName, null, KEY_ENABLE_UI, true) : false;
     this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
   }
 
@@ -83,10 +80,6 @@ public class ReviewersConfig {
 
   public boolean enableREST() {
     return enableREST;
-  }
-
-  public boolean enableUI() {
-    return enableUI;
   }
 
   public boolean suggestOnly() {
