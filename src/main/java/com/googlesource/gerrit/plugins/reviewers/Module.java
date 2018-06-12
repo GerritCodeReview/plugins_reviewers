@@ -30,6 +30,6 @@ public class Module extends AbstractModule {
   @Override
   protected void configure() {
     install(new BackendModule(cfg.enableREST(), cfg.suggestOnly()));
-    install(new ClientModule(cfg.enableUI()));
+    install(new ClientModule());
   }
 }
