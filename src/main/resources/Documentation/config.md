@@ -7,17 +7,12 @@ Global configuration of the @PLUGIN@ plugin is done in the
 ```
   [reviewers]
     enableREST = true
-    enableUI = false
     suggestOnly = false
 ```
 
 reviewers.enableREST
 :	Enable the REST API. When set to false, the REST API is not available.
 	Defaults to true.
-
-reviewers.enableUI
-:	Enable the UI.  When set to false, the 'Reviewers' menu is not displayed
-	on the project screen. Defaults to true, or false when `enableREST` is false.
 
 reviewers.suggestOnly
 :	Provide the configured reviewers as suggestions in the "Add Reviewer" dialog
