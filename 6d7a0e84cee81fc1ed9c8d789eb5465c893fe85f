@@ -1,4 +1,28 @@
 {
   "pushCert": "certificate version 0.1\npusher Dave Borowitz \u003cdborowitz@google.com\u003e 1528473881 -0400\npushee rpc://gerrit/plugins/reviewers\nnonce ADrMV7a40FdocbAsfsaEG1SyrORUtBgo/bxtWCs2Cr5tSo9rsltV7HLSAwWDzGdt3vYtgZtpfb+P\n\n0000000000000000000000000000000000000000 6d7a0e84cee81fc1ed9c8d789eb5465c893fe85f refs/for/master\n-----BEGIN PGP SIGNATURE-----\n\niQJJBAABCgAzFiEEpPm/sOxWgSqG5grhX9fFmpoSiIwFAlsaqRkVHGRib3Jvd2l0\nekBnb29nbGUuY29tAAoJEF/XxZqaEoiMe94P/2ebEnB4qJ1UcX8UXxjutSHr56rk\nVIJIy7+RPwMtn+h8FkSsnzagOmRSV8cckPsAvUjOFItc4nXzk5r7bMCGnWsRM2zz\nwC3h6heJYKwFwXtc5noOU4XDiAAcNJIHFPr09CvWfiN4yoP8ddvh2Sn/VAg7WyTs\nmLrSOeGNprtttSRA8/MirfLL90uZG9M4nTiUvzUzMYF5Od6xN3ks/Aiz487gimHk\nD133jVpMmat8/mAa0yRJs/mvW7oXqR5GzrywyWvkrxSkJHRt0YKvVC807OweWzve\nhxrjmjkyuDElHesO8ajKR4nApE1qztK6inRdQ51QcMIWQiCuljdnfNnFWCRHKqHi\nsqlxUvBgKmEbKpLDVFzNX6gZprc872UEYc8sn0/3ynnGfUUu5wzs23bdvCwfDKnc\nfeZZR3f5HXdNM178n3Wn2AqF1V1TYJ4RjHgJjdDdCYsv2Wpm8axdqpWdLZbb36VQ\n8UdcjP1a1kyPLaHlcdnGjY/ECc6TZGNVSnm/SZ+Btj4t8CKXwz7R1+nNdVPz5wBF\n3lRW+GSlbpeUFnAT0ubasJb+EfxZ84mT/tyu+c8tV8wjQtxGbijkyRgDYdbj9Of3\neYJ+XB7h8b0ZdriP/Uky0HclEjwkjg0akMPYbedDWAAS5qi4WB+N95i8YxWhuuza\nW9MGyl7xfvdWmX9K\n\u003d+fsv\n-----END PGP SIGNATURE-----\n",
-  "comments": []
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0673b62_74441670",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ClientModule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-06-12T21:58:28Z",
+      "side": 1,
+      "message": "Is this ctor actually used now? The only place where this class is used is Module, where only ClientModule(Config c) ctor is used, so no inject and this ctor needed?",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 3
+      },
+      "revId": "6d7a0e84cee81fc1ed9c8d789eb5465c893fe85f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
 }
