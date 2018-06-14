@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ea07fbca_18d14765",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-06-14T03:53:28Z",
+      "side": 1,
+      "message": "Good point. Will upload an own change for that.",
+      "parentUuid": "0c8127eb_bec1e83b",
+      "revId": "4d94682c5b06e12cdfba6cb1d58d0cd7bec1584c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08cc6de5_9ccca9e2",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ClientModule.java",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2018-06-13T23:23:18Z",
       "side": 1,
       "message": "2018?",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "4d94682c5b06e12cdfba6cb1d58d0cd7bec1584c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8379941d_7712a0e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ClientModule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-06-14T03:53:28Z",
+      "side": 1,
+      "message": "This code was extracted from the existing Module.java and thus this original year was preserved.",
+      "parentUuid": "08cc6de5_9ccca9e2",
       "range": {
         "startLine": 1,
         "startChar": 17,
