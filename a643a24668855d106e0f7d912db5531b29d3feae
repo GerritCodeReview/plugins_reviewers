@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b565e5ae_af1265d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-06-14T04:10:49Z",
+      "side": 1,
+      "message": "sha1 is included in all lines except the first one.\n\nFYI this is how I have been generating this info for my commits:\n\n  git log --oneline --no-merges 930c64494c0400a3f08d3cf053c99f7d1dcb3f1c..HEAD --format\u003d\"- %s\"\n\nin the bazlets repo where the sha1 is the old sha1 used in the plugin, and HEAD is the head of the bazlets repo on the target branch.",
+      "revId": "a643a24668855d106e0f7d912db5531b29d3feae",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
