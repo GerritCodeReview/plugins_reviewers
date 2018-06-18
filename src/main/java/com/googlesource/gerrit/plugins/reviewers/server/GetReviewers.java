@@ -14,9 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers.server;
 
-import com.google.gerrit.extensions.restapi.AuthException;
-import com.google.gerrit.extensions.restapi.BadRequestException;
-import com.google.gerrit.extensions.restapi.ResourceConflictException;
+import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.server.project.ProjectResource;
 import com.google.inject.Inject;
@@ -25,16 +23,15 @@ import java.util.List;
 
 @Singleton
 class GetReviewers implements RestReadView<ProjectResource> {
-  private final ReviewersConfig.Factory configFactory;
+  private final ReviewersConfig config;
 
   @Inject
-  GetReviewers(ReviewersConfig.Factory configFactory) {
-    this.configFactory = configFactory;
+  GetReviewers(ReviewersConfig config) {
+    this.config = config;
   }
 
   @Override
-  public List<ReviewerFilterSection> apply(ProjectResource resource)
-      throws AuthException, BadRequestException, ResourceConflictException, Exception {
-    return configFactory.create(resource.getNameKey()).getReviewerFilterSections();
+  public List<ReviewerFilterSection> apply(ProjectResource resource) throws RestApiException {
+    return config.forProject(resource.getNameKey()).getReviewerFilterSections();
   }
 }

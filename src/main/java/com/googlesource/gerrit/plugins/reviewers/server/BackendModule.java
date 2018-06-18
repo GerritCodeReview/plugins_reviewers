@@ -15,37 +15,53 @@
 package com.googlesource.gerrit.plugins.reviewers.server;
 
 import static com.google.gerrit.server.project.ProjectResource.PROJECT_KIND;
+import static com.googlesource.gerrit.plugins.reviewers.server.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
 
-import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.annotations.Exports;
+import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.restapi.RestApiModule;
-import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.change.ReviewerSuggestion;
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import org.eclipse.jgit.lib.Config;
 
 public class BackendModule extends FactoryModule {
-  public final boolean enableREST;
+  private final boolean enableREST;
+  private final boolean suggestOnly;
 
   @Inject
-  public BackendModule(@PluginName String pluginName, PluginConfigFactory pluginCfgFactory) {
-    this(pluginCfgFactory.getGlobalPluginConfig(pluginName));
+  public BackendModule(ReviewersConfig cfg) {
+    this(cfg.enableREST(), cfg.suggestOnly());
   }
 
-  public BackendModule(Config c) {
-    this.enableREST = c.getBoolean("reviewers", null, "enableREST", true);
-  }
-
-  public BackendModule(boolean enableREST) {
+  public BackendModule(boolean enableREST, boolean suggestOnly) {
     this.enableREST = enableREST;
+    this.suggestOnly = suggestOnly;
   }
 
   @Override
   protected void configure() {
-    DynamicSet.bind(binder(), RevisionCreatedListener.class).to(ChangeEventListener.class);
-    factory(DefaultReviewers.Factory.class);
-    factory(ReviewersConfig.Factory.class);
+    bind(CapabilityDefinition.class)
+        .annotatedWith(Exports.named(MODIFY_REVIEWERS_CONFIG))
+        .to(ModifyReviewersConfigCapability.class);
+
+    if (suggestOnly) {
+      install(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(ReviewerSuggestion.class)
+                  .annotatedWith(Exports.named("reviewer-suggest"))
+                  .to(Reviewers.class);
+            }
+          });
+    } else {
+      DynamicSet.bind(binder(), RevisionCreatedListener.class).to(Reviewers.class);
+    }
+
+    factory(AddReviewersByConfiguration.Factory.class);
 
     if (enableREST) {
       install(
