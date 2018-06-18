@@ -22,6 +22,30 @@
       "revId": "1f49a51ab3d44444838f2d3c93a470423006bfd0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e39af426_2dc65bf5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-06-18T07:02:57Z",
+      "side": 1,
+      "message": "To avoid this I have the following in my ~/.gitconfig\n\n [merge]\n \tlog \u003d 200",
+      "parentUuid": "7be1ed62_d96667c3",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 5
+      },
+      "revId": "1f49a51ab3d44444838f2d3c93a470423006bfd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
