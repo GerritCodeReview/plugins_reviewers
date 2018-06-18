@@ -14,7 +14,10 @@
 
 package com.googlesource.gerrit.plugins.reviewers.server;
 
+import static com.googlesource.gerrit.plugins.reviewers.server.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
+
 import com.google.gerrit.extensions.annotations.PluginName;
+import com.google.gerrit.extensions.api.access.PluginPermission;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
@@ -55,7 +58,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   private final String pluginName;
-  private final ReviewersConfig.Factory configFactory;
+  private final ReviewersConfig config;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
@@ -65,14 +68,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   @Inject
   PutReviewers(
       @PluginName String pluginName,
-      ReviewersConfig.Factory configFactory,
+      ReviewersConfig config,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
       PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
-    this.configFactory = configFactory;
+    this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
@@ -84,18 +87,15 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public List<ReviewerFilterSection> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
-    ReviewersConfig cfg = configFactory.create(projectName);
-    try {
-      permissionBackend
-          .user(rsrc.getUser())
-          .project(rsrc.getNameKey())
-          .check(ProjectPermission.WRITE_CONFIG);
-    } catch (AuthException e) {
+    ReviewersConfig.ForProject cfg = config.forProject(projectName);
+    if (cfg == null) {
       throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
     }
 
-    if (cfg == null) {
-      throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
+    PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());
+    if (!userPermission.project(rsrc.getNameKey()).testOrFalse(ProjectPermission.WRITE_CONFIG)
+        && !userPermission.testOrFalse(new PluginPermission(pluginName, MODIFY_REVIEWERS_CONFIG))) {
+      throw new AuthException("not allowed to modify reviewers config");
     }
 
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {

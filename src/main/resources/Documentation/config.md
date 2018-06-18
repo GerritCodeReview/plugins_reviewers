@@ -7,17 +7,20 @@ Global configuration of the @PLUGIN@ plugin is done in the
 ```
   [reviewers]
     enableREST = true
-    enableUI = false
+    suggestOnly = false
 ```
 
 reviewers.enableREST
 :	Enable the REST API. When set to false, the REST API is not available.
 	Defaults to true.
 
-reviewers.enableUI
-:	Enable the UI.  When set to false, the 'Reviewers' menu is not displayed
-	on the project screen. Defaults to true, or false when `enableREST` is false.
-
+reviewers.suggestOnly
+:	Provide the configured reviewers as suggestions in the "Add Reviewer" dialog
+	instead of automatically adding them to the change. Only supports accounts;
+	groups are not suggested. Defaults to false. By default Gerrit will consider
+	the suggestions with a weight of 1. To force the suggestions higher in the
+	list, set a higher value (like 1000) in `addReviewer.@PLUGIN@-reviewer-suggestion.weight`
+	in `gerrit.config`.
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
 from the parent projects. This means a global default configuration can
@@ -58,4 +61,4 @@ The plugin supports multiple filter matches.
 ```
 
 1. Push a change for review involving file "build/modules/GLOBAL.pm".
-2. Both john.doe@example.com and jane.doe@example.com get added as reviewers.
+2. Both john.doe@example.com and jane.doe@example.com get added or suggested as reviewers.

@@ -14,38 +14,16 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.extensions.config.FactoryModule;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.webui.GwtPlugin;
 import com.google.gerrit.extensions.webui.TopMenu;
 import com.google.gerrit.extensions.webui.WebUiPlugin;
-import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.inject.Inject;
-import org.eclipse.jgit.lib.Config;
+import com.google.inject.AbstractModule;
 
-public class ClientModule extends FactoryModule {
-  private final boolean enableUI;
-
-  @Inject
-  public ClientModule(@PluginName String pluginName, PluginConfigFactory pluginCfgFactory) {
-    this(pluginCfgFactory.getGlobalPluginConfig(pluginName));
-  }
-
-  public ClientModule(Config c) {
-    boolean enableREST = c.getBoolean("reviewers", null, "enableREST", true);
-    this.enableUI = enableREST ? c.getBoolean("reviewers", null, "enableUI", true) : false;
-  }
-
-  public ClientModule(boolean enableUI) {
-    this.enableUI = enableUI;
-  }
-
+public class ClientModule extends AbstractModule {
   @Override
   protected void configure() {
-    if (enableUI) {
-      DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
-      DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
-    }
+    DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
+    DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
   }
 }

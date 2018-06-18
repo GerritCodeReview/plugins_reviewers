@@ -12,24 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.server;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.reviewers.server.BackendModule;
-import com.googlesource.gerrit.plugins.reviewers.server.ReviewersConfig;
+import com.google.gerrit.extensions.config.CapabilityDefinition;
 
-public class Module extends AbstractModule {
-  private final ReviewersConfig cfg;
-
-  @Inject
-  public Module(ReviewersConfig cfg) {
-    this.cfg = cfg;
-  }
+public class ModifyReviewersConfigCapability extends CapabilityDefinition {
+  static final String MODIFY_REVIEWERS_CONFIG = "modifyReviewersConfig";
 
   @Override
-  protected void configure() {
-    install(new BackendModule(cfg.enableREST(), cfg.suggestOnly()));
-    install(new ClientModule());
+  public String getDescription() {
+    return "Modify Reviewers Config";
   }
 }

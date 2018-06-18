@@ -19,6 +19,12 @@ The output is created in
   bazel-genfiles/@PLUGIN@.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test //...
+```
+
 This project can be imported into the Eclipse IDE:
 
 ```
@@ -37,6 +43,12 @@ The output is created in
   bazel-genfiles/plugins/@PLUGIN@/@PLUGIN@.jar
 ```
 
+To execute the tests run:
+
+```
+  bazel test --test_tag_filters=@PLUGIN@
+```
+
 This project can be imported into the Eclipse IDE.
 Add the plugin name to the `CUSTOM_PLUGINS` set in
 Gerrit core in `tools/bzl/plugins.bzl`, and execute:
@@ -52,3 +64,6 @@ There are two separate plugin targets, one containing UI components
 UI plugin is only compatible with the GWT UI, and does not work with PolyGerrit.
 Both build instructions will work with either `reviewers` or
 `reviewers-backend`.
+
+How to build the Gerrit Plugin API is described in the [Gerrit
+documentation](../../../Documentation/dev-bazel.html#_extension_and_plugin_api_jar_files).
