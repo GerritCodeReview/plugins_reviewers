@@ -46,6 +46,30 @@
       "revId": "1f49a51ab3d44444838f2d3c93a470423006bfd0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca2bbe71_e44dab24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-06-19T06:12:57Z",
+      "side": 1,
+      "message": "Adding this option didn\u0027t help on git version 2.16.3. What worked is, passing --log\u003d400 option. Done.",
+      "parentUuid": "e39af426_2dc65bf5",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 5
+      },
+      "revId": "1f49a51ab3d44444838f2d3c93a470423006bfd0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
