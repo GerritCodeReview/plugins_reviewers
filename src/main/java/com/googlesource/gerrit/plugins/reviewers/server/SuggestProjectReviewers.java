@@ -20,7 +20,6 @@ import com.google.gerrit.extensions.restapi.BadRequestException;
 import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.server.ReviewDb;
-import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
@@ -44,12 +43,11 @@ public class SuggestProjectReviewers extends SuggestReviewers
   @Inject
   SuggestProjectReviewers(
       AccountVisibility av,
-      IdentifiedUser.GenericFactory identifiedUserFactory,
       Provider<ReviewDb> dbProvider,
       @GerritServerConfig Config cfg,
       ReviewersUtil reviewersUtil,
       PermissionBackend permissionBackend) {
-    super(av, identifiedUserFactory, dbProvider, cfg, reviewersUtil);
+    super(av, dbProvider, cfg, reviewersUtil);
     this.permissionBackend = permissionBackend;
   }
 
@@ -64,9 +62,9 @@ public class SuggestProjectReviewers extends SuggestReviewers
   private VisibilityControl getVisibility(final ProjectResource rsrc) {
     return new VisibilityControl() {
       @Override
-      public boolean isVisibleTo(Account.Id account) throws OrmException {
+      public boolean isVisibleTo(Account.Id account) {
         return permissionBackend
-            .user(identifiedUserFactory.create(account))
+            .absentUser(account)
             .project(rsrc.getNameKey())
             .testOrFalse(ProjectPermission.ACCESS);
       }
