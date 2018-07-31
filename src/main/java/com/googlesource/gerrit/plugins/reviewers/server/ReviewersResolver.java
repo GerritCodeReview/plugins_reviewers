@@ -19,6 +19,7 @@ import static java.util.stream.Collectors.toSet;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
@@ -143,7 +144,7 @@ class ReviewersResolver {
           changeNumber,
           project,
           group);
-    } catch (NoSuchProjectException | IOException e) {
+    } catch (NoSuchProjectException | NoSuchGroupException | IOException e) {
       log.error(
           "For the change {} of project {}: failed to list accounts for group {}.",
           changeNumber,
