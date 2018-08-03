@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20f7a6d7_1726c1c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/server/ReviewersConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-08-03T19:40:06Z",
+      "side": 0,
+      "message": "Not sure, if this was a bad merge and that option survived?",
+      "revId": "7b6ad0e8819e93d3e4897dbeae5df65209cb86f4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
