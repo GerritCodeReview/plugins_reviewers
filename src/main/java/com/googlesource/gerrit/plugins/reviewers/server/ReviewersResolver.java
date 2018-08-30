@@ -19,12 +19,10 @@ import static java.util.stream.Collectors.toSet;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.google.gerrit.common.Nullable;
-import com.google.gerrit.common.errors.NoSuchGroupException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
-import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -47,18 +45,15 @@ class ReviewersResolver {
   private final AccountResolver accountResolver;
   private final Provider<GroupsCollection> groupsCollection;
   private final GroupMembers groupMembers;
-  private final IdentifiedUser.GenericFactory identifiedUserFactory;
 
   @Inject
   ReviewersResolver(
       AccountResolver accountResolver,
       Provider<GroupsCollection> groupsCollection,
-      GroupMembers groupMembers,
-      IdentifiedUser.GenericFactory identifiedUserFactory) {
+      GroupMembers groupMembers) {
     this.accountResolver = accountResolver;
     this.groupsCollection = groupsCollection;
     this.groupMembers = groupMembers;
-    this.identifiedUserFactory = identifiedUserFactory;
   }
 
   /**
@@ -144,7 +139,7 @@ class ReviewersResolver {
           changeNumber,
           project,
           group);
-    } catch (NoSuchProjectException | NoSuchGroupException | IOException e) {
+    } catch (NoSuchProjectException | IOException e) {
       log.error(
           "For the change {} of project {}: failed to list accounts for group {}.",
           changeNumber,
