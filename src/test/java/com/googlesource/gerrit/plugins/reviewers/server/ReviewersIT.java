@@ -83,6 +83,42 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   }
 
   @Test
+  public void addReviewersMatchMultipleSections() throws Exception {
+    RevCommit oldHead = getRemoteHead();
+    TestAccount user2 = accountCreator.user2();
+
+    Config cfg = new Config();
+    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email));
+    cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email));
+
+    pushFactory
+        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    testRepo.reset(oldHead);
+    String changeId = createChange().getChangeId();
+
+    Collection<AccountInfo> reviewers;
+    // Wait for 100 ms until the create patch set event
+    // is processed by the reviewers plugin
+    long wait = 0;
+    do {
+      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
+      if (reviewers == null) {
+        Thread.sleep(10);
+        wait += 10;
+        if (wait > 100) {
+          assert_().fail("Timeout of 100 ms exceeded");
+        }
+      }
+    } while (reviewers == null);
+
+    assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
+        .containsExactlyElementsIn(ImmutableSet.of(admin.id.get(), user.id.get(), user2.id.get()));
+  }
+
+  @Test
   public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
     RevCommit oldHead = getRemoteHead();
 
