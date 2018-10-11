@@ -28,12 +28,12 @@ import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.meta.MetaDataUpdate;
+import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.permissions.PermissionBackend;
 import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
-import com.google.gerrit.server.restapi.group.GroupsCollection;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -62,7 +62,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
-  private final Provider<GroupsCollection> groupsCollection;
+  private final Provider<GroupResolver> groupResolver;
   private final PermissionBackend permissionBackend;
 
   @Inject
@@ -72,14 +72,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
-      Provider<GroupsCollection> groupsCollection,
+      Provider<GroupResolver> groupResolver,
       PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
     this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
-    this.groupsCollection = groupsCollection;
+    this.groupResolver = groupResolver;
     this.permissionBackend = permissionBackend;
   }
 
@@ -152,7 +152,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       Account account = accountResolver.find(reviewer);
       if (account == null) {
         try {
-          groupsCollection.get().parse(reviewer);
+          groupResolver.get().parse(reviewer);
         } catch (UnprocessableEntityException e) {
           throw new ResourceNotFoundException("Account or group " + reviewer + " not found");
         }

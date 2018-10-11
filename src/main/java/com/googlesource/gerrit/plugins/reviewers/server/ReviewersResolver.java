@@ -25,8 +25,8 @@ import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
+import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gerrit.server.restapi.group.GroupsCollection;
 import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -43,16 +43,16 @@ class ReviewersResolver {
   private static final Logger log = LoggerFactory.getLogger(ReviewersResolver.class);
 
   private final AccountResolver accountResolver;
-  private final Provider<GroupsCollection> groupsCollection;
+  private final Provider<GroupResolver> groupResolver;
   private final GroupMembers groupMembers;
 
   @Inject
   ReviewersResolver(
       AccountResolver accountResolver,
-      Provider<GroupsCollection> groupsCollection,
+      Provider<GroupResolver> groupResolver,
       GroupMembers groupMembers) {
     this.accountResolver = accountResolver;
-    this.groupsCollection = groupsCollection;
+    this.groupResolver = groupResolver;
     this.groupMembers = groupMembers;
   }
 
@@ -126,8 +126,7 @@ class ReviewersResolver {
       String group) {
     try {
       Set<Account.Id> accounts =
-          groupMembers
-              .listAccounts(groupsCollection.get().parse(group).getGroupUUID(), project)
+          groupMembers.listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
               .stream()
               .filter(Account::isActive)
               .map(Account::getId)
