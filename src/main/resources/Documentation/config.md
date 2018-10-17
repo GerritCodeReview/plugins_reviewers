@@ -8,6 +8,8 @@ Global configuration of the @PLUGIN@ plugin is done in the
   [reviewers]
     enableREST = true
     suggestOnly = false
+    ignoreWip = true
+    ignorePrivate = true
 ```
 
 reviewers.enableREST
@@ -21,6 +23,18 @@ reviewers.suggestOnly
 	the suggestions with a weight of 1. To force the suggestions higher in the
 	list, set a higher value (like 1000) in `addReviewer.@PLUGIN@-reviewer-suggestion.weight`
 	in `gerrit.config`.
+	
+reviewers.ingoreWip
+:	Ignore changes in WIP state. When set to true changes in WIP state are not
+	considered when adding reviewers. Defaults to true. To enable adding
+	reviewers on changes in WIP state on a per-project basis set this value
+	to true.
+	
+revewers.ignorePrivate
+:	Ignore changes in private state. When set to true changes in private state
+	are not considered when adding reviewers. Defaults to true. To enable
+	adding reviewers on changes in Private state on a per-project basis set
+	this value to true.
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
 from the parent projects. This means a global default configuration can
