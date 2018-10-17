@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "583c0b48_8edec111",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-10-17T14:59:18Z",
+      "side": 1,
+      "message": "Nit: trailing space.",
+      "revId": "37a1720dbeb535589532f32988c226e3ded88f30",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6bf4e1f_165278ca",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-10-17T14:59:18Z",
+      "side": 1,
+      "message": "false.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 8
+      },
+      "revId": "37a1720dbeb535589532f32988c226e3ded88f30",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdc40ec5_5a5379db",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-10-17T14:59:18Z",
+      "side": 1,
+      "message": "same here.",
+      "revId": "37a1720dbeb535589532f32988c226e3ded88f30",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69c08ce9_807ba8a2",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-10-17T14:59:18Z",
+      "side": 1,
+      "message": "false.",
+      "range": {
+        "startLine": 37,
+        "startChar": 15,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "37a1720dbeb535589532f32988c226e3ded88f30",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
