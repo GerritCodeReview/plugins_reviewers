@@ -20,7 +20,9 @@ import static com.googlesource.gerrit.plugins.reviewers.server.ModifyReviewersCo
 import com.google.gerrit.extensions.annotations.Exports;
 import com.google.gerrit.extensions.config.CapabilityDefinition;
 import com.google.gerrit.extensions.config.FactoryModule;
+import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
+import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.restapi.RestApiModule;
 import com.google.gerrit.server.change.ReviewerSuggestion;
@@ -59,6 +61,8 @@ public class BackendModule extends FactoryModule {
           });
     } else {
       DynamicSet.bind(binder(), RevisionCreatedListener.class).to(Reviewers.class);
+      DynamicSet.bind(binder(), WorkInProgressStateChangedListener.class).to(Reviewers.class);
+      DynamicSet.bind(binder(), PrivateStateChangedListener.class).to(Reviewers.class);
     }
 
     factory(AddReviewersByConfiguration.Factory.class);
