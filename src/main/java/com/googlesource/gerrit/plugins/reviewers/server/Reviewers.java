@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
@@ -41,12 +42,10 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.List;
 import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
-  private static final Logger log = LoggerFactory.getLogger(Reviewers.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
   private final AddReviewersByConfiguration.Factory byConfigFactory;
@@ -101,7 +100,7 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
             .collect(toSet());
       }
     } catch (OrmException | QueryParseException x) {
-      log.error(x.getMessage(), x);
+      logger.atSevere().withCause(x).log(x.getMessage());
     }
     return ImmutableSet.of();
   }
@@ -141,13 +140,11 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
 
       workQueue.getDefaultQueue().submit(task);
     } catch (QueryParseException e) {
-      log.warn(
-          "Could not add default reviewers for change {} of project {}, filter is invalid: {}",
-          changeNumber,
-          projectName.get(),
-          e.getMessage());
+      logger.atWarning().log(
+          "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
+          changeNumber, projectName.get(), e.getMessage());
     } catch (OrmException x) {
-      log.error(x.getMessage(), x);
+      logger.atSevere().withCause(x).log(x.getMessage());
     }
   }
 

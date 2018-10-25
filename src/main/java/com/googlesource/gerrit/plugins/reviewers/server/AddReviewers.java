@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers.server;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
@@ -31,11 +32,9 @@ import com.google.inject.Provider;
 import com.google.inject.ProvisionException;
 import java.util.ArrayList;
 import java.util.Set;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 abstract class AddReviewers implements Runnable {
-  private static final Logger log = LoggerFactory.getLogger(AddReviewers.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ThreadLocalRequestContext tl;
   protected final GerritApi gApi;
@@ -112,7 +111,7 @@ abstract class AddReviewers implements Runnable {
       }
       gApi.changes().id(changeInfo._number).current().review(in);
     } catch (RestApiException e) {
-      log.error("Couldn't add reviewers to the change", e);
+      logger.atSevere().withCause(e).log("Couldn't add reviewers to the change");
     }
   }
 }

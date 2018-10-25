@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.reviewers.server;
 
 import static com.googlesource.gerrit.plugins.reviewers.server.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
 
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.access.PluginPermission;
 import com.google.gerrit.extensions.restapi.AuthException;
@@ -44,12 +45,10 @@ import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 class PutReviewers implements RestModifyView<ProjectResource, Input> {
-  private static final Logger log = LoggerFactory.getLogger(PutReviewers.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static class Input {
     public Action action;
@@ -158,7 +157,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
         }
       }
     } catch (OrmException | IOException | ConfigInvalidException e) {
-      log.error("Failed to resolve account " + reviewer);
+      logger.atSevere().log("Failed to resolve account %s", reviewer);
     }
   }
 }

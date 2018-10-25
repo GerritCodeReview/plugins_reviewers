@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.reviewers.server;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
@@ -32,12 +33,10 @@ import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Config;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 public class ReviewersConfig {
-  private static final Logger log = LoggerFactory.getLogger(ReviewersConfig.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   static final String FILENAME = "reviewers.config";
   static final String SECTION_FILTER = "filter";
@@ -65,7 +64,7 @@ public class ReviewersConfig {
     try {
       cfg = cfgFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
     } catch (NoSuchProjectException e) {
-      log.error("Unable to get config for project {}", projectName.get());
+      logger.atSevere().log("Unable to get config for project %s", projectName.get());
       cfg = new Config();
     }
     return new ForProject(cfg);

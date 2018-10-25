@@ -18,6 +18,7 @@ import static java.util.stream.Collectors.toSet;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -34,13 +35,11 @@ import com.google.inject.Singleton;
 import java.io.IOException;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /* Resolve account and group names to account ids */
 @Singleton
 class ReviewersResolver {
-  private static final Logger log = LoggerFactory.getLogger(ReviewersResolver.class);
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final AccountResolver accountResolver;
   private final Provider<GroupResolver> groupResolver;
@@ -98,21 +97,16 @@ class ReviewersResolver {
           }
           return true;
         }
-        log.warn(
-            "For the change {} of project {}: account {} is inactive.",
-            changeNumber,
-            project,
-            accountName);
+        logger.atWarning().log(
+            "For the change %d of project %s: account %s is inactive.",
+            changeNumber, project, accountName);
       }
     } catch (OrmException | IOException | ConfigInvalidException e) {
       // If the account doesn't exist, find() will return null.  We only
       // get here if something went wrong accessing the database
-      log.error(
-          "For the change {} of project {}: failed to resolve account {}.",
-          changeNumber,
-          project,
-          accountName,
-          e);
+      logger.atSevere().withCause(e).log(
+          "For the change %d of project %s: failed to resolve account %s.",
+          changeNumber, project, accountName);
       return true;
     }
     return false;
@@ -133,18 +127,13 @@ class ReviewersResolver {
               .collect(toSet());
       reviewers.addAll(accounts);
     } catch (UnprocessableEntityException e) {
-      log.warn(
-          "For the change {} of project {}: reviewer {} is neither an account nor a group.",
-          changeNumber,
-          project,
-          group);
+      logger.atWarning().log(
+          "For the change %d of project %s: reviewer %s is neither an account nor a group.",
+          changeNumber, project, group);
     } catch (NoSuchProjectException | IOException e) {
-      log.error(
-          "For the change {} of project {}: failed to list accounts for group {}.",
-          changeNumber,
-          project,
-          group,
-          e);
+      logger.atSevere().withCause(e).log(
+          "For the change %d of project %s: failed to list accounts for group %s.",
+          changeNumber, project, group);
     }
   }
 }
