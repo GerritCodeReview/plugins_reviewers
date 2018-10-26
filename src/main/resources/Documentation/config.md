@@ -24,12 +24,12 @@ reviewers.suggestOnly
 	list, set a higher value (like 1000) in `addReviewer.@PLUGIN@-reviewer-suggestion.weight`
 	in `gerrit.config`.
 
-reviewers.ingoreWip
+reviewers.ignoreWip
 :	Ignore changes in WIP state. When set to true changes in WIP state are not
 	considered when adding reviewers. Defaults to true. To enable adding
 	reviewers on changes in WIP state set this value to false.
 
-revewers.ignorePrivate
+reviewers.ignorePrivate
 :	Ignore changes in private state. When set to true changes in private state
 	are not considered when adding reviewers. Defaults to true. To enable
 	adding reviewers on changes in Private state set this value to false.
