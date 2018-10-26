@@ -24,8 +24,10 @@ import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
+import com.google.gerrit.extensions.events.ChangeEvent;
+import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
-import com.google.gerrit.extensions.events.RevisionEvent;
+import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Change;
@@ -44,8 +46,12 @@ import java.util.List;
 import java.util.Set;
 
 @Singleton
-class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+class Reviewers
+    implements RevisionCreatedListener,
+        PrivateStateChangedListener,
+        WorkInProgressStateChangedListener,
+        ReviewerSuggestion {
+	  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
   private final AddReviewersByConfiguration.Factory byConfigFactory;
@@ -75,6 +81,16 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
 
   @Override
   public void onRevisionCreated(RevisionCreatedListener.Event event) {
+    onEvent(event);
+  }
+
+  @Override
+  public void onWorkInProgressStateChanged(WorkInProgressStateChangedListener.Event event) {
+    onEvent(event);
+  }
+
+  @Override
+  public void onPrivateStateChanged(PrivateStateChangedListener.Event event) {
     onEvent(event);
   }
 
@@ -117,8 +133,14 @@ class Reviewers implements RevisionCreatedListener, ReviewerSuggestion {
     return config.forProject(projectName).getReviewerFilterSections();
   }
 
-  private void onEvent(RevisionEvent event) {
+  private void onEvent(ChangeEvent event) {
     ChangeInfo c = event.getChange();
+    if (config.ignoreWip() && (c.workInProgress != null && c.workInProgress)) {
+      return;
+    }
+    if (config.ignorePrivate() && (c.isPrivate != null && c.isPrivate)) {
+      return;
+    }
     Project.NameKey projectName = new Project.NameKey(c.project);
 
     List<ReviewerFilterSection> sections = getSections(projectName);
