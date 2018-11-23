@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80096bce_2636935d",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2018-11-23T11:23:04Z",
+      "side": 1,
+      "message": "https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-reviewers-bazel-master/44/ fails:\n\nERROR: /home/jenkins/workspace/plugin-reviewers-bazel-master/plugins/reviewers/BUILD:28:1: //plugins/reviewers:reviewers__plugin: no such attribute \u0027gwt_module\u0027 in \u0027java_library\u0027 rule\nERROR: /home/jenkins/workspace/plugin-reviewers-bazel-master/plugins/reviewers/BUILD:28:1: //plugins/reviewers:reviewers__non_stamped: no such attribute \u0027gwt_module\u0027 in \u0027java_binary\u0027 rule",
+      "revId": "53c46081993d8dadf22d29c6bdb1015c7087db1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
