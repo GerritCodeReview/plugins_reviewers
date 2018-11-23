@@ -34,6 +34,24 @@
       "revId": "53c46081993d8dadf22d29c6bdb1015c7087db1e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fd8ea12_6dcca079",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011624
+      },
+      "writtenOn": "2018-11-23T12:17:00Z",
+      "side": 1,
+      "message": "Ah, then ci needs a 2.26 build probably.",
+      "parentUuid": "964e5bd4_d34ee6e9",
+      "revId": "53c46081993d8dadf22d29c6bdb1015c7087db1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
