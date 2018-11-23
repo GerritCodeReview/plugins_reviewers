@@ -16,6 +16,24 @@
       "revId": "53c46081993d8dadf22d29c6bdb1015c7087db1e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "964e5bd4_d34ee6e9",
+        "filename": "WORKSPACE",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2018-11-23T11:47:58Z",
+      "side": 1,
+      "message": "That\u0027s not related to this change.\n\nThe CI is using the in-tree build, which has not been adjusted on master to the removal of GWT.",
+      "parentUuid": "80096bce_2636935d",
+      "revId": "53c46081993d8dadf22d29c6bdb1015c7087db1e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
