@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.server;
+package com.googlesource.gerrit.plugins.reviewers;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -120,7 +120,8 @@ class ReviewersResolver {
       String group) {
     try {
       Set<Account.Id> accounts =
-          groupMembers.listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
+          groupMembers
+              .listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
               .stream()
               .filter(Account::isActive)
               .map(Account::getId)

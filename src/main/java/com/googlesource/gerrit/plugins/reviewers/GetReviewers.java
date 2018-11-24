@@ -14,29 +14,24 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.common.collect.Lists;
-import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.extensions.client.MenuItem;
-import com.google.gerrit.extensions.webui.TopMenu;
+import com.google.gerrit.extensions.restapi.RestApiException;
+import com.google.gerrit.extensions.restapi.RestReadView;
+import com.google.gerrit.server.project.ProjectResource;
 import com.google.inject.Inject;
-import java.util.Collections;
+import com.google.inject.Singleton;
 import java.util.List;
 
-public class ReviewersTopMenu implements TopMenu {
-  private final List<MenuEntry> menuEntries;
+@Singleton
+class GetReviewers implements RestReadView<ProjectResource> {
+  private final ReviewersConfig config;
 
   @Inject
-  ReviewersTopMenu(@PluginName String pluginName) {
-    menuEntries = Lists.newArrayList();
-    menuEntries.add(
-        new MenuEntry(
-            "Projects",
-            Collections.singletonList(
-                new MenuItem("Reviewers", "#/x/" + pluginName + "/p/${projectName}", "_self"))));
+  GetReviewers(ReviewersConfig config) {
+    this.config = config;
   }
 
   @Override
-  public List<MenuEntry> getEntries() {
-    return this.menuEntries;
+  public List<ReviewerFilterSection> apply(ProjectResource resource) throws RestApiException {
+    return config.forProject(resource.getNameKey()).getReviewerFilterSections();
   }
 }
