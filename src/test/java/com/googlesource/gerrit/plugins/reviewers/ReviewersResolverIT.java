@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.server;
+package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.AbstractDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
+import com.google.gerrit.acceptance.testsuite.group.GroupOperations;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.inject.Inject;
 import java.util.Collections;
@@ -30,6 +31,7 @@ import org.junit.Test;
 @NoHttpd
 public class ReviewersResolverIT extends AbstractDaemonTest {
 
+  @Inject private GroupOperations groupOperations;
   @Inject private ReviewersResolver resolver;
   private int change;
 
@@ -62,11 +64,13 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
 
   @Test
   public void testAccountGroupResolve() throws Exception {
-    String group1 = createGroup("group1");
+    String group1 = "group1";
+    groupOperations.newGroup().name(group1).create();
     TestAccount foo = createTestAccount("foo", group1);
     TestAccount bar = createTestAccount("bar", group1);
 
-    String group2 = createGroup("group2");
+    String group2 = "group2";
+    groupOperations.newGroup().name(group2).create();
     TestAccount baz = createTestAccount("baz", group2);
     TestAccount qux = createTestAccount("qux", group2);
 
