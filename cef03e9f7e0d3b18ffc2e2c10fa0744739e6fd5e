@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab721363_75b5cf35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-24T13:21:59Z",
+      "side": 1,
+      "message": "Now that",
+      "range": {
+        "startLine": 10,
+        "startChar": 53,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f3421b_7af993b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-24T13:21:59Z",
+      "side": 1,
+      "message": "Can this be done in another change, on which this one could be based?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 50
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00c88765_c2fdd622",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-24T13:21:59Z",
+      "side": 1,
+      "message": "Google-java-format moves this line further above, isolating static import(s).",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 112
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a06f107_754e7524",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-24T13:21:59Z",
+      "side": 1,
+      "message": "Google-java-format removes these two lines.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6fd5d6c_89df086c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolverIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-24T13:21:59Z",
+      "side": 1,
+      "message": "Removed by gjf as well.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 67
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
