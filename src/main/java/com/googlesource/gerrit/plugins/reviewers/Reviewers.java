@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.server;
+package com.googlesource.gerrit.plugins.reviewers;
 
 import static java.util.stream.Collectors.toSet;
 
@@ -51,7 +51,7 @@ class Reviewers
         PrivateStateChangedListener,
         WorkInProgressStateChangedListener,
         ReviewerSuggestion {
-	  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
   private final AddReviewersByConfiguration.Factory byConfigFactory;
