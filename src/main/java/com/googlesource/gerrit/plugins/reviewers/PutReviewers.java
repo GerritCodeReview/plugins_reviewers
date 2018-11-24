@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.server;
+package com.googlesource.gerrit.plugins.reviewers;
 
-import static com.googlesource.gerrit.plugins.reviewers.server.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
+import static com.googlesource.gerrit.plugins.reviewers.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.annotations.PluginName;
@@ -39,8 +39,7 @@ import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.common.Action;
-import com.googlesource.gerrit.plugins.reviewers.server.PutReviewers.Input;
+import com.googlesource.gerrit.plugins.reviewers.PutReviewers.Input;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
