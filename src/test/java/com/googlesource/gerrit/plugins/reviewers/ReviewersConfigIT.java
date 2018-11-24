@@ -12,14 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.server;
+package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
-import static com.googlesource.gerrit.plugins.reviewers.server.ReviewersConfig.FILENAME;
-import static com.googlesource.gerrit.plugins.reviewers.server.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.server.ReviewersConfig.SECTION_FILTER;
-
+import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
@@ -27,6 +26,8 @@ import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
+import com.googlesource.gerrit.plugins.reviewers.ReviewerFilterSection;
+import com.googlesource.gerrit.plugins.reviewers.ReviewersConfig;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Before;

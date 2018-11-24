@@ -12,14 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.client;
+package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.gerrit.plugin.client.Plugin;
-import com.google.gerrit.plugin.client.PluginEntryPoint;
-
-public class ReviewersPlugin extends PluginEntryPoint {
-  @Override
-  public void onPluginLoad() {
-    Plugin.get().screenRegex("p/(.*)", new ReviewersScreen.Factory());
-  }
+public enum Action {
+  ADD,
+  REMOVE
 }

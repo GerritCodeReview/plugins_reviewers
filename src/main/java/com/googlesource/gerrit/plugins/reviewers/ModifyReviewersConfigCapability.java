@@ -1,4 +1,4 @@
-// Copyright (C) 2014 The Android Open Source Project
+// Copyright (C) 2018 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,12 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers.client;
+package com.googlesource.gerrit.plugins.reviewers;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gerrit.extensions.config.CapabilityDefinition;
 
-public class ProjectAccessInfo extends JavaScriptObject {
-  public final native boolean isOwner() /*-{ return this.is_owner ? true : false; }-*/;
+public class ModifyReviewersConfigCapability extends CapabilityDefinition {
+  static final String MODIFY_REVIEWERS_CONFIG = "modifyReviewersConfig";
 
-  protected ProjectAccessInfo() {}
+  @Override
+  public String getDescription() {
+    return "Modify Reviewers Config";
+  }
 }
