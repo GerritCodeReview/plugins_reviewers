@@ -46,6 +46,30 @@
       "revId": "fedec2e356250bfba2daa508914527cf189ad956",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1752729_643a10ce",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolverIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-25T20:15:17Z",
+      "side": 1,
+      "message": "Likely yes. Cannot check this now, driving again soon. Tests passed by the way.",
+      "parentUuid": "8d19c01d_5ed42532",
+      "range": {
+        "startLine": 34,
+        "startChar": 34,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "fedec2e356250bfba2daa508914527cf189ad956",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
