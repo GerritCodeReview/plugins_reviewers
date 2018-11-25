@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "305fb01e_e987d952",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-11-25T10:23:32Z",
+      "side": 1,
+      "message": "Bad rebase.",
+      "revId": "d1f01a6e448054c411009cd2edff193c6d4c7a71",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
