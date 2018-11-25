@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "97455107_1338ae79",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-25T18:22:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "694df44b_4a409e8a",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 50
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00c88765_c2fdd622",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
         "patchSetId": 2
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "Thanks. I ran gjf alias on this commit. However, it turned out that my alias was not complete and missed the renamed files, I fixed it now:\n\n  alias gjf2\u003d\u0027git show --diff-filter\u003dAMR --pretty\u003d\"\" --name-only HEAD | grep java$ | xargs -r  /home/davido/projects/gerrit2/tools/format/google-java-format-1.6 -i\u0027\n\nDone.",
       "parentUuid": "00c88765_c2fdd622",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 112
+      },
+      "revId": "cef03e9f7e0d3b18ffc2e2c10fa0744739e6fd5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f1bbd42_dcca9be5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2018-11-25T18:22:47Z",
+      "side": 1,
+      "message": "Thx for sharing your alias with us here.",
+      "parentUuid": "27ee3cbd_9415838b",
       "range": {
         "startLine": 41,
         "startChar": 0,
