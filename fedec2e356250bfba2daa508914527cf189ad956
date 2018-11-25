@@ -22,6 +22,30 @@
       "revId": "fedec2e356250bfba2daa508914527cf189ad956",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d19c01d_5ed42532",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolverIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2018-11-25T18:41:08Z",
+      "side": 1,
+      "message": "Can it be that you have not pulled the recent master? groupOperations attribute was removed in AbstractDaemonTest in this CL: [1].\n\n* [1] https://gerrit-review.googlesource.com/c/gerrit/+/203795/6/java/com/google/gerrit/acceptance/AbstractDaemonTest.java#b267",
+      "parentUuid": "98e3a99b_a25cb710",
+      "range": {
+        "startLine": 34,
+        "startChar": 34,
+        "endLine": 34,
+        "endChar": 49
+      },
+      "revId": "fedec2e356250bfba2daa508914527cf189ad956",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
