@@ -25,8 +25,10 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.reviewdb.client.RefNames;
+import com.google.inject.Inject;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
@@ -39,6 +41,9 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
   private static final String NO_FILTER = "*";
   private static final String JANE_DOE = "jane.doe@example.com";
   private static final String JOHN_DOE = "john.doe@example.com";
+
+  @Inject
+  private ProjectOperations projectOperations;
 
   @Before
   public void setUp() throws Exception {
@@ -82,7 +87,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
-    Project.NameKey childProject = createProject("child", project);
+    Project.NameKey childProject = projectOperations.newProject().parent(project).create();
     TestRepository<?> childTestRepo = cloneProject(childProject);
     fetch(childTestRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
     childTestRepo.reset("refs/heads/config");
