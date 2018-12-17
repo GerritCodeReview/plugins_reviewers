@@ -56,7 +56,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email, user2.email));
 
     pushFactory
-        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -92,7 +92,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email));
 
     pushFactory
-        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -126,7 +126,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     cfg.setString(SECTION_FILTER, "branch:master", KEY_REVIEWER, user.email);
 
     pushFactory
-        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -159,7 +159,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     cfg.setString(SECTION_FILTER, "branch:other-branch", KEY_REVIEWER, user.email);
 
     pushFactory
-        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
