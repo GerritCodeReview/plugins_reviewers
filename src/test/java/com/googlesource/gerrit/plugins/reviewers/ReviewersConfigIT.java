@@ -42,8 +42,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
   private static final String JANE_DOE = "jane.doe@example.com";
   private static final String JOHN_DOE = "john.doe@example.com";
 
-  @Inject
-  private ProjectOperations projectOperations;
+  @Inject private ProjectOperations projectOperations;
 
   @Before
   public void setUp() throws Exception {
@@ -58,7 +57,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JANE_DOE);
 
     pushFactory
-        .create(db, admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -78,7 +77,6 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
     pushFactory
         .create(
-            db,
             admin.getIdent(),
             testRepo,
             "Add reviewers parent project",
@@ -98,12 +96,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
     pushFactory
         .create(
-            db,
-            admin.getIdent(),
-            childTestRepo,
-            "Add reviewers child project",
-            FILENAME,
-            cfg.toText())
+            admin.getIdent(), childTestRepo, "Add reviewers child project", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
