@@ -26,10 +26,6 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
-import com.google.gwtorm.server.OrmException;
-import com.google.gwtorm.server.SchemaFactory;
-import com.google.inject.Provider;
-import com.google.inject.ProvisionException;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -39,7 +35,6 @@ abstract class AddReviewers implements Runnable {
   private final ThreadLocalRequestContext tl;
   protected final GerritApi gApi;
   protected final IdentifiedUser.GenericFactory identifiedUserFactory;
-  protected final SchemaFactory<ReviewDb> schemaFactory;
   protected final ChangeInfo changeInfo;
 
   private ReviewDb db = null;
@@ -48,12 +43,10 @@ abstract class AddReviewers implements Runnable {
       ThreadLocalRequestContext tl,
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      SchemaFactory<ReviewDb> schemaFactory,
       ChangeInfo changeInfo) {
     this.tl = tl;
     this.gApi = gApi;
     this.identifiedUserFactory = identifiedUserFactory;
-    this.schemaFactory = schemaFactory;
     this.changeInfo = changeInfo;
   }
 
@@ -68,23 +61,6 @@ abstract class AddReviewers implements Runnable {
               @Override
               public CurrentUser getUser() {
                 return identifiedUserFactory.create(new Account.Id(changeInfo.owner._accountId));
-              }
-
-              @Override
-              public Provider<ReviewDb> getReviewDbProvider() {
-                return new Provider<ReviewDb>() {
-                  @Override
-                  public ReviewDb get() {
-                    if (db == null) {
-                      try {
-                        db = schemaFactory.open();
-                      } catch (OrmException e) {
-                        throw new ProvisionException("Cannot open ReviewDb", e);
-                      }
-                    }
-                    return db;
-                  }
-                };
               }
             });
     try {

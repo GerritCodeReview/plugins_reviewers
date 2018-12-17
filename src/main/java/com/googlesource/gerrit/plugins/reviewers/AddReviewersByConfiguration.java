@@ -17,10 +17,8 @@ package com.googlesource.gerrit.plugins.reviewers;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.reviewdb.client.Account;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
-import com.google.gwtorm.server.SchemaFactory;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.Set;
@@ -37,10 +35,9 @@ class AddReviewersByConfiguration extends AddReviewers {
       ThreadLocalRequestContext tl,
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      SchemaFactory<ReviewDb> schemaFactory,
       @Assisted ChangeInfo changeInfo,
       @Assisted Set<Account.Id> reviewers) {
-    super(tl, gApi, identifiedUserFactory, schemaFactory, changeInfo);
+    super(tl, gApi, identifiedUserFactory, changeInfo);
     this.reviewers = reviewers;
   }
 

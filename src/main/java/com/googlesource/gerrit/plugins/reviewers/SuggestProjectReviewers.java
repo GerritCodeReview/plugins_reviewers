@@ -43,11 +43,10 @@ public class SuggestProjectReviewers extends SuggestReviewers
   @Inject
   SuggestProjectReviewers(
       AccountVisibility av,
-      Provider<ReviewDb> dbProvider,
       @GerritServerConfig Config cfg,
       ReviewersUtil reviewersUtil,
       PermissionBackend permissionBackend) {
-    super(av, dbProvider, cfg, reviewersUtil);
+    super(av, cfg, reviewersUtil);
     this.permissionBackend = permissionBackend;
   }
 
