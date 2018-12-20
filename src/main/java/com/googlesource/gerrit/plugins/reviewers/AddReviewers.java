@@ -21,7 +21,6 @@ import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.reviewdb.client.Account;
-import com.google.gerrit.reviewdb.server.ReviewDb;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.util.RequestContext;
@@ -36,8 +35,6 @@ abstract class AddReviewers implements Runnable {
   protected final GerritApi gApi;
   protected final IdentifiedUser.GenericFactory identifiedUserFactory;
   protected final ChangeInfo changeInfo;
-
-  private ReviewDb db = null;
 
   AddReviewers(
       ThreadLocalRequestContext tl,
@@ -67,10 +64,6 @@ abstract class AddReviewers implements Runnable {
       addReviewers(getReviewers(), changeInfo);
     } finally {
       tl.setContext(old);
-      if (db != null) {
-        db.close();
-        db = null;
-      }
     }
   }
 
