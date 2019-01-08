@@ -51,7 +51,7 @@ class Reviewers
         PrivateStateChangedListener,
         WorkInProgressStateChangedListener,
         ReviewerSuggestion {
-	  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
   private final AddReviewersByConfiguration.Factory byConfigFactory;
