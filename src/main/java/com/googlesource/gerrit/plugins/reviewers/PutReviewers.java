@@ -25,7 +25,6 @@ import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
-import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.git.meta.MetaDataUpdate;
@@ -147,8 +146,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   private void validateReviewer(String reviewer) throws RestApiException {
     try {
-      Account account = accountResolver.find(reviewer);
-      if (account == null) {
+      if (accountResolver.resolve(reviewer).asList().isEmpty()) {
         try {
           groupResolver.get().parse(reviewer);
         } catch (UnprocessableEntityException e) {

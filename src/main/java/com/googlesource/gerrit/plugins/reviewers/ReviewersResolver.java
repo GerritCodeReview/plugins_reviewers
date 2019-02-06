@@ -85,31 +85,25 @@ class ReviewersResolver {
   private boolean resolveAccount(
       Project.NameKey project,
       int changeNumber,
-      AccountInfo uploader,
+      @Nullable AccountInfo uploader,
       Set<Account.Id> reviewers,
       String accountName) {
     try {
-      Account account = accountResolver.find(accountName);
-      if (account != null) {
-        if (account.isActive()) {
-          if (uploader == null || uploader._accountId != account.getId().get()) {
-            reviewers.add(account.getId());
-          }
+      AccountResolver.Result result = accountResolver.resolve(accountName);
+      if (result.asList().size() == 1) {
+        Account.Id id = result.asList().get(0).getAccount().getId();
+        if (uploader == null || id.get() != uploader._accountId) {
+          reviewers.add(id);
           return true;
         }
-        logger.atWarning().log(
-            "For the change %d of project %s: account %s is inactive.",
-            changeNumber, project, accountName);
       }
+      return false;
     } catch (OrmException | IOException | ConfigInvalidException e) {
-      // If the account doesn't exist, find() will return null.  We only
-      // get here if something went wrong accessing the database
       logger.atSevere().withCause(e).log(
           "For the change %d of project %s: failed to resolve account %s.",
           changeNumber, project, accountName);
       return true;
     }
-    return false;
   }
 
   private void resolveGroup(
