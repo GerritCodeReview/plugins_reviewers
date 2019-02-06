@@ -25,9 +25,9 @@ import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
-import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
+import com.google.gerrit.server.account.AccountResolver.UnresolvableAccountException;
 import com.google.gerrit.server.git.meta.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.permissions.PermissionBackend;
@@ -147,13 +147,18 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   private void validateReviewer(String reviewer) throws RestApiException {
     try {
-      Account account = accountResolver.find(reviewer);
-      if (account == null) {
-        try {
-          groupResolver.get().parse(reviewer);
-        } catch (UnprocessableEntityException e) {
-          throw new ResourceNotFoundException("Account or group " + reviewer + " not found");
-        }
+      UnresolvableAccountException accountException;
+      try {
+        accountResolver.resolve(reviewer).asUnique();
+        return;
+      } catch (UnresolvableAccountException e) {
+        accountException = e;
+      }
+      try {
+        groupResolver.get().parse(reviewer);
+      } catch (UnprocessableEntityException e) {
+        throw new ResourceNotFoundException(
+            "Account or group '" + reviewer + "' not found\n" + accountException.getMessage());
       }
     } catch (OrmException | IOException | ConfigInvalidException e) {
       logger.atSevere().log("Failed to resolve account %s", reviewer);
