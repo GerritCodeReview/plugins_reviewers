@@ -18,6 +18,7 @@ gerrit_plugin(
 
 junit_tests(
     name = "reviewers_tests",
+    size = "small",
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["reviewers"],
     deps = [
