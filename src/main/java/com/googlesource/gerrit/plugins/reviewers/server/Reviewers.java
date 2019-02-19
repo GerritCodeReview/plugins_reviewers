@@ -202,7 +202,7 @@ class Reviewers
     return !queryProvider
         .get()
         .noFields()
-        .query(qb.parse(String.format("change:%s %s", change, filter)))
+        .query(qb.parse(String.format("change:%s AND (%s)", change, filter)))
         .isEmpty();
   }
 }
