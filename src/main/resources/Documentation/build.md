@@ -46,7 +46,7 @@ The output is created in
 To execute the tests run:
 
 ```
-  bazel test --test_tag_filters=@PLUGIN@
+  bazel test --test_tag_filters=@PLUGIN@ //...
 ```
 
 This project can be imported into the Eclipse IDE.
