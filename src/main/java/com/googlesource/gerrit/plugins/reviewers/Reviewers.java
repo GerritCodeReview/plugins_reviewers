@@ -106,9 +106,7 @@ class Reviewers implements RevisionCreatedListener, DraftPublishedListener, Revi
     try (ReviewDb reviewDb = schemaFactory.open()) {
       Set<String> reviewers = findReviewers(changeId.get(), sections);
       if (!reviewers.isEmpty()) {
-        return resolver
-            .resolve(reviewDb, reviewers, projectName, changeId.get(), null)
-            .stream()
+        return resolver.resolve(reviewDb, reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
       }
