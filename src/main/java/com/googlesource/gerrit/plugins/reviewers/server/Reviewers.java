@@ -110,9 +110,7 @@ class Reviewers
     try {
       Set<String> reviewers = findReviewers(changeId.get(), sections);
       if (!reviewers.isEmpty()) {
-        return resolver
-            .resolve(reviewers, projectName, changeId.get(), null)
-            .stream()
+        return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
       }
