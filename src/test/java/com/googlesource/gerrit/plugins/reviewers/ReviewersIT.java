@@ -53,10 +53,11 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     TestAccount user2 = accountCreator.user2();
 
     Config cfg = new Config();
-    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email, user2.email));
+    cfg.setStringList(
+        SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email(), user2.email()));
 
     pushFactory
-        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -79,7 +80,8 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(admin.id.get(), user.id.get(), user2.id.get()));
+        .containsExactlyElementsIn(
+            ImmutableSet.of(admin.id().get(), user.id().get(), user2.id().get()));
   }
 
   @Test
@@ -88,11 +90,11 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     TestAccount user2 = accountCreator.user2();
 
     Config cfg = new Config();
-    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email));
-    cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email));
+    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email()));
+    cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email()));
 
     pushFactory
-        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -115,7 +117,8 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(admin.id.get(), user.id.get(), user2.id.get()));
+        .containsExactlyElementsIn(
+            ImmutableSet.of(admin.id().get(), user.id().get(), user2.id().get()));
   }
 
   @Test
@@ -123,10 +126,10 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     RevCommit oldHead = getRemoteHead();
 
     Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, "branch:master", KEY_REVIEWER, user.email);
+    cfg.setString(SECTION_FILTER, "branch:master", KEY_REVIEWER, user.email());
 
     pushFactory
-        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -156,10 +159,10 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     RevCommit oldHead = getRemoteHead();
 
     Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, "branch:other-branch", KEY_REVIEWER, user.email);
+    cfg.setString(SECTION_FILTER, "branch:other-branch", KEY_REVIEWER, user.email());
 
     pushFactory
-        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -182,6 +185,6 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null && wait < 100);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(admin.id.get(), user.id.get()));
+        .containsExactlyElementsIn(ImmutableSet.of(admin.id().get(), user.id().get()));
   }
 }

@@ -44,10 +44,10 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   public void testUploaderSkippedAsReviewer() throws Exception {
     Set<Account.Id> reviewers =
         resolver.resolve(
-            Collections.singleton(user.email),
+            Collections.singleton(user.email()),
             project,
             change,
-            gApi.accounts().id(user.id.get()).get());
+            gApi.accounts().id(user.id().get()).get());
     assertThat(reviewers).isEmpty();
   }
 
@@ -55,11 +55,11 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   public void testAccountResolve() throws Exception {
     Set<Account.Id> reviewers =
         resolver.resolve(
-            ImmutableSet.of(user.email, admin.email),
+            ImmutableSet.of(user.email(), admin.email()),
             project,
             change,
-            gApi.accounts().id(admin.id.get()).get());
-    assertThat(reviewers).containsExactly(user.id);
+            gApi.accounts().id(admin.id().get()).get());
+    assertThat(reviewers).containsExactly(user.id());
   }
 
   @Test
@@ -78,11 +78,11 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
 
     Set<Account.Id> reviewers =
         resolver.resolve(
-            ImmutableSet.of(system.email, group1, group2),
+            ImmutableSet.of(system.email(), group1, group2),
             project,
             change,
-            gApi.accounts().id(admin.id.get()).get());
-    assertThat(reviewers).containsExactly(system.id, foo.id, bar.id, baz.id, qux.id);
+            gApi.accounts().id(admin.id().get()).get());
+    assertThat(reviewers).containsExactly(system.id(), foo.id(), bar.id(), baz.id(), qux.id());
   }
 
   private TestAccount createTestAccount(String name, String group) throws Exception {

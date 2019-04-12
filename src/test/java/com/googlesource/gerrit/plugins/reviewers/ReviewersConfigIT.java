@@ -57,7 +57,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JANE_DOE);
 
     pushFactory
-        .create(admin.getIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
@@ -77,7 +77,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
     pushFactory
         .create(
-            admin.getIdent(),
+            admin.newIdent(),
             testRepo,
             "Add reviewers parent project",
             FILENAME,
@@ -96,7 +96,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
     pushFactory
         .create(
-            admin.getIdent(), childTestRepo, "Add reviewers child project", FILENAME, cfg.toText())
+            admin.newIdent(), childTestRepo, "Add reviewers child project", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
