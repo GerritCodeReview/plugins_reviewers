@@ -135,7 +135,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     testRepo.reset(oldHead);
 
-    createBranch(new Branch.NameKey(project, "other-branch"));
+    createBranch(Branch.nameKey(project, "other-branch"));
 
     // Create a change that matches the filter section.
     createChange("refs/for/master");
@@ -168,7 +168,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     testRepo.reset(oldHead);
 
-    createBranch(new Branch.NameKey(project, "other-branch"));
+    createBranch(Branch.nameKey(project, "other-branch"));
 
     // Create a change that doesn't match the filter section.
     createChange("refs/for/master");
