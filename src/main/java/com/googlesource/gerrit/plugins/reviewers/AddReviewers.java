@@ -57,7 +57,7 @@ abstract class AddReviewers implements Runnable {
 
               @Override
               public CurrentUser getUser() {
-                return identifiedUserFactory.create(new Account.Id(changeInfo.owner._accountId));
+                return identifiedUserFactory.create(Account.id(changeInfo.owner._accountId));
               }
             });
     try {
