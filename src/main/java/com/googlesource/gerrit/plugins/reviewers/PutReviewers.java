@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.reviewers;
 import static com.googlesource.gerrit.plugins.reviewers.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.access.PluginPermission;
 import com.google.gerrit.extensions.restapi.AuthException;
@@ -35,7 +36,6 @@ import com.google.gerrit.server.permissions.PermissionBackendException;
 import com.google.gerrit.server.permissions.ProjectPermission;
 import com.google.gerrit.server.project.ProjectCache;
 import com.google.gerrit.server.project.ProjectResource;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -160,7 +160,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
         throw new ResourceNotFoundException(
             "Account or group '" + reviewer + "' not found\n" + accountException.getMessage());
       }
-    } catch (OrmException | IOException | ConfigInvalidException e) {
+    } catch (StorageException | IOException | ConfigInvalidException e) {
       logger.atSevere().log("Failed to resolve account %s", reviewer);
     }
   }

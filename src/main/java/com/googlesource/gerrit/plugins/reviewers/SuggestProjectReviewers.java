@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountVisibility;
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
 import com.google.gerrit.extensions.restapi.BadRequestException;
@@ -27,7 +28,6 @@ import com.google.gerrit.server.project.ProjectResource;
 import com.google.gerrit.server.restapi.change.ReviewersUtil;
 import com.google.gerrit.server.restapi.change.ReviewersUtil.VisibilityControl;
 import com.google.gerrit.server.restapi.change.SuggestReviewers;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.util.List;
@@ -50,7 +50,7 @@ public class SuggestProjectReviewers extends SuggestReviewers
 
   @Override
   public List<SuggestedReviewerInfo> apply(ProjectResource rsrc)
-      throws BadRequestException, OrmException, IOException, ConfigInvalidException,
+      throws BadRequestException, StorageException, IOException, ConfigInvalidException,
           PermissionBackendException {
     return reviewersUtil.suggestReviewers(
         null, this, rsrc.getProjectState(), getVisibility(rsrc), true);

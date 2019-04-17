@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.ChangeEvent;
@@ -38,7 +39,6 @@ import com.google.gerrit.server.change.SuggestedReviewer;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.gerrit.server.query.change.InternalChangeQuery;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -113,7 +113,7 @@ class Reviewers
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
       }
-    } catch (OrmException | QueryParseException x) {
+    } catch (StorageException | QueryParseException x) {
       logger.atSevere().withCause(x).log(x.getMessage());
     }
     return ImmutableSet.of();
@@ -163,13 +163,13 @@ class Reviewers
       logger.atWarning().log(
           "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
           changeNumber, projectName.get(), e.getMessage());
-    } catch (OrmException x) {
+    } catch (StorageException x) {
       logger.atSevere().withCause(x).log(x.getMessage());
     }
   }
 
   private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
-      throws OrmException, QueryParseException {
+      throws StorageException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
     List<ReviewerFilterSection> found = findReviewerSections(change, sections);
     for (ReviewerFilterSection s : found) {
@@ -179,7 +179,8 @@ class Reviewers
   }
 
   private List<ReviewerFilterSection> findReviewerSections(
-      int change, List<ReviewerFilterSection> sections) throws OrmException, QueryParseException {
+      int change, List<ReviewerFilterSection> sections)
+      throws StorageException, QueryParseException {
     ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
     for (ReviewerFilterSection s : sections) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
@@ -191,7 +192,7 @@ class Reviewers
     return found.build();
   }
 
-  boolean filterMatch(int change, String filter) throws OrmException, QueryParseException {
+  boolean filterMatch(int change, String filter) throws StorageException, QueryParseException {
     Preconditions.checkNotNull(filter);
     ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
     return !queryProvider

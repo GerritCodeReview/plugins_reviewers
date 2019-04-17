@@ -20,6 +20,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.reviewdb.client.Account;
@@ -28,7 +29,6 @@ import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.project.NoSuchProjectException;
-import com.google.gwtorm.server.OrmException;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -98,7 +98,7 @@ class ReviewersResolver {
         }
       }
       return false;
-    } catch (OrmException | IOException | ConfigInvalidException e) {
+    } catch (StorageException | IOException | ConfigInvalidException e) {
       logger.atSevere().withCause(e).log(
           "For the change %d of project %s: failed to resolve account %s.",
           changeNumber, project, accountName);
