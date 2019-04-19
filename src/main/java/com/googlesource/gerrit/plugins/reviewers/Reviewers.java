@@ -139,7 +139,7 @@ class Reviewers
     if (config.ignorePrivate() && (c.isPrivate != null && c.isPrivate)) {
       return;
     }
-    Project.NameKey projectName = new Project.NameKey(c.project);
+    Project.NameKey projectName = Project.nameKey(c.project);
 
     List<ReviewerFilterSection> sections = getSections(projectName);
 
