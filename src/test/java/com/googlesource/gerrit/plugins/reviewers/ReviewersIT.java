@@ -30,7 +30,7 @@ import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.extensions.common.AccountInfo;
-import com.google.gerrit.reviewdb.client.BranchNameKey;
+import com.google.gerrit.reviewdb.client.Branch;
 import com.google.gerrit.reviewdb.client.RefNames;
 import java.util.Collection;
 import org.eclipse.jgit.lib.Config;
@@ -135,7 +135,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     testRepo.reset(oldHead);
 
-    createBranch(BranchNameKey.create(project, "other-branch"));
+    createBranch(new Branch.NameKey(project, "other-branch"));
 
     // Create a change that matches the filter section.
     createChange("refs/for/master");
@@ -168,7 +168,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     testRepo.reset(oldHead);
 
-    createBranch(BranchNameKey.create(project, "other-branch"));
+    createBranch(new Branch.NameKey(project, "other-branch"));
 
     // Create a change that doesn't match the filter section.
     createChange("refs/for/master");
