@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "gerritforge:style-checker": {
+      "state": "SUCCESSFUL",
+      "url": "https://gerrit-ci.gerritforge.com/job/Gerrit-verifier-bazel/65643/consoleText",
+      "created": "2019-05-13T13:48:48Z",
+      "updated": "2019-05-13T13:48:48Z"
+    }
+  }
+}
