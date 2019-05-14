@@ -1,0 +1,71 @@
+<!--
+@license
+Copyright (C) 2019 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<link rel="import" href="./rv-filter-section.html">
+
+<dom-module id="rv-edit-screen">
+  <template>
+    <style include="shared-styles"></style>
+    <style include="gr-menu-page-styles"></style>
+    <style include="gr-subpage-styles">
+      .bottomButtons {
+        display: flex;
+      }
+      #closeButton {
+        float: right;
+      }
+      #filterSections {
+          width: 100%;
+      }
+    </style>
+    <div>
+      <h1>Reviewers Config</h1>
+      <table id="filterSections">
+        <tr>
+          <th>Filter Sections</th>
+        </tr>
+        <tr id="loading" class$="loadingMsg [[_computeLoadingClass(loading)]]">
+          <td>Loading...</td>
+        </tr>
+        <tbody class$="[[_computeLoadingClass(loading)]]">
+          <tr>
+            <template
+                is="dom-repeat"
+                items="[[_filterSections]]"
+                as="section">
+              <rv-filter-section
+                  filter="[[section.filter]]"
+                  reviewers="[[section.reviewers]]"
+                  editing="[[section.editing]]"
+                  reviewers-url="[[_getReviewersUrl(repoName)]]"
+                  plugin-rest-api="[[pluginRestApi]]"
+                  can-modify-config="[[canModifyConfig]]"
+                  on-reviewer-changed="_handleReviewerChanged"></rv-filter-section>
+            </template>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bottomButtons">
+        <gr-button
+            id="addFilterBtn"
+            on-tap="_handleCreateSection"
+            hidden="[[_computeAddFilterBtnHidden(canModifyConfig, _editingFilter)]]">Add Filter</gr-button>
+        <gr-button id="closeButton" on-tap="_handleCloseTap">Close</gr-button>
+      </div>
+    </div>
+  </template>
+  <script src="./rv-edit-screen.js"></script>
+</dom-module>
