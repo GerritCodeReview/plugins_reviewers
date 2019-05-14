@@ -1,0 +1,204 @@
+<!--
+@license
+Copyright (C) 2019 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<link rel="import" href="./rv-reviewer.html">
+
+<dom-module id="rv-filter-section">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        margin-bottom: 1em;
+      }
+      fieldset {
+        border: 1px solid var(--border-color);
+      }
+      .name {
+        align-items: center;
+        display: flex;
+      }
+      .header,
+      #deletedContainer {
+        align-items: center;
+        background: var(--table-header-background-color);
+        border-bottom: 1px dotted var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        min-height: 3em;
+        padding: 0 .7em;
+      }
+      #deletedContainer {
+        border-bottom: 0;
+      }
+      .sectionContent {
+        padding: .7em;
+      }
+      .deleted #mainContainer,
+      #addReviewer,
+      #deleteCancelBtn,
+      .editingFilter .name,
+      .editing #saveBtn,
+      .editingFilter #editFilterInput {
+        display: flex;
+      }
+      .deleted #deletedContainer {
+        display: flex;
+      }
+      .editing #addReviewer,
+      #mainContainer,
+      .editing #deleteBtn  {
+        display: block;
+      }
+      .editing #deleteCancelBtn,
+      #undoRemoveBtn {
+        padding-right: .7em;
+      }
+    </style>
+    <style include="gr-form-styles"></style>
+    <fieldset id="section"
+        class$="gr-form-styles">
+      <div id="mainContainer">
+        <div class="header">
+          <div class="name">
+            <h3>Filter:</h3>
+            <input
+                id="editFilterInput"
+                bind-value="{{filter}}"
+                is="iron-input"
+                type="text">
+            <gr-button
+                link
+                id="deleteCancelBtn"
+                on-tap="_handleDeleteCancel">[[_getDeleteCancel(filter, _originalFilter)]]</gr-button>
+          </div><!-- name -->
+        </div><!-- header -->
+        <div class="reviewers">
+          <h4>Reviewer:</h4>
+          <template
+              is="dom-repeat"
+              items="{{_reviewers}}">
+            <rv-reviewer
+                reviewer="{{item}}"
+                on-reviewer-deleted="_handleReviewerDeleted"
+                on-reviewer-added="_handleReviewerAdded">
+            </rv-reviewer>
+          </template>
+          <div id="addReviewer">
+            <gr-button
+                link
+                id="addBtn"
+                on-tap="_handleAddReviewer">Add Reviewer</gr-button>
+          </div><!-- addReviewer -->
+        </div><!-- reviewers -->
+      </div>
+    </fieldset>
+  </template>
+  <script>
+    Polymer({
+      is: 'rv-filter-section',
+
+      properties: {
+        plugin: Object,
+        editing: {
+          type: Boolean,
+          value: false
+        },
+        reviewers: Array,
+        _reviewers: Array,
+        filter: String,
+        _originalFilter: String,
+        editing: {
+          type: Boolean,
+          computed: '_computeEditing(filter, _originalFilter)'
+        }
+      },
+
+      _updateSection() {
+          this._reviewers = this.reviewers;
+          this._originalFilter = this.filter
+      },
+
+      attached() {
+        this._updateSection();
+      },
+
+      _computeEditing(filter, _originalFilter) {
+          if (_originalFilter === "") {
+              return true;
+          }
+          return filter === "";
+      },
+
+      _computeSaveDisabled(filter, _originalFilter) {
+        return !(this._computeEditing(filter, _originalFilter) && this.$.editFilterInput.value);
+      },
+
+      _computeSaveHidden(filter, _originalFilter) {
+        return !this._computeEditing(filter, _originalFilter);
+      },
+
+      _getDeleteCancel(filter, _originalFilter) {
+          return this._computeEditing(filter, _originalFilter) ? 'Cancel' : 'Delete'
+      },
+
+      _handleDeleteCancel() {
+        if (!this._computeEditing(this.filter, this._originalFilter)) {
+            this._removeSection();
+        }
+        this.remove();
+      },
+
+      _handleReviewerDeleted(e) {
+        if (e.detail.editing) {
+            this._reviewers.pop();
+        } else {
+            const index = e.model.index;
+            const deleted = this.reviewers[index];
+            this._putReviewer(deleted, "DELETE");
+            this.reviewers = this.reviewers.slice(0, index).concat(this.reviewers.slice(index +1));
+        }
+        this._updateSection();
+      },
+
+      async _handleReviewerAdded(e) {
+        // Remove empty reviewers
+        this.reviewers = this.reviewers.filter(r => r !== "");
+        this.push('reviewers', e.detail.reviewer);
+        this._updateSection();
+        this._putReviewer(e.detail.reviewer, "ADD");
+      },
+
+      _removeSection() {
+        this.reviewers.forEach(reviewer => {
+          this._putReviewer(reviewer, "DELETE");
+        });
+      },
+
+      async _putReviewer(reviewer, action) {
+        this.plugin.restApi().put(this.plugin.reviewersUrl, {
+          action: action,
+          reviewer: reviewer,
+          filter: this.filter
+        });
+      },
+
+      _handleAddReviewer() {
+        this.push('_reviewers', "");
+      },
+
+    })
+  </script>
+</dom-module>
