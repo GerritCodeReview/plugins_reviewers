@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.webui.GwtPlugin;
+import com.google.gerrit.extensions.webui.JavaScriptPlugin;
 import com.google.gerrit.extensions.webui.TopMenu;
 import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.inject.AbstractModule;
@@ -25,5 +26,6 @@ public class ClientModule extends AbstractModule {
   protected void configure() {
     DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
     DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
+    DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new JavaScriptPlugin("rv-reviewers.html"));
   }
 }
