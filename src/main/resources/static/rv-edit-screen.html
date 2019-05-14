@@ -1,0 +1,28 @@
+<dom-module id="rv-edit-screen">
+    <template>
+    <div>
+        This is the <b>main</b> plugin screen
+        <p>
+        And this is a paragraph.
+        </p>
+        <p>This is filter sections [[filterSections.length]]</p>
+    </div>
+    </template>
+    <script>
+        Polymer({
+          is: 'rv-edit-screen',
+          properties: {
+              plugin: Object,
+              filterSections: Array,
+          },
+          attached: function() {
+            this._loadFilterSections();
+          },
+          async _loadFilterSections() {
+            const url = `/projects/${this.plugin.repoName}/reviewers`;
+            this.filterSections = await this.plugin.restApi().get(url);
+          }
+        });
+    </script>
+
+</dom-module>

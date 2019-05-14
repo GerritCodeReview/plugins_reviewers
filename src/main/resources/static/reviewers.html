@@ -1,0 +1,12 @@
+<link rel="import" href="./rv-edit-button.html">
+<link rel="import" href="./rv-edit-screen.html">
+
+<dom-module id="reviewers">
+    <script>
+        Gerrit.install(plugin => {
+            'use strict';
+            if (!window.Polymer) { return; }
+            plugin.registerCustomComponent('repo-command', 'rv-edit-button');
+        })
+    </script>
+</dom-module>

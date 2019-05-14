@@ -1,0 +1,26 @@
+<link rel="import" href="./rv-edit-screen.html">
+
+<dom-module id="rv-edit-button">
+  <template>
+    <gr-repo-command
+        title="Edit Reviewers"
+        on-command-tap="_handleCommandTap">
+    </gr-repo-command>
+  </template>
+  <script>
+    Polymer({
+      is: 'rv-edit-button',
+      properties: {
+        plugin: Object,
+        repoName: String,
+      },
+      attached() {
+        console.log("I'm attached!");
+        this.plugin.repoName = this.repoName;
+      },
+      _handleCommandTap() {
+        this.plugin.popup('rv-edit-screen');
+      },
+    });
+  </script>
+</dom-module>
