@@ -29,9 +29,11 @@ import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.reviewdb.client.BranchNameKey;
 import com.google.gerrit.reviewdb.client.RefNames;
+import com.google.inject.Inject;
 import java.util.Collection;
 import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -41,6 +43,8 @@ import org.junit.Test;
 @NoHttpd
 @TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.Module")
 public class ReviewersIT extends LightweightPluginDaemonTest {
+  @Inject private ProjectOperations projectOperations;
+
   @Before
   public void setUp() throws Exception {
     fetch(testRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
