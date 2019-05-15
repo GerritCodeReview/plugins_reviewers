@@ -23,7 +23,6 @@ import com.google.inject.AbstractModule;
 public class ClientModule extends AbstractModule {
   @Override
   protected void configure() {
-    DynamicSet.bind(binder(), TopMenu.class).to(ReviewersTopMenu.class);
-    DynamicSet.bind(binder(), WebUiPlugin.class).toInstance(new GwtPlugin("reviewers"));
+
   }
 }

@@ -31,7 +31,6 @@ gerrit_plugin(
         SRC + "*.java",
         SRC + "client/*.java",
     ]),
-    gwt_module = "com.googlesource.gerrit.plugins.reviewers.ReviewersForm",
     manifest_entries = [
         "Gerrit-PluginName: reviewers",
         "Gerrit-Module: com.googlesource.gerrit.plugins.reviewers.Module",
