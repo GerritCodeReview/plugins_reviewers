@@ -44,6 +44,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Future;
 
 @Singleton
 class Reviewers
@@ -158,7 +159,8 @@ class Reviewers
           byConfigFactory.create(
               c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
 
-      workQueue.getDefaultQueue().submit(task);
+      @SuppressWarnings("unused")
+      Future<?> ignored = workQueue.getDefaultQueue().submit(task);
     } catch (QueryParseException e) {
       logger.atWarning().log(
           "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
