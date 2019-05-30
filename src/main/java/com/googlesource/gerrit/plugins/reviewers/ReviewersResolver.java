@@ -20,11 +20,11 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
+import com.google.gerrit.entities.Account;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
-import com.google.gerrit.reviewdb.client.Account;
-import com.google.gerrit.reviewdb.client.Project;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.group.GroupResolver;
@@ -56,14 +56,14 @@ class ReviewersResolver {
   }
 
   /**
-   * Resolve a set of account names to {@link com.google.gerrit.reviewdb.client.Account.Id}s. Group
-   * names are resolved to their account members.
+   * Resolve a set of account names to {@link com.google.gerrit.entities.Account.Id}s. Group names
+   * are resolved to their account members.
    *
    * @param names the set of account names to convert
    * @param project the project name
    * @param changeNumber the change Id
    * @param uploader account to use to look up groups, or null if groups are not needed
-   * @return set of {@link com.google.gerrit.reviewdb.client.Account.Id}s.
+   * @return set of {@link com.google.gerrit.entities.Account.Id}s.
    */
   @VisibleForTesting
   Set<Account.Id> resolve(
