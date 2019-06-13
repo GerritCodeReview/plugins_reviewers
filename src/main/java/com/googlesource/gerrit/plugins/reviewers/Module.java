@@ -77,6 +77,7 @@ public class Module extends FactoryModule {
               get(PROJECT_KIND, "suggest_reviewers").to(SuggestProjectReviewers.class);
             }
           });
+     install(new HttpModule());
     }
   }
 }
