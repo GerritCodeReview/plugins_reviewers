@@ -1,0 +1,187 @@
+<!--
+@license
+Copyright (C) 2019 The Android Open Source Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<link rel="import" href="./rv-reviewer.html">
+
+<dom-module id="rv-filter-section">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        margin-bottom: 1em;
+      }
+      fieldset {
+        border: 1px solid var(--border-color);
+      }
+      .name {
+        align-items: center;
+        display: flex;
+      }
+      .header,
+      #deletedContainer {
+        align-items: center;
+        background: var(--table-header-background-color);
+        border-bottom: 1px dotted var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        min-height: 3em;
+        padding: 0 .7em;
+      }
+      #deletedContainer {
+        border-bottom: 0;
+      }
+      .sectionContent {
+        padding: .7em;
+      }
+      .deleted #mainContainer,
+      #addReviewer,
+      #deleteCancelBtn,
+      .editingFilter .name,
+      .editing #saveBtn,
+      .editingFilter #editFilterInput {
+        display: flex;
+      }
+      .deleted #deletedContainer {
+        display: flex;
+      }
+      .editing #addReviewer,
+      #mainContainer,
+      .editing #deleteBtn  {
+        display: block;
+      }
+      .editing #deleteCancelBtn,
+      #undoRemoveBtn {
+        padding-right: .7em;
+      }
+    </style>
+    <style include="gr-form-styles"></style>
+    <fieldset id="section">
+      <div id="mainContainer">
+        <div class="header">
+          <div class="name">
+            <h3>Filter:</h3>
+            <input
+                id="editFilterInput"
+                bind-value="{{section.filter}}"
+                is="iron-input"
+                type="text"
+                on-input="_handleFilterChanged">
+            <gr-button
+                link
+                id="SaveBtn"
+                on-tap="_handleSaveFilter">Save</gr-button>
+            <gr-button
+                link
+                id="deleteCancelBtn"
+                on-tap="_handleDeleteCancel">[[_getDeleteCancel()]]</gr-button>
+          </div><!-- name -->
+        </div><!-- header -->
+        <div class="reviewers">
+          <template
+              is="dom-repeat"
+              items="{{section.reviewers}}"
+              as="reviewerId">
+            <rv-reviewer
+                id="permissionSelect"
+                reviewerId="{{reviewerId}}">
+            </rv-reviewer>
+          </template>
+          <div id="addReviewer">
+            <gr-button
+                link
+                id="addBtn"
+                on-tap="_handleAddReviewer">Add Reviewer</gr-button>
+          </div><!-- addReviewer -->
+        </div><!-- reviewers -->
+      </div>
+    </fieldset>
+  </template>
+  <script>
+    Polymer({
+      is: 'rv-filter-section',
+
+      properties: {
+        _editingFilter: {
+          type: Boolean,
+          value: false,
+        },
+        _originalSection: String,
+        section: Object,
+        editing: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      attached() {
+        this._originalSection = this.section;
+      },
+
+      _handleFilterChanged() {
+        // Switch DeleteBtn to "Cancel";
+        // If section.reviewers and section.filter
+        // * Enable SaveBtn
+        // Else:
+        // * Disable SaveBtn
+      },
+
+      _getDeleteCancel() {
+        if (this.editing) {
+          return 'Cancel';
+        }
+        return 'Delete';
+      },
+
+      _handleDeleteCancel() {
+        if (editing) {
+          this.section = this._originalSection;
+          this.editing = false;
+        }
+        _removeSection();
+      },
+
+      removeSection() {
+        this.section.reviewers.forEach(reviewer => {
+          _putReviewer(reviewer, 'DELETE');
+        });
+      },
+
+      async _putReviewer(reviewer, action) {
+        this.plugin.restApi().put(reviewer, {
+          action: action,
+          reviewer: reviewer,
+          filter: section.filter
+        });
+      },
+
+      _handleAddReviewer() {
+        //const value = this.$.permissionSelect.value;
+        //console.log(value);
+        /*const permission = {
+          id: value,
+          value: {rules: {}, added: true},
+        };
+
+        // Add to the end of the array (used in dom-repeat) and also to the
+        // section object that is two way bound with its parent element.
+        this.push('_permissions', permission);
+        this.set(['section.value.permissions', permission.id],
+            permission.value);*/
+      },
+    });
+  </script>
+</dom-module>
+
