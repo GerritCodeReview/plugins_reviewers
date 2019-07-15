@@ -15,7 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assert_;
+import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
@@ -78,7 +78,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
         Thread.sleep(10);
         wait += 10;
         if (wait > 100) {
-          assert_().fail("Timeout of 100 ms exceeded");
+          assertWithMessage("Timeout of 100 ms exceeded").fail();
         }
       }
     } while (reviewers == null);
@@ -115,7 +115,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
         Thread.sleep(10);
         wait += 10;
         if (wait > 100) {
-          assert_().fail("Timeout of 100 ms exceeded");
+          assertWithMessage("Timeout of 100 ms exceeded").fail();
         }
       }
     } while (reviewers == null);
