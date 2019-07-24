@@ -91,7 +91,7 @@ class ReviewersResolver {
     try {
       AccountResolver.Result result = accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
-        Account.Id id = result.asList().get(0).getAccount().getId();
+        Account.Id id = result.asList().get(0).getAccount().id();
         if (uploader == null || id.get() != uploader._accountId) {
           reviewers.add(id);
           return true;
@@ -117,7 +117,7 @@ class ReviewersResolver {
           groupMembers.listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
               .stream()
               .filter(Account::isActive)
-              .map(Account::getId)
+              .map(Account::id)
               .collect(toSet());
       reviewers.addAll(accounts);
     } catch (UnprocessableEntityException e) {
