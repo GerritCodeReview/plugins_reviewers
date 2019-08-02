@@ -23,6 +23,7 @@ import com.google.gerrit.extensions.api.access.PluginPermission;
 import com.google.gerrit.extensions.restapi.AuthException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
+import com.google.gerrit.extensions.restapi.Response;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
@@ -82,7 +83,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   @Override
-  public List<ReviewerFilterSection> apply(ProjectResource rsrc, Input input)
+  public Response<List<ReviewerFilterSection>> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
     ReviewersConfig.ForProject cfg = config.forProject(projectName);
@@ -142,7 +143,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     } catch (IOException err) {
       throw new ResourceNotFoundException(projectName.get(), err);
     }
-    return cfg.getReviewerFilterSections();
+    return Response.ok(cfg.getReviewerFilterSections());
   }
 
   private void validateReviewer(String reviewer) throws RestApiException {

@@ -18,6 +18,7 @@ import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountVisibility;
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
 import com.google.gerrit.extensions.restapi.BadRequestException;
+import com.google.gerrit.extensions.restapi.Response;
 import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.reviewdb.client.Account;
 import com.google.gerrit.server.config.GerritServerConfig;
@@ -49,11 +50,12 @@ public class SuggestProjectReviewers extends SuggestReviewers
   }
 
   @Override
-  public List<SuggestedReviewerInfo> apply(ProjectResource rsrc)
+  public Response<List<SuggestedReviewerInfo>> apply(ProjectResource rsrc)
       throws BadRequestException, StorageException, IOException, ConfigInvalidException,
           PermissionBackendException {
-    return reviewersUtil.suggestReviewers(
-        null, this, rsrc.getProjectState(), getVisibility(rsrc), true);
+    return Response.ok(
+        reviewersUtil.suggestReviewers(
+            null, this, rsrc.getProjectState(), getVisibility(rsrc), true));
   }
 
   private VisibilityControl getVisibility(final ProjectResource rsrc) {

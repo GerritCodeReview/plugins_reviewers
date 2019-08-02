@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import com.google.gerrit.extensions.restapi.Response;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.server.project.ProjectResource;
@@ -31,7 +32,8 @@ class GetReviewers implements RestReadView<ProjectResource> {
   }
 
   @Override
-  public List<ReviewerFilterSection> apply(ProjectResource resource) throws RestApiException {
-    return config.forProject(resource.getNameKey()).getReviewerFilterSections();
+  public Response<List<ReviewerFilterSection>> apply(ProjectResource resource)
+      throws RestApiException {
+    return Response.ok(config.forProject(resource.getNameKey()).getReviewerFilterSections());
   }
 }
