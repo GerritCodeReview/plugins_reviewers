@@ -22,6 +22,30 @@
       "revId": "1036aa0a31a7f7775590192a3b7830564e497a88",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2d80702_e8a02e5b",
+        "filename": "src/main/resources/static/rv-filter-section.html",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-08-20T12:03:58Z",
+      "side": 1,
+      "message": "I don\u0027t now if this was caused by camel-case reviewerId but changing to default \"item\" makes it work.",
+      "parentUuid": "2d7235c6_2e83cec4",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 44
+      },
+      "revId": "1036aa0a31a7f7775590192a3b7830564e497a88",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
