@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4dc99768_f51465e3",
+        "filename": "src/main/resources/static/rv-filter-section.html",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-08-22T06:33:22Z",
+      "side": 1,
+      "message": "Not available",
+      "range": {
+        "startLine": 170,
+        "startChar": 34,
+        "endLine": 170,
+        "endChar": 58
+      },
+      "revId": "f86a256be6ad80691d46090ac9f6f6e3d4b1272f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
