@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c95228e5_046a4dbc",
+        "filename": "src/main/resources/static/rv-edit-screen.html",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-08-22T15:32:53Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 73
+      },
+      "revId": "f46af925054eeeb93463cdbf2f8ea15f1a9c1afd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0d3f246_96a87dbd",
+        "filename": "src/main/resources/static/rv-edit-screen.html",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-08-22T15:32:53Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 37
+      },
+      "revId": "f46af925054eeeb93463cdbf2f8ea15f1a9c1afd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}
