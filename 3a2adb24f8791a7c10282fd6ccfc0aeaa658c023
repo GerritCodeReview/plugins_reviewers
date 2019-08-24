@@ -22,6 +22,29 @@
       "revId": "3a2adb24f8791a7c10282fd6ccfc0aeaa658c023",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2811032e_52e30324",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-08-24T14:11:53Z",
+      "side": 0,
+      "message": "making another unresolved comment",
+      "range": {
+        "startLine": 11,
+        "startChar": 55,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "3a2adb24f8791a7c10282fd6ccfc0aeaa658c023",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
