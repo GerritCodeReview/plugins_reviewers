@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.exceptions.StorageException;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.AccountVisibility;
 import com.google.gerrit.extensions.common.SuggestedReviewerInfo;
 import com.google.gerrit.extensions.restapi.BadRequestException;
@@ -55,7 +56,7 @@ public class SuggestProjectReviewers extends SuggestReviewers
           PermissionBackendException {
     return Response.ok(
         reviewersUtil.suggestReviewers(
-            null, this, rsrc.getProjectState(), getVisibility(rsrc), true));
+            ReviewerState.REVIEWER, null, this, rsrc.getProjectState(), getVisibility(rsrc), true));
   }
 
   private VisibilityControl getVisibility(final ProjectResource rsrc) {
