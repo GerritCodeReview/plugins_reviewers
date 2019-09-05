@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "dbbf2bad_a4852a52",
+        "filename": "src/main/resources/static/rv-edit-button.html",
+        "patchSetId": 18
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-05T22:02:03Z",
+      "side": 1,
+      "message": "Here and in all other html files, JS is in the same file, while they are separated in gerrit core in other plugins, e.g. checks plugin. Would it make sense to also separate them here, then the srcs set would be:\n\n  srcs \u003d glob([\n      \"gr-reviewers/*.html\",\n      \"gr-reviewers/*.js\",\n  ]),",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 11
+      },
+      "revId": "a71f6e6a58def48d3e4909013af357457da8fe19",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a0eadcb_c91a641b",
         "filename": "src/main/resources/static/rv-edit-screen.html",
         "patchSetId": 18
