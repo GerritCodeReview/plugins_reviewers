@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "acbc43d1_bbf95498",
+        "filename": "src/main/resources/static/reviewers.html",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-09-05T16:46:15Z",
+      "side": 1,
+      "message": "Oh, right. You could do:\n\nif (window.Polymer) {\n  Gerrit.install(plugin \u003d\u003e {\n    plugin.registerCustomComponent(\u0027repo-command\u0027, \u0027rv-edit-button\u0027);\n  });\n}",
+      "parentUuid": "486e0000_ac136a0f",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 38
+      },
+      "revId": "160ffb4c6019767fc854cd7f640b2a6d23fc1d40",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "25975dfb_efa189c7",
         "filename": "src/main/resources/static/reviewers.html",
         "patchSetId": 16
