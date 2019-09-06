@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5da190be_670b287b",
+        "filename": "gr-reviewers/rv-edit-screen.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-06T12:05:57Z",
+      "side": 1,
+      "message": "The plugin specific capability \u0027reviewers-modifyReviewersConfig\u0027 check for logged in account is still missing?\n\nAs specified in the documentation: [1], \"Caller must be a member of a group that is granted the ‘Modify Reviewers Config’ capability (provided by this plugin) or be a Project Owner for the project.\"\n\nIn the old GWT UI it is done here: [2].\n\nIn simple-submit-rules project owner property is read from the backend: [3]. And in checker plugin, plugin specific capability \u0027checks-administrateCheckers\u0027 is retrieved from backend: [4].\n\n* [1] https://gerrit.googlesource.com/plugins/reviewers/+/46866ecbe40d486927cd26b5f1dff5d1f6be8125/src/main/resources/Documentation/rest-api.md#change-reviewers\n* [2] https://gerrit.googlesource.com/plugins/reviewers/+/46866ecbe40d486927cd26b5f1dff5d1f6be8125/src/main/java/com/googlesource/gerrit/plugins/reviewers/client/ReviewersScreen.java#74\n* [3] https://gerrit.googlesource.com/plugins/simple-submit-rules/+/129ddb2b787cd7f3a899e59966d78b50a05c0a03/gr-simple-submit-rules-repo-config/gr-simple-submit-rules-repo-config.js#75\n* [4] https://gerrit.googlesource.com/plugins/checks/+/4076aa5812be6358bd45dbac8de3cfe40075bac4/gr-checks/gr-checks-view.js#87",
+      "range": {
+        "startLine": 37,
+        "startChar": 50,
+        "endLine": 37,
+        "endChar": 63
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
