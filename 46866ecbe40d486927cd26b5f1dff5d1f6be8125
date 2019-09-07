@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "a5892d14_bd01160c",
+        "filename": "gr-reviewers/gr-reviewers.html",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-09-07T17:39:04Z",
+      "side": 1,
+      "message": "Should be \"[[plugin]]\" (with the strings).",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66c7228f_94ff75f6",
+        "filename": "gr-reviewers/gr-reviewers.html",
+        "patchSetId": 21
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-09-07T17:39:04Z",
+      "side": 1,
+      "message": "Should be \"[[repoName]]\" (with the strings).",
+      "range": {
+        "startLine": 33,
+        "startChar": 20,
+        "endLine": 33,
+        "endChar": 32
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5da190be_670b287b",
         "filename": "gr-reviewers/rv-edit-screen.js",
         "patchSetId": 21
@@ -88,6 +134,23 @@
         "endLine": 77,
         "endChar": 31
       },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2681c8_aa930afc",
+        "filename": "gr-reviewers/rv-filter-section.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-09-07T17:39:04Z",
+      "side": 1,
+      "message": "Please remove the double new lines.",
       "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
