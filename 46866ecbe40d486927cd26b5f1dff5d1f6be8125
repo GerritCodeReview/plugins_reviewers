@@ -22,6 +22,98 @@
       "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12b321da_f8997d05",
+        "filename": "gr-reviewers/rv-edit-screen.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-07T17:21:36Z",
+      "side": 1,
+      "message": "While semicolons are optional in JavaScript, I prefer to consistently put one. When the code is minified we don\u0027t have surprises and some IDEs issue \"Unterminated statement\" warning.",
+      "range": {
+        "startLine": 37,
+        "startChar": 63,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b96746c4_80ce1604",
+        "filename": "gr-reviewers/rv-filter-section.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-07T17:21:36Z",
+      "side": 1,
+      "message": "This property is duplicated. First definition is on the line 20 above.",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d8500d9_6f835a7a",
+        "filename": "gr-reviewers/rv-filter-section.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-07T17:21:36Z",
+      "side": 1,
+      "message": "Unterminated statement.",
+      "range": {
+        "startLine": 77,
+        "startChar": 8,
+        "endLine": 77,
+        "endChar": 31
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e760ab60_ec73ae5d",
+        "filename": "gr-reviewers/rv-reviewer.js",
+        "patchSetId": 21
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-07T17:21:36Z",
+      "side": 1,
+      "message": "Unterminated statement.",
+      "range": {
+        "startLine": 52,
+        "startChar": 6,
+        "endLine": 52,
+        "endChar": 45
+      },
+      "revId": "46866ecbe40d486927cd26b5f1dff5d1f6be8125",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
