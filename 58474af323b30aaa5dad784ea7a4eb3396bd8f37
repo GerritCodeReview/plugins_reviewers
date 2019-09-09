@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8c930559_36ad6f02",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-09T22:15:15Z",
+      "side": 1,
+      "message": "return is unnecessary, as the last statement in a function with no return value.",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 13
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c3d8aa_3e80bd2e",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-09T22:15:15Z",
+      "side": 1,
+      "message": "Nit: Unterminated statement.",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ae80032_5cdc96a6",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-09T22:15:15Z",
+      "side": 1,
+      "message": "Promise returned from all is ignored. You want to wait until the promise is resolved, e.g.:\n\n  Promise.all(promises).then(() \u003d\u003e {\n    this._loading \u003d false;\n  });\n\nor something similar.",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a117837_b2779996",
+        "filename": "gr-reviewers/rv-edit-screen.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-09T22:15:15Z",
+      "side": 1,
+      "message": "Unused parameter canModifyConfig.",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
