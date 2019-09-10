@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a869de95_62091960",
+        "filename": "gr-reviewers/rv-filter-section.html",
+        "patchSetId": 24
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-10T11:14:16Z",
+      "side": 1,
+      "message": "This input has a set width which is a problem with long filter expressions \nSince I\u0027m really not a FE dev I cannot figure out what limits the width of it.",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 61,
+        "endChar": 93
+      },
+      "revId": "ee9c3bab8b55ccf95de27759c19f218972fd56bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
