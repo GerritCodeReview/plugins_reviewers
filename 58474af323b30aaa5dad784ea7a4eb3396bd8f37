@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3864ac1d_6c734d07",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-10T07:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c930559_36ad6f02",
+      "range": {
+        "startLine": 37,
+        "startChar": 6,
+        "endLine": 37,
+        "endChar": 13
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22c3d8aa_3e80bd2e",
         "filename": "gr-reviewers/gr-reviewers.js",
         "patchSetId": 22
@@ -45,6 +69,30 @@
       "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b51aedaa_8454c1b7",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-10T07:17:08Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "22c3d8aa_3e80bd2e",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "8b4c0614_74c6d427",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-10T07:17:08Z",
+      "side": 1,
+      "message": "I removed the Promise array since it wasn\u0027t necessary.\nWhy would we need async?\nDoesn\u0027t Polymer notice when _isOwner and _hasModifyCapability changes and recomputes _canModifyConfig?\nIf we don\u0027t need async I see no point in using it.",
+      "parentUuid": "f3509369_e5f2d0f4",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a117837_b2779996",
         "filename": "gr-reviewers/rv-edit-screen.js",
         "patchSetId": 22
@@ -115,6 +187,30 @@
       "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e2f6fea_8ba6b03c",
+        "filename": "gr-reviewers/rv-edit-screen.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-10T07:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a117837_b2779996",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 46
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
