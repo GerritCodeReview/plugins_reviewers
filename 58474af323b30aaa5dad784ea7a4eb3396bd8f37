@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "f952cd3c_8713596b",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T08:32:04Z",
+      "side": 1,
+      "message": "But the requests are run asynchronously by their nature. And the UI has to account for that. Imagine, even if it is not really probable, that on very busy site, with tons users, both requests to retrieve the owner and to read user capabilities would take ca. 30 seconds.\n\nHow should the UI behave during this time? The user cannot change anything in reviewers configuration (per default?), but what would indicate to the user, that this situation might change later and he would get the ACL? What if the user give up in this time and push Ctrl-W button in her browser?\n\nThat why the usual behaviour in PolyGerrit (and GWT UI) for that major use case: To disable parts of the UI, put \"Loading...\" on the loading page, and change the state and remove \"Loading...\" message, when all requests are accomplished and all Promises are resolved.",
+      "parentUuid": "8b4c0614_74c6d427",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a117837_b2779996",
         "filename": "gr-reviewers/rv-edit-screen.js",
         "patchSetId": 22
