@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "f3509369_e5f2d0f4",
+        "filename": "gr-reviewers/gr-reviewers.js",
+        "patchSetId": 22
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-10T05:57:47Z",
+      "side": 1,
+      "message": "On second thought, why don\u0027t we use async methods here? Wouldn\u0027s something like this work (untested):\n\n  attached() {\n\tthis._retrieveProjectOwner();\n\tthis._retrieveModifyReviewersConfig();\n      },\n      \n      async _retrieveProjectOwner() {\n\t  var access;\n          # Is this check really needed?\n\t  if (!this.repoName) {\n\t      return;\n\t  }\n\t  acess \u003d await this._getRepoAccess(this.repoName);\n\t  if (access \u0026\u0026 access[this.repoName] \u0026\u0026 access[this.repoName].is_owner) {\n              this._isOwner \u003d true;\n          }\n      },\n\n      async _retrieveModifyReviewersConfig() {\n          # Shoulnd\u0027t we first check whether a user is logged on,\n          # or is it guaranteed by the repo-command API?\n\t  var capabilities \u003d await this.plugin.restApi().get(\u0027/accounts/self/capabilities\u0027);\n\t  if (capabilities[\u0027reviewers-modifyReviewersConfig\u0027]) {\n            this._hasModifyCapability \u003d true;\n          }\n      },",
+      "parentUuid": "2ae80032_5cdc96a6",
+      "range": {
+        "startLine": 66,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "58474af323b30aaa5dad784ea7a4eb3396bd8f37",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3a117837_b2779996",
         "filename": "gr-reviewers/rv-edit-screen.js",
         "patchSetId": 22
