@@ -22,6 +22,30 @@
       "revId": "ee9c3bab8b55ccf95de27759c19f218972fd56bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18c8c324_85991d81",
+        "filename": "gr-reviewers/rv-filter-section.html",
+        "patchSetId": 24
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-12T09:06:13Z",
+      "side": 1,
+      "message": "Increased the width of the input element.\nIdeally the already existing filters should be displayed in text elements (or sim.) and only the filter that is currently edited should be in a text box. But I hope we can do that in a follow up change.",
+      "parentUuid": "a869de95_62091960",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 61,
+        "endChar": 93
+      },
+      "revId": "ee9c3bab8b55ccf95de27759c19f218972fd56bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
