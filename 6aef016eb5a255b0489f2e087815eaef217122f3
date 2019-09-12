@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "17797fc8_99c57b84",
+        "filename": "gr-reviewers/gr-reviewers.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T10:18:00Z",
+      "side": 1,
+      "message": "Rather then passing the whole plugin object, you could pass in only what you really need: pluginRestApi instance. \n\nFor that you could assign it to a property in attached method:\n\n  pluginRestApi: Object,\n  [...]\n  attached() {\n      this.pluginRestApi \u003d this.plugin.restApi();\n  [...]\n\nand pass it in to rv-edit-screen component:\n\n   \u003crv-edit-screen\n       pluginRestApi\u003d\"[[pluginRestApi]]\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 29
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c891565c_8b7f2fbe",
         "filename": "gr-reviewers/rv-edit-screen.html",
         "patchSetId": 25
