@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de360b9d_48de5edc",
+        "filename": "gr-reviewers/gr-reviewers.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "This file is named inconsistently compared with other files in this dierctory. Should we prefix all files either with \"gr-\" or with \"rv-\"? In checks plugin, all files are consistently prefixed with \"gr-\" prefix: [1].\n\n* [1] https://gerrit.googlesource.com/plugins/checks/+/refs/heads/master/gr-checks",
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c891565c_8b7f2fbe",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "This could be a row in the table, see comment below?",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 83
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b3fce36_94633a52",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "This could be table header?",
+      "range": {
+        "startLine": 34,
+        "startChar": 10,
+        "endLine": 34,
+        "endChar": 25
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2241175_3f14dc18",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "Should this be _computeLoadingClass, or where is computeLoadingClass defined?",
+      "range": {
+        "startLine": 35,
+        "startChar": 23,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e015e7c3_86b7db52",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "Why there is tbody tag without a corresponding table tag?",
+      "range": {
+        "startLine": 35,
+        "startChar": 7,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d1e4b2a_c64c2c59",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-12T09:53:48Z",
+      "side": 1,
+      "message": "Is two way binding really needed here? Can it be just plugin \u003d \"[[plugin]], like it was done in gr-reviewers.html?",
+      "range": {
+        "startLine": 41,
+        "startChar": 16,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
