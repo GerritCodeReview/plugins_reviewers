@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "d9c8ad33_f4e6aa74",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-13T13:24:06Z",
+      "side": 1,
+      "message": "It\u0027s because of the extra \"loadingMsg\" class that I didn\u0027t know of until now:\n\npolygerrit-ui/app/styles/gr-table-styles.html:\n\n      .genericList .loadingMsg:not(.loading) {\n        display: none;\n      }",
+      "parentUuid": "e2c517f8_a7f4c773",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 83
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b3fce36_94633a52",
         "filename": "gr-reviewers/rv-edit-screen.html",
         "patchSetId": 25
