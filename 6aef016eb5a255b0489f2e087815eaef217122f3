@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "e2c517f8_a7f4c773",
+        "filename": "gr-reviewers/rv-edit-screen.html",
+        "patchSetId": 25
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-13T11:34:03Z",
+      "side": 1,
+      "message": "Strange, as I have found this code in gerrit@HEAD in core:\n\n  polygerrit-ui/app/elements/admin/gr-repo-list/gr-repo-list.html:        \u003ctr id\u003d\"loading\" class$\u003d\"loadingMsg [[computeLoadingClass(_loading)]]\"\u003e\n\nin very similar situation.",
+      "parentUuid": "ca2ec8c9_bb07fada",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 83
+      },
+      "revId": "6aef016eb5a255b0489f2e087815eaef217122f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b3fce36_94633a52",
         "filename": "gr-reviewers/rv-edit-screen.html",
         "patchSetId": 25
