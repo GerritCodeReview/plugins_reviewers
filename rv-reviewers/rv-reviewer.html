@@ -24,19 +24,37 @@ limitations under the License.
         align-items: center;
         display: flex;
       }
-      #reviewerHeader, #editReviewerInput, #deleteCancelBtn, #addBtn {
+      #reviewerHeader,
+      #editReviewerInput,
+      #deleteCancelBtn,
+      #addBtn
+      #reviewerField {
           margin-left: 3px;
+      }
+      #reviewerField {
+        width: 150px;
+        text-indent: 1px;
+        border: 1px solid var(--border-color);
       }
     </style>
     <style include="gr-form-styles"></style>
     <div class="reviewerRow">
       <h4 id="reviewerHeader">Reviewer:</h4>
-      <input
-          id="editReviewerInput"
-          bind-value="{{reviewer}}"
-          is="iron-input"
-          type="text"
-          disabled="[[_computeReviewerDisabled(reviewer, _originalReviewer)]]">
+      <template is="dom-if" if="[[_computeEditing(reviewer, _originalReviewer)]]">
+        <span class="value">
+            <gr-autocomplete
+                id="editReviewerInput"
+                text="{{reviewer}}"
+                value="{{_reviewerSearchId}}"
+                query="[[_queryReviewers]]"
+                placeholder="Name Or Email"
+                disabled="[[_computeReviewerDisabled(reviewer, _originalReviewer)]]">
+            </gr-autocomplete>
+        </span>
+      </template>
+      <template is="dom-if" if="[[!_computeEditing(reviewer, _originalReviewer)]]">
+        <td id="reviewerField">[[reviewer]]</td>
+      </template>
       <gr-button
           id="deleteCancelBtn"
           on-tap="_handleDeleteCancel"
