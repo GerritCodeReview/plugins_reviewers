@@ -22,6 +22,30 @@
       "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b579f07b_15703356",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-16T08:04:16Z",
+      "side": 1,
+      "message": "The screen shot is not from a state where \"editing\" was true, so it should enter the else clause.\n\nI cannot replicate the behavior where deleting reviewer2 deletes reviewer1:\n1. \"Add Filter\"\n2. Edit Filter1\n3. Add reviewer1\n4. Add reviewer2\n5. Delete reviewer2\nLeaves me with Filter1 that has one reviewer (reviewer1).\n\nThe REST API takes a (reviewer,filter) tuple so once you have added the first reviewer to a filter the filter is \"saved\".\nThe \"Add Filter\" button is for adding an additional filter. The process is:\n\n1. Push Add Filter button.\n2. Edit the filter or Cancel.\n3. Push \"Add Reviewer\" button.\n4. Edit filter or reviewer OR Cancel filter or reviewer OR add reviewer. \n5. Once you press \"Add\" on the reviewer row the (filter, reviewer) tuple is saved and you are not in state editing until pressing \"Add Reviewer\" to add additional reviewers to the same filter or \"Add Filter\" if you wish to add reviewers to another filter.",
+      "parentUuid": "2d78d05c_4b626d7b",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 7
+      },
+      "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
