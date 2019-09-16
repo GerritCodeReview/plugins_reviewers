@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f65b1a45_a9c48728",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 29
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-16T14:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bd3c9bb_b6364813",
+      "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d78d05c_4b626d7b",
         "filename": "rv-reviewers/rv-filter-section.js",
         "patchSetId": 29
