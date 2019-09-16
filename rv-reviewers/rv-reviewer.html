@@ -31,12 +31,16 @@ limitations under the License.
     <style include="gr-form-styles"></style>
     <div class="reviewerRow">
       <h4 id="reviewerHeader">Reviewer:</h4>
-      <input
-          id="editReviewerInput"
-          bind-value="{{reviewer}}"
-          is="iron-input"
-          type="text"
-          disabled="[[_computeReviewerDisabled(reviewer, _originalReviewer)]]">
+      <span class="value">
+          <gr-autocomplete
+              id="editReviewerInput"
+              text="{{reviewer}}"
+              value="{{_reviewerSearchId}}"
+              query="[[_queryReviewers]]"
+              placeholder="[[_computeReviewerPlaceHolder(_reveiwerSearchName)]]"
+              disabled="[[_computeReviewerDisabled(reviewer, _originalReviewer)]]">
+          </gr-autocomplete>
+        </span>
       <gr-button
           id="deleteCancelBtn"
           on-tap="_handleDeleteCancel"
