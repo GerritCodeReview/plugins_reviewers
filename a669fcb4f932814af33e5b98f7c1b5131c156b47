@@ -87,6 +87,30 @@
       "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db7f323_7e72bf8d",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-16T08:45:14Z",
+      "side": 1,
+      "message": "\"Add Filter\" does not save the filter. The only way to save a filter is to add a reviewer to it.\nThe REST API does not support adding an empty filter, in fact it throws an \"internal server error\" if you try.\n\nThis iteration is only supposed to support the functionality of the current REST API, hence adding multiple reviewers, at a time, to a filter is not supported.",
+      "parentUuid": "ec8ea9bf_b0096bce",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 7
+      },
+      "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
