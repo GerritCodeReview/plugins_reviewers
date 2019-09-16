@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41eac5f6_c401c1fe",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-16T14:14:53Z",
+      "side": 1,
+      "message": "Hide \"Add Filter\" button when filter is being edited.",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 107
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    }
+  ]
+}

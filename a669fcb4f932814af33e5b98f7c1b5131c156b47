@@ -135,6 +135,30 @@
       "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7feed79d_f652c99e",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 29
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-16T14:14:53Z",
+      "side": 1,
+      "message": "When a reviewer was deleted rv-reviewer called \"this.remove()\" which apparently was unnecessary and upsetting to polymer that removed all reviewers after it in the collection. By only calling \"this.remove()\" when editing (not saved reviewer yet) it works as expected.",
+      "parentUuid": "4c94b328_ccff6e89",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 7
+      },
+      "revId": "a669fcb4f932814af33e5b98f7c1b5131c156b47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
