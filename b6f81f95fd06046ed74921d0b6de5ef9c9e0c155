@@ -213,6 +213,29 @@
     },
     {
       "key": {
+        "uuid": "f02b968e_078447e2",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 30
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:57:46Z",
+      "side": 1,
+      "message": "Use parameter instead of instance variable.",
+      "range": {
+        "startLine": 34,
+        "startChar": 45,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5eb7a6e5_bfecbde6",
         "filename": "rv-reviewers/rv-reviewers.js",
         "patchSetId": 30
