@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ecea51c5_bcc5f646",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a87fe3d_f6503ca1",
+      "range": {
+        "startLine": 35,
+        "startChar": 5,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "565eb25e_2c9af3c9",
         "filename": "rv-reviewers/rv-edit-screen.html",
         "patchSetId": 30
@@ -36,6 +60,30 @@
       "writtenOn": "2019-09-17T07:19:45Z",
       "side": 1,
       "message": "Would left alignment \u003cth align\u003d\"left\"\u003e be better here, as current center alignment?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8a6ab7fe_b8f2de93",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:51:36Z",
+      "side": 1,
+      "message": "That was my initial reaction too but I quite like the center alignment.\n\nAny of left|center alignment works fine for me, your call.",
+      "parentUuid": "565eb25e_2c9af3c9",
       "range": {
         "startLine": 37,
         "startChar": 8,
@@ -95,6 +143,29 @@
     },
     {
       "key": {
+        "uuid": "bfda4835_091b7356",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:51:36Z",
+      "side": 1,
+      "message": "Should we change this to \"New Filter\" or \"Add New Filter\" as \"Add Filter\" could give the impression that this is the button to save the filter with.",
+      "range": {
+        "startLine": 65,
+        "startChar": 85,
+        "endLine": 65,
+        "endChar": 95
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "88f912ec_43246ccb",
         "filename": "rv-reviewers/rv-edit-screen.html",
         "patchSetId": 30
@@ -118,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "0e31b29a_27131607",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88f912ec_43246ccb",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 78
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5eb7a6e5_bfecbde6",
         "filename": "rv-reviewers/rv-reviewers.js",
         "patchSetId": 30
@@ -138,6 +233,30 @@
       "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76bc6e0a_a5a7df52",
+        "filename": "rv-reviewers/rv-reviewers.js",
+        "patchSetId": 30
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T07:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb7a6e5_bfecbde6",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 12
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
