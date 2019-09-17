@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a87fe3d_f6503ca1",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T07:19:45Z",
+      "side": 1,
+      "message": "While we are using the overlay, we don\u0027t use gr-dialog, that would do styling for us, e.g. header. The reason to not use gr-dialog, like it is for example done in delete-project plugin is because we don\u0027t have Close | Delete buttons (or like in \"Create Change\" core dialog Cancel | Create)?\n\nOTOH, we could handle Close | Add Filter buttons as gr-dialog buttons.\n\nBut this could also considered to be changed in follow-up change. We could just style header of the dialog with header style, borrowed from gr-dialog.html, because H1 is way to big:\n\n  header {\n        border-bottom: 1px solid var(--border-color);\n        flex-shrink: 0;\n        font-weight: var(--font-weight-bold);\n      }\n\nand then you could use:\n\n  \u003cheader\u003eReviewers Config\u003c/header\u003e\n\ninstead of:\n\n\u003ch1\u003eReviewers Config\u003c/h1\u003e",
+      "range": {
+        "startLine": 35,
+        "startChar": 5,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "565eb25e_2c9af3c9",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T07:19:45Z",
+      "side": 1,
+      "message": "Would left alignment \u003cth align\u003d\"left\"\u003e be better here, as current center alignment?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 13
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "41eac5f6_c401c1fe",
         "filename": "rv-reviewers/rv-edit-screen.html",
         "patchSetId": 30
@@ -22,6 +68,76 @@
       "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d162009_54c72e48",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T07:19:45Z",
+      "side": 1,
+      "message": "+1, but could be done in follow-up change.",
+      "parentUuid": "41eac5f6_c401c1fe",
+      "range": {
+        "startLine": 65,
+        "startChar": 10,
+        "endLine": 65,
+        "endChar": 107
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88f912ec_43246ccb",
+        "filename": "rv-reviewers/rv-edit-screen.html",
+        "patchSetId": 30
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T07:19:45Z",
+      "side": 1,
+      "message": "Please, swap the order of these buttons. In core Gerrit and in delete-project plugins it is Right To The Left with significance action order:\n\n  CANCEL | CREATE\n\nor:\n\n  CANCEL | DELETE",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 66,
+        "endChar": 78
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eb7a6e5_bfecbde6",
+        "filename": "rv-reviewers/rv-reviewers.js",
+        "patchSetId": 30
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-17T07:19:45Z",
+      "side": 1,
+      "message": "Type.",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 12
+      },
+      "revId": "b6f81f95fd06046ed74921d0b6de5ef9c9e0c155",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
