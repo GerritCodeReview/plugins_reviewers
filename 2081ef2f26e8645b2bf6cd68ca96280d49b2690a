@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d1374ee7_72ebe601",
+        "filename": "rv-reviewers/rv-reviewer.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-17T08:26:53Z",
+      "side": 1,
+      "message": "Due to my FE shortcomings I don\u0027t know what to use to display already saved reviewers.",
+      "range": {
+        "startLine": 47,
+        "startChar": 9,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "2081ef2f26e8645b2bf6cd68ca96280d49b2690a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
