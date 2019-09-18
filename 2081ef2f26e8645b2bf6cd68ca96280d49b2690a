@@ -22,6 +22,30 @@
       "revId": "2081ef2f26e8645b2bf6cd68ca96280d49b2690a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "052fa919_41535f2a",
+        "filename": "rv-reviewers/rv-reviewer.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-18T08:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1374ee7_72ebe601",
+      "range": {
+        "startLine": 47,
+        "startChar": 9,
+        "endLine": 47,
+        "endChar": 11
+      },
+      "revId": "2081ef2f26e8645b2bf6cd68ca96280d49b2690a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
