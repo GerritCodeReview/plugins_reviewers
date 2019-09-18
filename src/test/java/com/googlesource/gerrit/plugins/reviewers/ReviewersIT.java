@@ -84,8 +84,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(
-            ImmutableSet.of(admin.id().get(), user.id().get(), user2.id().get()));
+        .containsExactlyElementsIn(ImmutableSet.of(user.id().get(), user2.id().get()));
   }
 
   @Test
@@ -121,8 +120,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(
-            ImmutableSet.of(admin.id().get(), user.id().get(), user2.id().get()));
+        .containsExactlyElementsIn(ImmutableSet.of(user.id().get(), user2.id().get()));
   }
 
   @Test
@@ -189,6 +187,6 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null && wait < 100);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(admin.id().get(), user.id().get()));
+        .containsExactlyElementsIn(ImmutableSet.of(user.id().get()));
   }
 }
