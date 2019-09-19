@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9052e614_d59adaf0",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T06:46:23Z",
+      "side": 1,
+      "message": "nameOrEmail?",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3444d4ce_cdd825ac",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T06:46:23Z",
+      "side": 1,
+      "message": "Can be simplified: if (accounts[key].email) {...",
+      "range": {
+        "startLine": 76,
+        "startChar": 18,
+        "endLine": 76,
+        "endChar": 51
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
