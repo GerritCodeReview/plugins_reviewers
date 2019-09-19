@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d9597b03_91a0a438",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-19T08:10:26Z",
+      "side": 1,
+      "message": "\u003e \"_getAccountSuggestions\" is copied from:\n\u003e polygerrit-ui/app/elements/admin/gr-group-members/gr-group-members.js.\n\nPerhaps I should mention that in the commit message...",
+      "parentUuid": "30106bc9_01520ec3",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3444d4ce_cdd825ac",
         "filename": "rv-reviewers/rv-reviewer.js",
         "patchSetId": 9
