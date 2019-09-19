@@ -25,6 +25,8 @@ import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.extensions.restapi.RestApiModule;
+import com.google.gerrit.extensions.webui.JavaScriptPlugin;
+import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
@@ -78,5 +80,13 @@ public class Module extends FactoryModule {
             }
           });
     }
+    install(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            DynamicSet.bind(binder(), WebUiPlugin.class)
+                .toInstance(new JavaScriptPlugin("rv-reviewers.html"));
+          }
+        });
   }
 }

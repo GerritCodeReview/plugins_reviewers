@@ -6,6 +6,8 @@ load(
     "PLUGIN_TEST_DEPS",
     "gerrit_plugin",
 )
+load("//tools/bzl:genrule2.bzl", "genrule2")
+load("//tools/bzl:js.bzl", "polygerrit_plugin")
 
 gerrit_plugin(
     name = "reviewers",
@@ -15,6 +17,28 @@ gerrit_plugin(
         "Gerrit-Module: com.googlesource.gerrit.plugins.reviewers.Module",
     ],
     resources = glob(["src/main/resources/**/*"]),
+    resource_jars = [":rv-reviewers-static"],
+)
+
+genrule2(
+    name = "rv-reviewers-static",
+    srcs = [":rv-reviewers"],
+    outs = ["rv-reviewers-static.jar"],
+    cmd = " && ".join([
+        "mkdir $$TMP/static",
+        "cp -r $(locations :rv-reviewers) $$TMP/static",
+        "cd $$TMP",
+        "zip -Drq $$ROOT/$@ -g .",
+    ]),
+)
+
+polygerrit_plugin(
+    name = "rv-reviewers",
+    srcs = glob([
+        "rv-reviewers/*.html",
+        "rv-reviewers/*.js",
+    ]),
+    app = "plugin.html",
 )
 
 junit_tests(
