@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "30106bc9_01520ec3",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-19T08:08:49Z",
+      "side": 1,
+      "message": "I think nameAndEmail is slightly more accurate since that\u0027s what we are showing, (email\u003dundefined \u003d\u003e name + email \u003d name).\nTo be more precise you\u0027d have to use nameOrNameAndEmail.\nYou could go for less precise and use \"accountDescription\"...\n\n\"_getAccountSuggestions\" is copied from:\npolygerrit-ui/app/elements/admin/gr-group-members/gr-group-members.js.",
+      "parentUuid": "9052e614_d59adaf0",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3444d4ce_cdd825ac",
         "filename": "rv-reviewers/rv-reviewer.js",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "d31db34b2fac54111374391890a861937070d5fa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "338b7b69_20cd2561",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-19T08:08:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3444d4ce_cdd825ac",
+      "range": {
+        "startLine": 76,
+        "startChar": 18,
+        "endLine": 76,
+        "endChar": 51
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
