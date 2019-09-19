@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "e7d8de67_945bd801",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2019-09-19T08:39:20Z",
+      "side": 1,
+      "message": "+1. And put a TODO on this line in code, that it could somehow re-use the gerrit core code if it could be exposed somehow from the core?",
+      "parentUuid": "d9597b03_91a0a438",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "d31db34b2fac54111374391890a861937070d5fa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3444d4ce_cdd825ac",
         "filename": "rv-reviewers/rv-reviewer.js",
         "patchSetId": 9
