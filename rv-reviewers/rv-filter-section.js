@@ -17,6 +17,7 @@
 
     properties: {
       pluginRestApi: Object,
+      repoName: String,
       reviewers: Array,
       filter: String,
       canModifyConfig: Boolean,
