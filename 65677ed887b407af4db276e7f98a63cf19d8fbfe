@@ -22,6 +22,30 @@
       "revId": "65677ed887b407af4db276e7f98a63cf19d8fbfe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e604495_30918c3f",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-23T13:06:42Z",
+      "side": 1,
+      "message": "Is this because the reviewers plugin doesn\u0027t support (or REST cannot validate) singleusergroup groups?",
+      "parentUuid": "b417e2d5_ef3562a8",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 23
+      },
+      "revId": "65677ed887b407af4db276e7f98a63cf19d8fbfe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
