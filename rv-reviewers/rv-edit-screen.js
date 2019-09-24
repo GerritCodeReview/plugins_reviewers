@@ -47,7 +47,7 @@
     },
 
     _getReviewersUrl(repoName) {
-      return `/projects/${repoName}/reviewers`;
+      return `/projects/${encodeURIComponent(repoName)}/reviewers`;
     },
 
     _handleCreateSection() {
