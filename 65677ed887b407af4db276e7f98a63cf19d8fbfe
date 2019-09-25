@@ -46,6 +46,30 @@
       "revId": "65677ed887b407af4db276e7f98a63cf19d8fbfe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e958b693_f7de4207",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-25T10:18:53Z",
+      "side": 1,
+      "message": "Reviewers plugin ReviewerResolver does not seem to support singleusergroups.\nThe question is just how to figure out which groups are singleusergroups groups? Regexp?",
+      "parentUuid": "6e604495_30918c3f",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 23
+      },
+      "revId": "65677ed887b407af4db276e7f98a63cf19d8fbfe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
