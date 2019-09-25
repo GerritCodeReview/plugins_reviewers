@@ -22,6 +22,30 @@
       "revId": "6775d764dc50b927556522052a364f288cb35e6a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b36fac3_134539cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2019-09-25T09:39:40Z",
+      "side": 1,
+      "message": "Done\n\nSorry, forgot to fix the commit message.\nI never use local branches. Not remembering to edit merge commit messages is one of the few draw-backs.",
+      "parentUuid": "17d7ecab_57698fe7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 41
+      },
+      "revId": "6775d764dc50b927556522052a364f288cb35e6a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
