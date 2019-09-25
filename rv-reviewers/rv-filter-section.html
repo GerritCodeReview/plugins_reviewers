@@ -58,12 +58,18 @@ limitations under the License.
         <div class="header">
           <div class="name">
             <h3>Filter:</h3>
-            <input
+            <iron-input
                 id="editFilterInput"
                 bind-value="{{filter}}"
-                is="iron-input"
                 type="text"
                 disabled="[[_computeFilterInputDisabled(canModifyConfig, _originalFilter)]]">
+              <input
+                  id="editFilterInput"
+                  bind-value="{{filter}}"
+                  is="iron-input"
+                  type="text"
+                  disabled="[[_computeFilterInputDisabled(canModifyConfig, _originalFilter)]]">
+            </iron-input>
             <gr-button
                 id="cancelBtn"
                 on-tap="_handleCancel"
