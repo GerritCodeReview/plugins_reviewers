@@ -16,7 +16,10 @@
     is: 'rv-edit-screen',
 
     properties: {
-      pluginRestApi: Object,
+      pluginRestApi: {
+        type: Object,
+        observer: '_loadFilterSections'
+      },
       repoName: String,
       loading: Boolean,
       canModifyConfig: Boolean,
@@ -25,10 +28,6 @@
         value: false,
       },
       _filterSections: Array,
-    },
-
-    attached() {
-      this._loadFilterSections();
     },
 
     _loadFilterSections() {
