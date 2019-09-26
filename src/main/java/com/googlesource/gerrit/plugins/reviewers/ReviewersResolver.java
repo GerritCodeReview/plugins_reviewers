@@ -91,7 +91,7 @@ class ReviewersResolver {
     try {
       AccountResolver.Result result = accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
-        Account.Id id = result.asList().get(0).getAccount().id();
+        Account.Id id = result.asList().get(0).account().id();
         if (uploader == null || id.get() != uploader._accountId) {
           reviewers.add(id);
           return true;
