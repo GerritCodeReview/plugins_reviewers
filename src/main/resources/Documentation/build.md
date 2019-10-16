@@ -16,7 +16,7 @@ the Gerrit tree to exist locally.
 The output is created in
 
 ```
-  bazel-genfiles/@PLUGIN@.jar
+  bazel-bin/@PLUGIN@.jar
 ```
 
 To execute the tests run:
@@ -40,7 +40,7 @@ This project can be imported into the Eclipse IDE:
 The output is created in
 
 ```
-  bazel-genfiles/plugins/@PLUGIN@/@PLUGIN@.jar
+  bazel-bin/plugins/@PLUGIN@/@PLUGIN@.jar
 ```
 
 To execute the tests run:
