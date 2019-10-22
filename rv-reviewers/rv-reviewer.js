@@ -18,12 +18,13 @@
     properties: {
       canModifyConfig: Boolean,
       pluginRestAPi: Object,
+      repoName: String,
       reviewer: String,
       _reviewerSearchId: String,
       _queryReviewers: {
         type: Function,
         value() {
-          return this._getAccountSuggestions.bind(this);
+          return this._getReviewerSuggestions.bind(this);
         },
       },
       _originalReviewer: String,
@@ -63,41 +64,61 @@
       return !canModifyConfig;
     },
 
-    _getAccountSuggestions(input) {
+    _getReviewerSuggestions(input) {
       if (input.length === 0) { return Promise.resolve([]); }
-      return this._getSuggestedAccounts(
-          input).then(accounts => {
-            const accountSuggestions = [];
-            let nameAndEmail;
-            let value;
-            if (!accounts) { return []; }
-            for (const key in accounts) {
-              if (!accounts.hasOwnProperty(key)) { continue; }
-              if (accounts[key].email) {
-                nameAndEmail = accounts[key].name +
-                  ' <' + accounts[key].email + '>';
-              } else {
-                nameAndEmail = accounts[key].name;
-              }
-              if (accounts[key].username) {
-                value = accounts[key].username;
-              } else if (accounts[key].email) {
-                value = accounts[key].email;
-              } else {
-                value = accounts[key]._account_id;
-              }
-              accountSuggestions.push({
-                name: nameAndEmail,
-                value,
-              });
-            }
-            return accountSuggestions;
+      const promises = [];
+      promises.push(this._getSuggestedGroups(input));
+      promises.push(this._getSuggestedAccounts(input));
+      return Promise.all(promises).then(result => {
+        return result.flat();
+      });
+    },
+
+    _getSuggestedGroups(input) {
+      const suggestUrl = `/groups/?suggest=${input}&p=${this.repoName}`;
+      return this.pluginRestApi.get(suggestUrl).then(groups => {
+        if (!groups) { return []; }
+        const groupSuggestions = [];
+        for (const key in groups) {
+          if (!groups.hasOwnProperty(key)) { continue; }
+          groupSuggestions.push({
+            name: key,
+            value: key,
           });
+        }
+        return groupSuggestions;
+      });
     },
 
     _getSuggestedAccounts(input) {
       const suggestUrl = `/accounts/?suggest&q=${input}`;
-      return this.pluginRestApi.get(suggestUrl);
+      return this.pluginRestApi.get(suggestUrl).then(accounts => {
+        const accountSuggestions = [];
+        let nameAndEmail;
+        let value;
+        if (!accounts) { return []; }
+        for (const key in accounts) {
+          if (!accounts.hasOwnProperty(key)) { continue; }
+          if (accounts[key].email) {
+            nameAndEmail = accounts[key].name +
+              ' <' + accounts[key].email + '>';
+          } else {
+            nameAndEmail = accounts[key].name;
+          }
+          if (accounts[key].username) {
+            value = accounts[key].username;
+          } else if (accounts[key].email) {
+            value = accounts[key].email;
+          } else {
+            value = accounts[key]._account_id;
+          }
+          accountSuggestions.push({
+            name: nameAndEmail,
+            value,
+          });
+        }
+        return accountSuggestions;
+      });
     },
 
     _handleDeleteCancel() {
