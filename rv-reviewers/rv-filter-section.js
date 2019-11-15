@@ -11,11 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-(function() {
-  Polymer({
-    is: 'rv-filter-section',
+(function () {
+    class RvFilterSection extends Polymer.GestureEventListeners(
+Polymer.LegacyElementMixin(
+Polymer.Element)) {
+        static get is() { return "rv-filter-section"; } 
 
-    properties: {
+
+        static get properties() { return {
       pluginRestApi: Object,
       repoName: String,
       reviewers: Array,
@@ -27,38 +30,38 @@
         value: false,
       },
       reviewersUrl: String,
-    },
-
-    attached() {
+    }; }
+        attached() {
+            super.attached();
       this._updateSection();
-    },
+        }
 
     _updateSection() {
       this._originalFilter = this.filter;
-    },
+    }
 
     _computeEditing(filter, _originalFilter) {
       if (_originalFilter === '') {
         return true;
       }
       return filter === '';
-    },
+    }
 
     _computeCancelHidden(filter, _originalFilter) {
       return !this._computeEditing(filter, _originalFilter);
-    },
+    }
 
     _computeAddBtnHidden(canModifyConfig, editingReviewer) {
       return !(canModifyConfig && !editingReviewer);
-    },
+    }
 
     _computeFilterInputDisabled(canModifyConfig, originalFilter) {
       return !canModifyConfig || originalFilter !== '';
-    },
+    }
 
     _handleCancel() {
       this.remove();
-    },
+    }
 
     _handleReviewerDeleted(e) {
       if (e.detail.editing) {
@@ -69,7 +72,7 @@
         const deleted = this.reviewers[index];
         this._putReviewer(deleted, 'DELETE');
       }
-    },
+    }
 
     _handleReviewerAdded(e) {
       this._editingReviewer = false;
@@ -77,7 +80,7 @@
         this.fire('show-alert', {message: err});
         throw err;
       });
-    },
+    }
 
     _putReviewer(reviewer, action) {
       return this.pluginRestApi.put(this.reviewersUrl, {
@@ -89,11 +92,12 @@
         this.dispatchEvent(
             new CustomEvent('reviewer-changed', {detail, bubbles: true}));
       });
-    },
+    }
 
     _handleAddReviewer() {
       this.push('reviewers', '');
       this._editingReviewer = true;
-    },
-  });
+    }
+    }
+    customElements.define(RvFilterSection.is, RvFilterSection);
 })();
