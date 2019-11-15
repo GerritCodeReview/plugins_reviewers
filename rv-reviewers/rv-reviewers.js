@@ -12,42 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 (function() {
-  Polymer({
-    is: 'rv-reviewers',
+  class RvReviewers extends Polymer.Element {
+    static get is() { return 'rv-reviewers'; }
 
-    properties: {
-      pluginRestApi: Object,
-      repoName: String,
-      _canModifyConfig: {
-        type: Boolean,
-        computed: '_computeCanModifyConfig(_isOwner, _hasModifyCapability)',
-      },
-      _loading: {
-        type: Boolean,
-        value: true,
-      },
-      _isOwner: {
-        type: Boolean,
-        value: false,
-      },
-      _hasModifyCapability: {
-        type: Boolean,
-        value: false,
-      },
-    },
+    static get properties() {
+      return {
+        pluginRestApi: Object,
+        repoName: String,
+        _canModifyConfig: {
+          type: Boolean,
+          computed: '_computeCanModifyConfig(_isOwner, _hasModifyCapability)',
+        },
+        _loading: {
+          type: Boolean,
+          value: true,
+        },
+        _isOwner: {
+          type: Boolean,
+          value: false,
+        },
+        _hasModifyCapability: {
+          type: Boolean,
+          value: false,
+        },
+      };
+    }
 
-    attached() {
+    connectedCallback() {
+      super.connectedCallback();
       this.pluginRestApi = this.plugin.restApi();
       this._setCanModifyConfig();
-    },
+    }
 
     _handleCommandTap() {
       this.$.rvScreenOverlay.open();
-    },
+    }
 
     _handleRvEditScreenClose() {
       this.$.rvScreenOverlay.close();
-    },
+    }
 
     _setCanModifyConfig() {
       const promises = [];
@@ -64,19 +67,21 @@
       Promise.all(promises).then(() => {
         this._loading = false;
       });
-    },
+    }
 
     _computeCanModifyConfig(isOwner, hasModifyCapability) {
       return isOwner || hasModifyCapability;
-    },
+    }
 
     _getRepoAccess(repoName) {
       return this.pluginRestApi.get(
           '/access/?project=' + encodeURIComponent(repoName));
-    },
+    }
 
     _getCapabilities() {
       return this.pluginRestApi.get('/accounts/self/capabilities');
-    },
-  });
+    }
+  }
+
+  customElements.define(RvReviewers.is, RvReviewers);
 })();
