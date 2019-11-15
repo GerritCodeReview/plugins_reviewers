@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "678ee1f5_acc57d5c",
+        "filename": "rv-reviewers/rv-edit-screen.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-11-15T20:13:01Z",
+      "side": 1,
+      "message": "Should be:\n\n  static get properties() {\n    return {\n      pluginRestApi: {\n        type: Object,\n        observer: \u0027_loadFilterSections\u0027\n      },\n      repoName: String,\n      loading: Boolean,\n      canModifyConfig: Boolean,\n      _editingFilter: {\n        type: Boolean,\n        value: false,\n      },\n      _filterSections: Array,\n    };\n  }",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 8
+      },
+      "revId": "8d15d9c660015d1c77971d3d105aa9e3ab6f1544",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "347fee10_0e839698",
+        "filename": "rv-reviewers/rv-edit-screen.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2019-11-15T20:13:01Z",
+      "side": 1,
+      "message": "Should be indented more. (Same for the rest of the files).",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "8d15d9c660015d1c77971d3d105aa9e3ab6f1544",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
