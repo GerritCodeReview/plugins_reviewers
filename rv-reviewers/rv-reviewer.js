@@ -12,57 +12,62 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 (function() {
-  Polymer({
-    is: 'rv-reviewer',
+  class RvReviewer extends Polymer.GestureEventListeners(
+      Polymer.LegacyElementMixin(
+          Polymer.Element)) {
+    static get is() { return 'rv-reviewer'; }
 
-    properties: {
-      canModifyConfig: Boolean,
-      pluginRestAPi: Object,
-      repoName: String,
-      reviewer: String,
-      _reviewerSearchId: String,
-      _queryReviewers: {
-        type: Function,
-        value() {
-          return this._getReviewerSuggestions.bind(this);
+    static get properties() {
+      return {
+        canModifyConfig: Boolean,
+        pluginRestAPi: Object,
+        repoName: String,
+        reviewer: String,
+        _reviewerSearchId: String,
+        _queryReviewers: {
+          type: Function,
+          value() {
+            return this._getReviewerSuggestions.bind(this);
+          },
         },
-      },
-      _originalReviewer: String,
-      _deleted: Boolean,
-      _editing: {
-        type: Boolean,
-        computed: '_computeEditing(reviewer, _originalReviewer)',
-      },
-    },
+        _originalReviewer: String,
+        _deleted: Boolean,
+        _editing: {
+          type: Boolean,
+          computed: '_computeEditing(reviewer, _originalReviewer)',
+        },
+      };
+    }
 
     attached() {
+      super.attached();
       this._originalReviewer = this.reviewer;
-    },
+    }
 
     _computeReviewerDisabled(reviewer, _originalReviewer) {
       return !this._computeEditing(reviewer, _originalReviewer);
-    },
+    }
 
     _computeEditing(reviewer, _originalReviewer) {
       if (_originalReviewer === '') {
         return true;
       }
       return reviewer === '';
-    },
+    }
 
     _computeDeleteCancel(reviewer, _originalReviewer) {
       return this._computeEditing(reviewer, _originalReviewer) ?
-      'Cancel' : 'Delete';
-    },
+        'Cancel' : 'Delete';
+    }
 
     _computeHideAddButton(reviewer, _originalReviewer) {
       return !(this._computeEditing(reviewer, _originalReviewer)
       && this._reviewerSearchId);
-    },
+    }
 
     _computeHideDeleteButton(canModifyConfig) {
       return !canModifyConfig;
-    },
+    }
 
     _getReviewerSuggestions(input) {
       if (input.length === 0) { return Promise.resolve([]); }
@@ -72,7 +77,7 @@
       return Promise.all(promises).then(result => {
         return result.flat();
       });
-    },
+    }
 
     _getSuggestedGroups(input) {
       const suggestUrl = `/groups/?suggest=${input}&p=${this.repoName}`;
@@ -88,7 +93,7 @@
         }
         return groupSuggestions;
       });
-    },
+    }
 
     _getSuggestedAccounts(input) {
       const suggestUrl = `/accounts/?suggest&q=${input}`;
@@ -119,7 +124,7 @@
         }
         return accountSuggestions;
       });
-    },
+    }
 
     _handleDeleteCancel() {
       const detail = {editing: this._editing};
@@ -128,13 +133,15 @@
       }
       this.dispatchEvent(
           new CustomEvent('reviewer-deleted', {detail, bubbles: true}));
-    },
+    }
 
     _handleAddReviewer() {
       const detail = {reviewer: this._reviewerSearchId};
       this._originalReviewer = this.reviewer;
       this.dispatchEvent(
           new CustomEvent('reviewer-added', {detail, bubbles: true}));
-    },
-  });
+    }
+  }
+
+  customElements.define(RvReviewer.is, RvReviewer);
 })();
