@@ -11,11 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-(function() {
-  Polymer({
-    is: 'rv-reviewers',
+(function () {
+    class RvReviewers extends Polymer.GestureEventListeners(
+Polymer.LegacyElementMixin(
+Polymer.Element)) {
+        static get is() { return "rv-reviewers"; } 
 
-    properties: {
+
+        static get properties() { return {
       pluginRestApi: Object,
       repoName: String,
       _canModifyConfig: {
@@ -34,20 +37,20 @@
         type: Boolean,
         value: false,
       },
-    },
-
-    attached() {
+    }; }
+        attached() {
+            super.attached();
       this.pluginRestApi = this.plugin.restApi();
       this._setCanModifyConfig();
-    },
+        }
 
     _handleCommandTap() {
       this.$.rvScreenOverlay.open();
-    },
+    }
 
     _handleRvEditScreenClose() {
       this.$.rvScreenOverlay.close();
-    },
+    }
 
     _setCanModifyConfig() {
       const promises = [];
@@ -64,19 +67,20 @@
       Promise.all(promises).then(() => {
         this._loading = false;
       });
-    },
+    }
 
     _computeCanModifyConfig(isOwner, hasModifyCapability) {
       return isOwner || hasModifyCapability;
-    },
+    }
 
     _getRepoAccess(repoName) {
       return this.pluginRestApi.get(
           '/access/?project=' + encodeURIComponent(repoName));
-    },
+    }
 
     _getCapabilities() {
       return this.pluginRestApi.get('/accounts/self/capabilities');
-    },
-  });
+    }
+    }
+    customElements.define(RvReviewers.is, RvReviewers);
 })();

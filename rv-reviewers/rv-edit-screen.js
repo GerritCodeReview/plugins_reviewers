@@ -11,11 +11,14 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-(function() {
-  Polymer({
-    is: 'rv-edit-screen',
+(function () {
+    class RvEditScreen extends Polymer.GestureEventListeners(
+Polymer.LegacyElementMixin(
+Polymer.Element)) {
+        static get is() { return "rv-edit-screen"; } 
 
-    properties: {
+
+        static get properties() { return {
       pluginRestApi: {
         type: Object,
         observer: '_loadFilterSections'
@@ -28,41 +31,42 @@
         value: false,
       },
       _filterSections: Array,
-    },
+    }; }
 
     _loadFilterSections() {
       this.pluginRestApi.get(this._getReviewersUrl(this.repoName))
           .then(filterSections => {
             this._filterSections = filterSections;
           });
-    },
+    }
 
     _computeAddFilterBtnHidden(canModifyConfig, editingFilter) {
       return !canModifyConfig || editingFilter;
-    },
+    }
 
     _computeLoadingClass(loading) {
       return loading ? 'loading' : '';
-    },
+    }
 
     _getReviewersUrl(repoName) {
       return `/projects/${encodeURIComponent(repoName)}/reviewers`;
-    },
+    }
 
     _handleCreateSection() {
       const section = {filter: '', reviewers: [], editing: true};
       this._editingFilter = true;
       this.push('_filterSections', section);
-    },
+    }
 
     _handleCloseTap(e) {
       e.preventDefault();
       this.fire('close', null, {bubbles: false});
-    },
+    }
 
     _handleReviewerChanged(e) {
       this._filterSections = e.detail.result;
       this._editingFilter = false;
-    },
-  });
+    }
+    }
+    customElements.define(RvEditScreen.is, RvEditScreen);
 })();
