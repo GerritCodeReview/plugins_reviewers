@@ -22,6 +22,30 @@
       "revId": "2544cd87fbf719ef321234d8927cbeaa303386ac",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3454ba89_5e748fd9",
+        "filename": "rv-reviewers/rv-edit-screen.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1085901
+      },
+      "writtenOn": "2019-11-18T09:16:22Z",
+      "side": 1,
+      "message": "This is a part of a custom elements standard. You can find more information here:\nhttps://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements",
+      "parentUuid": "3dd43b29_46b473a7",
+      "range": {
+        "startLine": 73,
+        "startChar": 1,
+        "endLine": 73,
+        "endChar": 16
+      },
+      "revId": "2544cd87fbf719ef321234d8927cbeaa303386ac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
