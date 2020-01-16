@@ -16,9 +16,11 @@ load(
 gerrit_polymer()
 
 # Load closure compiler with transitive dependencies
-load("@io_bazel_rules_closure//closure:defs.bzl", "closure_repositories")
+load("@io_bazel_rules_closure//closure:repositories.bzl", "rules_closure_dependencies", "rules_closure_toolchains")
 
-closure_repositories()
+rules_closure_dependencies()
+
+rules_closure_toolchains()
 
 # Load Gerrit npm_binary toolchain
 load("@com_googlesource_gerrit_bazlets//tools:js.bzl", "GERRIT", "npm_binary")
