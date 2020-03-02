@@ -87,6 +87,6 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
 
   private TestAccount createTestAccount(String name, String group) throws Exception {
     name = name(name);
-    return accountCreator.create(name, name + "@example.com", name + " full name", group);
+    return accountCreator.create(name, name + "@example.com", name + " full name", null, group);
   }
 }
