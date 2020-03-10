@@ -36,19 +36,19 @@ npm_binary(
 )
 
 # Release Plugin API
-load(
-    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
-    "gerrit_api",
-)
-
-# Snapshot Plugin API
 #load(
-#    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
-#    "gerrit_api_maven_local",
+#    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
+#    "gerrit_api",
 #)
 
+# Snapshot Plugin API
+load(
+    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
+    "gerrit_api_maven_local",
+)
+
 # Load release Plugin API
-gerrit_api()
+#gerrit_api()
 
 # Load snapshot Plugin API
-#gerrit_api_maven_local()
+gerrit_api_maven_local()
