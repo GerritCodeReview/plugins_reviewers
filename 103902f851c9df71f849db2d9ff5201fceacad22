@@ -22,6 +22,53 @@
       "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4873178a_5c4e954d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-03T08:40:15Z",
+      "side": 1,
+      "message": "See my other comment on rv-reviewer/rv-reviewer.html",
+      "parentUuid": "4fed6bec_dfe70b71",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 63
+      },
+      "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2aa8d2f1_02da910f",
+        "filename": "rv-reviewers/rv-reviewer.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-03T08:40:15Z",
+      "side": 1,
+      "message": "Almost true.\nIn the state where gr-autocomplete should have been disabled it\u0027s not even rendered since this \"if\" is false.\nSo the logic is something like:\nif it doesn\u0027t exist -\u003e disable it",
+      "range": {
+        "startLine": 44,
+        "startChar": 28,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
