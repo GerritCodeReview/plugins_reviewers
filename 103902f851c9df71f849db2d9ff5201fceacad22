@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fed6bec_dfe70b71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-03T07:25:45Z",
+      "side": 1,
+      "message": "Just to be sure I am understanding correctly this part of the code\n\n_computeReviewerDisabled() is calling _computeEditing() that is consulting wether _originalReviewer or reviewer are set.\n\nSo if _originalReviewer is not set, and _computeReviewerDisabled returning true, gr-autocomplete is not enabled anyway?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 63
+      },
+      "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
