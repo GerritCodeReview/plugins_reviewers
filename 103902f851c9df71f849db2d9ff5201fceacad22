@@ -69,6 +69,30 @@
       "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a5d04f9_54ed3b78",
+        "filename": "rv-reviewers/rv-reviewer.html",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-03T09:48:25Z",
+      "side": 1,
+      "message": "Thanks for clarifying.",
+      "parentUuid": "2aa8d2f1_02da910f",
+      "range": {
+        "startLine": 44,
+        "startChar": 28,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "103902f851c9df71f849db2d9ff5201fceacad22",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
