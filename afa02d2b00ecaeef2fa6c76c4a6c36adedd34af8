@@ -68,6 +68,30 @@
       "revId": "afa02d2b00ecaeef2fa6c76c4a6c36adedd34af8",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2ab7bf7_5ec902f4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/AddReviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1079507
+      },
+      "writtenOn": "2020-04-14T14:48:30Z",
+      "side": 1,
+      "message": "This change basically prevents reviewers who are already present in the changeset (either as reviewer or in CC, for example if someone manually added added them there) to have their ReviewerState changed (from CC to Reviewer or vise versa).\nI don\u0027t know if this is a useful change without the \"add reviewer as CC\" change. If you think so, I\u0027ll split this change.",
+      "parentUuid": "7f6f2d0d_17558f9d",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "afa02d2b00ecaeef2fa6c76c4a6c36adedd34af8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
