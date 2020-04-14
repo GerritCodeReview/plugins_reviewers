@@ -19,14 +19,18 @@ import com.google.gerrit.entities.Account;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 abstract class AddReviewers implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -71,10 +75,21 @@ abstract class AddReviewers implements Runnable {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
+      List<Integer> existingReviewers = gApi
+          .changes()
+          .id(changeInfo._number)
+          .reviewers()
+          .stream()
+          .map(r -> r._accountId)
+          .collect(Collectors.toList());
       ReviewInput in = new ReviewInput();
       in.reviewers = new ArrayList<>(reviewers.size());
       for (Account.Id account : reviewers) {
+        if (existingReviewers.contains(account.get())) {
+          continue;
+        }
         AddReviewerInput addReviewerInput = new AddReviewerInput();
+        addReviewerInput.state = ReviewerState.CC;
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
       }
