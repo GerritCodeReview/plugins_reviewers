@@ -156,10 +156,12 @@ class Reviewers
       List<ReviewerFilter> matching = findMatchingFilters(changeNumber, filters);
       Set<String> reviewers = getReviewersFrom(matching);
       Set<String> ccs = getCcsFrom(matching);
-      ccs.removeAll(reviewers);
       if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
+      /* Remove all reviewer identifiers (account-ids, group-ids) from ccs that are present in reviewers.
+       * Further filtering of individual accounts is done in AddReviewers after the ids have been resolved into Accounts. */
+      ccs.removeAll(reviewers);
       final AddReviewers addReviewers =
           addReviewersFactory.create(
               c,

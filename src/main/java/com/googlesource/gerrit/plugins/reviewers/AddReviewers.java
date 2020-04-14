@@ -28,6 +28,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /** Adds reviewers to a change. */
 class AddReviewers implements Runnable {
@@ -72,14 +73,30 @@ class AddReviewers implements Runnable {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
+      Set<Account.Id> existingReviewers =
+          gApi.changes().id(changeInfo._number).reviewers().stream()
+              .map(r -> Account.id(r._accountId))
+              .collect(Collectors.toSet());
+      /* Don't add, or change state of, already existing reviewers. */
+      Set<Account.Id> reviewersToAdd =
+          reviewers.stream()
+              .filter(r -> !existingReviewers.contains(r))
+              .collect(Collectors.toSet());
+      /* If account is already configured to be added as reviewer, don't attempt to add as cc. */
+      Set<Account.Id> ccsToAdd =
+          ccs.stream()
+              .filter(c -> !existingReviewers.contains(c))
+              .filter(r -> !reviewersToAdd.contains(r))
+              .collect(Collectors.toSet());
+
       ReviewInput in = new ReviewInput();
       in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
-      for (Account.Id account : reviewers) {
+      for (Account.Id account : reviewersToAdd) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
       }
-      for (Account.Id account : ccs) {
+      for (Account.Id account : ccsToAdd) {
         AddReviewerInput input = new AddReviewerInput();
         input.state = ReviewerState.CC;
         input.reviewer = account.toString();
