@@ -86,10 +86,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public Response<List<ReviewerFilterSection>> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
-    ReviewersConfig.ForProject cfg = config.forProject(projectName);
-    if (cfg == null) {
-      throw new ResourceNotFoundException("Project" + projectName.get() + " not found");
-    }
+    ReviewersConfig.ForProject forProject = new ReviewersConfig.ForProject();
 
     PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());
     if (!userPermission.project(rsrc.getNameKey()).testOrFalse(ProjectPermission.WRITE_CONFIG)
@@ -103,26 +100,26 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       }
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");
-        cfg.load(md);
+        forProject.load(md);
         if (input.action == Action.ADD) {
           message
               .append("Add reviewer ")
               .append(input.reviewer)
               .append(" to filter ")
               .append(input.filter);
-          cfg.addReviewer(input.filter, input.reviewer);
+          forProject.addReviewer(input.filter, input.reviewer);
         } else {
           message
               .append("Remove reviewer ")
               .append(input.reviewer)
               .append(" from filter ")
               .append(input.filter);
-          cfg.removeReviewer(input.filter, input.reviewer);
+          forProject.removeReviewer(input.filter, input.reviewer);
         }
         message.append("\n");
         md.setMessage(message.toString());
         try {
-          cfg.commit(md);
+          forProject.commit(md);
           projectCache.evict(projectName);
         } catch (IOException e) {
           if (e.getCause() instanceof ConfigInvalidException) {
@@ -143,7 +140,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     } catch (IOException err) {
       throw new ResourceNotFoundException(projectName.get(), err);
     }
-    return Response.ok(cfg.getReviewerFilterSections());
+    return Response.ok(config.filtersWithInheritance(projectName));
   }
 
   private void validateReviewer(String reviewer) throws RestApiException {
