@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.config;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.entities.Project;
-import java.util.Arrays;
+import com.googlesource.gerrit.plugins.reviewers.AbstractReviewersPluginTest;
 import org.eclipse.jgit.junit.TestRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,10 +64,9 @@ public class ReviewersConfigIT extends AbstractReviewersPluginTest {
         filter(BRANCH_MAIN).reviewer(JOHN_DOE).reviewer(JANE_DOE));
   }
 
-  private void assertProjectHasFilters(Project.NameKey project, FilterData... filters) {
-    assertThat(reviewersConfig().forProject(project).getReviewerFilterSections())
-        .containsExactlyElementsIn(
-            Arrays.stream(filters).map(f -> f.asSection()).collect(toImmutableList()))
+  private void assertProjectHasFilters(Project.NameKey project, TestFilter... filters) {
+    assertThat(reviewersConfig().filtersWithInheritance(project))
+        .containsExactlyElementsIn(ImmutableList.copyOf(filters))
         .inOrder();
   }
 
