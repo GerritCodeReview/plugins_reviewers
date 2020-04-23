@@ -20,7 +20,7 @@ Gets the default reviewers for specified project.
   GET /projects/myproject/@PLUGIN@ HTTP/1.0
 ```
 
-As response a List of [ReviewerFilterSection](#reviewer-filter-section) is returned
+As response a List of [ReviewerFilter](#reviewer-filter) is returned
 that describes the default reviewers for myproject.
 
 #### Response
@@ -72,7 +72,7 @@ capability (provided by this plugin) or be a Project Owner for the project.
 ```
 
 As response the default reviewers are returned as a list of
-[ReviewerFilterSection](#reviewer-filter-section).
+[ReviewerFilter](#reviewer-filter).
 
 #### Response
 
@@ -104,10 +104,9 @@ As response the default reviewers are returned as a list of
 <a id="json-entities">JSON Entities
 -----------------------------------
 
-### <a id="reviewer-filter-section"></a>ReviewerFilterSection
+### <a id="reviewer-filter"></a>ReviewerFilter
 
-The `ReviewerFilterSection` entity contains a filter section of the
-default reviewers.
+The `ReviewerFilter` entity contains a filter of the default reviewers.
 
 * _filter_: A filter that is used to assign default reviewers.
 * _reviewers_: List of usernames which are assigned as default reviewers
