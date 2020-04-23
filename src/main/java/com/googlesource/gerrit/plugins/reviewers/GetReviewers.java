@@ -23,8 +23,8 @@ import com.google.inject.Singleton;
 import java.util.List;
 
 /**
- * GET REST end-point for getting all configured {@link ReviewerFilterSection}s of a project, local
- * and inherited.
+ * GET REST end-point for getting all configured {@link ReviewerFilterCollection}s of a project,
+ * local and inherited.
  */
 @Singleton
 class GetReviewers implements RestReadView<ProjectResource> {
@@ -36,8 +36,7 @@ class GetReviewers implements RestReadView<ProjectResource> {
   }
 
   @Override
-  public Response<List<ReviewerFilterSection>> apply(ProjectResource resource)
-      throws RestApiException {
-    return Response.ok(config.forProject(resource.getNameKey()).getReviewerFilterSections());
+  public Response<List<ReviewerFilter>> apply(ProjectResource resource) throws RestApiException {
+    return Response.ok(config.filtersWithInheritance(resource.getNameKey()));
   }
 }
