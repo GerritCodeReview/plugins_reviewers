@@ -15,19 +15,19 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.gerrit.acceptance.GitUtil.fetch;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.RefNames;
 import com.google.inject.Inject;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Ignore;
@@ -37,16 +37,19 @@ import org.junit.Ignore;
 public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
   @Inject protected ProjectOperations projectOperations;
 
-  protected void createFilters(FilterData... filters) throws Exception {
+  protected void createFilters(TestFilter... filters) throws Exception {
     createFiltersFor(testRepo, filters);
   }
 
-  protected void createFiltersFor(TestRepository<?> repo, FilterData... filters) throws Exception {
+  protected void createFiltersFor(TestRepository<?> repo, TestFilter... filters) throws Exception {
     String previousHead = repo.getRepository().getBranch();
     checkoutRefsMetaConfig(repo);
     Config cfg = new Config();
     Arrays.stream(filters)
-        .forEach(f -> cfg.setStringList(SECTION_FILTER, f.filter, KEY_REVIEWER, f.reviewers));
+        .forEach(
+            f ->
+                cfg.setStringList(
+                    SECTION_FILTER, f.filter, KEY_REVIEWER, Lists.newArrayList(f.reviewers)));
     pushFactory
         .create(admin.newIdent(), repo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
@@ -60,31 +63,32 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
     return repo;
   }
 
-  protected FilterData filter(String filter) {
-    return new FilterData(filter);
+  protected TestFilter filter(String filter, Set<String> reviewers) {
+    return new TestFilter(filter, reviewers);
   }
 
-  /** Assists tests to define a filter. */
-  protected static class FilterData {
-    List<String> reviewers;
-    String filter;
+  protected TestFilter filter(String filter) {
+    return new TestFilter(filter);
+  }
 
-    FilterData(String filter) {
+  protected static class TestFilter extends ReviewerFilter {
+
+    public TestFilter(String filter, Set<String> reviewers) {
       this.filter = filter;
-      this.reviewers = Lists.newArrayList();
+      this.reviewers = reviewers;
     }
 
-    FilterData reviewer(TestAccount reviewer) {
-      return reviewer(reviewer.email());
+    public TestFilter(String filter) {
+      this(filter, Sets.newHashSet());
     }
 
-    FilterData reviewer(String reviewer) {
-      reviewers.add(reviewer);
+    public TestFilter reviewer(String reviewerId) {
+      reviewers.add(reviewerId);
       return this;
     }
 
-    public ReviewerFilterSection asSection() {
-      return new ReviewerFilterSection(filter, ImmutableSet.copyOf(reviewers));
+    public TestFilter reviewer(TestAccount reviewer) {
+      return reviewer(reviewer.email());
     }
   }
 }
