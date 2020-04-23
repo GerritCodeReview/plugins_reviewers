@@ -128,7 +128,7 @@ class Reviewers
 
   private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    return config.forProject(projectName).getReviewerFilterSections();
+    return config.filtersWithInheritance(projectName);
   }
 
   private void onEvent(ChangeEvent event) {
