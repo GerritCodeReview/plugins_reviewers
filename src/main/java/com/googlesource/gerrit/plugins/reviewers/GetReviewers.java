@@ -34,6 +34,6 @@ class GetReviewers implements RestReadView<ProjectResource> {
   @Override
   public Response<List<ReviewerFilterSection>> apply(ProjectResource resource)
       throws RestApiException {
-    return Response.ok(config.forProject(resource.getNameKey()).getReviewerFilterSections());
+    return Response.ok(config.filtersWithInheritance(resource.getNameKey()));
   }
 }
