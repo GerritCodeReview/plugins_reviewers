@@ -17,9 +17,9 @@ package com.googlesource.gerrit.plugins.reviewers;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 import static java.util.stream.Collectors.toSet;
 
 import com.google.common.collect.ImmutableSet;
