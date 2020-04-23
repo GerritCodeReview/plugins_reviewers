@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.config;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -29,6 +29,8 @@ import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.reviewers.ReviewerFilter;
+import java.util.Set;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
@@ -61,11 +63,11 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
-    assertThat(reviewersConfig().forProject(project).getReviewerFilterSections())
+    assertThat(reviewersConfig().filtersWithInheritance(project))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JANE_DOE))))
+                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE)),
+                filter(BRANCH_MAIN, ImmutableSet.of(JANE_DOE))))
         .inOrder();
   }
 
@@ -100,15 +102,27 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
 
-    assertThat(reviewersConfig().forProject(childProject).getReviewerFilterSections())
+    assertThat(reviewersConfig().filtersWithInheritance(childProject))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
+                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
+                filter(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
         .inOrder();
   }
 
   private ReviewersConfig reviewersConfig() {
     return plugin.getSysInjector().getInstance(ReviewersConfig.class);
+  }
+
+  private TestFilter filter(String filter, Set<String> reviewers) {
+    return new TestFilter(filter, reviewers);
+  }
+
+  private static class TestFilter extends ReviewerFilter {
+
+    public TestFilter(String filter, Set<String> reviewers) {
+      this.filter = filter;
+      this.reviewers = reviewers;
+    }
   }
 }
