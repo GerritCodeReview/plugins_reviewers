@@ -15,8 +15,6 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
@@ -27,8 +25,6 @@ import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
@@ -39,8 +35,6 @@ public class ReviewersConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   static final String FILENAME = "reviewers.config";
-  static final String SECTION_FILTER = "filter";
-  static final String KEY_REVIEWER = "reviewer";
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
   private static final String KEY_IGNORE_WIP = "ignoreWip";
@@ -65,7 +59,7 @@ public class ReviewersConfig {
     this.ignorePrivate = cfg.getBoolean(pluginName, null, KEY_IGNORE_PRIVATE, true);
   }
 
-  public ForProject forProject(Project.NameKey projectName) {
+  public List<ReviewerFilterSection> filtersWithInheritance(Project.NameKey projectName) {
     Config cfg;
     try {
       cfg = cfgFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
@@ -73,7 +67,7 @@ public class ReviewersConfig {
       logger.atSevere().log("Unable to get config for project %s", projectName.get());
       cfg = new Config();
     }
-    return new ForProject(cfg);
+    return new ReviewerFilterSection.Factory(cfg).getAll();
   }
 
   public boolean enableREST() {
@@ -94,47 +88,20 @@ public class ReviewersConfig {
 
   static class ForProject extends VersionedMetaData {
     private Config cfg;
+    private ReviewerFilterSection.Factory filterSections;
 
-    ForProject(Config cfg) {
-      this.cfg = cfg;
-    }
+    ForProject() {}
 
     List<ReviewerFilterSection> getReviewerFilterSections() {
-      ImmutableList.Builder<ReviewerFilterSection> b = ImmutableList.builder();
-      for (String f : cfg.getSubsections(SECTION_FILTER)) {
-        b.add(newReviewerFilterSection(f));
-      }
-      return b.build();
+      return this.filterSections.getAll();
     }
 
     void addReviewer(String filter, String reviewer) {
-      if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-        List<String> values =
-            new ArrayList<>(Arrays.asList(cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)));
-        values.add(reviewer);
-        cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, values);
-      }
+      filterSections.forFilter(filter).addReviewer(reviewer);
     }
 
     void removeReviewer(String filter, String reviewer) {
-      if (newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-        List<String> values =
-            new ArrayList<>(Arrays.asList(cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)));
-        values.remove(reviewer);
-        if (values.isEmpty()) {
-          cfg.unsetSection(SECTION_FILTER, filter);
-        } else {
-          cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, values);
-        }
-      }
-    }
-
-    private ReviewerFilterSection newReviewerFilterSection(String filter) {
-      ImmutableSet.Builder<String> b = ImmutableSet.builder();
-      for (String reviewer : cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)) {
-        b.add(reviewer);
-      }
-      return new ReviewerFilterSection(filter, b.build());
+      filterSections.forFilter(filter).removeReviewer(reviewer);
     }
 
     @Override
@@ -144,7 +111,8 @@ public class ReviewersConfig {
 
     @Override
     protected void onLoad() throws IOException, ConfigInvalidException {
-      cfg = readConfig(FILENAME);
+      this.cfg = readConfig(FILENAME);
+      this.filterSections = new ReviewerFilterSection.Factory(cfg);
     }
 
     @Override
