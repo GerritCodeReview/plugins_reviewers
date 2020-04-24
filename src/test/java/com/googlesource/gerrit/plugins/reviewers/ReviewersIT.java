@@ -16,8 +16,10 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
+import static com.google.gerrit.extensions.client.ReviewerState.CC;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_CC;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 import static java.util.stream.Collectors.toSet;
@@ -35,6 +37,7 @@ import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.client.ChangeStatus;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.inject.Inject;
 import java.util.List;
@@ -50,10 +53,19 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   @Test
   public void addReviewers() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    setReviewerFilters(filter("*").reviewer(user).reviewer(user2));
+    setReviewerFilters(filter("*").reviewer(user).cc(user2));
     String changeId = createChange().getChangeId();
-    assertThat(reviewersFor(changeId))
-        .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
+    assertThat(ccsFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
+  }
+
+  @Test
+  public void addReviewerMatchingReviewerAndCc() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+    setReviewerFilters(filter("*").cc(user).cc(user2), filter("^a.txt").reviewer(user2));
+    String changeId = createChange().getChangeId();
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
+    assertThat(ccsFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
   }
 
   @Test
@@ -66,11 +78,14 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
-    setReviewerFilters(filter("branch:master").reviewer(user));
+  public void doNotAddReviewersOrCcFromNonMatchingFilters() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+
+    setReviewerFilters(filter("branch:master").reviewer(user).cc(user2));
     createBranch(BranchNameKey.create(project, "other-branch"));
     // Create a change that matches the filter section.
     createChange("refs/for/master");
+
     // The actual change we want to test
     String changeId = createChange("refs/for/other-branch").getChangeId();
     assertNoReviewersAddedFor(changeId);
@@ -131,6 +146,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     Config cfg = new Config();
     for (Filter f : filters) {
       cfg.setStringList(SECTION_FILTER, f.filter, KEY_REVIEWER, f.reviewers);
+      cfg.setStringList(SECTION_FILTER, f.filter, KEY_CC, f.ccs);
     }
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
@@ -139,14 +155,24 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     testRepo.reset(projectOperations.project(project).getHead("master"));
   }
 
+  private Set<Account.Id> ccsFor(String changeId) throws Exception {
+    return reviewersFor(changeId, CC);
+  }
+
   private Set<Account.Id> reviewersFor(String changeId) throws Exception {
-    return gApi.changes().id(changeId).get().reviewers.get(REVIEWER).stream()
+    return reviewersFor(changeId, REVIEWER);
+  }
+
+  private Set<Account.Id> reviewersFor(String changeId, ReviewerState reviewerState)
+      throws Exception {
+    return gApi.changes().id(changeId).get().reviewers.get(reviewerState).stream()
         .map(a -> Account.id(a._accountId))
         .collect(toSet());
   }
 
   private void assertNoReviewersAddedFor(String changeId) throws Exception {
     assertThat(gApi.changes().id(changeId).get().reviewers.get(REVIEWER)).isNull();
+    assertThat(gApi.changes().id(changeId).get().reviewers.get(CC)).isNull();
   }
 
   private Filter filter(String filter) {
@@ -155,11 +181,18 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
   private class Filter {
     List<String> reviewers;
+    List<String> ccs;
     String filter;
 
     Filter(String filter) {
       this.filter = filter;
       this.reviewers = Lists.newArrayList();
+      this.ccs = Lists.newArrayList();
+    }
+
+    Filter cc(TestAccount cc) {
+      ccs.add(cc.email());
+      return this;
     }
 
     Filter reviewer(TestAccount reviewer) {

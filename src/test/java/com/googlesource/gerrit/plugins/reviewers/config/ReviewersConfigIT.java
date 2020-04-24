@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.reviewers.config;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_CC;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 
@@ -66,15 +67,52 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     assertThat(reviewersConfig().filtersWithInheritance(project))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE)),
-                filter(BRANCH_MAIN, ImmutableSet.of(JANE_DOE))))
+                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE), ImmutableSet.of()),
+                filter(BRANCH_MAIN, ImmutableSet.of(JANE_DOE), ImmutableSet.of())))
         .inOrder();
   }
 
   @Test
-  public void reviewersConfigWithMergedInheritance() throws Exception {
+  public void reviewersConfigSingleWithCc() throws Exception {
+    Config cfg = new Config();
+    cfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JOHN_DOE);
+    cfg.setString(SECTION_FILTER, NO_FILTER, KEY_CC, JANE_DOE);
+
+    pushFactory
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    assertThat(reviewersConfig().filtersWithInheritance(project))
+        .containsExactlyElementsIn(
+            ImmutableList.of(
+                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE), ImmutableSet.of(JANE_DOE))))
+        .inOrder();
+  }
+
+  @Test
+  public void reviewersConfigSingleWithCcSeparateFilters() throws Exception {
+    Config cfg = new Config();
+    cfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JOHN_DOE);
+    cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_CC, JANE_DOE);
+
+    pushFactory
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    assertThat(reviewersConfig().filtersWithInheritance(project))
+        .containsExactlyElementsIn(
+            ImmutableList.of(
+                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE), ImmutableSet.of()),
+                filter(BRANCH_MAIN, ImmutableSet.of(), ImmutableSet.of(JANE_DOE))))
+        .inOrder();
+  }
+
+  @Test
+  public void reviewersConfigWithMergedInheritanceWithCc() throws Exception {
     Config parentCfg = new Config();
-    parentCfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JOHN_DOE);
+    parentCfg.setString(SECTION_FILTER, NO_FILTER, KEY_CC, JOHN_DOE);
     parentCfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JOHN_DOE);
 
     pushFactory
@@ -94,7 +132,7 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
     Config cfg = new Config();
     cfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JANE_DOE);
-    cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JANE_DOE);
+    cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_CC, JANE_DOE);
 
     pushFactory
         .create(
@@ -105,8 +143,8 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     assertThat(reviewersConfig().filtersWithInheritance(childProject))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                filter(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
-                filter(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
+                filter(NO_FILTER, ImmutableSet.of(JANE_DOE), ImmutableSet.of(JOHN_DOE)),
+                filter(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE), ImmutableSet.of(JANE_DOE))))
         .inOrder();
   }
 
@@ -114,15 +152,16 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     return plugin.getSysInjector().getInstance(ReviewersConfig.class);
   }
 
-  private TestFilter filter(String filter, Set<String> reviewers) {
-    return new TestFilter(filter, reviewers);
+  private TestFilter filter(String filter, Set<String> reviewers, Set<String> ccs) {
+    return new TestFilter(filter, reviewers, ccs);
   }
 
   private static class TestFilter extends ReviewerFilter {
 
-    public TestFilter(String filter, Set<String> reviewers) {
+    public TestFilter(String filter, Set<String> reviewers, Set<String> ccs) {
       this.filter = filter;
       this.reviewers = reviewers;
+      this.ccs = ccs;
     }
   }
 }
