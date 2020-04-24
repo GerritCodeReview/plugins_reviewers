@@ -38,6 +38,7 @@ Other projects can then override the configuration in their own
 ```
   [filter "*"]
     reviewer = john.doe@example.com
+    cc = DevGroup
 
   [filter "branch:main file:^lib/.*"]
     reviewer = jane.doe@example.com
@@ -52,9 +53,16 @@ filter.\<filter\>.reviewer
 	account's email address or username, or the group name.  Multiple `reviewer`
 	occurrences are allowed.
 
+filter.\<filter\>.cc
+:	An account or a group name. Must be an exact match (case sensitive) with the
+	account's email address or username, or the group name.  Multiple `cc`
+	occurrences are allowed.
+
 ##Multiple filter matches
 
 The plugin supports multiple filter matches.
+If a reviewer, according to filter matches, should be added as both `reviewer` and `cc`,
+`reviewer` takes precedence.
 
 ###Example
 

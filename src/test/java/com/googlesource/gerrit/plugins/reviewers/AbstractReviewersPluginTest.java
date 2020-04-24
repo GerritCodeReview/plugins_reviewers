@@ -45,9 +45,11 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
     Config cfg = new Config();
     Arrays.stream(filters)
         .forEach(
-            f ->
-                cfg.setStringList(
-                    SECTION_FILTER, f.filter, KEY_REVIEWER, Lists.newArrayList(f.reviewers)));
+            f -> {
+              cfg.setStringList(
+                  SECTION_FILTER, f.filter, KEY_REVIEWER, Lists.newArrayList(f.reviewers));
+              cfg.setStringList(SECTION_FILTER, f.filter, KEY_CC, Lists.newArrayList(f.reviewers));
+            });
     pushFactory
         .create(admin.newIdent(), repo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
@@ -61,8 +63,8 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
     return repo;
   }
 
-  protected TestFilter filter(String filter, Set<String> reviewers) {
-    return new TestFilter(filter, reviewers);
+  private TestFilter filter(String filter, Set<String> reviewers, Set<String> ccs) {
+    return new TestFilter(filter, reviewers, ccs);
   }
 
   protected TestFilter filter(String filter) {
@@ -71,13 +73,14 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
 
   protected static class TestFilter extends ReviewerFilter {
 
-    public TestFilter(String filter, Set<String> reviewers) {
+    public TestFilter(String filter, Set<String> reviewers, Set<String> ccs) {
       this.filter = filter;
       this.reviewers = reviewers;
+      this.ccs = ccs;
     }
 
     public TestFilter(String filter) {
-      this(filter, Sets.newHashSet());
+      this(filter, Sets.newHashSet(), Sets.newHashSet());
     }
 
     public TestFilter reviewer(String reviewerId) {
@@ -87,6 +90,15 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
 
     public TestFilter reviewer(TestAccount reviewer) {
       return reviewer(reviewer.email());
+    }
+
+    public TestFilter cc(String ccId) {
+      ccs.add(ccId);
+      return this;
+    }
+
+    public TestFilter cc(TestAccount cc) {
+      return cc(cc.email());
     }
   }
 }
