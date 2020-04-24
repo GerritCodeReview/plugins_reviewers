@@ -17,7 +17,9 @@ package com.googlesource.gerrit.plugins.reviewers;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assert_;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
+import static com.google.gerrit.extensions.client.ReviewerState.CC;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.ReviewerFilterSection.KEY_CC;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewerFilterSection.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewerFilterSection.SECTION_FILTER;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
@@ -53,8 +55,8 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     TestAccount user2 = accountCreator.user2();
 
     Config cfg = new Config();
-    cfg.setStringList(
-        SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email(), user2.email()));
+    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email()));
+    cfg.setStringList(SECTION_FILTER, "*", KEY_CC, ImmutableList.of(user2.email()));
 
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
@@ -65,23 +67,66 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     String changeId = createChange().getChangeId();
 
     Collection<AccountInfo> reviewers;
+    Collection<AccountInfo> ccs;
     // Wait for 100 ms until the create patch set event
     // is processed by the reviewers plugin
     long wait = 0;
     do {
       reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-      if (reviewers == null) {
+      ccs = gApi.changes().id(changeId).get().reviewers.get(CC);
+      if (reviewers == null || ccs == null) {
         Thread.sleep(10);
         wait += 10;
         if (wait > 100) {
           assert_().fail("Timeout of 100 ms exceeded");
         }
       }
-    } while (reviewers == null);
+    } while (reviewers == null || ccs == null);
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(
-            ImmutableSet.of(admin.id().get(), user.id().get(), user2.id().get()));
+        .containsExactlyElementsIn(ImmutableSet.of(admin.id().get(), user.id().get()));
+    assertThat(ccs.stream().map(a -> a._accountId).collect(toSet()))
+        .containsExactlyElementsIn(ImmutableSet.of(user2.id().get()));
+  }
+
+  @Test
+  public void addReviewerMatchingReviewerAndCc() throws Exception {
+    RevCommit oldHead = getRemoteHead();
+    TestAccount user2 = accountCreator.user2();
+
+    Config cfg = new Config();
+    cfg.setStringList(SECTION_FILTER, "*", KEY_CC, ImmutableList.of(user.email(), user2.email()));
+    cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email()));
+
+    pushFactory
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    testRepo.reset(oldHead);
+    String changeId = createChange().getChangeId();
+
+    Collection<AccountInfo> reviewers;
+    Collection<AccountInfo> ccs;
+    // Wait for 100 ms until the create patch set event
+    // is processed by the reviewers plugin
+    long wait = 0;
+    do {
+      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
+      ccs = gApi.changes().id(changeId).get().reviewers.get(CC);
+      if (reviewers == null || ccs == null) {
+        Thread.sleep(10);
+        wait += 10;
+        if (wait > 100) {
+          assert_().fail("Timeout of 100 ms exceeded");
+        }
+      }
+    } while (reviewers == null || ccs == null);
+
+    assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
+        .containsExactlyElementsIn(ImmutableSet.of(admin.id().get(), user2.id().get()));
+    assertThat(ccs.stream().map(a -> a._accountId).collect(toSet()))
+        .containsExactlyElementsIn(ImmutableSet.of(user.id().get()));
   }
 
   @Test
@@ -122,11 +167,13 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
+  public void doNotAddReviewersOrCcFromNonMatchingFilters() throws Exception {
     RevCommit oldHead = getRemoteHead();
+    TestAccount user2 = accountCreator.user2();
 
     Config cfg = new Config();
     cfg.setString(SECTION_FILTER, "branch:master", KEY_REVIEWER, user.email());
+    cfg.setString(SECTION_FILTER, "branch:master", KEY_CC, user2.email());
 
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
@@ -144,14 +191,17 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     String changeId = createChange("refs/for/other-branch").getChangeId();
 
     Collection<AccountInfo> reviewers;
+    Collection<AccountInfo> ccs;
     long wait = 0;
     do {
       Thread.sleep(10);
       wait += 10;
       reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-    } while (reviewers == null && wait < 100);
+      ccs = gApi.changes().id(changeId).get().reviewers.get(CC);
+    } while (reviewers == null && ccs == null && wait < 100);
 
     assertThat(reviewers).isNull();
+    assertThat(ccs).isNull();
   }
 
   @Test
