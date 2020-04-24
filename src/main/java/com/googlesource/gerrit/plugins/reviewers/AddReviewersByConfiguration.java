@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.entities.Account;
+import com.google.gerrit.entities.Account.Id;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.server.IdentifiedUser;
@@ -25,9 +26,13 @@ import java.util.Set;
 
 class AddReviewersByConfiguration extends AddReviewers {
   private final Set<Account.Id> reviewers;
+  private final Set<Account.Id> ccs;
 
   interface Factory {
-    AddReviewersByConfiguration create(ChangeInfo changeInfo, Set<Account.Id> reviewers);
+    AddReviewersByConfiguration create(
+        ChangeInfo changeInfo,
+        @Assisted("reviewers") Set<Account.Id> reviewers,
+        @Assisted("ccs") Set<Account.Id> ccs);
   }
 
   @Inject
@@ -36,13 +41,20 @@ class AddReviewersByConfiguration extends AddReviewers {
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
       @Assisted ChangeInfo changeInfo,
-      @Assisted Set<Account.Id> reviewers) {
+      @Assisted("reviewers") Set<Account.Id> reviewers,
+      @Assisted("ccs") Set<Account.Id> ccs) {
     super(tl, gApi, identifiedUserFactory, changeInfo);
     this.reviewers = reviewers;
+    this.ccs = ccs;
   }
 
   @Override
   Set<Account.Id> getReviewers() {
     return reviewers;
+  }
+
+  @Override
+  Set<Id> getCcs() {
+    return this.ccs;
   }
 }

@@ -19,6 +19,7 @@ import com.google.gerrit.entities.Account;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.server.CurrentUser;
@@ -49,6 +50,8 @@ abstract class AddReviewers implements Runnable {
 
   abstract Set<Account.Id> getReviewers();
 
+  abstract Set<Account.Id> getCcs();
+
   @Override
   public void run() {
     RequestContext old =
@@ -61,22 +64,31 @@ abstract class AddReviewers implements Runnable {
               }
             });
     try {
-      addReviewers(getReviewers(), changeInfo);
+      addReviewers();
     } finally {
       tl.setContext(old);
     }
   }
 
-  private void addReviewers(Set<Account.Id> reviewers, ChangeInfo changeInfo) {
+  private void addReviewers() {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
+
+      Set<Account.Id> reviewers = getReviewers();
+      Set<Account.Id> ccs = getCcs();
       ReviewInput in = new ReviewInput();
-      in.reviewers = new ArrayList<>(reviewers.size());
+      in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
       for (Account.Id account : reviewers) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
+      }
+      for (Account.Id account : ccs) {
+        AddReviewerInput input = new AddReviewerInput();
+        input.state = ReviewerState.CC;
+        input.reviewer = account.toString();
+        in.reviewers.add(input);
       }
       gApi.changes().id(changeInfo._number).current().review(in);
     } catch (RestApiException e) {
