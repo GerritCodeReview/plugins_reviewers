@@ -64,8 +64,9 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     assertThat(reviewersConfig().filtersWithInheritance(project))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JANE_DOE))))
+                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE), ImmutableSet.of()),
+                new ReviewerFilterSection(
+                    BRANCH_MAIN, ImmutableSet.of(JANE_DOE), ImmutableSet.of())))
         .inOrder();
   }
 
@@ -103,8 +104,10 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
     assertThat(reviewersConfig().filtersWithInheritance(childProject))
         .containsExactlyElementsIn(
             ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
+                new ReviewerFilterSection(
+                    NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE), ImmutableSet.of()),
+                new ReviewerFilterSection(
+                    BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE), ImmutableSet.of())))
         .inOrder();
   }
 
