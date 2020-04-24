@@ -25,6 +25,7 @@ import org.eclipse.jgit.lib.Config;
 
 class ReviewerFilterSection {
   static final String KEY_REVIEWER = "reviewer";
+  static final String KEY_CC = "cc";
   static final String SECTION_FILTER = "filter";
 
   public static class Factory {
@@ -50,17 +51,20 @@ class ReviewerFilterSection {
   private final transient Config cfg;
   private final String filter;
   private final Set<String> reviewers;
+  private final Set<String> ccs;
 
   ReviewerFilterSection(String filter, Config cfg) {
     this.cfg = cfg;
     this.filter = filter;
     this.reviewers = Sets.newHashSet(this.cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER));
+    this.ccs = Sets.newHashSet(this.cfg.getStringList(SECTION_FILTER, filter, KEY_CC));
   }
 
   @VisibleForTesting
-  ReviewerFilterSection(String filter, Set<String> reviewers) {
+  ReviewerFilterSection(String filter, Set<String> reviewers, Set<String> ccs) {
     this.cfg = null;
     this.reviewers = reviewers;
+    this.ccs = ccs;
     this.filter = filter;
   }
 
@@ -70,6 +74,10 @@ class ReviewerFilterSection {
 
   Set<String> getReviewers() {
     return reviewers;
+  }
+
+  Set<String> getCcs() {
+    return ccs;
   }
 
   void removeReviewer(String reviewer) {
@@ -82,11 +90,22 @@ class ReviewerFilterSection {
     save();
   }
 
+  void addCc(String reviewer) {
+    this.ccs.add(reviewer);
+    save();
+  }
+
+  void removeCc(String reviewer) {
+    this.ccs.remove(reviewer);
+    save();
+  }
+
   void save() {
-    if (this.reviewers.isEmpty()) {
+    if (this.reviewers.isEmpty() && this.ccs.isEmpty()) {
       cfg.unsetSection(SECTION_FILTER, filter);
     } else {
       cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, Lists.newArrayList(this.reviewers));
+      cfg.setStringList(SECTION_FILTER, filter, KEY_CC, Lists.newArrayList(this.ccs));
     }
   }
 
@@ -94,13 +113,15 @@ class ReviewerFilterSection {
   public boolean equals(Object o) {
     if (o instanceof ReviewerFilterSection) {
       ReviewerFilterSection other = ((ReviewerFilterSection) o);
-      return Objects.equals(filter, other.filter) && Objects.equals(reviewers, other.reviewers);
+      return Objects.equals(filter, other.filter)
+          && Objects.equals(reviewers, other.reviewers)
+          && Objects.equals(ccs, other.ccs);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(filter, reviewers);
+    return Objects.hash(filter, reviewers, ccs);
   }
 }
