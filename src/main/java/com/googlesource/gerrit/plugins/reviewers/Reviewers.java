@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Account;
@@ -151,14 +152,18 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, sections);
-      if (reviewers.isEmpty()) {
+      List<ReviewerFilterSection> matching = findMatchingSections(changeNumber, sections);
+      Set<String> reviewers = getReviewersFrom(matching);
+      Set<String> ccs = getCcsFrom(matching);
+      ccs.removeAll(reviewers);
+      if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
       final AddReviewers addReviewers =
           addReviewersFactory.create(
-              c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
-
+              c,
+              resolver.resolve(reviewers, projectName, changeNumber, uploader),
+              resolver.resolve(ccs, projectName, changeNumber, uploader));
       @SuppressWarnings("unused")
       Future<?> ignored = workQueue.getDefaultQueue().submit(addReviewers);
     } catch (QueryParseException e) {
@@ -172,15 +177,27 @@ class Reviewers
 
   private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
       throws StorageException, QueryParseException {
+    return getReviewersFrom(findMatchingSections(change, sections));
+  }
+
+  private Set<String> getReviewersFrom(List<ReviewerFilterSection> sections)
+      throws StorageException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(change, sections);
-    for (ReviewerFilterSection s : found) {
+    for (ReviewerFilterSection s : sections) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilterSection> findReviewerSections(
+  private Set<String> getCcsFrom(List<ReviewerFilterSection> sections) throws StorageException {
+    Set<String> ccs = Sets.newHashSet();
+    for (ReviewerFilterSection s : sections) {
+      ccs.addAll(s.getCcs());
+    }
+    return ccs;
+  }
+
+  private List<ReviewerFilterSection> findMatchingSections(
       int change, List<ReviewerFilterSection> sections)
       throws StorageException, QueryParseException {
     ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
