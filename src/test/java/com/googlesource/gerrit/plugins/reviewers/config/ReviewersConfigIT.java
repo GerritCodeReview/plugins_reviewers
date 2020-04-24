@@ -47,27 +47,39 @@ public class ReviewersConfigIT extends AbstractReviewersPluginTest {
   }
 
   @Test
-  public void reviewersConfigWithMergedInheritance() throws Exception {
+  public void reviewersConfigSingleWithCc() throws Exception {
+    createFilters(filter(NO_FILTER).reviewer(JOHN_DOE).cc(JANE_DOE));
+
+    assertProjectHasFilters(project, filter(NO_FILTER).reviewer(JOHN_DOE).cc(JANE_DOE));
+  }
+
+  @Test
+  public void reviewersConfigSingleWithCcSeparateFilters() throws Exception {
+    createFilters(filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).cc(JANE_DOE));
+
+    assertProjectHasFilters(
+        project, filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).cc(JANE_DOE));
+  }
+
+  @Test
+  public void reviewersConfigWithMergedInheritanceWithCc() throws Exception {
     Project.NameKey childProject = projectOperations.newProject().parent(project).create();
     TestRepository<?> childTestRepo = checkoutRefsMetaConfig(cloneProject(childProject));
 
     createFiltersFor(
-        childTestRepo,
-        filter(NO_FILTER).reviewer(JANE_DOE),
-        filter(BRANCH_MAIN).reviewer(JANE_DOE));
+        childTestRepo, filter(NO_FILTER).reviewer(JANE_DOE), filter(BRANCH_MAIN).cc(JANE_DOE));
 
-    createFilters(filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).reviewer(JOHN_DOE));
+    createFilters(filter(NO_FILTER).cc(JOHN_DOE), filter(BRANCH_MAIN).reviewer(JOHN_DOE));
 
     assertProjectHasFilters(
         childProject,
-        filter(NO_FILTER).reviewer(JOHN_DOE).reviewer(JANE_DOE),
-        filter(BRANCH_MAIN).reviewer(JOHN_DOE).reviewer(JANE_DOE));
+        filter(NO_FILTER).cc(JOHN_DOE).reviewer(JANE_DOE),
+        filter(BRANCH_MAIN).reviewer(JOHN_DOE).cc(JANE_DOE));
   }
 
   private void assertProjectHasFilters(Project.NameKey project, TestFilter... filters) {
     assertThat(reviewersConfig().filtersWithInheritance(project))
-        .containsExactlyElementsIn(ImmutableList.copyOf(filters))
-        .inOrder();
+        .containsExactlyElementsIn(ImmutableList.copyOf(filters));
   }
 
   private ReviewersConfig reviewersConfig() {

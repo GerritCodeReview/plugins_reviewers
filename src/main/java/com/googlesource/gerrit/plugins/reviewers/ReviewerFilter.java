@@ -29,6 +29,7 @@ import java.util.Set;
 public abstract class ReviewerFilter {
   protected String filter;
   protected Set<String> reviewers;
+  protected Set<String> ccs;
 
   String getFilter() {
     return filter;
@@ -38,17 +39,23 @@ public abstract class ReviewerFilter {
     return reviewers;
   }
 
+  Set<String> getCcs() {
+    return ccs;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o instanceof ReviewerFilter) {
       ReviewerFilter other = ((ReviewerFilter) o);
-      return Objects.equals(filter, other.filter) && Objects.equals(reviewers, other.reviewers);
+      return Objects.equals(filter, other.filter)
+          && Objects.equals(reviewers, other.reviewers)
+          && Objects.equals(ccs, other.ccs);
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(filter, reviewers);
+    return Objects.hash(filter, reviewers, ccs);
   }
 }
