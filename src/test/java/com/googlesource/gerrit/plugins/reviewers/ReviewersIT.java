@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.google.gerrit.extensions.client.ReviewerState.CC;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
 import static java.util.stream.Collectors.toSet;
 
@@ -27,6 +28,7 @@ import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.client.ChangeStatus;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import java.util.Set;
 import org.junit.Test;
@@ -38,10 +40,19 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   @Test
   public void addReviewers() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    createFilters(filter("*").reviewer(user).reviewer(user2));
+    createFilters(filter("*").reviewer(user).cc(user2));
     String changeId = createChange().getChangeId();
-    assertThat(reviewersFor(changeId))
-        .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
+    assertThat(ccsFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
+  }
+
+  @Test
+  public void addReviewerMatchingReviewerAndCc() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+    createFilters(filter("*").cc(user).cc(user2), filter("^a.txt").reviewer(user2));
+    String changeId = createChange().getChangeId();
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
+    assertThat(ccsFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
   }
 
   @Test
@@ -54,8 +65,9 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   }
 
   @Test
-  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
-    createFilters(filter("branch:master").reviewer(user));
+  public void doNotAddReviewersOrCcFromNonMatchingFilters() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+    createFilters(filter("branch:master").reviewer(user).cc(user2));
     createBranch(BranchNameKey.create(project, "other-branch"));
     // Create a change that matches the filter section.
     createChange("refs/for/master");
@@ -113,13 +125,23 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
   }
 
+  private Set<Account.Id> ccsFor(String changeId) throws Exception {
+    return reviewersFor(changeId, CC);
+  }
+
   private Set<Account.Id> reviewersFor(String changeId) throws Exception {
-    return gApi.changes().id(changeId).get().reviewers.get(REVIEWER).stream()
+    return reviewersFor(changeId, REVIEWER);
+  }
+
+  private Set<Account.Id> reviewersFor(String changeId, ReviewerState reviewerState)
+      throws Exception {
+    return gApi.changes().id(changeId).get().reviewers.get(reviewerState).stream()
         .map(a -> Account.id(a._accountId))
         .collect(toSet());
   }
 
   private void assertNoReviewersAddedFor(String changeId) throws Exception {
     assertThat(gApi.changes().id(changeId).get().reviewers.get(REVIEWER)).isNull();
+    assertThat(gApi.changes().id(changeId).get().reviewers.get(CC)).isNull();
   }
 }

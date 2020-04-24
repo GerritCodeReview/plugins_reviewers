@@ -19,6 +19,7 @@ import com.google.gerrit.entities.Account;
 import com.google.gerrit.extensions.api.GerritApi;
 import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.gerrit.server.util.ManualRequestContext;
@@ -36,9 +37,13 @@ class AddReviewers implements Runnable {
   private final OneOffRequestContext requestContext;
   private final ChangeInfo changeInfo;
   private final Set<Account.Id> reviewers;
+  private final Set<Account.Id> ccs;
 
   interface Factory {
-    AddReviewers create(ChangeInfo changeInfo, Set<Account.Id> reviewers);
+    AddReviewers create(
+        ChangeInfo changeInfo,
+        @Assisted("reviewers") Set<Account.Id> reviewers,
+        @Assisted("ccs") Set<Account.Id> ccs);
   }
 
   @Inject
@@ -46,11 +51,13 @@ class AddReviewers implements Runnable {
       GerritApi gApi,
       OneOffRequestContext requestContext,
       @Assisted ChangeInfo changeInfo,
-      @Assisted Set<Account.Id> reviewers) {
+      @Assisted("reviewers") Set<Account.Id> reviewers,
+      @Assisted("ccs") Set<Account.Id> ccs) {
     this.gApi = gApi;
     this.requestContext = requestContext;
     this.changeInfo = changeInfo;
     this.reviewers = reviewers;
+    this.ccs = ccs;
   }
 
   @Override
@@ -66,11 +73,17 @@ class AddReviewers implements Runnable {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
       ReviewInput in = new ReviewInput();
-      in.reviewers = new ArrayList<>(reviewers.size());
+      in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
       for (Account.Id account : reviewers) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
+      }
+      for (Account.Id account : ccs) {
+        AddReviewerInput input = new AddReviewerInput();
+        input.state = ReviewerState.CC;
+        input.reviewer = account.toString();
+        in.reviewers.add(input);
       }
       gApi.changes().id(changeInfo._number).current().review(in);
     } catch (RestApiException e) {

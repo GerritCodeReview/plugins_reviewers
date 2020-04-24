@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers.config;
 
+import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_CC;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
 
@@ -50,6 +51,7 @@ class ReviewerFilterCollection {
     private ReviewerFilterSection(String filter) {
       this.filter = filter;
       this.reviewers = Sets.newHashSet(cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER));
+      this.ccs = Sets.newHashSet(cfg.getStringList(SECTION_FILTER, filter, KEY_CC));
     }
 
     public void removeReviewer(String reviewer) {
@@ -62,11 +64,22 @@ class ReviewerFilterCollection {
       save();
     }
 
+    public void removeCc(String cc) {
+      ccs.remove(cc);
+      save();
+    }
+
+    public void addCc(String cc) {
+      ccs.add(cc);
+      save();
+    }
+
     private void save() {
-      if (this.reviewers.isEmpty()) {
+      if (this.reviewers.isEmpty() && this.ccs.isEmpty()) {
         cfg.unsetSection(SECTION_FILTER, filter);
       } else {
         cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, Lists.newArrayList(this.reviewers));
+        cfg.setStringList(SECTION_FILTER, filter, KEY_CC, Lists.newArrayList(this.ccs));
       }
     }
   }
