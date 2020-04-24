@@ -36,6 +36,9 @@ that describes the default reviewers for myproject.
       "reviewers": [
         "UserA",
         "UserB"
+      ],
+      "cc": [
+        "DevGroup"
       ]
     },
     {
@@ -66,8 +69,9 @@ capability (provided by this plugin) or be a Project Owner for the project.
   Content-Type: application/json;charset=UTF-8
   {
     "action": "ADD",
-    "filter": "branch:master"
-    "reviewer": "UserA"
+    "type": "REVIEWER"
+    "filter": "branch:master",
+    "reviewer": "UserA",
   }
 ```
 
@@ -87,6 +91,9 @@ As response the default reviewers are returned as a list of
       "reviewers": [
         "UserA",
         "UserB"
+      ]
+      "ccs": [
+        "DevGroup"
       ]
     },
     {
@@ -111,6 +118,8 @@ The `ReviewerFilter` entity contains a filter of the default reviewers.
 * _filter_: A filter that is used to assign default reviewers.
 * _reviewers_: List of usernames which are assigned as default reviewers
  under the filter.
+* _ccs_: List of usernames which are assigned as default ccs
+ under the filter.
 
 ### <a id="config-reviewers-input"></a>ConfigReviewersInput
 
@@ -118,6 +127,7 @@ The `ConfigReviewersInput` entity contains an update for the default
 reviewers.
 
 * _action_: Indicates whether to add or remove the input reviewer
+* _type_: Which type to add/remove the user as, (REVIEWER|CC), defaults to REVIEWER.
 * _filter_: The filter associated with the input reviewer.
 * _reviewer_: The user to add or remove from the default reviewers.
 

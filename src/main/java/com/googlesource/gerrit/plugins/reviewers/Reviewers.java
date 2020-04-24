@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Account;
@@ -152,13 +153,18 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, filters);
-      if (reviewers.isEmpty()) {
+      List<ReviewerFilter> matching = findMatchingFilters(changeNumber, filters);
+      Set<String> reviewers = getReviewersFrom(matching);
+      Set<String> ccs = getCcsFrom(matching);
+      ccs.removeAll(reviewers);
+      if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
       final AddReviewers addReviewers =
           addReviewersFactory.create(
-              c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
+              c,
+              resolver.resolve(reviewers, projectName, changeNumber, uploader),
+              resolver.resolve(ccs, projectName, changeNumber, uploader));
       workQueue.submit(addReviewers);
     } catch (QueryParseException e) {
       logger.atWarning().log(
@@ -171,15 +177,26 @@ class Reviewers
 
   private Set<String> findReviewers(int change, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
+    return getReviewersFrom(findMatchingFilters(change, filters));
+  }
+
+  private Set<String> getReviewersFrom(List<ReviewerFilter> filters) throws StorageException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilter> found = findReviewerFilters(change, filters);
-    for (ReviewerFilter s : found) {
-      reviewers.addAll(s.getReviewers());
+    for (ReviewerFilter f : filters) {
+      reviewers.addAll(f.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilter> findReviewerFilters(int change, List<ReviewerFilter> filters)
+  private Set<String> getCcsFrom(List<ReviewerFilter> filters) throws StorageException {
+    Set<String> ccs = Sets.newHashSet();
+    for (ReviewerFilter f : filters) {
+      ccs.addAll(f.getCcs());
+    }
+    return ccs;
+  }
+
+  private List<ReviewerFilter> findMatchingFilters(int change, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableList.Builder<ReviewerFilter> found = ImmutableList.builder();
     for (ReviewerFilter s : filters) {
