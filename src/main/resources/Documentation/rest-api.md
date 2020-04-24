@@ -66,8 +66,9 @@ capability (provided by this plugin) or be a Project Owner for the project.
   Content-Type: application/json;charset=UTF-8
   {
     "action": "ADD",
-    "filter": "branch:master"
-    "reviewer": "UserA"
+    "filter": "branch:master",
+    "reviewer": "UserA",
+    "cc": "DevGroup"
   }
 ```
 
@@ -87,6 +88,9 @@ As response the default reviewers are returned as a list of
       "reviewers": [
         "UserA",
         "UserB"
+      ]
+      "ccs": [
+        "DevGroup"
       ]
     },
     {
@@ -112,6 +116,8 @@ default reviewers.
 * _filter_: A filter that is used to assign default reviewers.
 * _reviewers_: List of usernames which are assigned as default reviewers
  under the filter.
+* _ccs_: List of usernames which are assigned as default ccs
+ under the filter.
 
 ### <a id="config-reviewers-input"></a>ConfigReviewersInput
 
@@ -121,6 +127,7 @@ reviewers.
 * _action_: Indicates whether to add or remove the input reviewer
 * _filter_: The filter associated with the input reviewer.
 * _reviewer_: The user to add or remove from the default reviewers.
+* _cc_: The user to add or remove from the default ccs.
 
 GERRIT
 ------

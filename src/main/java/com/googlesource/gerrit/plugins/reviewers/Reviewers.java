@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.exceptions.StorageException;
@@ -150,13 +151,18 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, sections);
-      if (reviewers.isEmpty()) {
+      List<ReviewerFilterSection> found = findReviewerSections(changeNumber, sections);
+      Set<String> reviewers = findReviewers(found);
+      Set<String> ccs = findCcs(found);
+      ccs.removeAll(reviewers);
+      if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
       final Runnable task =
           byConfigFactory.create(
-              c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
+              c,
+              resolver.resolve(reviewers, projectName, changeNumber, uploader),
+              resolver.resolve(reviewers, projectName, changeNumber, uploader));
 
       workQueue.getDefaultQueue().submit(task);
     } catch (QueryParseException e) {
@@ -170,12 +176,23 @@ class Reviewers
 
   private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
       throws StorageException, QueryParseException {
+    return findReviewers(findReviewerSections(change, sections));
+  }
+
+  private Set<String> findReviewers(List<ReviewerFilterSection> found) throws StorageException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(change, sections);
     for (ReviewerFilterSection s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
+  }
+
+  private Set<String> findCcs(List<ReviewerFilterSection> found) throws StorageException {
+    Set<String> ccs = Sets.newHashSet();
+    for (ReviewerFilterSection s : found) {
+      ccs.addAll(s.getCcs());
+    }
+    return ccs;
   }
 
   private List<ReviewerFilterSection> findReviewerSections(
