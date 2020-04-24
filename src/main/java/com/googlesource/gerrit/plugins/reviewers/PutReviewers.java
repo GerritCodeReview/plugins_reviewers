@@ -51,6 +51,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   public static class Input {
     public Action action;
+    public ReviewerType type;
     public String filter;
     public String reviewer;
   }
@@ -94,26 +95,33 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     }
 
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {
+
       if (input.action == Action.ADD) {
         validateReviewer(input.reviewer);
+      }
+      if (input.type == null) {
+        input.type = ReviewerType.REVIEWER;
       }
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");
         forProject.load(md);
         if (input.action == Action.ADD) {
           message
-              .append("Add reviewer ")
+              .append("Add ")
+              .append(input.type.name)
+              .append(" ")
               .append(input.reviewer)
-              .append(" to filter ")
+              .append(", to filter ")
               .append(input.filter);
-          forProject.addReviewer(input.filter, input.reviewer);
+          forProject.addReviewer(input.filter, input.reviewer, input.type);
         } else {
           message
-              .append("Remove reviewer ")
-              .append(input.reviewer)
+              .append("Remove ")
+              .append(input.type.name)
+              .append(" ")
               .append(" from filter ")
               .append(input.filter);
-          forProject.removeReviewer(input.filter, input.reviewer);
+          forProject.removeReviewer(input.filter, input.reviewer, input.type);
         }
         message.append("\n");
         md.setMessage(message.toString());

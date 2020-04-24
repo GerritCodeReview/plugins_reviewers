@@ -96,12 +96,24 @@ public class ReviewersConfig {
       return this.filterSections.getAll();
     }
 
-    void addReviewer(String filter, String reviewer) {
-      filterSections.forFilter(filter).addReviewer(reviewer);
+    void addReviewer(String filter, String reviewer, ReviewerType type) {
+      switch (type) {
+        case REVIEWER:
+          filterSections.forFilter(filter).addReviewer(reviewer);
+          break;
+        case CC:
+          filterSections.forFilter(filter).addCc(reviewer);
+      }
     }
 
-    void removeReviewer(String filter, String reviewer) {
-      filterSections.forFilter(filter).removeReviewer(reviewer);
+    void removeReviewer(String filter, String reviewer, ReviewerType type) {
+      switch (type) {
+        case REVIEWER:
+          filterSections.forFilter(filter).removeReviewer(reviewer);
+          // $FALL-THROUGH$
+        case CC:
+          filterSections.forFilter(filter).removeCc(reviewer);
+      }
     }
 
     @Override
