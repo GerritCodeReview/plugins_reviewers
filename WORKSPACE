@@ -3,8 +3,8 @@ workspace(name = "reviewers")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "cd715d269734e7bb0aa2fc4a01d2d2e279631cc7",
-    #local_path = "/home/<user>/projects/bazlets",
+    commit = "5c26af9e0374ede4cd67939be972adf6c4cda791",
+    local_path = "/Users/dpursehouse/git/bazlets",
 )
 
 # Polymer dependencies
@@ -36,19 +36,19 @@ npm_binary(
 )
 
 # Release Plugin API
-#load(
-#    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
-#    "gerrit_api",
-#)
-
-# Snapshot Plugin API
 load(
-    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
-    "gerrit_api_maven_local",
+    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
+    "gerrit_api",
 )
 
+# Snapshot Plugin API
+#load(
+#    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
+#    "gerrit_api_maven_local",
+#)
+
 # Load release Plugin API
-#gerrit_api()
+gerrit_api()
 
 # Load snapshot Plugin API
-gerrit_api_maven_local()
+#gerrit_api_maven_local()
