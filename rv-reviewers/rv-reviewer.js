@@ -39,10 +39,6 @@
       this._originalReviewer = this.reviewer;
     },
 
-    _computeReviewerDisabled(reviewer, _originalReviewer) {
-      return !this._computeEditing(reviewer, _originalReviewer);
-    },
-
     _computeEditing(reviewer, _originalReviewer) {
       if (_originalReviewer === '') {
         return true;
