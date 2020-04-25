@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ace01cf3_2b3ff4f5",
+        "filename": "WORKSPACE",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-25T06:30:55Z",
+      "side": 1,
+      "message": "Revert to the base version.",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "f7af88d8198ffb83e93ba536f2b0b0392dc319c4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
