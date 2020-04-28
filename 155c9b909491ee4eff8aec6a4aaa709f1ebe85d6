@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8c8f6276_ef2b3fde",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T08:16:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4e59d1_ff54f93a",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 47
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab362d4_de01d6bc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e3b47ac4_589e73cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T08:16:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ab362d4_de01d6bc",
+      "range": {
+        "startLine": 141,
+        "startChar": 30,
+        "endLine": 141,
+        "endChar": 76
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a9cd03d9_9b758b20",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 1
@@ -68,6 +116,30 @@
       "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b05d1d1_9b8ffc25",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T08:16:44Z",
+      "side": 1,
+      "message": "It triggers if the state changes from \u0027private\u0027 to not-private(!?) but not the other way around.",
+      "parentUuid": "a9cd03d9_9b758b20",
+      "range": {
+        "startLine": 8,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
