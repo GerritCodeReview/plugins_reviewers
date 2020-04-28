@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d4e59d1_ff54f93a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-28T08:08:25Z",
+      "side": 1,
+      "message": "Simpler:\n\n if (Boolean.TRUE.equals(c.isPrivate))",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 47
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ab362d4_de01d6bc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-28T08:08:25Z",
+      "side": 1,
+      "message": "Same here:\n\n  Boolean.TRUE.equals(c.workInProgress)",
+      "range": {
+        "startLine": 141,
+        "startChar": 30,
+        "endLine": 141,
+        "endChar": 76
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9cd03d9_9b758b20",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-28T08:08:25Z",
+      "side": 1,
+      "message": "Does the plugin trigger on a change\u0027s private state being changed?",
+      "range": {
+        "startLine": 8,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
