@@ -45,7 +45,6 @@ public class ReviewersConfig {
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
   private static final String KEY_IGNORE_WIP = "ignoreWip";
-  private static final String KEY_IGNORE_PRIVATE = "ignorePrivate";
 
   private final PluginConfigFactory cfgFactory;
   private final String pluginName;
@@ -53,7 +52,6 @@ public class ReviewersConfig {
   private final boolean enableREST;
   private final boolean suggestOnly;
   private final boolean ignoreWip;
-  private final boolean ignorePrivate;
 
   @Inject
   ReviewersConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
@@ -63,7 +61,6 @@ public class ReviewersConfig {
     this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
     this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
     this.ignoreWip = cfg.getBoolean(pluginName, null, KEY_IGNORE_WIP, true);
-    this.ignorePrivate = cfg.getBoolean(pluginName, null, KEY_IGNORE_PRIVATE, true);
   }
 
   public ForProject forProject(Project.NameKey projectName) {
@@ -87,10 +84,6 @@ public class ReviewersConfig {
 
   public boolean ignoreWip() {
     return ignoreWip;
-  }
-
-  public boolean ignorePrivate() {
-    return ignorePrivate;
   }
 
   static class ForProject extends VersionedMetaData {
