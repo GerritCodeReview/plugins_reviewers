@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a676adf3_f3abcee4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T12:00:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdee7db1_0f494865",
+      "range": {
+        "startLine": 107,
+        "startChar": 16,
+        "endLine": 107,
+        "endChar": 28
+      },
+      "revId": "c7d0b2fb917a7e289e20264795cf6e27177af601",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e654bf97_0a88ff31",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "c7d0b2fb917a7e289e20264795cf6e27177af601",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dba9c1b_71b6d785",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T12:00:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e654bf97_0a88ff31",
+      "range": {
+        "startLine": 108,
+        "startChar": 61,
+        "endLine": 108,
+        "endChar": 79
+      },
+      "revId": "c7d0b2fb917a7e289e20264795cf6e27177af601",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
