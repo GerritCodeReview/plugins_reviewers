@@ -9,18 +9,18 @@ Please also take note of the general information on the
 <a id="project-endpoints"> Reviewers Endpoints
 ----------------------------------------------
 
-### <a id="get-reviewers"> Get Reviewers
-_GET /projects/project_name/@PLUGIN@_
+### <a id="get-reviewers-filters"> Get Reviewers filters
+_GET /projects/project_name/reviewers-filters
 
-Gets the default reviewers for specified project.
+Gets the reviewers filters for specified project.
 
 #### Request
 
 ```
-  GET /projects/myproject/@PLUGIN@ HTTP/1.0
+  GET /projects/myproject/reviewers-filters HTTP/1.0
 ```
 
-As response a List of [ReviewerFilterSection](#reviewer-filter-section) is returned
+As response a List of [ReviewerFilter](#reviewer-filter) is returned
 that describes the default reviewers for myproject.
 
 #### Response
@@ -37,24 +37,18 @@ that describes the default reviewers for myproject.
         "UserA",
         "UserB"
       ]
-    },
-    {
-      "filter": "file:^lib/*",
-      "reviewers": [
-        "UserB",
-        "UserC"
-      ]
     }
   ]
 ```
 
-### <a id="change-reviewers"> Change Reviewers
-_PUT /projects/project_name/@PLUGIN@_
+### <a id="upsert-reviewer-filter"> Upsert Reviewers Filter
+_PUT /projects/project_name/reviewers-filters/$FILTER
 
-Changes the default reviewers for the specified project.
+Sets the default reviewers for open changes in the specified project that
+matches the query expression $FILTER.
 
 The change to reviewers must be provided in the request body inside
-a [ConfigReviewersInput](#config-reviewers-input) entity.
+a [ReviewersFilterInput](#reviewers-filter-input) entity.
 
 Caller must be a member of a group that is granted the 'Modify Reviewers Config'
 capability (provided by this plugin) or be a Project Owner for the project.
@@ -62,12 +56,10 @@ capability (provided by this plugin) or be a Project Owner for the project.
 #### Request
 
 ```
-  PUT /projects/myproject/@PLUGIN@ HTTP/1.0
+  PUT /projects/myproject/reviewers-filters/file%3A%5Elib%2F%2A HTTP/1.0
   Content-Type: application/json;charset=UTF-8
   {
-    "action": "ADD",
-    "filter": "branch:master"
-    "reviewer": "UserA"
+    "reviewers": ["UserB", "UserC"]
   }
 ```
 
@@ -104,9 +96,9 @@ As response the default reviewers are returned as a list of
 <a id="json-entities">JSON Entities
 -----------------------------------
 
-### <a id="reviewer-filter-section"></a>ReviewerFilterSection
+### <a id="reviewer-filter"></a>ReviewerFilterSection
 
-The `ReviewerFilterSection` entity contains a filter section of the
+The `ReviewerFilter` entity contains a filter section of the
 default reviewers.
 
 * _filter_: A filter that is used to assign default reviewers.
@@ -115,12 +107,11 @@ default reviewers.
 
 ### <a id="config-reviewers-input"></a>ConfigReviewersInput
 
-The `ConfigReviewersInput` entity contains an update for the default
+The `ReviewersFilterInput` entity contains an update for the default
 reviewers.
 
-* _action_: Indicates whether to add or remove the input reviewer
-* _filter_: The filter associated with the input reviewer.
-* _reviewer_: The user to add or remove from the default reviewers.
+* _reviewers_: List of account ids that should be added as reviewers on changes
+               matching the filter.
 
 GERRIT
 ------
