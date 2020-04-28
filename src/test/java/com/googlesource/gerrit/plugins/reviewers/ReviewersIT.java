@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
+import com.google.gerrit.acceptance.PushOneCommit;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
@@ -85,6 +86,14 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     createBranch(BranchNameKey.create(project, "other-branch"));
     String changeId = createChange("refs/for/other-branch").getChangeId();
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
+  }
+
+  @Test
+  public void dontAddReviewersForPrivateChange() throws Exception {
+    setReviewerFilters(newFilter("*", user));
+    PushOneCommit.Result r = createChange("refs/for/master%private");
+    assertThat(r.getChange().change().isPrivate()).isTrue();
+    assertNoReviewersAddedFor(r.getChangeId());
   }
 
   private void setReviewerFilters(ReviewerFilterSection... filters) throws Exception {
