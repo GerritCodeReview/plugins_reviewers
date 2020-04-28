@@ -23,21 +23,23 @@ import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVI
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
 import static java.util.stream.Collectors.toSet;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
+import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.common.AccountInfo;
+import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 import org.eclipse.jgit.lib.Config;
-import org.eclipse.jgit.revwalk.RevCommit;
-import org.junit.Before;
 import org.junit.Test;
 
 @NoHttpd
@@ -45,65 +47,68 @@ import org.junit.Test;
 public class ReviewersIT extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
 
-  @Before
-  public void setUp() throws Exception {
-    fetch(testRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
-    testRepo.reset("refs/heads/config");
-  }
-
   @Test
   public void addReviewers() throws Exception {
-    RevCommit oldHead = projectOperations.project(project).getHead("master");
     TestAccount user2 = accountCreator.user2();
-
-    Config cfg = new Config();
-    cfg.setStringList(
-        SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email(), user2.email()));
-
-    pushFactory
-        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
-
-    testRepo.reset(oldHead);
+    setReviewerFilters(newFilter("*", user, user2));
     String changeId = createChange().getChangeId();
-
-    Collection<AccountInfo> reviewers;
-    // Wait for 100 ms until the create patch set event
-    // is processed by the reviewers plugin
-    long wait = 0;
-    do {
-      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-      if (reviewers == null) {
-        Thread.sleep(10);
-        wait += 10;
-        if (wait > 100) {
-          assertWithMessage("Timeout of 100 ms exceeded").fail();
-        }
-      }
-    } while (reviewers == null);
-
-    assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(user.id().get(), user2.id().get()));
+    assertThat(reviewersFor(changeId))
+        .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
   }
 
   @Test
   public void addReviewersMatchMultipleSections() throws Exception {
-    RevCommit oldHead = projectOperations.project(project).getHead("master");
     TestAccount user2 = accountCreator.user2();
+    setReviewerFilters(newFilter("*", user), newFilter("\"^a.txt\"", user2));
+    String changeId = createChange().getChangeId();
+    assertThat(reviewersFor(changeId))
+        .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
+  }
 
+  @Test
+  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
+    setReviewerFilters(newFilter("branch:master", user));
+    createBranch(BranchNameKey.create(project, "other-branch"));
+    // Create a change that matches the filter section.
+    createChange("refs/for/master");
+    // The actual change we want to test
+    String changeId = createChange("refs/for/other-branch").getChangeId();
+    assertNoReviewersAddedFor(changeId);
+  }
+
+  @Test
+  public void addReviewersFromMatchingFilters() throws Exception {
+    setReviewerFilters(newFilter("branch:other-branch", user));
+    // Create a change that doesn't match the filter section.
+    createChange("refs/for/master");
+    // The actual change we want to test
+    createBranch(BranchNameKey.create(project, "other-branch"));
+    String changeId = createChange("refs/for/other-branch").getChangeId();
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
+  }
+
+  private void setReviewerFilters(ReviewerFilterSection... filters) throws Exception {
+    fetch(testRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
+    testRepo.reset("refs/heads/config");
     Config cfg = new Config();
-    cfg.setStringList(SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email()));
-    cfg.setStringList(SECTION_FILTER, "^a.txt", KEY_REVIEWER, ImmutableList.of(user2.email()));
-
+    for (ReviewerFilterSection s : filters) {
+      cfg.setStringList(
+          SECTION_FILTER, s.getFilter(), KEY_REVIEWER, Lists.newArrayList(s.getReviewers()));
+    }
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
+    testRepo.reset(projectOperations.project(project).getHead("master"));
+  }
 
-    testRepo.reset(oldHead);
-    String changeId = createChange().getChangeId();
+  private ReviewerFilterSection newFilter(String filter, TestAccount... reviewers) {
+    return new ReviewerFilterSection(
+        filter, Arrays.stream(reviewers).map(r -> r.email()).collect(toSet()));
+  }
 
+  private Set<Account.Id> reviewersFor(String changeId)
+      throws RestApiException, InterruptedException {
     Collection<AccountInfo> reviewers;
     // Wait for 100 ms until the create patch set event
     // is processed by the reviewers plugin
@@ -118,33 +123,11 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
         }
       }
     } while (reviewers == null);
-
-    assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(user.id().get(), user2.id().get()));
+    return reviewers.stream().map(a -> Account.id(a._accountId)).collect(toSet());
   }
 
-  @Test
-  public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
-    RevCommit oldHead = projectOperations.project(project).getHead("master");
-
-    Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, "branch:master", KEY_REVIEWER, user.email());
-
-    pushFactory
-        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
-
-    testRepo.reset(oldHead);
-
-    createBranch(BranchNameKey.create(project, "other-branch"));
-
-    // Create a change that matches the filter section.
-    createChange("refs/for/master");
-
-    // The actual change we want to test
-    String changeId = createChange("refs/for/other-branch").getChangeId();
-
+  private void assertNoReviewersAddedFor(String changeId)
+      throws InterruptedException, RestApiException {
     Collection<AccountInfo> reviewers;
     long wait = 0;
     do {
@@ -154,39 +137,5 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null && wait < 100);
 
     assertThat(reviewers).isNull();
-  }
-
-  @Test
-  public void addReviewersFromMatchingFilters() throws Exception {
-    RevCommit oldHead = projectOperations.project(project).getHead("master");
-
-    Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, "branch:other-branch", KEY_REVIEWER, user.email());
-
-    pushFactory
-        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
-
-    testRepo.reset(oldHead);
-
-    createBranch(BranchNameKey.create(project, "other-branch"));
-
-    // Create a change that doesn't match the filter section.
-    createChange("refs/for/master");
-
-    // The actual change we want to test
-    String changeId = createChange("refs/for/other-branch").getChangeId();
-
-    Collection<AccountInfo> reviewers;
-    long wait = 0;
-    do {
-      Thread.sleep(10);
-      wait += 10;
-      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-    } while (reviewers == null && wait < 100);
-
-    assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
-        .containsExactlyElementsIn(ImmutableSet.of(user.id().get()));
   }
 }
