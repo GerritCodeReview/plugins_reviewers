@@ -36,8 +36,8 @@ import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.inject.Inject;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   @Test
   public void addReviewers() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    setReviewerFilters(newFilter("*", user, user2));
+    setReviewerFilters(filter("*").reviewer(user).reviewer(user2));
     String changeId = createChange().getChangeId();
     assertThat(reviewersFor(changeId))
         .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
@@ -59,7 +59,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   @Test
   public void addReviewersMatchMultipleSections() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    setReviewerFilters(newFilter("*", user), newFilter("\"^a.txt\"", user2));
+    setReviewerFilters(filter("*").reviewer(user), filter("\"^a.txt\"").reviewer(user2));
     String changeId = createChange().getChangeId();
     assertThat(reviewersFor(changeId))
         .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
@@ -67,7 +67,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
   @Test
   public void doNotAddReviewersFromNonMatchingFilters() throws Exception {
-    setReviewerFilters(newFilter("branch:master", user));
+    setReviewerFilters(filter("branch:master").reviewer(user));
     createBranch(BranchNameKey.create(project, "other-branch"));
     // Create a change that matches the filter section.
     createChange("refs/for/master");
@@ -78,7 +78,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
   @Test
   public void addReviewersFromMatchingFilters() throws Exception {
-    setReviewerFilters(newFilter("branch:other-branch", user));
+    setReviewerFilters(filter("branch:other-branch").reviewer(user));
     // Create a change that doesn't match the filter section.
     createChange("refs/for/master");
     // The actual change we want to test
@@ -87,24 +87,19 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
   }
 
-  private void setReviewerFilters(ReviewerFilterSection... filters) throws Exception {
+  private void setReviewerFilters(Filter... filters) throws Exception {
     fetch(testRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
     testRepo.reset("refs/heads/config");
     Config cfg = new Config();
-    for (ReviewerFilterSection s : filters) {
+    for (Filter f : filters) {
       cfg.setStringList(
-          SECTION_FILTER, s.getFilter(), KEY_REVIEWER, Lists.newArrayList(s.getReviewers()));
+          SECTION_FILTER, f.filter, KEY_REVIEWER, f.reviewers);
     }
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
     testRepo.reset(projectOperations.project(project).getHead("master"));
-  }
-
-  private ReviewerFilterSection newFilter(String filter, TestAccount... reviewers) {
-    return new ReviewerFilterSection(
-        filter, Arrays.stream(reviewers).map(r -> r.email()).collect(toSet()));
   }
 
   private Set<Account.Id> reviewersFor(String changeId)
@@ -137,5 +132,24 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     } while (reviewers == null && wait < 100);
 
     assertThat(reviewers).isNull();
+  }
+
+  private Filter filter(String filter) {
+    return new Filter(filter);
+  }
+
+  private class Filter {
+    List<String> reviewers;
+    String filter;
+
+    Filter(String filter) {
+      this.filter = filter;
+      this.reviewers = Lists.newArrayList();
+    }
+
+    Filter reviewer(TestAccount reviewer) {
+      reviewers.add(reviewer.email());
+      return this;
+    }
   }
 }
