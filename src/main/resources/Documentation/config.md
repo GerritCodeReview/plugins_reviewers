@@ -9,7 +9,6 @@ Global configuration of the @PLUGIN@ plugin is done in the
     enableREST = true
     suggestOnly = false
     ignoreWip = false
-    ignorePrivate = false
 ```
 
 reviewers.enableREST
@@ -29,10 +28,6 @@ reviewers.ignoreWip
 	considered when adding reviewers. Defaults to true. To enable adding
 	reviewers on changes in WIP state set this value to false.
 
-reviewers.ignorePrivate
-:	Ignore changes in private state. When set to true changes in private state
-	are not considered when adding reviewers. Defaults to true. To enable
-	adding reviewers on changes in Private state set this value to false.
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
 from the parent projects. This means a global default configuration can

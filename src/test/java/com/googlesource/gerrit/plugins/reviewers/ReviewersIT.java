@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
+import com.google.gerrit.acceptance.PushOneCommit;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
@@ -188,5 +189,33 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
 
     assertThat(reviewers.stream().map(a -> a._accountId).collect(toSet()))
         .containsExactlyElementsIn(ImmutableSet.of(user.id().get()));
+  }
+
+  @Test
+  public void dontAddReviewersForPrivateChange() throws Exception {
+    RevCommit oldHead = projectOperations.project(project).getHead("master");
+
+    Config cfg = new Config();
+    cfg.setStringList(
+        SECTION_FILTER, "*", KEY_REVIEWER, ImmutableList.of(user.email()));
+
+    pushFactory
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertOkStatus();
+
+    testRepo.reset(oldHead);
+    PushOneCommit.Result r = createChange("refs/for/master%private");
+    assertThat(r.getChange().change().isPrivate()).isTrue();
+
+    Collection<AccountInfo> reviewers;
+    long wait = 0;
+    do {
+      Thread.sleep(10);
+      wait += 10;
+      reviewers = gApi.changes().id(r.getChangeId()).get().reviewers.get(REVIEWER);
+    } while (reviewers == null && wait < 100);
+
+    assertThat(reviewers).isNull();
   }
 }
