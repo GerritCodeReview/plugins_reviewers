@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "16d071b0_a75419bd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T09:21:31Z",
+      "side": 1,
+      "message": "Remove this now.",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 35
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf72b779_b0392935",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 3
