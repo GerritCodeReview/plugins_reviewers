@@ -26,12 +26,16 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
+import com.google.gerrit.acceptance.PushOneCommit;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.RefNames;
+import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.client.ChangeStatus;
+import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
@@ -81,6 +85,31 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     createBranch(BranchNameKey.create(project, "other-branch"));
     String changeId = createChange("refs/for/other-branch").getChangeId();
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
+  }
+
+  @Test
+  public void dontAddReviewersForPrivateChange() throws Exception {
+    setReviewerFilters(filter("*").reviewer(user));
+    PushOneCommit.Result r = createChange("refs/for/master%private");
+    assertThat(r.getChange().change().isPrivate()).isTrue();
+    assertNoReviewersAddedFor(r.getChangeId());
+  }
+
+  @Test
+  public void privateBitFlippedAndReviewersAddedOnSubmit() throws Exception {
+    setReviewerFilters(filter("*").reviewer(user));
+    PushOneCommit.Result r = createChange("refs/for/master%private");
+    assertThat(r.getChange().change().isPrivate()).isTrue();
+    String changeId = r.getChangeId();
+    assertNoReviewersAddedFor(changeId);
+    // This adds admin as reviewer
+    gApi.changes().id(changeId).current().review(ReviewInput.approve());
+    gApi.changes().id(changeId).current().submit();
+    assertThat(reviewersFor(changeId))
+        .containsExactlyElementsIn(ImmutableSet.of(admin.id(), user.id()));
+    ChangeInfo info = gApi.changes().id(changeId).get();
+    assertThat(info.status).isEqualTo(ChangeStatus.MERGED);
+    assertThat(info.isPrivate).isNull();
   }
 
   private void setReviewerFilters(Filter... filters) throws Exception {
