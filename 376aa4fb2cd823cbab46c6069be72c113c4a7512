@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fdbe0c0b_efe8b35f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6cb55ad_b98eaf45",
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16d071b0_a75419bd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2020-04-28T09:21:31Z",
       "side": 1,
       "message": "Remove this now.",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 35
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20196c52_86721394",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 1,
+      "message": "There\u0027s still a use-case for:\n1. uploading a change as private\n2. changing your mind and switching to not-private\n\nWhy shouldn\u0027t we support this?",
+      "parentUuid": "16d071b0_a75419bd",
       "range": {
         "startLine": 52,
         "startChar": 8,
@@ -89,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "591c41e1_f612bd59",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 1,
+      "message": "I don\u0027t get why this should be removed.",
+      "parentUuid": "aff85e93_64cb98cb",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "583b77be_3ca0ab0c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
         "patchSetId": 3
@@ -109,6 +175,30 @@
       "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0857844d_efbb7ee6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "583b77be_3ca0ab0c",
+      "range": {
+        "startLine": 214,
+        "startChar": 6,
+        "endLine": 214,
+        "endChar": 23
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c335c206_e5af8488",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 0,
+      "message": "I don\u0027t see why. IMO the ROI on such an effort is extremely low and the impact is close to zero.\nFor how long should we keep this validation?\nWho should maintain the removal of the validation of out-dated configuration values.",
+      "parentUuid": "2fbe744e_3407de6a",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "e4b78744c3e358265cb5b93f8b5554954267d620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4b87495_bc0b6c10",
         "filename": "src/main/resources/Documentation/config.md",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "e4b78744c3e358265cb5b93f8b5554954267d620",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "091c8eb6_68e71a45",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T10:53:51Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "c4b87495_bc0b6c10",
+      "range": {
+        "startLine": 28,
+        "startChar": 31,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "e4b78744c3e358265cb5b93f8b5554954267d620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
