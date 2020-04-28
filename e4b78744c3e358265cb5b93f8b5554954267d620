@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fbe744e_3407de6a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T09:09:47Z",
+      "side": 0,
+      "message": "Log with warning (or even error) severity that this configuration doesn\u0027t have any effect any more and should be removed?",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "e4b78744c3e358265cb5b93f8b5554954267d620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4b87495_bc0b6c10",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T09:09:47Z",
+      "side": 0,
+      "message": "Unrelated here, but it\u0027s confusing: if it is true per default, why would I set it to true in the first place. may bre remove that statement.",
+      "range": {
+        "startLine": 28,
+        "startChar": 31,
+        "endLine": 29,
+        "endChar": 52
+      },
+      "revId": "e4b78744c3e358265cb5b93f8b5554954267d620",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
