@@ -22,6 +22,30 @@
       "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20a174ef_6b8495b9",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-28T13:41:25Z",
+      "side": 1,
+      "message": "Since the Id of a filter section is the filter itself the URL aren\u0027t always human-readable but the same could be said for project-ids\n\n    projects/my%2Fown%2Fproject\n\nor change-ids\n   my%2Fown%2Fproject~my%2Fbranch~I1234...\n\nI\u0027m not claiming to be a REST expert but this way it get\u0027s quite neat.\nAdding an entire section:\n\n    PUT projects/my-project/reviewers-filters/* -\u003c {\"reviewers\":[\"Ed\",\"Sue\"]}\n\nUpserting the reviewers for the section:\n\n    PUT projects/my-project/reviewers-filters/*/reviewers -\u003c [\"Eve\",\"Ned\"]\n\nAdding a single reviewer:\n\n    POST project/my-projeect/reviewers-filters/*/reviewers -\u003c {\"reviewer\":\"Pam\"}\n\nRemoving a single reviewer:\n\n    DELETE project/my-projeect/reviewers-filters/*/reviewers/Sue",
+      "parentUuid": "3e985f47_d1943adc",
+      "range": {
+        "startLine": 59,
+        "startChar": 44,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
