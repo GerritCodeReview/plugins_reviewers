@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cdee7db1_0f494865",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T11:23:30Z",
+      "side": 1,
+      "message": "Nit: this could be inlined.",
+      "range": {
+        "startLine": 107,
+        "startChar": 16,
+        "endLine": 107,
+        "endChar": 28
+      },
+      "revId": "c7d0b2fb917a7e289e20264795cf6e27177af601",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e654bf97_0a88ff31",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T11:23:30Z",
+      "side": 1,
+      "message": "Nit: import statically.",
+      "range": {
+        "startLine": 108,
+        "startChar": 61,
+        "endLine": 108,
+        "endChar": 79
+      },
+      "revId": "c7d0b2fb917a7e289e20264795cf6e27177af601",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
