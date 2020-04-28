@@ -140,6 +140,30 @@
       "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1acff863_97a1bfa6",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-28T08:19:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b05d1d1_9b8ffc25",
+      "range": {
+        "startLine": 8,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "155c9b909491ee4eff8aec6a4aaa709f1ebe85d6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
