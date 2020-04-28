@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e985f47_d1943adc",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-28T12:53:34Z",
+      "side": 1,
+      "message": "I am not sure I like such cryptical Ids. An alternative approach would be to use named sections? Say, application has 4 code areas, then project owner could upload 4 named sections:\n\n* sshd\n* httpd\n* server\n* ui\n\nsomething like this:\n\n  PUT /projects/myproject/reviewers-sections/httpd\t\n  {\n    \"filter\": \"dir:httpd\"\n    \"reviewer\": \"Alice\"\n  }\n\n  PUT /projects/myproject/reviewers-sections/ui\n  {\n    \"filter\": \"dir:ui\"\n    \"reviewer\": \"Bob\"\n  }\n\n\nand use it like a key? Diadvantage is , of course, we would need additional input, that however may also be used as documentation.",
+      "range": {
+        "startLine": 59,
+        "startChar": 44,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
