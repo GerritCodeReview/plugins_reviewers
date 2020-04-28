@@ -135,10 +135,11 @@ class Reviewers
 
   private void onEvent(ChangeEvent event) {
     ChangeInfo c = event.getChange();
-    if (config.ignoreWip() && (c.workInProgress != null && c.workInProgress)) {
+    /* Never add reviewers automatically to private changes. */
+    if (Boolean.TRUE.equals(c.isPrivate)) {
       return;
     }
-    if (config.ignorePrivate() && (c.isPrivate != null && c.isPrivate)) {
+    if (config.ignoreWip() && Boolean.TRUE.equals(c.workInProgress)) {
       return;
     }
     Project.NameKey projectName = Project.nameKey(c.project);
