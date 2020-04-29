@@ -21,10 +21,8 @@ import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
-import com.google.gerrit.server.CurrentUser;
-import com.google.gerrit.server.IdentifiedUser;
-import com.google.gerrit.server.util.RequestContext;
-import com.google.gerrit.server.util.ThreadLocalRequestContext;
+import com.google.gerrit.server.util.ManualRequestContext;
+import com.google.gerrit.server.util.OneOffRequestContext;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import java.util.ArrayList;
@@ -33,9 +31,8 @@ import java.util.Set;
 class AddReviewers implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final ThreadLocalRequestContext tl;
   private final GerritApi gApi;
-  private final IdentifiedUser.GenericFactory identifiedUserFactory;
+  private final OneOffRequestContext requestContext;
   private final ChangeInfo changeInfo;
   private final Set<Account.Id> reviewers;
 
@@ -45,33 +42,22 @@ class AddReviewers implements Runnable {
 
   @Inject
   AddReviewers(
-      ThreadLocalRequestContext tl,
       GerritApi gApi,
-      IdentifiedUser.GenericFactory identifiedUserFactory,
+      OneOffRequestContext requestContext,
       @Assisted ChangeInfo changeInfo,
       @Assisted Set<Account.Id> reviewers) {
-    this.tl = tl;
     this.gApi = gApi;
-    this.identifiedUserFactory = identifiedUserFactory;
+    this.requestContext = requestContext;
     this.changeInfo = changeInfo;
     this.reviewers = reviewers;
   }
 
   @Override
   public void run() {
-    RequestContext old =
-        tl.setContext(
-            new RequestContext() {
 
-              @Override
-              public CurrentUser getUser() {
-                return identifiedUserFactory.create(Account.id(changeInfo.owner._accountId));
-              }
-            });
-    try {
+    try (ManualRequestContext ctx =
+        requestContext.openAs(Account.id(changeInfo.owner._accountId))) {
       addReviewers();
-    } finally {
-      tl.setContext(old);
     }
   }
 
