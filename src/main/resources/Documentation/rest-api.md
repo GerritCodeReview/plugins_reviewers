@@ -49,7 +49,7 @@ that describes the default reviewers for myproject.
 ```
 
 ### <a id="change-reviewers"> Change Reviewers
-_PUT /projects/project_name/@PLUGIN@_
+_POST /projects/project_name/@PLUGIN@_
 
 Changes the default reviewers for the specified project.
 
@@ -62,7 +62,7 @@ capability (provided by this plugin) or be a Project Owner for the project.
 #### Request
 
 ```
-  PUT /projects/myproject/@PLUGIN@ HTTP/1.0
+  POST /projects/myproject/@PLUGIN@ HTTP/1.0
   Content-Type: application/json;charset=UTF-8
   {
     "action": "ADD",

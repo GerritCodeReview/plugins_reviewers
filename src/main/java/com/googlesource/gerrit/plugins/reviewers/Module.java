@@ -76,7 +76,7 @@ public class Module extends FactoryModule {
             @Override
             protected void configure() {
               get(PROJECT_KIND, "reviewers").to(GetReviewers.class);
-              put(PROJECT_KIND, "reviewers").to(PutReviewers.class);
+              post(PROJECT_KIND, "reviewers").to(PostReviewers.class);
             }
           });
     }

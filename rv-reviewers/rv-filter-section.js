@@ -83,13 +83,13 @@ class RvFilterSection extends Polymer.Element {
     } else {
       const index = e.model.index;
       const deleted = this.reviewers[index];
-      this._putReviewer(deleted, 'DELETE');
+      this._postReviewer(deleted, 'DELETE');
     }
   }
 
   _handleReviewerAdded(e) {
     this._editingReviewer = false;
-    this._putReviewer(e.detail.reviewer, 'ADD').catch(err => {
+    this._postReviewer(e.detail.reviewer, 'ADD').catch(err => {
       this.dispatchEvent(new CustomEvent('show-alert', {
         detail: {
           message: err,
@@ -100,8 +100,8 @@ class RvFilterSection extends Polymer.Element {
     });
   }
 
-  _putReviewer(reviewer, action) {
-    return this.pluginRestApi.put(this.reviewersUrl, {
+  _postReviewer(reviewer, action) {
+    return this.pluginRestApi.post(this.reviewersUrl, {
       action,
       reviewer,
       filter: this.filter,
