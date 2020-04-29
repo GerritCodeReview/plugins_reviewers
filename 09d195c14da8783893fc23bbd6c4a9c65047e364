@@ -46,6 +46,30 @@
       "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e249570b_fe275e24",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-04-29T06:49:15Z",
+      "side": 1,
+      "message": "\u003e Since the Id of a filter section is the filter itself the URL aren\u0027t always human-readable but the same could be said for project-ids\n\u003e \n\u003e     projects/my%2Fown%2Fproject\n\u003e \n\u003e or change-ids\n\u003e    my%2Fown%2Fproject~my%2Fbranch~I1234...\n\nWith one small but important difference: project id and change id combination: project~branch~change-number are unique, while suggested filter are not.\n\nAlready today we can have two sections:\n\n  [\n    \"filter\": \"dir:foo\",\n    \"reviewer\": \"bar\"\n  ],\n  [\n    \"filter\": \"dir:foo\",\n    \"reviewer\": \"baz\"\n  ]\n\nSee example in checks plugins for checker definition. Checker can also have query filter, but they do identifed themself with unique id: [1].\n\n* [1] https://gerrit.googlesource.com/plugins/checks/+/refs/heads/master/resources/Documentation/rest-api-checkers.md#update-checker",
+      "parentUuid": "20a174ef_6b8495b9",
+      "range": {
+        "startLine": 59,
+        "startChar": 44,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
