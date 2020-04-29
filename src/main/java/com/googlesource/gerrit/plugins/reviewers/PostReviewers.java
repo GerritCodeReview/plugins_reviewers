@@ -40,15 +40,15 @@ import com.google.gerrit.server.project.ProjectResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.PutReviewers.Input;
+import com.googlesource.gerrit.plugins.reviewers.PostReviewers.Input;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 
-/** PUT REST end-point that removes or adds a reveiwer to a {@link ReviewerFilterSection}. */
+/** POST REST end-point that removes or adds a reviewer to a {@link ReviewerFilterSection}. */
 @Singleton
-class PutReviewers implements RestModifyView<ProjectResource, Input> {
+class PostReviewers implements RestModifyView<ProjectResource, Input> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   protected static class Input {
@@ -71,7 +71,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final PermissionBackend permissionBackend;
 
   @Inject
-  PutReviewers(
+  PostReviewers(
       @PluginName String pluginName,
       ReviewersConfig config,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
