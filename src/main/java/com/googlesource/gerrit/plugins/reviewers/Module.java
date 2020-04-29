@@ -67,7 +67,7 @@ public class Module extends FactoryModule {
       DynamicSet.bind(binder(), PrivateStateChangedListener.class).to(Reviewers.class);
     }
 
-    factory(AddReviewersByConfiguration.Factory.class);
+    factory(AddReviewers.Factory.class);
 
     if (enableREST) {
       install(

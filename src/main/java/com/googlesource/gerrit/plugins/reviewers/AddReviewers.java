@@ -25,29 +25,37 @@ import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.IdentifiedUser;
 import com.google.gerrit.server.util.RequestContext;
 import com.google.gerrit.server.util.ThreadLocalRequestContext;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import java.util.ArrayList;
 import java.util.Set;
 
-abstract class AddReviewers implements Runnable {
+class AddReviewers implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ThreadLocalRequestContext tl;
-  protected final GerritApi gApi;
-  protected final IdentifiedUser.GenericFactory identifiedUserFactory;
-  protected final ChangeInfo changeInfo;
+  private final GerritApi gApi;
+  private final IdentifiedUser.GenericFactory identifiedUserFactory;
+  private final ChangeInfo changeInfo;
+  private final Set<Account.Id> reviewers;
 
+  interface Factory {
+    AddReviewers create(ChangeInfo changeInfo, Set<Account.Id> reviewers);
+  }
+
+  @Inject
   AddReviewers(
       ThreadLocalRequestContext tl,
       GerritApi gApi,
       IdentifiedUser.GenericFactory identifiedUserFactory,
-      ChangeInfo changeInfo) {
+      @Assisted ChangeInfo changeInfo,
+      @Assisted Set<Account.Id> reviewers) {
     this.tl = tl;
     this.gApi = gApi;
     this.identifiedUserFactory = identifiedUserFactory;
     this.changeInfo = changeInfo;
+    this.reviewers = reviewers;
   }
-
-  abstract Set<Account.Id> getReviewers();
 
   @Override
   public void run() {
@@ -61,13 +69,13 @@ abstract class AddReviewers implements Runnable {
               }
             });
     try {
-      addReviewers(getReviewers(), changeInfo);
+      addReviewers();
     } finally {
       tl.setContext(old);
     }
   }
 
-  private void addReviewers(Set<Account.Id> reviewers, ChangeInfo changeInfo) {
+  private void addReviewers() {
     try {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers

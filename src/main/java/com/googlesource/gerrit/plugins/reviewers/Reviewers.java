@@ -55,7 +55,7 @@ class Reviewers
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
-  private final AddReviewersByConfiguration.Factory byConfigFactory;
+  private final AddReviewers.Factory addReviewersFactory;
   private final WorkQueue workQueue;
   private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
@@ -65,14 +65,14 @@ class Reviewers
   @Inject
   Reviewers(
       ReviewersResolver resolver,
-      AddReviewersByConfiguration.Factory byConfigFactory,
+      AddReviewers.Factory addReviewersFactory,
       WorkQueue workQueue,
       ReviewersConfig config,
       Provider<CurrentUser> user,
       ChangeQueryBuilder queryBuilder,
       Provider<InternalChangeQuery> queryProvider) {
     this.resolver = resolver;
-    this.byConfigFactory = byConfigFactory;
+    this.addReviewersFactory = addReviewersFactory;
     this.workQueue = workQueue;
     this.config = config;
     this.user = user;
@@ -155,12 +155,12 @@ class Reviewers
       if (reviewers.isEmpty()) {
         return;
       }
-      final Runnable task =
-          byConfigFactory.create(
+      final AddReviewers addReviewers =
+          addReviewersFactory.create(
               c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
 
       @SuppressWarnings("unused")
-      Future<?> ignored = workQueue.getDefaultQueue().submit(task);
+      Future<?> ignored = workQueue.getDefaultQueue().submit(addReviewers);
     } catch (QueryParseException e) {
       logger.atWarning().log(
           "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
