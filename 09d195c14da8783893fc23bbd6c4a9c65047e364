@@ -70,6 +70,30 @@
       "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9419b87b_59cb2830",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-04-29T07:59:50Z",
+      "side": 1,
+      "message": "\u003e Already today we can have two sections:\n\u003e \n\u003e   [\n\u003e     \"filter\": \"dir:foo\",\n\u003e     \"reviewer\": \"bar\"\n\u003e   ],\n\u003e   [\n\u003e     \"filter\": \"dir:foo\",\n\u003e     \"reviewer\": \"baz\"\n\u003e   ]\n\nIIUC this would not be possible for an individual project.\n\nTo me the definition of a filter-section is something like:\n\"A _set of accounts_ that should be added as reviewer for the changes matching a _specific filter_\".\n\nIf you \"currently\" add [\"filter\": \"dir:foo\", \"reviewer\": \"bar\"] and [\"filter\": \"dir:foo\", \"reviewer\": \"baz\"] it would result in:\n\n   [\n     \"filter\": \"dir:foo\",\n     \"reviewers\": [\"bar\", \"baz\"]\n   ],\n\nA more precise representation would be as a map:\n\n    filters_sections: {\n      \"dir:foo\" : {\n        \"reviewers\": [\"bar\", \"baz\"],\n      }\n    }\n\n\u003e \n\u003e See example in checks plugins for checker definition. Checker can also have query filter, but they do identifed themself with unique id: [1].\n\u003e \n\u003e * [1] https://gerrit.googlesource.com/plugins/checks/+/refs/heads/master/resources/Documentation/rest-api-checkers.md#update-checker\n\nThere\u0027s a significant difference.\nChecks *can* have a query.\nA filter-section *must* have a query.\n(Like access-sections that doesn\u0027t make sense without a ref-definition.)",
+      "parentUuid": "e249570b_fe275e24",
+      "range": {
+        "startLine": 59,
+        "startChar": 44,
+        "endLine": 59,
+        "endChar": 61
+      },
+      "revId": "09d195c14da8783893fc23bbd6c4a9c65047e364",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
