@@ -92,8 +92,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     testRepo.reset("refs/heads/config");
     Config cfg = new Config();
     for (Filter f : filters) {
-      cfg.setStringList(
-          SECTION_FILTER, f.filter, KEY_REVIEWER, f.reviewers);
+      cfg.setStringList(SECTION_FILTER, f.filter, KEY_REVIEWER, f.reviewers);
     }
     pushFactory
         .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
