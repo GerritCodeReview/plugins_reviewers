@@ -40,14 +40,14 @@ import com.google.gerrit.server.project.ProjectResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.PutReviewers.Input;
+import com.googlesource.gerrit.plugins.reviewers.PostReviewers.Input;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 
 @Singleton
-class PutReviewers implements RestModifyView<ProjectResource, Input> {
+class PostReviewers implements RestModifyView<ProjectResource, Input> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public static class Input {
@@ -65,7 +65,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final PermissionBackend permissionBackend;
 
   @Inject
-  PutReviewers(
+  PostReviewers(
       @PluginName String pluginName,
       ReviewersConfig config,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
