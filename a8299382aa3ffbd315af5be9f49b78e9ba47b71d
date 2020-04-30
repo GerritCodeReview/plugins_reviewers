@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "622143a9_316bdb2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-30T12:13:34Z",
+      "side": 1,
+      "message": "nit: missing blank line",
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7e19c2c_dcc34cdd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/TestModule.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-04-30T12:13:34Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
