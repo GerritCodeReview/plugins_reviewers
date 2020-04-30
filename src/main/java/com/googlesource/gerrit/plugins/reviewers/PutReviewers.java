@@ -56,6 +56,11 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     public String reviewer;
   }
 
+  private enum Action {
+    ADD,
+    REMOVE
+  }
+
   private final String pluginName;
   private final ReviewersConfig config;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
