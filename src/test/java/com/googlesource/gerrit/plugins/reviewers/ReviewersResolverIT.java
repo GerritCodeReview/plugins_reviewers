@@ -41,7 +41,7 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   }
 
   @Test
-  public void testUploaderSkippedAsReviewer() throws Exception {
+  public void uploaderSkippedAsReviewer() throws Exception {
     Set<Account.Id> reviewers =
         resolver.resolve(
             Collections.singleton(user.email()),
@@ -52,7 +52,7 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   }
 
   @Test
-  public void testAccountResolve() throws Exception {
+  public void accountResolve() throws Exception {
     Set<Account.Id> reviewers =
         resolver.resolve(
             ImmutableSet.of(user.email(), admin.email()),
@@ -63,7 +63,7 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   }
 
   @Test
-  public void testAccountGroupResolve() throws Exception {
+  public void accountGroupResolve() throws Exception {
     String group1 = "group1";
     groupOperations.newGroup().name(group1).create();
     TestAccount foo = createTestAccount("foo", group1);
