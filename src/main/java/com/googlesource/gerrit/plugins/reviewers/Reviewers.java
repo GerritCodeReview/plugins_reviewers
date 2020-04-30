@@ -36,7 +36,6 @@ import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
-import com.google.gerrit.server.git.WorkQueue;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
@@ -44,7 +43,6 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Future;
 
 @Singleton
 class Reviewers
@@ -56,7 +54,7 @@ class Reviewers
 
   private final ReviewersResolver resolver;
   private final AddReviewers.Factory addReviewersFactory;
-  private final WorkQueue workQueue;
+  private final ReviewerWorkQueue workQueue;
   private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
@@ -66,7 +64,7 @@ class Reviewers
   Reviewers(
       ReviewersResolver resolver,
       AddReviewers.Factory addReviewersFactory,
-      WorkQueue workQueue,
+      ReviewerWorkQueue workQueue,
       ReviewersConfig config,
       Provider<CurrentUser> user,
       ChangeQueryBuilder queryBuilder,
@@ -158,9 +156,7 @@ class Reviewers
       final AddReviewers addReviewers =
           addReviewersFactory.create(
               c, resolver.resolve(reviewers, projectName, changeNumber, uploader));
-
-      @SuppressWarnings("unused")
-      Future<?> ignored = workQueue.getDefaultQueue().submit(addReviewers);
+      workQueue.submit(addReviewers);
     } catch (QueryParseException e) {
       logger.atWarning().log(
           "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
