@@ -36,6 +36,7 @@ import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.Config;
 
+/** Implements a project suggest REST end-point. */
 public class SuggestProjectReviewers extends SuggestReviewers
     implements RestReadView<ProjectResource> {
   private final PermissionBackend permissionBackend;

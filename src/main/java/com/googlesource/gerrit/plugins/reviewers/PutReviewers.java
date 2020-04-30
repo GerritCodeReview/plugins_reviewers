@@ -46,6 +46,7 @@ import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 
+/** PUT REST end-point that removes or adds a reveiwer to a {@link ReviewerFilterSection}. */
 @Singleton
 class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();

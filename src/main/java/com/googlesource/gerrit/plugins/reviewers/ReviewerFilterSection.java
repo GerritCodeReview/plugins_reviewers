@@ -17,6 +17,15 @@ package com.googlesource.gerrit.plugins.reviewers;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Representation of a filter section in reviewers.config. Example:
+ *
+ * <pre>
+ * [filter "'"]
+ *   reviewer = joe
+ *   reviewer = jane
+ * </pre>
+ */
 class ReviewerFilterSection {
   private final String filter;
   private final Set<String> reviewers;

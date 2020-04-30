@@ -36,7 +36,11 @@ import java.io.IOException;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
-/* Resolve account and group names to account ids */
+/**
+ * Attempts to resolve string identifiers in reviewers.config into valid {@link
+ * com.google.gerrit.entities.Account.Id}s when string identifies an account and groups that are
+ * expanded into {@link com.google.gerrit.entities.Account.Id}s if it identifies a group.
+ */
 @Singleton
 class ReviewersResolver {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
