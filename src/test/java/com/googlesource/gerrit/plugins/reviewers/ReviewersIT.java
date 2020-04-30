@@ -15,7 +15,6 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
 import static com.google.gerrit.extensions.client.ReviewerState.REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
@@ -33,17 +32,14 @@ import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.RefNames;
-import com.google.gerrit.extensions.common.AccountInfo;
-import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
 @NoHttpd
-@TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.Module")
+@TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.TestModule")
 public class ReviewersIT extends LightweightPluginDaemonTest {
   @Inject private ProjectOperations projectOperations;
 
@@ -101,36 +97,14 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
     testRepo.reset(projectOperations.project(project).getHead("master"));
   }
 
-  private Set<Account.Id> reviewersFor(String changeId)
-      throws RestApiException, InterruptedException {
-    Collection<AccountInfo> reviewers;
-    // Wait for 100 ms until the create patch set event
-    // is processed by the reviewers plugin
-    long wait = 0;
-    do {
-      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-      if (reviewers == null) {
-        Thread.sleep(10);
-        wait += 10;
-        if (wait > 100) {
-          assertWithMessage("Timeout of 100 ms exceeded").fail();
-        }
-      }
-    } while (reviewers == null);
-    return reviewers.stream().map(a -> Account.id(a._accountId)).collect(toSet());
+  private Set<Account.Id> reviewersFor(String changeId) throws Exception {
+    return gApi.changes().id(changeId).get().reviewers.get(REVIEWER).stream()
+        .map(a -> Account.id(a._accountId))
+        .collect(toSet());
   }
 
-  private void assertNoReviewersAddedFor(String changeId)
-      throws InterruptedException, RestApiException {
-    Collection<AccountInfo> reviewers;
-    long wait = 0;
-    do {
-      Thread.sleep(10);
-      wait += 10;
-      reviewers = gApi.changes().id(changeId).get().reviewers.get(REVIEWER);
-    } while (reviewers == null && wait < 100);
-
-    assertThat(reviewers).isNull();
+  private void assertNoReviewersAddedFor(String changeId) throws Exception {
+    assertThat(gApi.changes().id(changeId).get().reviewers.get(REVIEWER)).isNull();
   }
 
   private Filter filter(String filter) {
