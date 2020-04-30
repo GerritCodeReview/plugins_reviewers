@@ -47,6 +47,7 @@ public class Module extends FactoryModule {
 
   @Override
   protected void configure() {
+    bindWorkQueue();
     bind(CapabilityDefinition.class)
         .annotatedWith(Exports.named(MODIFY_REVIEWERS_CONFIG))
         .to(ModifyReviewersConfigCapability.class);
@@ -88,5 +89,9 @@ public class Module extends FactoryModule {
                 .toInstance(new JavaScriptPlugin("rv-reviewers.html"));
           }
         });
+  }
+
+  protected void bindWorkQueue() {
+    bind(ReviewerWorkQueue.class).to(ReviewerWorkQueue.Scheduled.class);
   }
 }
