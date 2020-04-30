@@ -34,6 +34,7 @@ import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Config;
 
+/** Global and project local configurations. */
 @Singleton
 public class ReviewersConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();

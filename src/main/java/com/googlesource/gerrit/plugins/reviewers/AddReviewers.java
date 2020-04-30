@@ -28,6 +28,7 @@ import com.google.inject.assistedinject.Assisted;
 import java.util.ArrayList;
 import java.util.Set;
 
+/** Adds reviewers to a change. */
 class AddReviewers implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 

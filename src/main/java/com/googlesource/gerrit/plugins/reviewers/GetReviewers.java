@@ -22,6 +22,10 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
 
+/**
+ * GET REST end-point for getting all configured {@link ReviewerFilterSection}s of a project, local
+ * and inherited.
+ */
 @Singleton
 class GetReviewers implements RestReadView<ProjectResource> {
   private final ReviewersConfig config;

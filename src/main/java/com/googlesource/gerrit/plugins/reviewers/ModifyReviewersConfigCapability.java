@@ -16,6 +16,7 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.gerrit.extensions.config.CapabilityDefinition;
 
+/** Capability that allows for editing reviewers.config. */
 public class ModifyReviewersConfigCapability extends CapabilityDefinition {
   static final String MODIFY_REVIEWERS_CONFIG = "modifyReviewersConfig";
 

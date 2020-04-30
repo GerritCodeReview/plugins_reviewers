@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
+/** Handles automatic adding of reviewers and reviewer suggestions. */
 @Singleton
 class Reviewers
     implements RevisionCreatedListener,
