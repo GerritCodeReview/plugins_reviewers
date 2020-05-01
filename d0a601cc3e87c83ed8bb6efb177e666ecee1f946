@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "36fa66d4_1bbe999d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-01T21:33:14Z",
+      "side": 1,
+      "message": "Yes, if we would promote this plugin as core plugin, we would also remove the standalone build.\n\nHowever, looking into Polymer 3 move, and switching from bower/rules_closure to npm/nodejs, it is too intrusive to maintain standalone build mode for plugins.\n\nFrom my perspective, there are two plugins that are affected:\n\n* verify-status\n* reviewers\n\nI would tend to remove the standalone build mode before migrating to Polymer 3, like recently done for checks and delete-project plugin.\n\nIf it turns out in the future to be trivial we could change the mind and the restore the build.",
+      "parentUuid": "c6cdeb98_8552968d",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "d0a601cc3e87c83ed8bb6efb177e666ecee1f946",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a1ca35e_5f95fe1d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -36,6 +60,24 @@
       "writtenOn": "2020-05-01T21:21:48Z",
       "side": 1,
       "message": "Add the issue reference?",
+      "revId": "d0a601cc3e87c83ed8bb6efb177e666ecee1f946",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03a0f18b_afde2f50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-01T21:33:14Z",
+      "side": 1,
+      "message": "I only created this issue 12535 to migrate to Polymer 3 for core plugins. I have not issue to migrate non core plugin to Polymer 3 yet.",
+      "parentUuid": "7a1ca35e_5f95fe1d",
       "revId": "d0a601cc3e87c83ed8bb6efb177e666ecee1f946",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
