@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d16a9f2f_c575f351",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-02T00:41:45Z",
+      "side": 1,
+      "message": "The delete-project plugin is a core plugin since 3.0 though, so its standalone build was already removed some time ago before the migration to Polymer 3.",
+      "parentUuid": "36fa66d4_1bbe999d",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "d0a601cc3e87c83ed8bb6efb177e666ecee1f946",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7a1ca35e_5f95fe1d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
