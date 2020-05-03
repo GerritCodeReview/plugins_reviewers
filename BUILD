@@ -16,8 +16,8 @@ gerrit_plugin(
         "Gerrit-PluginName: reviewers",
         "Gerrit-Module: com.googlesource.gerrit.plugins.reviewers.Module",
     ],
-    resources = glob(["src/main/resources/**/*"]),
     resource_jars = [":rv-reviewers-static"],
+    resources = glob(["src/main/resources/**/*"]),
 )
 
 genrule2(
