@@ -1,21 +1,20 @@
-<!--
-@license
-Copyright (C) 2019 The Android Open Source Project
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<dom-module id="rv-reviewer">
-  <template>
+/**
+ * @license
+ * Copyright (C) 2019 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+export const htmlTemplate = Polymer.html`
     <style include="shared-styles">
       #editReviewerInput {
         display: block;
@@ -45,11 +44,11 @@ limitations under the License.
         <span class="value">
             <!--
               TODO:
-              Investigate wether we could reuse gr-account-list.
+              Investigate whether we could reuse gr-account-list.
               If the REST API returns AccountInfo instead of an account
               identifier String we should be able to use gr-account-list(size=1)
               for all reviewers, including those who are non-editable
-              (#reviewerField below) and allign the plugin with how accounts
+              (#reviewerField below) and align the plugin with how accounts
               are displayed in core Gerrit's UI.
             -->
             <gr-autocomplete
@@ -74,6 +73,4 @@ limitations under the License.
           on-tap="_handleAddReviewer"
           hidden$="[[_computeHideAddButton(reviewer, _originalReviewer)]]">Add</gr-button>
     </div> <!-- reviewerRow -->
-  </template>
-  <script src="./rv-reviewer.js"></script>
-</dom-module>
+`;
