@@ -1,5 +1,7 @@
 load("@rules_java//java:defs.bzl", "java_library")
+load("@npm_bazel_rollup//:index.bzl", "rollup_bundle")
 load("//tools/bzl:junit.bzl", "junit_tests")
+load("//tools/js:eslint.bzl", "eslint")
 load(
     "//tools/bzl:plugin.bzl",
     "PLUGIN_DEPS",
@@ -28,17 +30,26 @@ genrule2(
         "mkdir $$TMP/static",
         "cp -r $(locations :rv-reviewers) $$TMP/static",
         "cd $$TMP",
+        "rm $$TMP/static/reviewers.html",
         "zip -Drq $$ROOT/$@ -g .",
     ]),
 )
 
 polygerrit_plugin(
     name = "rv-reviewers",
-    srcs = glob([
-        "rv-reviewers/*.html",
-        "rv-reviewers/*.js",
-    ]),
-    app = "plugin.html",
+    app = "reviewers-bundle.js",
+    plugin_name = "reviewers",
+)
+
+rollup_bundle(
+    name = "reviewers-bundle",
+    srcs = glob(["rv-reviewers/*.js"]),
+    entry_point = "rv-reviewers/plugin.js",
+    rollup_bin = "//tools/node_tools:rollup-bin",
+    sourcemap = "hidden",
+    deps = [
+        "@tools_npm//rollup-plugin-node-resolve",
+    ],
 )
 
 junit_tests(
@@ -48,5 +59,26 @@ junit_tests(
     tags = ["reviewers"],
     deps = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
         ":reviewers__plugin",
+    ],
+)
+
+# Define the eslinter for the plugin
+# The eslint macro creates 2 rules: lint_test and lint_bin
+eslint(
+    name = "lint",
+    srcs = glob([
+        "rv-reviewers/*.js",
+    ]),
+    config = ".eslintrc.json",
+    data = [],
+    extensions = [
+        ".js",
+    ],
+    ignore = ".eslintignore",
+    plugins = [
+        "@npm//eslint-config-google",
+        "@npm//eslint-plugin-html",
+        "@npm//eslint-plugin-import",
+        "@npm//eslint-plugin-jsdoc",
     ],
 )
