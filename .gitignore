@@ -3,3 +3,4 @@
 /.settings
 /local.properties
 *.pyc
+/package-lock.json
