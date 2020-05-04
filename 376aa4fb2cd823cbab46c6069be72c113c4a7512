@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "2001c6a3_82de7d8a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Reviewers.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1030912
+      },
+      "writtenOn": "2020-05-04T16:04:03Z",
+      "side": 1,
+      "message": "I share Sven\u0027s opinion. If a change switches from private to public, it\u0027s like pushing a change for review.",
+      "parentUuid": "20196c52_86721394",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 35
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cf72b779_b0392935",
         "filename": "src/main/resources/Documentation/about.md",
         "patchSetId": 3
