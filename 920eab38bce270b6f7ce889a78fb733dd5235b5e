@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2eaa4276_838357ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-04T10:22:38Z",
+      "side": 1,
+      "message": "Why?\n\nIf it\u0027s needed by another change, why not just squash it into that change?",
+      "revId": "920eab38bce270b6f7ce889a78fb733dd5235b5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
