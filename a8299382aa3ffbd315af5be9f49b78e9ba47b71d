@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "75bde7ba_65553b74",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daac723c_edd55687",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 7
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "25196411_1a64b81f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
         "patchSetId": 3
@@ -80,6 +104,30 @@
       "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "baf00665_ad4dd08d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25196411_1a64b81f",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -106,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "19b85a6a_e6d37d8a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "098684ba_392847bf",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd158fbf_71d91d21",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
         "patchSetId": 3
@@ -117,6 +189,30 @@
       "writtenOn": "2020-05-04T08:12:25Z",
       "side": 1,
       "message": "Should this construct be added here to avoid that Error Prone barks on it?\n\n      @SuppressWarnings(\"unused\")\n      Future\u003c?\u003e ignored",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 55
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b45f9a82_f8ad7308",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "When is error prone run on the reviewer plugin?\nIf error-prone thinks we should care about the Future, shouldn\u0027t we suppress error-prone instead?",
+      "parentUuid": "cd158fbf_71d91d21",
       "range": {
         "startLine": 34,
         "startChar": 6,
@@ -152,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "e31109ed_74252e87",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "163062e4_26afdb8f",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1b4c71e_32c2c4a8",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
         "patchSetId": 3
@@ -175,6 +295,30 @@
     },
     {
       "key": {
+        "uuid": "949488c8_aea9f0f2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b4c71e_32c2c4a8",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30e53cbb_27c8a2e3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
         "patchSetId": 3
@@ -195,6 +339,30 @@
       "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2648673_39c207ba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T09:54:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30e53cbb_27c8a2e3",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
