@@ -16,6 +16,24 @@
       "revId": "920eab38bce270b6f7ce889a78fb733dd5235b5e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05f947ba_22ef53a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-04T10:26:02Z",
+      "side": 1,
+      "message": "It\u0027s not needed by any other change, it just doesn\u0027t have to have public visibility.",
+      "parentUuid": "2eaa4276_838357ac",
+      "revId": "920eab38bce270b6f7ce889a78fb733dd5235b5e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
