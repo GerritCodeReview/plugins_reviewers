@@ -50,7 +50,7 @@ import org.eclipse.jgit.errors.RepositoryNotFoundException;
 class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  public static class Input {
+  protected static class Input {
     public Action action;
     public String filter;
     public String reviewer;
