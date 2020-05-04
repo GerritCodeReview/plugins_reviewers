@@ -225,6 +225,30 @@
     },
     {
       "key": {
+        "uuid": "04608f6a_8076e1dd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T10:10:32Z",
+      "side": 1,
+      "message": "Ack. Error Prone is not activated yet. If and when this plugin is promoted as core plugin, then we have to do it, as this check ist activated in gerrit core and has severity ERROR.",
+      "parentUuid": "b45f9a82_f8ad7308",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 55
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "163062e4_26afdb8f",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
         "patchSetId": 3
