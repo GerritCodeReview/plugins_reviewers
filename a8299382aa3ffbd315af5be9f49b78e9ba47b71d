@@ -37,6 +37,167 @@
     },
     {
       "key": {
+        "uuid": "daac723c_edd55687",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Does it have to be public?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 7
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25196411_1a64b81f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Unneeded.",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "098684ba_392847bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Non public?",
+      "range": {
+        "startLine": 24,
+        "startChar": 2,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd158fbf_71d91d21",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Should this construct be added here to avoid that Error Prone barks on it?\n\n      @SuppressWarnings(\"unused\")\n      Future\u003c?\u003e ignored",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 55
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "163062e4_26afdb8f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Unneeded?",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1b4c71e_32c2c4a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 39,
+        "endChar": 9
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30e53cbb_27c8a2e3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewerWorkQueue.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-04T08:12:25Z",
+      "side": 1,
+      "message": "Unneeded?",
+      "range": {
+        "startLine": 44,
+        "startChar": 6,
+        "endLine": 44,
+        "endChar": 13
+      },
+      "revId": "a8299382aa3ffbd315af5be9f49b78e9ba47b71d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b7e19c2c_dcc34cdd",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/TestModule.java",
         "patchSetId": 3
