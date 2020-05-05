@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b3dfb7c_ffbbe773",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-05T20:27:06Z",
+      "side": 1,
+      "message": "You mean if I have this:\n\n  [filter \"*\"]\n    reviewer \u003d john.doe@example.com\n    cc \u003d john.doe@example.com\n\nAnother option would be to reject this config as invalid.",
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aacdab15_eb7d5277",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-05T20:27:06Z",
+      "side": 1,
+      "message": "Could we avoid type, and use \"cc\" instead \"reviewer\"? Adding cc would be:\n\n    {\n    \"action\": \"ADD\",\n    \"filter\": \"branch:master\",\n    \"cc\": \"UserB\",\n    }",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 3
+      },
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
