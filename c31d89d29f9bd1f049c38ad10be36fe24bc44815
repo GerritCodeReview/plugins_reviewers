@@ -114,6 +114,29 @@
       "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "975bb9d7_c3947ef1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-06T06:09:32Z",
+      "side": 1,
+      "message": "This construct is confusing. Can\u0027t be guicified? May be also rename ReviewerFilterSection in FilterSectionConfig, and try to inject the factory: FilterSectionConfig.Factory filterSectionConfigFactory as instance variable in this class.\n\nThen the above line would be more Guice compatible:\n\n  filterSections \u003d filterSectionsFactory.create(cfg);\n\nHowever, you are creating a factory instance itself and not actually FilterSectionConfig instances. If you inject the factory you have already factory instance ad wouldn\u0027t need to create factory instance itself?",
+      "range": {
+        "startLine": 116,
+        "startChar": 28,
+        "endLine": 116,
+        "endChar": 66
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
