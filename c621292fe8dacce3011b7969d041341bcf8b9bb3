@@ -22,6 +22,30 @@
       "revId": "c621292fe8dacce3011b7969d041341bcf8b9bb3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1b2b9c4_67875638",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T14:19:17Z",
+      "side": 1,
+      "message": "As I replied on ps 10, there are also situations where you want to allow for this.",
+      "parentUuid": "b32bb42b_473a5f07",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 28
+      },
+      "revId": "c621292fe8dacce3011b7969d041341bcf8b9bb3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "df79b7ca_c0e04b82",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T14:19:17Z",
+      "side": 1,
+      "message": "There\u0027s also the more complex situation of a valid config where john wants to be added as cc for all reviews in projects that inherits from Parent-Project, but he wants to be added as reviewer if the change touches src/some-file.py in \"specific/project\". Being able to do that could be very powerful and shouldn\u0027t IMM be invalid:\n\nParent-Project - reviewers.config:\n\n    [filter \"*\"]\n      cc \u003d john.doe@example.com\n\nspecific/project - reviewers.config:\n\n    [filter \"file:src/some-file.py\"]\n      reviewer \u003d john.doe@example.com",
+      "parentUuid": "6b3dfb7c_ffbbe773",
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aacdab15_eb7d5277",
         "filename": "src/main/resources/Documentation/rest-api.md",
         "patchSetId": 10
@@ -30,6 +48,30 @@
       "writtenOn": "2020-05-05T20:27:06Z",
       "side": 1,
       "message": "Could we avoid type, and use \"cc\" instead \"reviewer\"? Adding cc would be:\n\n    {\n    \"action\": \"ADD\",\n    \"filter\": \"branch:master\",\n    \"cc\": \"UserB\",\n    }",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 3
+      },
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba519693_c6392972",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T14:19:17Z",
+      "side": 1,
+      "message": "I started out like that but it got quite messy since the REST API currently only allows for adding _one_ reviewer at the time.\nHow would we handle if the Input contained one reviewer and one cc? Should that be ok?\n\nI decided to, in-line with the current API, rely on flags in the request data to decide on which action should be performed.\n\nThis will hopefully sort itself out when we redesign the REST API.",
+      "parentUuid": "aacdab15_eb7d5277",
       "range": {
         "startLine": 70,
         "startChar": 2,
