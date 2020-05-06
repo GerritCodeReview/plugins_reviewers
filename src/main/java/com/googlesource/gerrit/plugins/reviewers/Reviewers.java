@@ -14,13 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import static java.util.stream.Collectors.toSet;
-
-import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.common.Nullable;
-import com.google.gerrit.entities.Account;
-import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
@@ -30,8 +24,6 @@ import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
-import com.google.gerrit.server.change.ReviewerSuggestion;
-import com.google.gerrit.server.change.SuggestedReviewer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
@@ -43,8 +35,7 @@ import java.util.Set;
 class Reviewers
     implements RevisionCreatedListener,
         PrivateStateChangedListener,
-        WorkInProgressStateChangedListener,
-        ReviewerSuggestion {
+        WorkInProgressStateChangedListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final ReviewersResolver resolver;
@@ -80,38 +71,6 @@ class Reviewers
   @Override
   public void onPrivateStateChanged(PrivateStateChangedListener.Event event) {
     onEvent(event);
-  }
-
-  @Override
-  public Set<SuggestedReviewer> suggestReviewers(
-      Project.NameKey projectName,
-      @Nullable Change.Id changeId,
-      @Nullable String query,
-      Set<Account.Id> candidates) {
-    List<ReviewerFilter> filters = getFilters(projectName);
-
-    if (filters.isEmpty() || changeId == null) {
-      return ImmutableSet.of();
-    }
-
-    try {
-      Set<String> reviewers = filterUtil.findReviewers(changeId.get(), filters);
-      if (!reviewers.isEmpty()) {
-        return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
-            .map(a -> suggestedReviewer(a))
-            .collect(toSet());
-      }
-    } catch (StorageException | QueryParseException x) {
-      logger.atSevere().withCause(x).log(x.getMessage());
-    }
-    return ImmutableSet.of();
-  }
-
-  private SuggestedReviewer suggestedReviewer(Account.Id account) {
-    SuggestedReviewer reviewer = new SuggestedReviewer();
-    reviewer.account = account;
-    reviewer.score = 1;
-    return reviewer;
   }
 
   private List<ReviewerFilter> getFilters(Project.NameKey projectName) {

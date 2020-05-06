@@ -60,7 +60,7 @@ public class Module extends FactoryModule {
             protected void configure() {
               bind(ReviewerSuggestion.class)
                   .annotatedWith(Exports.named("reviewer-suggest"))
-                  .to(Reviewers.class);
+                  .to(ReviewerSuggest.class);
             }
           });
     } else {
