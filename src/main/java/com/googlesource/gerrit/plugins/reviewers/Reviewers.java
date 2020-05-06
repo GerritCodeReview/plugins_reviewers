@@ -16,9 +16,6 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static java.util.stream.Collectors.toSet;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
@@ -33,13 +30,9 @@ import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
-import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
-import com.google.gerrit.server.query.change.ChangeQueryBuilder;
-import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import java.util.List;
 import java.util.Set;
@@ -57,9 +50,7 @@ class Reviewers
   private final AddReviewers.Factory addReviewersFactory;
   private final ReviewerWorkQueue workQueue;
   private final ReviewersConfig config;
-  private final Provider<CurrentUser> user;
-  private final ChangeQueryBuilder queryBuilder;
-  private final Provider<InternalChangeQuery> queryProvider;
+  private final ReviewersUtil util;
 
   @Inject
   Reviewers(
@@ -67,16 +58,12 @@ class Reviewers
       AddReviewers.Factory addReviewersFactory,
       ReviewerWorkQueue workQueue,
       ReviewersConfig config,
-      Provider<CurrentUser> user,
-      ChangeQueryBuilder queryBuilder,
-      Provider<InternalChangeQuery> queryProvider) {
+      ReviewersUtil util) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
     this.workQueue = workQueue;
     this.config = config;
-    this.user = user;
-    this.queryBuilder = queryBuilder;
-    this.queryProvider = queryProvider;
+    this.util = util;
   }
 
   @Override
@@ -107,7 +94,7 @@ class Reviewers
     }
 
     try {
-      Set<String> reviewers = findReviewers(changeId.get(), sections);
+      Set<String> reviewers = util.findReviewers(changeId.get(), sections);
       if (!reviewers.isEmpty()) {
         return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
@@ -150,7 +137,7 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, sections);
+      Set<String> reviewers = util.findReviewers(changeNumber, sections);
       if (reviewers.isEmpty()) {
         return;
       }
@@ -165,39 +152,5 @@ class Reviewers
     } catch (StorageException x) {
       logger.atSevere().withCause(x).log(x.getMessage());
     }
-  }
-
-  private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
-      throws StorageException, QueryParseException {
-    ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(change, sections);
-    for (ReviewerFilterSection s : found) {
-      reviewers.addAll(s.getReviewers());
-    }
-    return reviewers.build();
-  }
-
-  private List<ReviewerFilterSection> findReviewerSections(
-      int change, List<ReviewerFilterSection> sections)
-      throws StorageException, QueryParseException {
-    ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
-    for (ReviewerFilterSection s : sections) {
-      if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
-        found.add(s);
-      } else if (filterMatch(change, s.getFilter())) {
-        found.add(s);
-      }
-    }
-    return found.build();
-  }
-
-  boolean filterMatch(int change, String filter) throws StorageException, QueryParseException {
-    Preconditions.checkNotNull(filter);
-    ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    return !queryProvider
-        .get()
-        .noFields()
-        .query(qb.parse(String.format("change:%s %s", change, filter)))
-        .isEmpty();
   }
 }
