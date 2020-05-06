@@ -16,11 +16,7 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static java.util.stream.Collectors.toSet;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.common.Nullable;
 import com.google.gerrit.entities.Account;
@@ -34,13 +30,9 @@ import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
-import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
-import com.google.gerrit.server.query.change.ChangeQueryBuilder;
-import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
 import java.util.List;
@@ -59,9 +51,7 @@ class Reviewers
   private final AddReviewers.Factory addReviewersFactory;
   private final ReviewerWorkQueue workQueue;
   private final ReviewersConfig config;
-  private final Provider<CurrentUser> user;
-  private final ChangeQueryBuilder queryBuilder;
-  private final Provider<InternalChangeQuery> queryProvider;
+  private final ReviewersFilterUtil filterUtil;
 
   @Inject
   Reviewers(
@@ -69,16 +59,12 @@ class Reviewers
       AddReviewers.Factory addReviewersFactory,
       ReviewerWorkQueue workQueue,
       ReviewersConfig config,
-      Provider<CurrentUser> user,
-      ChangeQueryBuilder queryBuilder,
-      Provider<InternalChangeQuery> queryProvider) {
+      ReviewersFilterUtil util) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
     this.workQueue = workQueue;
     this.config = config;
-    this.user = user;
-    this.queryBuilder = queryBuilder;
-    this.queryProvider = queryProvider;
+    this.filterUtil = util;
   }
 
   @Override
@@ -109,7 +95,7 @@ class Reviewers
     }
 
     try {
-      Set<String> reviewers = findReviewers(changeId.get(), filters);
+      Set<String> reviewers = filterUtil.findReviewers(changeId.get(), filters);
       if (!reviewers.isEmpty()) {
         return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
@@ -153,11 +139,9 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      List<ReviewerFilter> matching = findMatchingFilters(changeNumber, filters);
-      Set<String> reviewers = getReviewersFrom(matching);
-      Set<String> ccs = getCcsFrom(matching);
-      ccs.removeAll(reviewers);
-      if (reviewers.isEmpty() && ccs.isEmpty()) {
+      Set<String> reviewers = filterUtil.findReviewers(changeNumber, filters);
+      Set<String> ccs = filterUtil.findCcs(changeNumber, filters);
+      if (reviewers.isEmpty()) {
         return;
       }
       final AddReviewers addReviewers =
@@ -173,49 +157,5 @@ class Reviewers
     } catch (StorageException x) {
       logger.atSevere().withCause(x).log(x.getMessage());
     }
-  }
-
-  private Set<String> findReviewers(int change, List<ReviewerFilter> filters)
-      throws StorageException, QueryParseException {
-    return getReviewersFrom(findMatchingFilters(change, filters));
-  }
-
-  private Set<String> getReviewersFrom(List<ReviewerFilter> filters) throws StorageException {
-    ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    for (ReviewerFilter f : filters) {
-      reviewers.addAll(f.getReviewers());
-    }
-    return reviewers.build();
-  }
-
-  private Set<String> getCcsFrom(List<ReviewerFilter> filters) throws StorageException {
-    Set<String> ccs = Sets.newHashSet();
-    for (ReviewerFilter f : filters) {
-      ccs.addAll(f.getCcs());
-    }
-    return ccs;
-  }
-
-  private List<ReviewerFilter> findMatchingFilters(int change, List<ReviewerFilter> filters)
-      throws StorageException, QueryParseException {
-    ImmutableList.Builder<ReviewerFilter> found = ImmutableList.builder();
-    for (ReviewerFilter s : filters) {
-      if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
-        found.add(s);
-      } else if (filterMatch(change, s.getFilter())) {
-        found.add(s);
-      }
-    }
-    return found.build();
-  }
-
-  boolean filterMatch(int change, String filter) throws StorageException, QueryParseException {
-    Preconditions.checkNotNull(filter);
-    ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    return !queryProvider
-        .get()
-        .noFields()
-        .query(qb.parse(String.format("change:%s %s", change, filter)))
-        .isEmpty();
   }
 }
