@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "106490c7_2ee9faa6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c87b2c2_17cfe28c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 56
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16b79c8b_9689cde3",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2020-05-05T20:19:35Z",
       "side": 1,
       "message": "This is bad name now, if project not passed any more into ctor. May be ReviewerMetaData?",
+      "range": {
+        "startLine": 90,
+        "startChar": 15,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00cedc4e_cba7e33c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "I disagree, it\u0027s a ReviewerConfig for a single project, these changes have not made it less project specific.",
+      "parentUuid": "16b79c8b_9689cde3",
       "range": {
         "startLine": 90,
         "startChar": 15,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c748c918_f96622b9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "Your comments made me rethink the whole relationship between the ReviewerFilters and the Factory.\nRewrote that whole bit and I feel it makes more sense now.",
+      "parentUuid": "ea127926_3d3017f8",
+      "range": {
+        "startLine": 92,
+        "startChar": 42,
+        "endLine": 92,
+        "endChar": 56
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a649251f_68f64ead",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 8
@@ -91,6 +163,30 @@
       "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e5dd565_fb38f6f0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a649251f_68f64ead",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 19
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "b65b8137_62cac32f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "Removed the method all together since it\u0027s no longer used.",
+      "parentUuid": "1356252c_ac37505b",
+      "range": {
+        "startLine": 97,
+        "startChar": 13,
+        "endLine": 97,
+        "endChar": 18
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "975bb9d7_c3947ef1",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
         "patchSetId": 8
@@ -128,6 +248,30 @@
       "writtenOn": "2020-05-06T06:09:32Z",
       "side": 1,
       "message": "This construct is confusing. Can\u0027t be guicified? May be also rename ReviewerFilterSection in FilterSectionConfig, and try to inject the factory: FilterSectionConfig.Factory filterSectionConfigFactory as instance variable in this class.\n\nThen the above line would be more Guice compatible:\n\n  filterSections \u003d filterSectionsFactory.create(cfg);\n\nHowever, you are creating a factory instance itself and not actually FilterSectionConfig instances. If you inject the factory you have already factory instance ad wouldn\u0027t need to create factory instance itself?",
+      "range": {
+        "startLine": 116,
+        "startChar": 28,
+        "endLine": 116,
+        "endChar": 66
+      },
+      "revId": "c31d89d29f9bd1f049c38ad10be36fe24bc44815",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca5f72a6_3860ef3b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 1,
+      "message": "As I said above I re-wrote the entire ReviewerFilter bit so that it makes more sense now (to me at least).\n\nThe only dependency it\u0027s got is the config of the project which is provided in the constructor, I don\u0027t understand why we would need to inject it?",
+      "parentUuid": "975bb9d7_c3947ef1",
       "range": {
         "startLine": 116,
         "startChar": 28,

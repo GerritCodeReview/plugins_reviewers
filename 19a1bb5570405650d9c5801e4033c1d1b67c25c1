@@ -22,6 +22,30 @@
       "revId": "19a1bb5570405650d9c5801e4033c1d1b67c25c1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7762a101_143d347a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-06T13:23:27Z",
+      "side": 0,
+      "message": "The parameter was only used to pre-load the config in case the ForProject was used to get all filter-sections for a project.\nIn this case at line:95 the ForProject loads it\u0027s own config with inheritance and at line:112 it is replaced by the config for this specific project without inheritance and the Project.NameKey that was provided in the creator at l:95 is not used when loading this config.\nI moved the get-all-filters-for-project-with-inheritance into a separate method, ReviewersConfig#filtersWithInheritance(Project.NameKey).",
+      "parentUuid": "9c60eac5_6d4edb38",
+      "range": {
+        "startLine": 95,
+        "startChar": 44,
+        "endLine": 95,
+        "endChar": 68
+      },
+      "revId": "19a1bb5570405650d9c5801e4033c1d1b67c25c1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
