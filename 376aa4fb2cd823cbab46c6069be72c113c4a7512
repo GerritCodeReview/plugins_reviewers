@@ -203,6 +203,30 @@
     },
     {
       "key": {
+        "uuid": "751c2a33_20b1fb57",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-08T22:12:34Z",
+      "side": 1,
+      "message": "\u003e A private change can be merged.  In recent versions the change will be set public on being submitted, but I can\u0027t remember which version or whether it\u0027s configurable.\n\nI re-checked. It was done in this CL: [1] and it is included since 3.0 release. Still this statement is confusing. Either we don\u0027t mention at all the fact about \"before it is merged\". Or we explain exactly, that the private state can be flipped manually (click on unmark private button) or automatically during submit. In latter case the reviewers are added to the changes but they are already submitted.\n\n[1] https://gerrit-review.googlesource.com/c/gerrit/+/214613",
+      "parentUuid": "d197db79_f65bf3d1",
+      "range": {
+        "startLine": 9,
+        "startChar": 47,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "376aa4fb2cd823cbab46c6069be72c113c4a7512",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "583b77be_3ca0ab0c",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
         "patchSetId": 3
