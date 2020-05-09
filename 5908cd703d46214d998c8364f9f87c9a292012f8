@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4591050f_6c6eb133",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T04:48:28Z",
+      "side": 1,
+      "message": "See my test coverage comment where I added: privateBitFlippedAndReviewersAddedOnSubmit() method to verify that in fact it behaves like this. If this change would be back ported to stable-2.16 then this phrasing would be invalid. So may be expand here that this was change starting from release 3.0.",
+      "range": {
+        "startLine": 9,
+        "startChar": 48,
+        "endLine": 9,
+        "endChar": 67
+      },
+      "revId": "5908cd703d46214d998c8364f9f87c9a292012f8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a00ad41c_ac22ed51",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T04:48:28Z",
+      "side": 1,
+      "message": "We should also add the test that is merging private changes directly and verifies what happens, and confirm that during the submit machinery, the private bit was flipped and that the reviewers were in fact added according to the filter section configuration. That way we would detect behavioral change if: [1] gets reverted. Or if this series is back ported to stable-2.16, where: [1] was not applied yet. May be something like:\n\n  @Test\n  public void privateBitFlippedAndReviewersAddedOnSubmit() throws Exception {\n    setReviewerFilters(filter(\"*\").reviewer(user));\n    PushOneCommit.Result r \u003d createChange(\"refs/for/master%private\");\n    assertThat(r.getChange().change().isPrivate()).isTrue();\n    String changeId \u003d r.getChangeId();\n    assertNoReviewersAddedFor(changeId);\n    // Approval operation is adding change owner as reviewer\n    gApi.changes().id(changeId).current().review(ReviewInput.approve());\n    gApi.changes().id(changeId).current().submit();\n  \nassertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(admin.id(), user.id()));\n    ChangeInfo info \u003d gApi.changes().id(changeId).get();\n    assertThat(info.status).isEqualTo(ChangeStatus.MERGED);\n    assertThat(info.isPrivate).isNull();\n  }\n\n[1] https://gerrit-review.googlesource.com/c/gerrit/+/214613",
+      "revId": "5908cd703d46214d998c8364f9f87c9a292012f8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
