@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daed76d5_dfd2a6fd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-05-09T05:13:45Z",
+      "side": 1,
+      "message": "What about a test for a private change being explicitly made public, but not yet submitted?  The test below is only testing the implicit flip of the private bit after a change is submitted.",
+      "revId": "44306d55f7780d2ca8e20183bf827008899183af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
