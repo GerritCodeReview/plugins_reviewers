@@ -16,6 +16,24 @@
       "revId": "44306d55f7780d2ca8e20183bf827008899183af",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9a98e89_36af518d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-05-09T05:22:01Z",
+      "side": 1,
+      "message": "Done. New test is added now. I think Patrick mention in the review, that test coverage is missing for priate bit flip and WIP/Ready flip in this plugin. So that this is a know issue.",
+      "parentUuid": "daed76d5_dfd2a6fd",
+      "revId": "44306d55f7780d2ca8e20183bf827008899183af",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
