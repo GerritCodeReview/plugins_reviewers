@@ -16,6 +16,24 @@
       "revId": "1276612b13035a9ccb971aad396047ccda476f64",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebf87390_b77eabe6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-05-11T08:43:36Z",
+      "side": 1,
+      "message": "This change only about CC \u003c-\u003e Reviewer state changes.\nAs I commented on the issue (5707) FWICT there is currently no way to get the historic state of reviewers from Gerrit that you\u0027d need to check if someone was added as reviewer previously and removed themselves.",
+      "parentUuid": "eea1f655_6e778104",
+      "revId": "1276612b13035a9ccb971aad396047ccda476f64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
     }
   ]
 }
