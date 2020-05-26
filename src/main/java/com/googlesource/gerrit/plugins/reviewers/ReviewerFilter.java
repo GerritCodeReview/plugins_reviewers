@@ -30,8 +30,9 @@ public abstract class ReviewerFilter {
   protected String filter;
   protected Set<String> reviewers;
   protected Set<String> ccs;
+  protected String filterError;
 
-  String getFilter() {
+  public String getFilter() {
     return filter;
   }
 
