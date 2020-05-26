@@ -28,8 +28,11 @@ import com.google.gerrit.extensions.restapi.RestApiModule;
 import com.google.gerrit.extensions.webui.JavaScriptPlugin;
 import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.gerrit.server.change.ReviewerSuggestion;
+import com.google.gerrit.server.git.validators.CommitValidationListener;
+import com.google.gerrit.server.git.validators.MergeValidationListener;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.reviewers.config.ConfigModule;
 import com.googlesource.gerrit.plugins.reviewers.config.GlobalConfig;
 
 public class Module extends FactoryModule {
@@ -52,7 +55,8 @@ public class Module extends FactoryModule {
     bind(CapabilityDefinition.class)
         .annotatedWith(Exports.named(MODIFY_REVIEWERS_CONFIG))
         .to(ModifyReviewersConfigCapability.class);
-
+    DynamicSet.bind(binder(), MergeValidationListener.class).to(ForProjectValidator.class);
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(ForProjectValidator.class);
     if (suggestOnly) {
       install(
           new AbstractModule() {
@@ -89,6 +93,7 @@ public class Module extends FactoryModule {
                 .toInstance(new JavaScriptPlugin("rv-reviewers.js"));
           }
         });
+    install(new ConfigModule());
   }
 
   protected void bindWorkQueue() {

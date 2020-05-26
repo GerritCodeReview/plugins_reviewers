@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import com.google.common.annotations.VisibleForTesting;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,6 +31,7 @@ public abstract class ReviewerFilter {
   protected String filter;
   protected Set<String> reviewers;
   protected Set<String> ccs;
+  protected String filterError;
 
   String getFilter() {
     return filter;
@@ -41,6 +43,11 @@ public abstract class ReviewerFilter {
 
   Set<String> getCcs() {
     return ccs;
+  }
+
+  @VisibleForTesting
+  public String getFilterError() {
+    return filterError;
   }
 
   @Override
