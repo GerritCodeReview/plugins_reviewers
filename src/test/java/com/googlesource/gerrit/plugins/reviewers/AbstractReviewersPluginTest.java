@@ -23,11 +23,13 @@ import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.SECTIO
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
+import com.google.gerrit.acceptance.PushOneCommit;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.RefNames;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
@@ -39,10 +41,21 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
   @Inject protected ProjectOperations projectOperations;
 
   protected void createFilters(TestFilter... filters) throws Exception {
-    createFiltersFor(testRepo, filters);
+    createFiltersFor(testRepo, Optional.empty(), filters);
   }
 
   protected void createFiltersFor(TestRepository<?> repo, TestFilter... filters) throws Exception {
+    createFiltersFor(repo, Optional.empty(), filters);
+  }
+
+  protected void createFiltersWithError(String errorMessage, TestFilter... filters)
+      throws Exception {
+    createFiltersFor(testRepo, Optional.of(errorMessage), filters);
+  }
+
+  protected void createFiltersFor(
+      TestRepository<?> repo, Optional<String> errorMessage, TestFilter... filters)
+      throws Exception {
     String previousHead = repo.getRepository().getBranch();
     checkoutRefsMetaConfig(repo);
     Config cfg = new Config();
@@ -53,10 +66,15 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
                   SECTION_FILTER, f.filter, KEY_REVIEWER, Lists.newArrayList(f.reviewers));
               cfg.setStringList(SECTION_FILTER, f.filter, KEY_CC, Lists.newArrayList(f.ccs));
             });
-    pushFactory
-        .create(admin.newIdent(), repo, "Add reviewers", FILENAME, cfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
+    PushOneCommit.Result result =
+        pushFactory
+            .create(admin.newIdent(), repo, "Add reviewers", FILENAME, cfg.toText())
+            .to(RefNames.REFS_CONFIG);
+    if (errorMessage.isPresent()) {
+      result.assertErrorStatus(errorMessage.get());
+    } else {
+      result.assertOkStatus();
+    }
     repo.reset(previousHead);
   }
 

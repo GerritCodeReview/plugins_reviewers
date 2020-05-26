@@ -21,6 +21,7 @@ import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.reviewers.AbstractReviewersPluginTest;
+import com.googlesource.gerrit.plugins.reviewers.ForProjectValidator;
 import org.eclipse.jgit.junit.TestRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +30,7 @@ import org.junit.Test;
 @TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.Module")
 public class ReviewersConfigIT extends AbstractReviewersPluginTest {
   private static final String BRANCH_MAIN = "branch:main";
+  private static final String MALFORMED_FILTER = "branches:master,stable2";
   private static final String NO_FILTER = "*";
   private static final String JANE_DOE = "jane.doe@example.com";
   private static final String JOHN_DOE = "john.doe@example.com";
@@ -80,6 +82,12 @@ public class ReviewersConfigIT extends AbstractReviewersPluginTest {
   private void assertProjectHasFilters(Project.NameKey project, TestFilter... filters) {
     assertThat(filters().withInheritance(project))
         .containsExactlyElementsIn(ImmutableList.copyOf(filters));
+  }
+
+  @Test
+  public void malformedFilterQuery() throws Exception {
+    createFiltersWithError(
+        ForProjectValidator.MALFORMED_CONFIG, filter(MALFORMED_FILTER).reviewer(JOHN_DOE));
   }
 
   private FiltersFactory filters() {
