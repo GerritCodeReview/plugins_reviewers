@@ -110,6 +110,10 @@ public class ReviewersConfig {
       }
     }
 
+    public List<ReviewerFilter> getFilters() {
+      return filters.getAll();
+    }
+
     @Override
     protected String getRefName() {
       return RefNames.REFS_CONFIG;
