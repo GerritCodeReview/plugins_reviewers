@@ -30,11 +30,16 @@ public class FiltersFactory {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final PluginConfigFactory configFactory;
+  private final ReviewerFilterCollection.Factory filterCollectionFactory;
   private final String pluginName;
 
   @Inject
-  public FiltersFactory(PluginConfigFactory configFactory, @PluginName String pluginName) {
+  public FiltersFactory(
+      PluginConfigFactory configFactory,
+      ReviewerFilterCollection.Factory filterCollectionFactory,
+      @PluginName String pluginName) {
     this.configFactory = configFactory;
+    this.filterCollectionFactory = filterCollectionFactory;
     this.pluginName = pluginName;
   }
 
@@ -46,6 +51,6 @@ public class FiltersFactory {
       logger.atSevere().log("Unable to get config for project %s", projectName.get());
       cfg = new Config();
     }
-    return new ReviewerFilterCollection(cfg).getAll();
+    return filterCollectionFactory.create(cfg).getAll();
   }
 }
