@@ -16,12 +16,15 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.googlesource.gerrit.plugins.reviewers.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.access.PluginPermission;
 import com.google.gerrit.extensions.restapi.AuthException;
+import com.google.gerrit.extensions.restapi.BadRequestException;
 import com.google.gerrit.extensions.restapi.ResourceConflictException;
 import com.google.gerrit.extensions.restapi.ResourceNotFoundException;
 import com.google.gerrit.extensions.restapi.Response;
@@ -30,6 +33,7 @@ import com.google.gerrit.extensions.restapi.RestModifyView;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.server.account.AccountResolver;
 import com.google.gerrit.server.account.AccountResolver.UnresolvableAccountException;
+import com.google.gerrit.server.git.ValidationError;
 import com.google.gerrit.server.git.meta.MetaDataUpdate;
 import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.permissions.PermissionBackend;
@@ -45,6 +49,7 @@ import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
 import com.googlesource.gerrit.plugins.reviewers.config.ForProject;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 
@@ -67,6 +72,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
 
   private final String pluginName;
   private final FiltersFactory filters;
+  private final ForProject.Factory forProjectFactory;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
@@ -77,6 +83,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   PutReviewers(
       @PluginName String pluginName,
       FiltersFactory filters,
+      ForProject.Factory forProjectFactory,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
@@ -84,6 +91,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
     this.filters = filters;
+    this.forProjectFactory = forProjectFactory;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
@@ -95,8 +103,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public Response<List<ReviewerFilter>> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
-    ForProject forProject = new ForProject();
-
+    ForProject forProject = forProjectFactory.create();
     PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());
     if (!userPermission.project(rsrc.getNameKey()).testOrFalse(ProjectPermission.WRITE_CONFIG)
         && !userPermission.testOrFalse(new PluginPermission(pluginName, MODIFY_REVIEWERS_CONFIG))) {
@@ -113,6 +120,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");
         forProject.load(md);
+        Set<ValidationError> previousErrors = ImmutableSet.copyOf(forProject.getValidationErrors());
         if (input.action == Action.ADD) {
           message
               .append("Add ")
@@ -130,6 +138,12 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
               .append(" from filter ")
               .append(input.filter);
           forProject.removeReviewer(input.filter, input.reviewer, input.type);
+        }
+        Set<ValidationError> errors =
+            Sets.difference(ImmutableSet.copyOf(forProject.getValidationErrors()), previousErrors);
+        if (!errors.isEmpty()) {
+          throw new BadRequestException(
+              String.format("Unsupported query: %s", errors.iterator().next()));
         }
         message.append("\n");
         md.setMessage(message.toString());
