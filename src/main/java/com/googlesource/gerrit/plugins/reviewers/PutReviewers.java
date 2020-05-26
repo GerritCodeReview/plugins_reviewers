@@ -70,6 +70,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final AccountResolver accountResolver;
   private final Provider<GroupResolver> groupResolver;
   private final PermissionBackend permissionBackend;
+  private final ReviewersQueryValidator queryValidator;
 
   @Inject
   PutReviewers(
@@ -79,7 +80,8 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupResolver> groupResolver,
-      PermissionBackend permissionBackend) {
+      PermissionBackend permissionBackend,
+      ReviewersQueryValidator queryValidator) {
     this.pluginName = pluginName;
     this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
@@ -87,6 +89,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     this.accountResolver = accountResolver;
     this.groupResolver = groupResolver;
     this.permissionBackend = permissionBackend;
+    this.queryValidator = queryValidator;
   }
 
   @Override
@@ -104,6 +107,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {
       if (input.action == Action.ADD) {
         validateReviewer(input.reviewer);
+        queryValidator.validateQuery(input.filter);
       }
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");

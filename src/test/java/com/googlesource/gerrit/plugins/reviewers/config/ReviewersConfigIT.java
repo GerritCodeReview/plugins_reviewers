@@ -30,6 +30,7 @@ import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.reviewers.ReviewerFilter;
+import com.googlesource.gerrit.plugins.reviewers.ReviewersConfigValidator;
 import java.util.Set;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
@@ -40,6 +41,7 @@ import org.junit.Test;
 @TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.Module")
 public class ReviewersConfigIT extends LightweightPluginDaemonTest {
   private static final String BRANCH_MAIN = "branch:main";
+  private static final String MALFORMED_FILTER = "branches:master,stable2";
   private static final String NO_FILTER = "*";
   private static final String JANE_DOE = "jane.doe@example.com";
   private static final String JOHN_DOE = "john.doe@example.com";
@@ -108,6 +110,18 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
                 filter(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
                 filter(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
         .inOrder();
+  }
+
+  @Test
+  public void malformedFilterQuery() throws Exception {
+    Config cfg = new Config();
+    cfg.setString(SECTION_FILTER, MALFORMED_FILTER, KEY_REVIEWER, JOHN_DOE);
+
+    pushFactory
+        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
+        .to(RefNames.REFS_CONFIG)
+        .assertErrorStatus(
+            String.format(ReviewersConfigValidator.MALFORMED_FILTER, MALFORMED_FILTER));
   }
 
   private ReviewersConfig reviewersConfig() {
