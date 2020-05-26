@@ -96,6 +96,10 @@ public class ReviewersConfig {
       filters.get(filter).removeReviewer(reviewer);
     }
 
+    public List<ReviewerFilter> getFilters() {
+      return filters.getAll();
+    }
+
     @Override
     protected String getRefName() {
       return RefNames.REFS_CONFIG;
