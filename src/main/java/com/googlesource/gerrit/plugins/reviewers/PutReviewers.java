@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.googlesource.gerrit.plugins.reviewers.ModifyReviewersConfigCapability.MODIFY_REVIEWERS_CONFIG;
+import static com.googlesource.gerrit.plugins.reviewers.ReviewersQueryValidator.validateQuery;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
@@ -70,7 +71,6 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   private final AccountResolver accountResolver;
   private final Provider<GroupResolver> groupResolver;
   private final PermissionBackend permissionBackend;
-  private final ReviewersQueryValidator queryValidator;
 
   @Inject
   PutReviewers(
@@ -80,8 +80,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupResolver> groupResolver,
-      PermissionBackend permissionBackend,
-      ReviewersQueryValidator queryValidator) {
+      PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
     this.config = config;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
@@ -89,7 +88,6 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     this.accountResolver = accountResolver;
     this.groupResolver = groupResolver;
     this.permissionBackend = permissionBackend;
-    this.queryValidator = queryValidator;
   }
 
   @Override
@@ -107,7 +105,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     try (MetaDataUpdate md = metaDataUpdateFactory.get().create(projectName)) {
       if (input.action == Action.ADD) {
         validateReviewer(input.reviewer);
-        queryValidator.validateQuery(input.filter);
+        validateQuery(input.filter);
       }
       try {
         StringBuilder message = new StringBuilder(pluginName).append(" plugin: ");
