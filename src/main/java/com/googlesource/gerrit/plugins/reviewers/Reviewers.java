@@ -36,8 +36,8 @@ import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
+import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
-import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -56,28 +56,28 @@ class Reviewers
 
   private final ReviewersResolver resolver;
   private final AddReviewers.Factory addReviewersFactory;
+  private final ChangeData.Factory changeDataFactory;
   private final ReviewerWorkQueue workQueue;
   private final ReviewersConfig config;
   private final Provider<CurrentUser> user;
   private final ChangeQueryBuilder queryBuilder;
-  private final Provider<InternalChangeQuery> queryProvider;
 
   @Inject
   Reviewers(
       ReviewersResolver resolver,
       AddReviewers.Factory addReviewersFactory,
+      ChangeData.Factory changeDataFactory,
       ReviewerWorkQueue workQueue,
       ReviewersConfig config,
       Provider<CurrentUser> user,
-      ChangeQueryBuilder queryBuilder,
-      Provider<InternalChangeQuery> queryProvider) {
+      ChangeQueryBuilder queryBuilder) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
+    this.changeDataFactory = changeDataFactory;
     this.workQueue = workQueue;
     this.config = config;
     this.user = user;
     this.queryBuilder = queryBuilder;
-    this.queryProvider = queryProvider;
   }
 
   @Override
@@ -108,7 +108,8 @@ class Reviewers
     }
 
     try {
-      Set<String> reviewers = findReviewers(changeId.get(), filters);
+      Set<String> reviewers =
+          findReviewers(changeDataFactory.create(projectName, changeId), filters);
       if (!reviewers.isEmpty()) {
         return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
@@ -152,7 +153,11 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, filters);
+      Set<String> reviewers =
+          findReviewers(
+              changeDataFactory.create(
+                  Project.nameKey(event.getChange().project), Change.id(event.getChange()._number)),
+              filters);
       if (reviewers.isEmpty()) {
         return;
       }
@@ -169,36 +174,31 @@ class Reviewers
     }
   }
 
-  private Set<String> findReviewers(int change, List<ReviewerFilter> filters)
+  private Set<String> findReviewers(ChangeData cd, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilter> found = findReviewerFilters(change, filters);
+    List<ReviewerFilter> found = findReviewerFilters(cd, filters);
     for (ReviewerFilter s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilter> findReviewerFilters(int change, List<ReviewerFilter> filters)
+  private List<ReviewerFilter> findReviewerFilters(ChangeData cd, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableList.Builder<ReviewerFilter> found = ImmutableList.builder();
     for (ReviewerFilter s : filters) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
-      } else if (filterMatch(change, s.getFilter())) {
+      } else if (filterMatch(cd, s.getFilter())) {
         found.add(s);
       }
     }
     return found.build();
   }
 
-  boolean filterMatch(int change, String filter) throws StorageException, QueryParseException {
+  boolean filterMatch(ChangeData cd, String filter) throws StorageException, QueryParseException {
     Preconditions.checkNotNull(filter);
-    ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    return !queryProvider
-        .get()
-        .noFields()
-        .query(qb.parse(String.format("change:%s %s", change, filter)))
-        .isEmpty();
+    return queryBuilder.asUser(user.get()).parse(filter).asMatchable().match(cd);
   }
 }
