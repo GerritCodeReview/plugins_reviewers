@@ -18,11 +18,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.gerrit.entities.Change;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.server.CurrentUser;
+import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
-import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -30,59 +32,58 @@ import java.util.Set;
 
 public class ReviewersFilterUtil {
   private final ChangeQueryBuilder queryBuilder;
-  private final Provider<InternalChangeQuery> queryProvider;
   private final Provider<CurrentUser> user;
+  private final ChangeData.Factory changeDataFactory;
 
   @Inject
   public ReviewersFilterUtil(
       ChangeQueryBuilder queryBuilder,
-      Provider<InternalChangeQuery> queryProvider,
-      Provider<CurrentUser> user) {
+      Provider<CurrentUser> user,
+      ChangeData.Factory changeDataFactory) {
     this.queryBuilder = queryBuilder;
-    this.queryProvider = queryProvider;
     this.user = user;
+    this.changeDataFactory = changeDataFactory;
   }
 
-  public Set<String> findReviewers(int change, List<ReviewerFilter> filters)
+  public Set<String> findReviewers(
+      Project.NameKey project, Change.Id changeId, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilter> found = findReviewerFilters(change, filters);
+    List<ReviewerFilter> found =
+        findReviewerFilters(changeDataFactory.create(project, changeId), filters);
     for (ReviewerFilter s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  public Set<String> findCcs(int change, List<ReviewerFilter> filters)
+  public Set<String> findCcs(
+      Project.NameKey project, Change.Id changeId, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableSet.Builder<String> ccs = ImmutableSet.builder();
-    List<ReviewerFilter> found = findReviewerFilters(change, filters);
+    List<ReviewerFilter> found =
+        findReviewerFilters(changeDataFactory.create(project, changeId), filters);
     for (ReviewerFilter s : found) {
       ccs.addAll(s.getCcs());
     }
     return ccs.build();
   }
 
-  private List<ReviewerFilter> findReviewerFilters(int change, List<ReviewerFilter> sections)
+  private List<ReviewerFilter> findReviewerFilters(ChangeData cd, List<ReviewerFilter> sections)
       throws StorageException, QueryParseException {
     ImmutableList.Builder<ReviewerFilter> found = ImmutableList.builder();
     for (ReviewerFilter s : sections) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
-      } else if (filterMatch(change, s.getFilter())) {
+      } else if (filterMatch(cd, s.getFilter())) {
         found.add(s);
       }
     }
     return found.build();
   }
 
-  boolean filterMatch(int change, String filter) throws StorageException, QueryParseException {
+  boolean filterMatch(ChangeData cd, String filter) throws StorageException, QueryParseException {
     Preconditions.checkNotNull(filter);
-    ChangeQueryBuilder qb = queryBuilder.asUser(user.get());
-    return !queryProvider
-        .get()
-        .noFields()
-        .query(qb.parse(String.format("change:%s %s", change, filter)))
-        .isEmpty();
+    return queryBuilder.asUser(user.get()).parse(filter).asMatchable().match(cd);
   }
 }

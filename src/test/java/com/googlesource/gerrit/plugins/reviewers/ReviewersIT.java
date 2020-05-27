@@ -49,7 +49,7 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   @Test
   public void addReviewerMatchingReviewerAndCc() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    createFilters(filter("*").cc(user).cc(user2), filter("^a.txt").reviewer(user2));
+    createFilters(filter("*").cc(user).cc(user2), filter("path:^a.txt").reviewer(user2));
     String changeId = createChange().getChangeId();
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
     assertThat(ccsFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
@@ -58,7 +58,7 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   @Test
   public void addReviewersMatchMultipleSections() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    createFilters(filter("*").reviewer(user), filter("\"^a.txt\"").reviewer(user2));
+    createFilters(filter("*").reviewer(user), filter("path:^a.txt").reviewer(user2));
     String changeId = createChange().getChangeId();
     assertThat(reviewersFor(changeId))
         .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
