@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import static com.googlesource.gerrit.plugins.reviewers.ReviewersQueryValidator.validateQuery;
+
 import com.google.common.annotations.VisibleForTesting;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.PatchSet.Id;
@@ -27,7 +29,6 @@ import com.google.gerrit.server.git.validators.CommitValidationMessage;
 import com.google.gerrit.server.git.validators.MergeValidationException;
 import com.google.gerrit.server.git.validators.MergeValidationListener;
 import com.google.gerrit.server.project.ProjectState;
-import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.ForProject;
 import java.io.IOException;
 import java.util.Collections;
@@ -42,13 +43,6 @@ public class ReviewersConfigValidator implements MergeValidationListener, Commit
   public static String MALFORMED_FILTER = "Malformed reviewers.config filter \"%s\"";
 
   private static String MALFORMED_CONFIG = "Malformed reviewers.config";
-
-  private final ReviewersQueryValidator queryValidator;
-
-  @Inject
-  public ReviewersConfigValidator(ReviewersQueryValidator queryValidator) {
-    this.queryValidator = queryValidator;
-  }
 
   @Override
   public void onPreMerge(
@@ -72,7 +66,7 @@ public class ReviewersConfigValidator implements MergeValidationListener, Commit
     }
     for (ReviewerFilter filter : cfg.getFilters()) {
       try {
-        queryValidator.validateQuery(filter.getFilter());
+        validateQuery(filter.getFilter());
       } catch (UnsupportedReviewersQueryException e) {
         throw new MergeValidationException(String.format(MALFORMED_FILTER, filter.getFilter()));
       }
@@ -91,7 +85,7 @@ public class ReviewersConfigValidator implements MergeValidationListener, Commit
       }
       for (ReviewerFilter filter : cfg.getFilters()) {
         try {
-          queryValidator.validateQuery(filter.getFilter());
+          validateQuery(filter.getFilter());
         } catch (UnsupportedReviewersQueryException e) {
           throw new CommitValidationException(String.format(MALFORMED_FILTER, filter.getFilter()));
         }

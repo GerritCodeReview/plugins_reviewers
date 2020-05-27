@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
@@ -98,8 +99,12 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = filterUtil.findReviewers(changeNumber, filters);
-      Set<String> ccs = filterUtil.findCcs(changeNumber, filters);
+      Set<String> reviewers =
+          filterUtil.findReviewers(
+              Project.nameKey(event.getChange().project), Change.id(changeNumber), filters);
+      Set<String> ccs =
+          filterUtil.findCcs(
+              Project.nameKey(event.getChange().project), Change.id(changeNumber), filters);
       if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
