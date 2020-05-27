@@ -117,8 +117,8 @@ The `ReviewerFilter` entity contains a filter of the default reviewers.
 The `ConfigReviewersInput` entity contains an update for the default
 reviewers.
 
-* _action_: Indicates whether to add or remove the input reviewer
-* _filter_: The filter associated with the input reviewer.
+* _action_: Indicates whether to add or remove the reviewer
+* _filter_: The [filter query](filter-query.md) associated with the reviewer.
 * _reviewer_: The user to add or remove from the default reviewers.
 
 GERRIT
