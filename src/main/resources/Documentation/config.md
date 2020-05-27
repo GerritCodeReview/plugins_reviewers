@@ -48,6 +48,10 @@ Other projects can then override the configuration in their own
 
 ```
 
+filter.\<filter\>
+:   A [query](filter-query.md) that matches all changes where the configured
+    reviewer(s) should be added as reviewer(s).
+
 filter.\<filter\>.reviewer
 :	An account or a group name. Must be an exact match (case sensitive) with the
 	account's email address or username, or the group name.  Multiple `reviewer`
