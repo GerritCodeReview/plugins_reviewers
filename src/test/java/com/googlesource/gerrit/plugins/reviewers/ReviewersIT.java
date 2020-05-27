@@ -59,7 +59,7 @@ public class ReviewersIT extends LightweightPluginDaemonTest {
   @Test
   public void addReviewersMatchMultipleSections() throws Exception {
     TestAccount user2 = accountCreator.user2();
-    setReviewerFilters(filter("*").reviewer(user), filter("\"^a.txt\"").reviewer(user2));
+    setReviewerFilters(filter("*").reviewer(user), filter("path:^a.txt").reviewer(user2));
     String changeId = createChange().getChangeId();
     assertThat(reviewersFor(changeId))
         .containsExactlyElementsIn(ImmutableSet.of(user.id(), user2.id()));
