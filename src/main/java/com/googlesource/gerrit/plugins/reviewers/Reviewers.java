@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
@@ -24,6 +25,7 @@ import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
+import com.google.gerrit.server.query.change.ChangeData;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
@@ -40,6 +42,7 @@ class Reviewers
 
   private final ReviewersResolver resolver;
   private final AddReviewers.Factory addReviewersFactory;
+  private final ChangeData.Factory changeDataFactory;
   private final ReviewerWorkQueue workQueue;
   private final ReviewersConfig config;
   private final ReviewersFilterUtil filterUtil;
@@ -48,11 +51,13 @@ class Reviewers
   Reviewers(
       ReviewersResolver resolver,
       AddReviewers.Factory addReviewersFactory,
+      ChangeData.Factory changeDataFactory,
       ReviewerWorkQueue workQueue,
       ReviewersConfig config,
       ReviewersFilterUtil util) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
+    this.changeDataFactory = changeDataFactory;
     this.workQueue = workQueue;
     this.config = config;
     this.filterUtil = util;
@@ -98,8 +103,12 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = filterUtil.findReviewers(changeNumber, filters);
-      Set<String> ccs = filterUtil.findCcs(changeNumber, filters);
+      ChangeData cd =
+          changeDataFactory.create(
+              Project.nameKey(event.getChange().project), Change.id(changeNumber));
+
+      Set<String> reviewers = filterUtil.findReviewers(cd, filters);
+      Set<String> ccs = filterUtil.findCcs(cd, filters);
       if (reviewers.isEmpty()) {
         return;
       }
