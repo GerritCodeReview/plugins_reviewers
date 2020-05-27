@@ -115,7 +115,7 @@ As response the default reviewers are returned as a list of
 
 The `ReviewerFilter` entity contains a filter of the default reviewers.
 
-* _filter_: A filter that is used to assign default reviewers.
+* _filter_: The [filter query](filter-query.md) filters changes.
 * _reviewers_: List of usernames which are assigned as default reviewers
  under the filter.
 * _ccs_: List of usernames which are assigned as default ccs
@@ -128,7 +128,7 @@ reviewers.
 
 * _action_: Indicates whether to add or remove the input reviewer
 * _type_: Which type to add/remove the user as, (REVIEWER|CC), defaults to REVIEWER.
-* _filter_: The filter associated with the input reviewer.
+* _filter_: The [filter query](filter-query.md) associated with the reviewer.
 * _reviewer_: The user to add or remove from the default reviewers.
 
 GERRIT
