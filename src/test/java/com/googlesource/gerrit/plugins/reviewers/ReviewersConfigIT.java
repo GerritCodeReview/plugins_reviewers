@@ -16,19 +16,23 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.gerrit.acceptance.GitUtil.fetch;
+import static com.googlesource.gerrit.plugins.reviewers.FilterData.filter;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.FILENAME;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.ReviewersConfig.SECTION_FILTER;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.testsuite.project.ProjectOperations;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.Project.NameKey;
 import com.google.gerrit.entities.RefNames;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Before;
@@ -46,66 +50,68 @@ public class ReviewersConfigIT extends LightweightPluginDaemonTest {
 
   @Before
   public void setUp() throws Exception {
-    fetch(testRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
-    testRepo.reset("refs/heads/config");
+    prepareTestRepo(testRepo);
   }
 
   @Test
   public void reviewersConfigSingle() throws Exception {
-    Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JOHN_DOE);
-    cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JANE_DOE);
+    createFilters(
+        testRepo, filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).reviewer(JANE_DOE));
 
-    pushFactory
-        .create(admin.newIdent(), testRepo, "Add reviewers", FILENAME, cfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
-
-    assertThat(reviewersConfig().forProject(project).getReviewerFilterSections())
-        .containsExactlyElementsIn(
-            ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JANE_DOE))))
-        .inOrder();
+    assertProjectHasFilters(
+        project, filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).reviewer(JANE_DOE));
   }
 
   @Test
   public void reviewersConfigWithMergedInheritance() throws Exception {
-    Config parentCfg = new Config();
-    parentCfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JOHN_DOE);
-    parentCfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JOHN_DOE);
-
-    pushFactory
-        .create(
-            admin.newIdent(),
-            testRepo,
-            "Add reviewers parent project",
-            FILENAME,
-            parentCfg.toText())
-        .to(RefNames.REFS_CONFIG)
-        .assertOkStatus();
-
     Project.NameKey childProject = projectOperations.newProject().parent(project).create();
-    TestRepository<?> childTestRepo = cloneProject(childProject);
-    fetch(childTestRepo, RefNames.REFS_CONFIG + ":refs/heads/config");
-    childTestRepo.reset("refs/heads/config");
+    TestRepository<?> childTestRepo = prepareTestRepo(cloneProject(childProject));
 
+    createFilters(
+        childTestRepo,
+        filter(NO_FILTER).reviewer(JANE_DOE),
+        filter(BRANCH_MAIN).reviewer(JANE_DOE));
+
+    createFilters(
+        testRepo, filter(NO_FILTER).reviewer(JOHN_DOE), filter(BRANCH_MAIN).reviewer(JOHN_DOE));
+
+    assertProjectHasFilters(
+        childProject,
+        filter(NO_FILTER).reviewer(JOHN_DOE).reviewer(JANE_DOE),
+        filter(BRANCH_MAIN).reviewer(JOHN_DOE).reviewer(JANE_DOE));
+  }
+
+  private TestRepository<?> prepareTestRepo(TestRepository<?> repo) throws Exception {
+    fetch(repo, RefNames.REFS_CONFIG + ":refs/heads/config");
+    repo.reset("refs/heads/config");
+    return repo;
+  }
+
+  private void assertProjectHasFilters(NameKey project, FilterData... filters) {
+    assertThat(reviewersConfig().forProject(project).getReviewerFilterSections())
+        .containsExactlyElementsIn(toSections(filters))
+        .inOrder();
+  }
+
+  private ImmutableList<ReviewerFilterSection> toSections(FilterData... filters) {
+    Builder<ReviewerFilterSection> builder = ImmutableList.builder();
+    Arrays.stream(filters)
+        .forEach(
+            f ->
+                builder.add(new ReviewerFilterSection(f.filter, ImmutableSet.copyOf(f.reviewers))));
+    return builder.build();
+  }
+
+  private void createFilters(TestRepository<?> repo, FilterData... filters) throws Exception {
     Config cfg = new Config();
-    cfg.setString(SECTION_FILTER, NO_FILTER, KEY_REVIEWER, JANE_DOE);
-    cfg.setString(SECTION_FILTER, BRANCH_MAIN, KEY_REVIEWER, JANE_DOE);
-
+    Arrays.stream(filters)
+        .forEach(
+            f ->
+                f.reviewers.forEach(r -> cfg.setString(SECTION_FILTER, f.filter, KEY_REVIEWER, r)));
     pushFactory
-        .create(
-            admin.newIdent(), childTestRepo, "Add reviewers child project", FILENAME, cfg.toText())
+        .create(admin.newIdent(), repo, "Add reviewers", FILENAME, cfg.toText())
         .to(RefNames.REFS_CONFIG)
         .assertOkStatus();
-
-    assertThat(reviewersConfig().forProject(childProject).getReviewerFilterSections())
-        .containsExactlyElementsIn(
-            ImmutableList.of(
-                new ReviewerFilterSection(NO_FILTER, ImmutableSet.of(JOHN_DOE, JANE_DOE)),
-                new ReviewerFilterSection(BRANCH_MAIN, ImmutableSet.of(JOHN_DOE, JANE_DOE))))
-        .inOrder();
   }
 
   private ReviewersConfig reviewersConfig() {
