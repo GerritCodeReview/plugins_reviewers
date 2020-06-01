@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8509f7c2_281f9bc4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/PutReviewers.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T06:20:16Z",
+      "side": 1,
+      "message": "Remove?\nAdd johndoe, to filter *\n\nwhereas below you have\n\nRemove johndoe from filter *",
+      "range": {
+        "startLine": 121,
+        "startChar": 23,
+        "endLine": 121,
+        "endChar": 24
+      },
+      "revId": "94e6939deed0bf300d16805afec9d35f3b0d9b84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea8c564_1a07f9f2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T06:20:16Z",
+      "side": 1,
+      "message": "Extra newlines?",
+      "revId": "94e6939deed0bf300d16805afec9d35f3b0d9b84",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
