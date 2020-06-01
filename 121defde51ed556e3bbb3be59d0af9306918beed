@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08506299_af37ba34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T11:10:21Z",
+      "side": 1,
+      "message": "Linebreak to stay within 72?",
+      "range": {
+        "startLine": 10,
+        "startChar": 64,
+        "endLine": 10,
+        "endChar": 74
+      },
+      "revId": "121defde51ed556e3bbb3be59d0af9306918beed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65589bf7_102f366d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T11:10:21Z",
+      "side": 1,
+      "message": "doublespace",
+      "range": {
+        "startLine": 29,
+        "startChar": 33,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "121defde51ed556e3bbb3be59d0af9306918beed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1511e23_7d4fb641",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T11:10:21Z",
+      "side": 1,
+      "message": "remove? This comma causes it to read a bit weird.\n\"new method:\nX with the sole responsibility of returning all, inherited Ys\"",
+      "range": {
+        "startLine": 31,
+        "startChar": 49,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "121defde51ed556e3bbb3be59d0af9306918beed",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
