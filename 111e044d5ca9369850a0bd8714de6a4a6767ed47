@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f30254c9_d6adc24d",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T06:30:31Z",
+      "side": 1,
+      "message": "ReviewerFilter?",
+      "range": {
+        "startLine": 99,
+        "startChar": 32,
+        "endLine": 99,
+        "endChar": 53
+      },
+      "revId": "111e044d5ca9369850a0bd8714de6a4a6767ed47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eca6a972_73157aee",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2020-06-01T06:30:31Z",
+      "side": 1,
+      "message": "\u003ca id\u003d\"reviewers-filter-input\"\u003e\u003c/a\u003eReviewersFilterInput?",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 59
+      },
+      "revId": "111e044d5ca9369850a0bd8714de6a4a6767ed47",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
