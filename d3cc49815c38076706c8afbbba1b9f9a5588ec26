@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81c51fcb_2533eea6",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1086906
+      },
+      "writtenOn": "2020-06-04T10:26:19Z",
+      "side": 1,
+      "message": "`format \u003d \"iife\"` to avoid global naming collision",
+      "revId": "d3cc49815c38076706c8afbbba1b9f9a5588ec26",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e514c27d_ff30ef35",
+        "filename": "rv-reviewers/rv-reviewers_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1086906
+      },
+      "writtenOn": "2020-06-04T10:26:19Z",
+      "side": 1,
+      "message": "2020 ?",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "d3cc49815c38076706c8afbbba1b9f9a5588ec26",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
