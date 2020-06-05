@@ -22,6 +22,30 @@
       "revId": "fe266a1d750d738a30ae45d8408fbc1cde26100d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7995fd9_7e61efdf",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1086906
+      },
+      "writtenOn": "2020-06-05T11:43:44Z",
+      "side": 1,
+      "message": "likely yes, will send out a fix soon",
+      "parentUuid": "71700b9e_6fbbe8a3",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 10
+      },
+      "revId": "fe266a1d750d738a30ae45d8408fbc1cde26100d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
