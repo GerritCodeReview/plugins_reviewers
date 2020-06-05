@@ -43,8 +43,8 @@ polygerrit_plugin(
 rollup_bundle(
     name = "reviewers-bundle",
     srcs = glob(["rv-reviewers/*.js"]),
+    config_file = "//tools/node_tools:plugin.rollup.config.js",
     entry_point = "rv-reviewers/plugin.js",
-    format = "iife",
     rollup_bin = "//tools/node_tools:rollup-bin",
     sourcemap = "hidden",
     deps = [
