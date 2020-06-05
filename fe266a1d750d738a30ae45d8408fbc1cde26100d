@@ -46,6 +46,30 @@
       "revId": "fe266a1d750d738a30ae45d8408fbc1cde26100d",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d5fa266a_81711dd3",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-06-05T11:44:34Z",
+      "side": 1,
+      "message": "Thanks, CCed you on that issue.",
+      "parentUuid": "b7995fd9_7e61efdf",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 10
+      },
+      "revId": "fe266a1d750d738a30ae45d8408fbc1cde26100d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
