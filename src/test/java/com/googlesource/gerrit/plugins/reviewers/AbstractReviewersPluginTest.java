@@ -30,8 +30,10 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.jgit.junit.TestRepository;
 import org.eclipse.jgit.lib.Config;
+import org.junit.Ignore;
 
 /** Base class for reviewer plugin tests. */
+@Ignore
 public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
   @Inject protected ProjectOperations projectOperations;
 
