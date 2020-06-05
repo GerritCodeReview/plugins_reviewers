@@ -29,6 +29,9 @@ export const htmlTemplate = Polymer.html`
         align-items: center;
         display: flex;
       }
+      .name gr-button {
+        margin-left: var(--spacing-m);
+      }
       .header {
         align-items: center;
         background: var(--table-header-background-color);

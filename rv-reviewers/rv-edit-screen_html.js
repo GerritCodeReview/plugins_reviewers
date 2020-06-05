@@ -20,6 +20,9 @@ export const htmlTemplate = Polymer.html`
     <style include="shared-styles"></style>
     <style include="gr-menu-page-styles"></style>
     <style include="gr-subpage-styles">
+      :host {
+        padding: var(--spacing-xl);
+      }
       .bottomButtons {
         display: flex;
       }

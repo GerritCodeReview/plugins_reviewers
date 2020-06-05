@@ -18,15 +18,21 @@ import './rv-edit-screen.js';
 
 export const htmlTemplate = Polymer.html`
     <style include="shared-styles">
+      :host {
+        display: block;
+        margin-bottom: var(--spacing-xxl);
+      }
       #rvScreenOverlay {
         width: 50em;
         overflow: auto;
       }
     </style>
-    <gr-repo-command
-        title="Reviewers Config"
-        on-command-tap="_handleCommandTap">
-    </gr-repo-command>
+    <h3>Reviewers Config</h3>
+    <gr-button
+      on-click="_handleCommandTap"
+    >
+      Reviewers Config
+    </gr-button>
     <gr-overlay id="rvScreenOverlay" with-backdrop>
       <rv-edit-screen
           plugin-rest-api="[[pluginRestApi]]"

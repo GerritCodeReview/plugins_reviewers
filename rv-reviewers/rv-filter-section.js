@@ -90,7 +90,12 @@ class RvFilterSection extends Polymer.Element {
   _handleReviewerAdded(e) {
     this._editingReviewer = false;
     this._putReviewer(e.detail.reviewer, 'ADD').catch(err => {
-      this.fire('show-alert', {message: err});
+      this.dispatchEvent(new CustomEvent('show-alert', {
+        detail: {
+          message: err,
+        },
+        composed: true, bubbles: true,
+      }));
       throw err;
     });
   }

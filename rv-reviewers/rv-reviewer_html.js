@@ -16,6 +16,10 @@
  */
 export const htmlTemplate = Polymer.html`
     <style include="shared-styles">
+      :host {
+        display: block;
+        padding: var(--spacing-s) 0;
+      }
       #editReviewerInput {
         display: block;
         width: 250px;
@@ -29,7 +33,7 @@ export const htmlTemplate = Polymer.html`
       #deleteCancelBtn,
       #addBtn,
       #reviewerField {
-          margin-left: 3px;
+        margin-left: var(--spacing-m);
       }
       #reviewerField {
         width: 250px;

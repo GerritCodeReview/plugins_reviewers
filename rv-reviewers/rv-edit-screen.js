@@ -72,7 +72,9 @@ class RvEditScreen extends Polymer.Element {
 
   _handleCloseTap(e) {
     e.preventDefault();
-    this.fire('close', null, {bubbles: false});
+    this.dispatchEvent(new CustomEvent('close', {
+      composed: true, bubbles: false,
+    }));
   }
 
   _handleReviewerChanged(e) {
