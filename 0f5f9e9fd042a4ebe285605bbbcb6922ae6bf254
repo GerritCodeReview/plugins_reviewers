@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f11aa78_157efcff",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/AbstractReviewersPluginTest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-06-05T09:11:49Z",
+      "side": 1,
+      "message": "Mark it as @Ignore so that Bazel wouldn\u0027t fail with: [1].\n\nAlternatively, dedicated java_library must be built with this base class included, because of this known Bazel limitation: [2].\n\nYou can see example in checks plugin for their base class that is using the dedicated java_library idiom.\n\n[1] http://paste.openstack.org/show/794399\n[2] https://github.com/bazelbuild/bazel/issues/2539\n[3] https://gerrit.googlesource.com/plugins/checks/+/refs/heads/master/java/com/google/gerrit/plugins/checks/acceptance/BUILD#8",
+      "revId": "0f5f9e9fd042a4ebe285605bbbcb6922ae6bf254",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
