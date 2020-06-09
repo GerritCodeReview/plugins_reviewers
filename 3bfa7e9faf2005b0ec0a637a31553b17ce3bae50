@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06781e81_fa24d7a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1011123
+      },
+      "writtenOn": "2020-06-09T10:56:04Z",
+      "side": 1,
+      "message": "We usually use the --log option to get a list of all the commits in the commit message",
+      "revId": "3bfa7e9faf2005b0ec0a637a31553b17ce3bae50",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": true
+    }
+  ]
+}
