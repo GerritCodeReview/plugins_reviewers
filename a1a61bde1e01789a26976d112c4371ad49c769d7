@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "5a40073b_1730dc9c",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-10T07:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df79b7ca_c0e04b82",
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aacdab15_eb7d5277",
         "filename": "src/main/resources/Documentation/rest-api.md",
         "patchSetId": 10
@@ -81,6 +99,30 @@
       "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78217979_f834c0f6",
+        "filename": "src/main/resources/Documentation/rest-api.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-06-10T07:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba519693_c6392972",
+      "range": {
+        "startLine": 70,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 3
+      },
+      "revId": "a1a61bde1e01789a26976d112c4371ad49c769d7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
