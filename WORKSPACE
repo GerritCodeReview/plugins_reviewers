@@ -3,7 +3,7 @@ workspace(name = "reviewers")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "7538805fe00406afadcf4ff6dea053fb78d6c132",
+    commit = "854b257c893cb50188acb2db25f719db1ff6ce5a",
     #local_path = "/home/<user>/projects/bazlets",
 )
 
@@ -35,20 +35,11 @@ npm_binary(
     repository = GERRIT,
 )
 
-# Release Plugin API
-load(
-    "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
-    "gerrit_api",
-)
+# Plugin APIs
+load("@com_googlesource_gerrit_bazlets//:gerrit_api.bzl", "gerrit_api")
 
-# Snapshot Plugin API
-#load(
-#    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
-#    "gerrit_api_maven_local",
-#)
-
-# Load release Plugin API
+# To build against a local api snapshot jar, simply add the `version` parameter
+# to the below `gerrit_api` macro, like:
+#
+# gerrit_api(version="3.0.10-SNAPSHOT")
 gerrit_api()
-
-# Load snapshot Plugin API
-#gerrit_api_maven_local()
