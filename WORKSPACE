@@ -3,7 +3,7 @@ workspace(name = "reviewers")
 load("//:bazlets.bzl", "load_bazlets")
 
 load_bazlets(
-    commit = "928c928345646ae958b946e9bbdb462f58dd1384",
+    commit = "1e027d7fa7158d5ddc7968a700e13387e8ce87e8",
     #local_path = "/home/<user>/projects/bazlets",
 )
 
@@ -35,20 +35,14 @@ npm_binary(
     repository = GERRIT,
 )
 
-# Release Plugin API
+# Plugin APIs
 load(
     "@com_googlesource_gerrit_bazlets//:gerrit_api.bzl",
     "gerrit_api",
 )
 
-# Snapshot Plugin API
-#load(
-#    "@com_googlesource_gerrit_bazlets//:gerrit_api_maven_local.bzl",
-#    "gerrit_api_maven_local",
-#)
-
-# Load release Plugin API
+# Release Plugin API
 gerrit_api()
 
-# Load snapshot Plugin API
-#gerrit_api_maven_local()
+# Snapshot Plugin API
+#gerrit_api(local=True)
