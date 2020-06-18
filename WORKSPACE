@@ -35,11 +35,7 @@ npm_binary(
     repository = GERRIT,
 )
 
-# Plugin APIs
+# Load plugin API
 load("@com_googlesource_gerrit_bazlets//:gerrit_api.bzl", "gerrit_api")
 
-# To build against a local api snapshot jar, simply add the `version` parameter
-# to the below `gerrit_api` macro, like:
-#
-# gerrit_api(version="3.1.7-SNAPSHOT")
 gerrit_api()
