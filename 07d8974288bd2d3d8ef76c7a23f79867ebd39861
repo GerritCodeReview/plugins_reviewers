@@ -69,6 +69,24 @@
       "revId": "07d8974288bd2d3d8ef76c7a23f79867ebd39861",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f322a393_1a5df62f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1086906
+      },
+      "writtenOn": "2020-06-24T14:29:42Z",
+      "side": 1,
+      "message": "ya i know, its for the transitional period, I will remove that once all similar cases like these ones are done. I think only image-diff is left now.",
+      "parentUuid": "2133d42c_dbb70db0",
+      "revId": "07d8974288bd2d3d8ef76c7a23f79867ebd39861",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153",
+      "unresolved": false
     }
   ]
 }
