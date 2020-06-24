@@ -85,7 +85,7 @@ public class Module extends FactoryModule {
           @Override
           protected void configure() {
             DynamicSet.bind(binder(), WebUiPlugin.class)
-                .toInstance(new JavaScriptPlugin("rv-reviewers.html"));
+                .toInstance(new JavaScriptPlugin("rv-reviewers.js"));
           }
         });
   }
