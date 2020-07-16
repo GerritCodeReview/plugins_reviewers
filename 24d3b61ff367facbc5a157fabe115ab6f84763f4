@@ -1,7 +1,8 @@
 {
   "checks": {
     "gerritforge:style-checker": {
-      "state": "RUNNING",
+      "state": "FAILED",
+      "message": "uuid \"gerritforge:style-checker\" has unknown language",
       "started": "2020-07-16T18:32:48Z",
       "created": "2020-07-16T18:32:48Z",
       "updated": "2020-07-16T18:32:48Z"
