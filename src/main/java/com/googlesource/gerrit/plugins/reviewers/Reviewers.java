@@ -41,6 +41,7 @@ import com.google.gerrit.server.query.change.InternalChangeQuery;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
 import java.util.List;
 import java.util.Set;
 
@@ -100,14 +101,14 @@ class Reviewers
       @Nullable Change.Id changeId,
       @Nullable String query,
       Set<Account.Id> candidates) {
-    List<ReviewerFilterSection> sections = getSections(projectName);
+    List<ReviewerFilter> filters = getFilters(projectName);
 
-    if (sections.isEmpty() || changeId == null) {
+    if (filters.isEmpty() || changeId == null) {
       return ImmutableSet.of();
     }
 
     try {
-      Set<String> reviewers = findReviewers(changeId.get(), sections);
+      Set<String> reviewers = findReviewers(changeId.get(), filters);
       if (!reviewers.isEmpty()) {
         return resolver.resolve(reviewers, projectName, changeId.get(), null).stream()
             .map(a -> suggestedReviewer(a))
@@ -126,9 +127,9 @@ class Reviewers
     return reviewer;
   }
 
-  private List<ReviewerFilterSection> getSections(Project.NameKey projectName) {
+  private List<ReviewerFilter> getFilters(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    return config.forProject(projectName).getReviewerFilterSections();
+    return config.filtersWithInheritance(projectName);
   }
 
   private void onEvent(ChangeEvent event) {
@@ -142,16 +143,16 @@ class Reviewers
     }
     Project.NameKey projectName = Project.nameKey(c.project);
 
-    List<ReviewerFilterSection> sections = getSections(projectName);
+    List<ReviewerFilter> filters = getFilters(projectName);
 
-    if (sections.isEmpty()) {
+    if (filters.isEmpty()) {
       return;
     }
 
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = findReviewers(changeNumber, sections);
+      Set<String> reviewers = findReviewers(changeNumber, filters);
       if (reviewers.isEmpty()) {
         return;
       }
@@ -168,21 +169,20 @@ class Reviewers
     }
   }
 
-  private Set<String> findReviewers(int change, List<ReviewerFilterSection> sections)
+  private Set<String> findReviewers(int change, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
     ImmutableSet.Builder<String> reviewers = ImmutableSet.builder();
-    List<ReviewerFilterSection> found = findReviewerSections(change, sections);
-    for (ReviewerFilterSection s : found) {
+    List<ReviewerFilter> found = findReviewerFilters(change, filters);
+    for (ReviewerFilter s : found) {
       reviewers.addAll(s.getReviewers());
     }
     return reviewers.build();
   }
 
-  private List<ReviewerFilterSection> findReviewerSections(
-      int change, List<ReviewerFilterSection> sections)
+  private List<ReviewerFilter> findReviewerFilters(int change, List<ReviewerFilter> filters)
       throws StorageException, QueryParseException {
-    ImmutableList.Builder<ReviewerFilterSection> found = ImmutableList.builder();
-    for (ReviewerFilterSection s : sections) {
+    ImmutableList.Builder<ReviewerFilter> found = ImmutableList.builder();
+    for (ReviewerFilter s : filters) {
       if (Strings.isNullOrEmpty(s.getFilter()) || s.getFilter().equals("*")) {
         found.add(s);
       } else if (filterMatch(change, s.getFilter())) {

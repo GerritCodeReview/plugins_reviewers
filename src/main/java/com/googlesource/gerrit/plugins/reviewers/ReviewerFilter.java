@@ -21,19 +21,14 @@ import java.util.Set;
  * Representation of a filter section in reviewers.config. Example:
  *
  * <pre>
- * [filter "'"]
+ * [filter "*"]
  *   reviewer = joe
  *   reviewer = jane
  * </pre>
  */
-class ReviewerFilterSection {
-  private final String filter;
-  private final Set<String> reviewers;
-
-  ReviewerFilterSection(String filter, Set<String> reviewers) {
-    this.filter = filter;
-    this.reviewers = reviewers;
-  }
+public abstract class ReviewerFilter {
+  protected String filter;
+  protected Set<String> reviewers;
 
   String getFilter() {
     return filter;
@@ -45,8 +40,8 @@ class ReviewerFilterSection {
 
   @Override
   public boolean equals(Object o) {
-    if (o instanceof ReviewerFilterSection) {
-      ReviewerFilterSection other = ((ReviewerFilterSection) o);
+    if (o instanceof ReviewerFilter) {
+      ReviewerFilter other = ((ReviewerFilter) o);
       return Objects.equals(filter, other.filter) && Objects.equals(reviewers, other.reviewers);
     }
     return false;

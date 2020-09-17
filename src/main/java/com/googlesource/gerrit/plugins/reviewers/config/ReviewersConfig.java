@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.googlesource.gerrit.plugins.reviewers;
+package com.googlesource.gerrit.plugins.reviewers.config;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.entities.RefNames;
@@ -26,9 +25,8 @@ import com.google.gerrit.server.git.meta.VersionedMetaData;
 import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.googlesource.gerrit.plugins.reviewers.ReviewerFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.lib.CommitBuilder;
@@ -39,9 +37,9 @@ import org.eclipse.jgit.lib.Config;
 public class ReviewersConfig {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  static final String FILENAME = "reviewers.config";
-  static final String SECTION_FILTER = "filter";
-  static final String KEY_REVIEWER = "reviewer";
+  @VisibleForTesting public static final String FILENAME = "reviewers.config";
+  @VisibleForTesting public static final String SECTION_FILTER = "filter";
+  @VisibleForTesting public static final String KEY_REVIEWER = "reviewer";
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
   private static final String KEY_IGNORE_WIP = "ignoreWip";
@@ -63,7 +61,7 @@ public class ReviewersConfig {
     this.ignoreWip = cfg.getBoolean(pluginName, null, KEY_IGNORE_WIP, true);
   }
 
-  public ForProject forProject(Project.NameKey projectName) {
+  public List<ReviewerFilter> filtersWithInheritance(Project.NameKey projectName) {
     Config cfg;
     try {
       cfg = cfgFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
@@ -71,7 +69,7 @@ public class ReviewersConfig {
       logger.atSevere().log("Unable to get config for project %s", projectName.get());
       cfg = new Config();
     }
-    return new ForProject(cfg);
+    return new ReviewerFilterCollection(cfg).getAll();
   }
 
   public boolean enableREST() {
@@ -86,49 +84,16 @@ public class ReviewersConfig {
     return ignoreWip;
   }
 
-  static class ForProject extends VersionedMetaData {
+  public static class ForProject extends VersionedMetaData {
     private Config cfg;
+    private ReviewerFilterCollection filters;
 
-    ForProject(Config cfg) {
-      this.cfg = cfg;
+    public void addReviewer(String filter, String reviewer) {
+      filters.get(filter).addReviewer(reviewer);
     }
 
-    List<ReviewerFilterSection> getReviewerFilterSections() {
-      ImmutableList.Builder<ReviewerFilterSection> b = ImmutableList.builder();
-      for (String f : cfg.getSubsections(SECTION_FILTER)) {
-        b.add(newReviewerFilterSection(f));
-      }
-      return b.build();
-    }
-
-    void addReviewer(String filter, String reviewer) {
-      if (!newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-        List<String> values =
-            new ArrayList<>(Arrays.asList(cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)));
-        values.add(reviewer);
-        cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, values);
-      }
-    }
-
-    void removeReviewer(String filter, String reviewer) {
-      if (newReviewerFilterSection(filter).getReviewers().contains(reviewer)) {
-        List<String> values =
-            new ArrayList<>(Arrays.asList(cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)));
-        values.remove(reviewer);
-        if (values.isEmpty()) {
-          cfg.unsetSection(SECTION_FILTER, filter);
-        } else {
-          cfg.setStringList(SECTION_FILTER, filter, KEY_REVIEWER, values);
-        }
-      }
-    }
-
-    private ReviewerFilterSection newReviewerFilterSection(String filter) {
-      ImmutableSet.Builder<String> b = ImmutableSet.builder();
-      for (String reviewer : cfg.getStringList(SECTION_FILTER, filter, KEY_REVIEWER)) {
-        b.add(reviewer);
-      }
-      return new ReviewerFilterSection(filter, b.build());
+    public void removeReviewer(String filter, String reviewer) {
+      filters.get(filter).removeReviewer(reviewer);
     }
 
     @Override
@@ -138,7 +103,8 @@ public class ReviewersConfig {
 
     @Override
     protected void onLoad() throws IOException, ConfigInvalidException {
-      cfg = readConfig(FILENAME);
+      this.cfg = readConfig(FILENAME);
+      this.filters = new ReviewerFilterCollection(cfg);
     }
 
     @Override
