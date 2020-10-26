@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5f3f80_d8848312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-10-26T14:03:56Z",
+      "side": 1,
+      "message": "What I can\u0027t wrap my head around is why \"DELETE\" is an accepted alias for \"REMOVE\" in this case.\nWhat am I missing?",
+      "revId": "c0c90a277403a2be221ae2e4648394f9c3262335",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
