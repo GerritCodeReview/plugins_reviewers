@@ -34,6 +34,24 @@
       "parentUuid": "5a5f3f80_d8848312",
       "revId": "c0c90a277403a2be221ae2e4648394f9c3262335",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de7c6c3e_1de32195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-10-26T14:58:22Z",
+      "side": 1,
+      "message": "\u003e I received a bug report about it from a user today.\n\nIt works for me on stable-3.2. With both \"DELETE\" and \"REMOVE\", that\u0027s what puzzles me!\nIt has been this way since the polygerrit ui for the reviewers-plugin was created, I don\u0027t see how it could ever have worked...",
+      "parentUuid": "d6775802_3b5fe729",
+      "revId": "c0c90a277403a2be221ae2e4648394f9c3262335",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
