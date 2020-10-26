@@ -83,7 +83,7 @@ class RvFilterSection extends Polymer.Element {
     } else {
       const index = e.model.index;
       const deleted = this.reviewers[index];
-      this._putReviewer(deleted, 'DELETE');
+      this._putReviewer(deleted, 'REMOVE');
     }
   }
 
