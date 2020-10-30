@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8188bef_a9ad5499",
+        "filename": ".bazelversion",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1012732
+      },
+      "writtenOn": "2020-10-30T14:53:35Z",
+      "side": 0,
+      "message": "Standalone mode was removed for this plugin in its stable-3.2 branch, since commit d642d96.",
+      "revId": "87a3b5a75c6d3f46dcdc03aa3ed10c3b7f5f554a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
