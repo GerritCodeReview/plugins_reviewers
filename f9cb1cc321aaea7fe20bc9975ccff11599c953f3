@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da512d0_54360910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-11-23T11:42:38Z",
+      "side": 1,
+      "message": "This change broke in gerrit tree build, as can be seen from the CI.\n\nAgain. The way it\u0027s done now and documented in Bazlets assumes that every plugin that offering standalone builde mode also interesting in supporting in  gerrit tree build, that is als used by both CI implementation:\n\n* GerritForge Jenkins trigger: for gerrit core and some plugins\n* Zuul: for core and non core plzugins\n\nAnd no, we don\u0027t ant to add Bazlets in gerrit core. Gerrit core shouldn\u0027t be aware, that Bazlets or any other build abstraction layer are used.\n\nThe bild tool chain in gerrit is complex enough. We shouldn\u0027t certainly add another complexity here.",
+      "revId": "f9cb1cc321aaea7fe20bc9975ccff11599c953f3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
