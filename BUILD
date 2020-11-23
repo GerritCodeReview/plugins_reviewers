@@ -1,3 +1,4 @@
+load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin")
 load("@rules_java//java:defs.bzl", "java_library")
 load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 load("//tools/bzl:junit.bzl", "junit_tests")
@@ -6,7 +7,6 @@ load(
     "//tools/bzl:plugin.bzl",
     "PLUGIN_DEPS",
     "PLUGIN_TEST_DEPS",
-    "gerrit_plugin",
 )
 load("//tools/bzl:genrule2.bzl", "genrule2")
 load("//tools/bzl:js.bzl", "polygerrit_plugin")
