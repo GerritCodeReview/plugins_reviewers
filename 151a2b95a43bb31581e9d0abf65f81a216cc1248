@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37007e2f_98bd2915",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-03T15:28:03Z",
+      "side": 1,
+      "message": "Verified locally that the UI works as expected.",
+      "revId": "151a2b95a43bb31581e9d0abf65f81a216cc1248",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
