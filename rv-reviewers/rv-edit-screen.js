@@ -65,7 +65,7 @@ class RvEditScreen extends Polymer.Element {
   }
 
   _handleCreateSection() {
-    const section = {filter: '', reviewers: [], editing: true};
+    const section = {filter: '', reviewers: [], ccs: [], editing: true};
     this._editingFilter = true;
     this.push('_filterSections', section);
   }

@@ -84,6 +84,7 @@ export const htmlTemplate = Polymer.html`
               items="{{reviewers}}">
             <rv-reviewer
                 reviewer="{{item}}"
+                type="REVIEWER"
                 can-modify-config="[[canModifyConfig]]"
                 plugin-rest-api="[[pluginRestApi]]"
                 repo-name="[[repoName]]"
@@ -91,12 +92,30 @@ export const htmlTemplate = Polymer.html`
                 on-reviewer-added="_handleReviewerAdded">
             </rv-reviewer>
           </template>
+          <template
+          is="dom-repeat"
+          items="{{ccs}}">
+            <rv-reviewer
+                reviewer="{{item}}"
+                type="CC"
+                can-modify-config="[[canModifyConfig]]"
+                plugin-rest-api="[[pluginRestApi]]"
+                repo-name="[[repoName]]"
+                on-reviewer-deleted="_handleReviewerDeleted"
+                on-reviewer-added="_handleReviewerAdded">
+        </rv-reviewer>
+      </template>
           <div id="addReviewer">
             <gr-button
                 link
-                id="addBtn"
+                id="addRevBtn"
                 on-tap="_handleAddReviewer"
                 hidden="[[_computeAddBtnHidden(canModifyConfig, _editingReviewer)]]">Add Reviewer</gr-button>
+            <gr-button
+                link
+                id="addCcBtn"
+                on-tap="_handleAddCc"
+                hidden="[[_computeAddBtnHidden(canModifyConfig, _editingReviewer)]]">Add Cc</gr-button>
           </div><!-- addReviewer -->
         </div><!-- reviewers -->
       </div>

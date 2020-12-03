@@ -56,6 +56,7 @@ export const htmlTemplate = Polymer.html`
               <rv-filter-section
                   filter="[[section.filter]]"
                   reviewers="[[section.reviewers]]"
+                  ccs="[[section.ccs]]"
                   editing="[[section.editing]]"
                   reviewers-url="[[_getReviewersUrl(repoName)]]"
                   repo-name="[[repoName]]"
