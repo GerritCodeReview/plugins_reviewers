@@ -33,6 +33,7 @@ class RvFilterSection extends Polymer.Element {
       pluginRestApi: Object,
       repoName: String,
       reviewers: Array,
+      ccs: Array,
       filter: String,
       canModifyConfig: Boolean,
       _originalFilter: String,
@@ -77,19 +78,24 @@ class RvFilterSection extends Polymer.Element {
   }
 
   _handleReviewerDeleted(e) {
+    var type = e.detail.type;
     if (e.detail.editing) {
-      this.reviewers.pop();
+      if (type === "CC") {
+        this.ccs.pop();
+      } else {
+        this.reviewers.pop();
+      }
       this._editingReviewer = false;
     } else {
       const index = e.model.index;
-      const deleted = this.reviewers[index];
-      this._putReviewer(deleted, 'REMOVE');
+      const deleted = type === 'CC' ? this.ccs[index] : this.reviewers[index];
+      this._putReviewer(deleted, 'REMOVE', type);
     }
   }
 
   _handleReviewerAdded(e) {
     this._editingReviewer = false;
-    this._putReviewer(e.detail.reviewer, 'ADD').catch(err => {
+    this._putReviewer(e.detail.reviewer, 'ADD', e.detail.type).catch(err => {
       this.dispatchEvent(new CustomEvent('show-alert', {
         detail: {
           message: err,
@@ -100,10 +106,11 @@ class RvFilterSection extends Polymer.Element {
     });
   }
 
-  _putReviewer(reviewer, action) {
+  _putReviewer(reviewer, action, type) {
     return this.pluginRestApi.put(this.reviewersUrl, {
       action,
       reviewer,
+      type,
       filter: this.filter,
     }).then(result => {
       const detail = {result};
@@ -114,6 +121,11 @@ class RvFilterSection extends Polymer.Element {
 
   _handleAddReviewer() {
     this.push('reviewers', '');
+    this._editingReviewer = true;
+  }
+
+  _handleAddCc() {
+    this.push('ccs', '');
     this._editingReviewer = true;
   }
 }
