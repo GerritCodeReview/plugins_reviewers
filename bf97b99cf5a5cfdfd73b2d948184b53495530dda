@@ -22,6 +22,30 @@
       },
       "revId": "bf97b99cf5a5cfdfd73b2d948184b53495530dda",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbddb599_435524d2",
+        "filename": "rv-reviewers/rv-filter-section.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2020-12-03T15:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b14e70f5_2bd34330",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 7
+      },
+      "revId": "bf97b99cf5a5cfdfd73b2d948184b53495530dda",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
