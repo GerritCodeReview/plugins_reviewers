@@ -43,7 +43,7 @@ export const htmlTemplate = Polymer.html`
     </style>
     <style include="gr-form-styles"></style>
     <div class="reviewerRow">
-      <h4 id="reviewerHeader">Reviewer:</h4>
+      <h4 id="reviewerHeader">[[_header]]:</h4>
       <template is="dom-if" if="[[_computeEditing(reviewer, _originalReviewer)]]">
         <span class="value">
             <!--

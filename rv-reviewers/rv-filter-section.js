@@ -33,6 +33,7 @@ class RvFilterSection extends Polymer.Element {
       pluginRestApi: Object,
       repoName: String,
       reviewers: Array,
+      cc: Array,
       filter: String,
       canModifyConfig: Boolean,
       _originalFilter: String,

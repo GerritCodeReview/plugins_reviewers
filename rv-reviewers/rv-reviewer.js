@@ -34,6 +34,11 @@ class RvReviewer extends Polymer.Element {
       pluginRestAPi: Object,
       repoName: String,
       reviewer: String,
+      type: String,
+      _header: {
+        type: String,
+        computed: '_computeHeader(type)',
+      },
       _reviewerSearchId: String,
       _queryReviewers: {
         type: Function,
@@ -53,6 +58,13 @@ class RvReviewer extends Polymer.Element {
   connectedCallback() {
     super.connectedCallback();
     this._originalReviewer = this.reviewer;
+  }
+
+  _computeHeader(type) {
+    if (type === 'CC') {
+      return 'Cc';
+    }
+    return 'Reviewer';
   }
 
   _computeEditing(reviewer, _originalReviewer) {
