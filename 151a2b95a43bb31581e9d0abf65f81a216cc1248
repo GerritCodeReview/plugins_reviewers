@@ -16,6 +16,29 @@
       "message": "Verified locally that the UI works as expected.",
       "revId": "151a2b95a43bb31581e9d0abf65f81a216cc1248",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f991f651_89f7ccd8",
+        "filename": "rv-reviewers/rv-edit-screen_html.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2020-12-08T21:49:12Z",
+      "side": 1,
+      "message": "In _handleCreateSection() method ccs should be initialized:\n\n  _handleCreateSection() {\n    const section \u003d {filter: \u0027\u0027, reviewers: [], editing: true};\n\nthe section should be extended:\n\n  const section \u003d {filter: \u0027\u0027, ccs: [], reviewers: [], editing: true};",
+      "range": {
+        "startLine": 59,
+        "startChar": 18,
+        "endLine": 59,
+        "endChar": 39
+      },
+      "revId": "151a2b95a43bb31581e9d0abf65f81a216cc1248",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
