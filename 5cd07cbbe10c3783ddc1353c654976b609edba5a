@@ -1,5 +1,11 @@
 {
   "checks": {
+    "gerritforge:style-checker": {
+      "state": "RUNNING",
+      "started": "2021-01-08T20:47:38Z",
+      "created": "2021-01-08T20:47:38Z",
+      "updated": "2021-01-08T20:47:38Z"
+    },
     "zuul-check:plugins_reviewers": {
       "state": "SUCCESSFUL",
       "message": "Change passed all voting jobs",
