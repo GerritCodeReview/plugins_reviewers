@@ -8,6 +8,12 @@ Private changes are ignored, which means that this plugin will never add reviewe
 to a change that is in `private` state. Reviewers will only be added to such a
 change if it transitions out of `private` state.
 
+__NOTE__:
+This plugin automatically naively filters out groups that follow the style from
+the singleusergroup plugin.
+This means that groups that start with `user/` will not be suggested, regardless
+of source.
+
 SEE ALSO
 --------
 

@@ -104,7 +104,9 @@ class RvReviewer extends Polymer.Element {
       if (!groups) { return []; }
       const groupSuggestions = [];
       for (const key in groups) {
-        if (!groups.hasOwnProperty(key)) { continue; }
+        if (!groups.hasOwnProperty(key) || key.startsWith("user/")) {
+          continue;
+        }
         groupSuggestions.push({
           name: key,
           value: key,
