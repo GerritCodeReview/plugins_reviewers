@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0c4032f_ca58bf49",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2021-04-07T10:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5820d9ab_d06d0f32",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 108,
+        "endChar": 35
+      },
+      "revId": "5085da686cc1003d231fb9e75a21f772fea7b34a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c12e0ad1_4a231cf6",
