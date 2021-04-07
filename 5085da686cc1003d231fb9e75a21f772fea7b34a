@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5820d9ab_d06d0f32",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-04-07T08:33:59Z",
+      "side": 1,
+      "message": "Can be included in previous condition.",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 108,
+        "endChar": 35
+      },
+      "revId": "5085da686cc1003d231fb9e75a21f772fea7b34a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12e0ad1_4a231cf6",
+        "filename": "src/main/resources/Documentation/about.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-04-07T08:33:59Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 14,
+        "startChar": 7,
+        "endLine": 14,
+        "endChar": 8
+      },
+      "revId": "5085da686cc1003d231fb9e75a21f772fea7b34a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
