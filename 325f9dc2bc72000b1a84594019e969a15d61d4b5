@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4e68a9_388e4bc6",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2021-04-07T11:21:18Z",
+      "side": 1,
+      "message": "unnecessary space",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 10
+      },
+      "revId": "325f9dc2bc72000b1a84594019e969a15d61d4b5",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
