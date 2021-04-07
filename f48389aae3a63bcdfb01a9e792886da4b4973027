@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "879b7da2_8b4a36a3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/AbstractReviewersPluginTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2021-04-07T16:36:51Z",
+      "side": 1,
+      "message": "google-java-format?",
+      "range": {
+        "startLine": 63,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "f48389aae3a63bcdfb01a9e792886da4b4973027",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
