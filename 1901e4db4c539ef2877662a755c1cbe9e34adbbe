@@ -22,6 +22,30 @@
       },
       "revId": "1901e4db4c539ef2877662a755c1cbe9e34adbbe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4854d6_4631dffe",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2021-04-07T11:12:34Z",
+      "side": 1,
+      "message": "I\u0027m not getting the operator-linebreak error when I run lint_test, and I also didn\u0027t change anything on line 84.\n\nDo you want me to fix it anyway? (including rv-filter-section.js which I also didn\u0027t change?)",
+      "parentUuid": "c9df0993_7a1638c2",
+      "range": {
+        "startLine": 107,
+        "startChar": 58,
+        "endLine": 107,
+        "endChar": 65
+      },
+      "revId": "1901e4db4c539ef2877662a755c1cbe9e34adbbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
