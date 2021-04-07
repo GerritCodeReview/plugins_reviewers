@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9df0993_7a1638c2",
+        "filename": "rv-reviewers/rv-reviewer.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-04-07T10:33:48Z",
+      "side": 1,
+      "message": "Trying to verify it:\n\n  $ bazel test plugins/reviewers:lint_test\n\nI\u0027m getting:\n\n  \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d Test output for //plugins/reviewers:lint_test:\n\n/home/davido/.cache/bazel/_bazel_davido/5c01f4f713b675540b8b424c5c647f63/execroot/gerrit/bazel-out/k8-fastbuild/bin/plugins/reviewers/lint_test.sh.runfiles/gerrit/plugins/reviewers/rv-reviewers/rv-filter-section.js\n  83:20  error  Strings must use singlequote  quotes\n\n/home/davido/.cache/bazel/_bazel_davido/5c01f4f713b675540b8b424c5c647f63/execroot/gerrit/bazel-out/k8-fastbuild/bin/plugins/reviewers/lint_test.sh.runfiles/gerrit/plugins/reviewers/rv-reviewers/rv-reviewer.js\n   84:5   error  \u0027\u0026\u0026\u0027 should be placed at the end of the line  operator-linebreak\n  107:59  error  Strings must use singlequote                  quotes\n\n✖ 3 problems (3 errors, 0 warnings)",
+      "range": {
+        "startLine": 107,
+        "startChar": 58,
+        "endLine": 107,
+        "endChar": 65
+      },
+      "revId": "1901e4db4c539ef2877662a755c1cbe9e34adbbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
