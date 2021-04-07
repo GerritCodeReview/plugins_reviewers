@@ -80,8 +80,8 @@ class RvReviewer extends Polymer.Element {
   }
 
   _computeHideAddButton(reviewer, _originalReviewer) {
-    return !(this._computeEditing(reviewer, _originalReviewer)
-    && this._reviewerSearchId);
+    return !(this._computeEditing(reviewer, _originalReviewer) &&
+      this._reviewerSearchId);
   }
 
   _computeHideDeleteButton(canModifyConfig) {

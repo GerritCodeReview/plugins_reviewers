@@ -80,7 +80,7 @@ class RvFilterSection extends Polymer.Element {
   _handleReviewerDeleted(e) {
     const type = e.detail.type;
     if (e.detail.editing) {
-      if (type === "CC") {
+      if (type === 'CC') {
         this.ccs.pop();
       } else {
         this.reviewers.pop();
