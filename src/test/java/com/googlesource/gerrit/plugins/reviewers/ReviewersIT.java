@@ -26,8 +26,8 @@ import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
-import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.api.changes.ReviewerInput;
 import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
@@ -157,7 +157,7 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
 
   private void addReviewer(String changeId, TestAccount user, ReviewerState state)
       throws Exception {
-    AddReviewerInput input = new AddReviewerInput();
+    ReviewerInput input = new ReviewerInput();
     input.reviewer = user.id().toString();
     input.state = state;
     gApi.changes().id(changeId).addReviewer(input);

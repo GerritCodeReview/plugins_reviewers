@@ -17,8 +17,8 @@ package com.googlesource.gerrit.plugins.reviewers;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.extensions.api.GerritApi;
-import com.google.gerrit.extensions.api.changes.AddReviewerInput;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
+import com.google.gerrit.extensions.api.changes.ReviewerInput;
 import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.restapi.RestApiException;
@@ -92,12 +92,12 @@ class AddReviewers implements Runnable {
       ReviewInput in = new ReviewInput();
       in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
       for (Account.Id account : reviewersToAdd) {
-        AddReviewerInput addReviewerInput = new AddReviewerInput();
+        ReviewerInput addReviewerInput = new ReviewerInput();
         addReviewerInput.reviewer = account.toString();
         in.reviewers.add(addReviewerInput);
       }
       for (Account.Id account : ccsToAdd) {
-        AddReviewerInput input = new AddReviewerInput();
+        ReviewerInput input = new ReviewerInput();
         input.state = ReviewerState.CC;
         input.reviewer = account.toString();
         in.reviewers.add(input);
