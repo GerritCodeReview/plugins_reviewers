@@ -22,6 +22,30 @@
       },
       "revId": "5bd480da180d4109fa5b4542f73f9ac34449193e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ea90d5_e4db1636",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-04-24T17:02:00Z",
+      "side": 0,
+      "message": "It\u0027s in core: [1]. This change is in reviewers plugin.\n\nThanks to Zuul\u0027s Depends-On feature, with this footer in the commit message:\n\n  Depends-On: https://gerrit-review.googlesource.com/c/gerrit/+/304193\n\nCI would fetch that change first and then build this Cl on top of it. That\u0027s the reason, why the CI verification is green.\n\n[1] https://gerrit-review.googlesource.com/c/gerrit/+/304193",
+      "parentUuid": "4d125516_85663067",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "5bd480da180d4109fa5b4542f73f9ac34449193e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
