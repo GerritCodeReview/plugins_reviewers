@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d125516_85663067",
+        "filename": "BUILD",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1029953
+      },
+      "writtenOn": "2021-04-24T14:59:01Z",
+      "side": 0,
+      "message": "Looking at the dependant change i don\u0027t see this in it. Wouldn\u0027t we need this?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "5bd480da180d4109fa5b4542f73f9ac34449193e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
