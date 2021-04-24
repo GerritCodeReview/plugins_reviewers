@@ -1,5 +1,4 @@
 load("@rules_java//java:defs.bzl", "java_library")
-load("@npm//@bazel/rollup:index.bzl", "rollup_bundle")
 load("//tools/bzl:junit.bzl", "junit_tests")
 load("//tools/js:eslint.bzl", "eslint")
 load(
@@ -9,7 +8,7 @@ load(
     "gerrit_plugin",
 )
 load("//tools/bzl:genrule2.bzl", "genrule2")
-load("//tools/bzl:js.bzl", "polygerrit_plugin")
+load("//tools/bzl:js.bzl", "polygerrit_bundle")
 
 gerrit_plugin(
     name = "reviewers",
@@ -18,38 +17,14 @@ gerrit_plugin(
         "Gerrit-PluginName: reviewers",
         "Gerrit-Module: com.googlesource.gerrit.plugins.reviewers.Module",
     ],
-    resource_jars = [":rv-reviewers-static"],
+    resource_jars = [":rv-reviewers"],
     resources = glob(["src/main/resources/**/*"]),
 )
 
-genrule2(
-    name = "rv-reviewers-static",
-    srcs = [":rv-reviewers"],
-    outs = ["rv-reviewers-static.jar"],
-    cmd = " && ".join([
-        "mkdir $$TMP/static",
-        "cp -r $(locations :rv-reviewers) $$TMP/static",
-        "cd $$TMP",
-        "zip -Drq $$ROOT/$@ -g .",
-    ]),
-)
-
-polygerrit_plugin(
+polygerrit_bundle(
     name = "rv-reviewers",
-    app = "reviewers-bundle.js",
-    plugin_name = "rv-reviewers",
-)
-
-rollup_bundle(
-    name = "reviewers-bundle",
     srcs = glob(["rv-reviewers/*.js"]),
     entry_point = "rv-reviewers/plugin.js",
-    format = "iife",
-    rollup_bin = "//tools/node_tools:rollup-bin",
-    sourcemap = "hidden",
-    deps = [
-        "@tools_npm//rollup-plugin-node-resolve",
-    ],
 )
 
 junit_tests(
