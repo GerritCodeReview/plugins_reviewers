@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4028a4bf_c79a08ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-04-26T08:06:16Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "9ee400c7224dfefa130ae46550039aba2a9d950d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63576462_4f712322",
@@ -14,6 +31,30 @@
       "writtenOn": "2021-04-26T07:35:55Z",
       "side": 1,
       "message": "(same comment as in the codemirror plugin): Is it possible to use the previous name? Google has its own build rule which should be updated to match this change. If possible, I would prefer to keep the previous name.",
+      "range": {
+        "startLine": 89,
+        "startChar": 50,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "9ee400c7224dfefa130ae46550039aba2a9d950d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3bf1c01_3f9ebf25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-04-26T08:06:16Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "63576462_4f712322",
       "range": {
         "startLine": 89,
         "startChar": 50,
