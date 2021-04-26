@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63576462_4f712322",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1085901
+      },
+      "writtenOn": "2021-04-26T07:35:55Z",
+      "side": 1,
+      "message": "(same comment as in the codemirror plugin): Is it possible to use the previous name? Google has its own build rule which should be updated to match this change. If possible, I would prefer to keep the previous name.",
+      "range": {
+        "startLine": 89,
+        "startChar": 50,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "9ee400c7224dfefa130ae46550039aba2a9d950d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
