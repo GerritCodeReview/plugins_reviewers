@@ -16,6 +16,24 @@
       "message": "Why not to cherry-pick it to stable-3.3?",
       "revId": "2a9102ef08dff8e6a08788e6507cc006140bde6b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31910001_855a4ac2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-06-07T10:14:16Z",
+      "side": 1,
+      "message": "I was a bit cautious to avoid potential confusion.\nThe stable-3.3 cherry-pick of the gerrit_js_bundle rule in core is included in v3.3.4 an onward, so the change is not compatible with the f.i. v3.3.2 bazel API. This means that someone might have v3.3.2 installed and want to build the reviewers plugin but is not able to against the version that they have deployed.\nThe stable-3.4 cherry-pick is included in v3.4.0 (i.e. all official releases of Gerrit).",
+      "parentUuid": "cfbc4968_4cb0a3d6",
+      "revId": "2a9102ef08dff8e6a08788e6507cc006140bde6b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
