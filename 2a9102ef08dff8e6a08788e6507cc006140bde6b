@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbc4968_4cb0a3d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2021-06-07T10:04:05Z",
+      "side": 1,
+      "message": "Why not to cherry-pick it to stable-3.3?",
+      "revId": "2a9102ef08dff8e6a08788e6507cc006140bde6b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
