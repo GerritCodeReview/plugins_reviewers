@@ -90,6 +90,9 @@ class AddReviewers implements Runnable {
               .collect(Collectors.toSet());
 
       ReviewInput in = new ReviewInput();
+      if (reviewersToAdd.isEmpty() && ccsToAdd.isEmpty()) {
+        return;
+      }
       in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
       for (Account.Id account : reviewersToAdd) {
         AddReviewerInput addReviewerInput = new AddReviewerInput();
