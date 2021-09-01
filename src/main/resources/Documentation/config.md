@@ -50,7 +50,10 @@ Other projects can then override the configuration in their own
 filter.\<filter\>.reviewer
 :	An account or a group name. Must be an exact match (case sensitive) with the
 	account's email address or username, or the group name.  Multiple `reviewer`
-	occurrences are allowed.
+	occurrences are allowed.\
+	**NOTE**: *Reviewers are added in the context of the uploader which means
+	that if a group is configured it needs to be visible to the uploader for
+	reviewers to be added.*
 
 ##Multiple filter matches
 
