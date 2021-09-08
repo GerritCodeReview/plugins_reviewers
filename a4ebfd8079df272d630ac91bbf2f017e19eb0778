@@ -48,6 +48,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ee1a10_65de5720",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2021-09-08T11:13:30Z",
+      "side": 1,
+      "message": "For now my only concern was just to understand what happens in this case and how it affects users. Otherwise I can\u0027t judge if that\u0027s something that needs to block this change.",
+      "parentUuid": "c6aaecae_0d77490e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
