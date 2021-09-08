@@ -168,6 +168,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "171be74c_ff9d071d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T12:51:04Z",
+      "side": 1,
+      "message": "\u003e No worries 😊\n\u003e \n\u003e \u003e The query-operators will simply stop working\n\u003e \n\u003e Does this mean it just evaluates to false and hence no reviewer is added automatically, or does it fail causing an exception (if yes does that affect the request of the user)?\n\nCurrently, if any filter is invalid no reviewers will be added since an exception from the \"filter-parsing\" percolates up to the event handler that catches and logs the Exception and exits.\nSo the initial request (git-push, UI-edit) is not affected in any other way than that no automatic reviewers will be added, if that was your question.",
+      "parentUuid": "fcfa81e1_e3019d06",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
