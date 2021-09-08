@@ -96,6 +96,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9840e658_79144af8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T11:28:33Z",
+      "side": 1,
+      "message": "But to that point the operators that are no longer supported should be documented here and in the \"$NEXT_GERRIT_VERSION\" release notes (I guess) so that users have the possibility to change their reviewer-filters before their instance is upgraded.",
+      "parentUuid": "b2fd8dad_9344b6db",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
