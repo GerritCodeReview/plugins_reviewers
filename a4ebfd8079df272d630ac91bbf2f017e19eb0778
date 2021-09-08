@@ -22,6 +22,47 @@
       },
       "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6aaecae_0d77490e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T10:50:20Z",
+      "side": 1,
+      "message": "As the change stands now it\u0027s sort of a \"touch luck\" situation which isn\u0027t feasible.\nBoth you and David have valid concerns around this and unfortunately I don\u0027t have the bandwidth to act on them in any foreseeable future.",
+      "parentUuid": "04181755_a7bea1fb",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c41d6d15_e72320bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T10:50:20Z",
+      "side": 1,
+      "message": "Thanks a lot for the review Edwin, much appreciated.\nBased on your and David\u0027s input I\u0027ll abandon this change as I cannot prioritize addressing those valid concerns ATM.",
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
