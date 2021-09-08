@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fd8dad_9344b6db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T11:22:19Z",
+      "side": 1,
+      "message": "Didn\u0027t mean to be so abrupt.\nThe query-operators will simply stop working, and the next time users try to update the reviewers.config they will get a validation exception.\nPersonally it\u0027s hard to measure if these inconveniences are worth the potential performance gains globally.",
+      "parentUuid": "94ee1a10_65de5720",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
