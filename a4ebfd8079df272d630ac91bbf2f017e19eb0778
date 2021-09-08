@@ -192,6 +192,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "844974af_920d4e8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003935
+      },
+      "writtenOn": "2021-09-08T13:26:10Z",
+      "side": 1,
+      "message": "Thanks for clarifying. That\u0027s exactly what I wanted to double-check.\n\nIf you ask me, this sounds not so bad. But I have no feeling about how many users/projects would be affected, to judge if it\u0027s really okay.",
+      "parentUuid": "171be74c_ff9d071d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
