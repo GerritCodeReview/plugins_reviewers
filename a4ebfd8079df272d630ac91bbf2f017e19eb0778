@@ -120,6 +120,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5d3a68_480e9488",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T11:44:35Z",
+      "side": 1,
+      "message": "...and I am grateful to you for pointing that out. 😊",
+      "parentUuid": "9840e658_79144af8",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
