@@ -216,6 +216,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ed1722_73ce44f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-08T13:33:59Z",
+      "side": 1,
+      "message": "As I worked on your comments on the previous change I got some ideas that might mitigate the impact of this change, or at least make it clearer to the users which filters aren\u0027t formatted correctly and to have filters that are formatted correctly to still be in effect even if other filters aren\u0027t.\nI\u0027ll revisit this change when this work is done and reopen it.\nThanks again for the review.",
+      "parentUuid": "844974af_920d4e8b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 45
+      },
+      "revId": "a4ebfd8079df272d630ac91bbf2f017e19eb0778",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c41d6d15_e72320bc",
