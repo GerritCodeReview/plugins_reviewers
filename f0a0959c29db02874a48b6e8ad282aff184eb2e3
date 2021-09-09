@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84cf79db_4ca04177",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Yes, done",
+      "parentUuid": "1a3375ef_44deb252",
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4e2f489_f2cc4f09",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-09-08T10:06:54Z",
       "side": 1,
       "message": "I would handle these exceptions separately.\n\nIOException doesn\u0027t mean that the config is malformed, but that there was an IO error while trying to load it. In this case the error message should say something like \"failed to validate ... config\".\n\nThe message of ConfigInvalidException points out what exactly is invalid (e.g. which line). That seems to be valuable information that you may want to include into the error message.",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 54
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d410366b_4b3599d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4e2f489_f2cc4f09",
       "range": {
         "startLine": 70,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db07d7e2_62fef4c7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2244ed15_1bf15f6c",
+      "range": {
+        "startLine": 71,
+        "startChar": 6,
+        "endLine": 71,
+        "endChar": 59
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1fae36e_ef2ec098",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-09-08T10:06:54Z",
       "side": 1,
       "message": "[optional] Instead of validating the filters here, you may do this already in ReviewersConfig.ForProject#onLoad. E.g. let ReviewersConfig.ForProject implement ValidationError.Sink similar to how ProjectConfig in Gerrit core collects validation errors on load.",
+      "range": {
+        "startLine": 73,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 5
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb6770e_4b23e324",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done, but I needed to rework the object-structure somewhat in the previous commit.",
+      "parentUuid": "d1fae36e_ef2ec098",
       "range": {
         "startLine": 73,
         "startChar": 4,
@@ -110,6 +200,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4425e964_5d051a46",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersConfigValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03537201_9625fd09",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 98,
+        "endChar": 7
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71eb20ea_1e65e55e",
@@ -133,6 +247,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1fbce6_0de8ad69",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersQueryValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71eb20ea_1e65e55e",
+      "range": {
+        "startLine": 25,
+        "startChar": 16,
+        "endLine": 25,
+        "endChar": 34
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1185d30d_1d9f11ce",
@@ -146,6 +284,30 @@
       "writtenOn": "2021-09-08T10:06:54Z",
       "side": 1,
       "message": "Consider including e.getMessage as well, as it will tell you which predicate in the filter is invalid.",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "f0a0959c29db02874a48b6e8ad282aff184eb2e3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6284e4ca_3fe63c57",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersQueryValidator.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-09T18:36:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1185d30d_1d9f11ce",
       "range": {
         "startLine": 37,
         "startChar": 24,
