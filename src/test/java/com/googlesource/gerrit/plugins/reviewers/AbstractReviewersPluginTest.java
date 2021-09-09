@@ -15,10 +15,10 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.gerrit.acceptance.GitUtil.fetch;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.FILENAME;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_CC;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.FILENAME;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_CC;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.SECTION_FILTER;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -64,10 +64,6 @@ public class AbstractReviewersPluginTest extends LightweightPluginDaemonTest {
     fetch(repo, RefNames.REFS_CONFIG + ":refs/heads/config");
     repo.reset("refs/heads/config");
     return repo;
-  }
-
-  private TestFilter filter(String filter, Set<String> reviewers, Set<String> ccs) {
-    return new TestFilter(filter, reviewers, ccs);
   }
 
   protected TestFilter filter(String filter) {

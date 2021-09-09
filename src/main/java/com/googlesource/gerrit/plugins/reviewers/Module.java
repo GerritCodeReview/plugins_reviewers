@@ -30,14 +30,14 @@ import com.google.gerrit.extensions.webui.WebUiPlugin;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
+import com.googlesource.gerrit.plugins.reviewers.config.GlobalConfig;
 
 public class Module extends FactoryModule {
   private final boolean enableREST;
   private final boolean suggestOnly;
 
   @Inject
-  public Module(ReviewersConfig cfg) {
+  public Module(GlobalConfig cfg) {
     this(cfg.enableREST(), cfg.suggestOnly());
   }
 

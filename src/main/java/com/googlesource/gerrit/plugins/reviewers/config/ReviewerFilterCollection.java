@@ -14,9 +14,9 @@
 
 package com.googlesource.gerrit.plugins.reviewers.config;
 
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_CC;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.KEY_REVIEWER;
-import static com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig.SECTION_FILTER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_CC;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_REVIEWER;
+import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.SECTION_FILTER;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

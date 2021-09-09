@@ -27,7 +27,7 @@ import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
+import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
 import java.util.List;
 import java.util.Set;
 
@@ -35,14 +35,14 @@ import java.util.Set;
 public class ReviewerSuggest implements ReviewerSuggestion {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  private final ReviewersConfig config;
+  private final FiltersFactory filters;
   private final ReviewersFilterUtil util;
   private final ReviewersResolver resolver;
 
   @Inject
   public ReviewerSuggest(
-      ReviewersConfig config, ReviewersFilterUtil filterUtil, ReviewersResolver resolver) {
-    this.config = config;
+      FiltersFactory filters, ReviewersFilterUtil filterUtil, ReviewersResolver resolver) {
+    this.filters = filters;
     this.util = filterUtil;
     this.resolver = resolver;
   }
@@ -53,7 +53,7 @@ public class ReviewerSuggest implements ReviewerSuggestion {
       Id changeId,
       String query,
       Set<com.google.gerrit.entities.Account.Id> candidates) {
-    List<ReviewerFilter> sections = config.filtersWithInheritance(project);
+    List<ReviewerFilter> sections = filters.withInheritance(project);
 
     if (sections.isEmpty() || changeId == null) {
       return ImmutableSet.of();
