@@ -41,7 +41,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.PutReviewers.Input;
-import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
+import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
+import com.googlesource.gerrit.plugins.reviewers.config.ForProject;
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jgit.errors.ConfigInvalidException;
@@ -65,7 +66,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   }
 
   private final String pluginName;
-  private final ReviewersConfig config;
+  private final FiltersFactory filters;
   private final Provider<MetaDataUpdate.User> metaDataUpdateFactory;
   private final ProjectCache projectCache;
   private final AccountResolver accountResolver;
@@ -75,14 +76,14 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   @Inject
   PutReviewers(
       @PluginName String pluginName,
-      ReviewersConfig config,
+      FiltersFactory filters,
       Provider<MetaDataUpdate.User> metaDataUpdateFactory,
       ProjectCache projectCache,
       AccountResolver accountResolver,
       Provider<GroupResolver> groupResolver,
       PermissionBackend permissionBackend) {
     this.pluginName = pluginName;
-    this.config = config;
+    this.filters = filters;
     this.metaDataUpdateFactory = metaDataUpdateFactory;
     this.projectCache = projectCache;
     this.accountResolver = accountResolver;
@@ -94,7 +95,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
   public Response<List<ReviewerFilter>> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
     Project.NameKey projectName = rsrc.getNameKey();
-    ReviewersConfig.ForProject forProject = new ReviewersConfig.ForProject();
+    ForProject forProject = new ForProject();
 
     PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());
     if (!userPermission.project(rsrc.getNameKey()).testOrFalse(ProjectPermission.WRITE_CONFIG)
@@ -154,7 +155,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
     } catch (IOException err) {
       throw new ResourceNotFoundException(projectName.get(), err);
     }
-    return Response.ok(config.filtersWithInheritance(projectName));
+    return Response.ok(filters.withInheritance(projectName));
   }
 
   private void validateReviewer(String reviewer) throws RestApiException {

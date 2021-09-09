@@ -15,22 +15,11 @@
 package com.googlesource.gerrit.plugins.reviewers.config;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Strings;
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.entities.Project;
-import com.google.gerrit.entities.RefNames;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.gerrit.server.git.meta.VersionedMetaData;
-import com.google.gerrit.server.project.NoSuchProjectException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.ReviewerFilter;
-import com.googlesource.gerrit.plugins.reviewers.ReviewerType;
-import java.io.IOException;
-import java.util.List;
-import org.eclipse.jgit.errors.ConfigInvalidException;
-import org.eclipse.jgit.lib.CommitBuilder;
 import org.eclipse.jgit.lib.Config;
 
 /** Global and project local configurations. */
@@ -63,17 +52,6 @@ public class ReviewersConfig {
     this.ignoreWip = cfg.getBoolean(pluginName, null, KEY_IGNORE_WIP, true);
   }
 
-  public List<ReviewerFilter> filtersWithInheritance(Project.NameKey projectName) {
-    Config cfg;
-    try {
-      cfg = cfgFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
-    } catch (NoSuchProjectException e) {
-      logger.atSevere().log("Unable to get config for project %s", projectName.get());
-      cfg = new Config();
-    }
-    return new ReviewerFilterCollection(cfg).getAll();
-  }
-
   public boolean enableREST() {
     return enableREST;
   }
@@ -84,50 +62,5 @@ public class ReviewersConfig {
 
   public boolean ignoreWip() {
     return ignoreWip;
-  }
-
-  public static class ForProject extends VersionedMetaData {
-    private Config cfg;
-    private ReviewerFilterCollection filters;
-
-    public void addReviewer(String filter, String reviewer, ReviewerType type) {
-      switch (type) {
-        case REVIEWER:
-          filters.get(filter).addReviewer(reviewer);
-          break;
-        case CC:
-          filters.get(filter).addCc(reviewer);
-      }
-    }
-
-    public void removeReviewer(String filter, String reviewer, ReviewerType type) {
-      switch (type) {
-        case REVIEWER:
-          filters.get(filter).removeReviewer(reviewer);
-          break;
-        case CC:
-          filters.get(filter).removeCc(reviewer);
-      }
-    }
-
-    @Override
-    protected String getRefName() {
-      return RefNames.REFS_CONFIG;
-    }
-
-    @Override
-    protected void onLoad() throws IOException, ConfigInvalidException {
-      this.cfg = readConfig(FILENAME);
-      this.filters = new ReviewerFilterCollection(cfg);
-    }
-
-    @Override
-    protected boolean onSave(CommitBuilder commit) throws IOException, ConfigInvalidException {
-      if (Strings.isNullOrEmpty(commit.getMessage())) {
-        commit.setMessage("Update reviewers configuration\n");
-      }
-      saveConfig(FILENAME, cfg);
-      return true;
-    }
   }
 }
