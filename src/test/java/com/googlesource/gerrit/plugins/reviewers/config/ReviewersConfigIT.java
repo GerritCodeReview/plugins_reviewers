@@ -78,11 +78,11 @@ public class ReviewersConfigIT extends AbstractReviewersPluginTest {
   }
 
   private void assertProjectHasFilters(Project.NameKey project, TestFilter... filters) {
-    assertThat(reviewersConfig().filtersWithInheritance(project))
+    assertThat(filters().withInheritance(project))
         .containsExactlyElementsIn(ImmutableList.copyOf(filters));
   }
 
-  private ReviewersConfig reviewersConfig() {
-    return plugin.getSysInjector().getInstance(ReviewersConfig.class);
+  private FiltersFactory filters() {
+    return plugin.getSysInjector().getInstance(FiltersFactory.class);
   }
 }

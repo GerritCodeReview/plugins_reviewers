@@ -26,7 +26,8 @@ import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
+import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
+import com.googlesource.gerrit.plugins.reviewers.config.GlobalConfig;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +42,8 @@ class Reviewers
   private final ReviewersResolver resolver;
   private final AddReviewers.Factory addReviewersFactory;
   private final ReviewerWorkQueue workQueue;
-  private final ReviewersConfig config;
+  private final GlobalConfig config;
+  private final FiltersFactory filters;
   private final ReviewersFilterUtil filterUtil;
 
   @Inject
@@ -49,12 +51,14 @@ class Reviewers
       ReviewersResolver resolver,
       AddReviewers.Factory addReviewersFactory,
       ReviewerWorkQueue workQueue,
-      ReviewersConfig config,
+      GlobalConfig config,
+      FiltersFactory filters,
       ReviewersFilterUtil util) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
     this.workQueue = workQueue;
     this.config = config;
+    this.filters = filters;
     this.filterUtil = util;
   }
 
@@ -75,7 +79,7 @@ class Reviewers
 
   private List<ReviewerFilter> getFilters(Project.NameKey projectName) {
     // TODO(davido): we have to cache per project configuration
-    return config.filtersWithInheritance(projectName);
+    return filters.withInheritance(projectName);
   }
 
   private void onEvent(ChangeEvent event) {

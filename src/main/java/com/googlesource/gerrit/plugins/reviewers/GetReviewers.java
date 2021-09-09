@@ -20,7 +20,7 @@ import com.google.gerrit.extensions.restapi.RestReadView;
 import com.google.gerrit.server.project.ProjectResource;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.googlesource.gerrit.plugins.reviewers.config.ReviewersConfig;
+import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
 import java.util.List;
 
 /**
@@ -29,15 +29,15 @@ import java.util.List;
  */
 @Singleton
 class GetReviewers implements RestReadView<ProjectResource> {
-  private final ReviewersConfig config;
+  private final FiltersFactory filters;
 
   @Inject
-  GetReviewers(ReviewersConfig config) {
-    this.config = config;
+  GetReviewers(FiltersFactory filters) {
+    this.filters = filters;
   }
 
   @Override
   public Response<List<ReviewerFilter>> apply(ProjectResource resource) throws RestApiException {
-    return Response.ok(config.filtersWithInheritance(resource.getNameKey()));
+    return Response.ok(filters.withInheritance(resource.getNameKey()));
   }
 }
