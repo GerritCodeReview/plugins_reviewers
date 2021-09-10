@@ -16,6 +16,24 @@
       "message": "nit: missing license header",
       "revId": "3014b3de8141f14deeb773c6240024d78fe6b037",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d3496a_b0689ccc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/config/ForProject.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-10T14:32:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a13c61_03704fa6",
+      "revId": "3014b3de8141f14deeb773c6240024d78fe6b037",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
