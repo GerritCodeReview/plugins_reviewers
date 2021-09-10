@@ -14,73 +14,148 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {htmlTemplate} from './rv-edit-screen_html.js';
+import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
+import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
+import {css, html, LitElement} from 'lit';
+import {customElement, property, state} from 'lit/decorators';
+import './rv-filter-section';
+import {Section} from './rv-filter-section';
+import {fire} from './util';
 
-class RvEditScreen extends Polymer.Element {
-  /** @returns {string} name of the component */
-  static get is() { return 'rv-edit-screen'; }
+function getReviewersUrl(repoName: RepoName) {
+  return `/projects/${encodeURIComponent(repoName)}/reviewers`;
+}
 
-  /** @returns {?} template for this component */
-  static get template() { return htmlTemplate; }
-
-  /**
-   * Defines properties of the component
-   *
-   * @returns {?}
-   */
-  static get properties() {
-    return {
-      pluginRestApi: {
-        type: Object,
-        observer: '_loadFilterSections',
-      },
-      repoName: String,
-      loading: Boolean,
-      canModifyConfig: Boolean,
-      _editingFilter: {
-        type: Boolean,
-        value: false,
-      },
-      _filterSections: Array,
-    };
-  }
-
-  _loadFilterSections() {
-    this.pluginRestApi.get(this._getReviewersUrl(this.repoName))
-        .then(filterSections => {
-          this._filterSections = filterSections;
-        });
-  }
-
-  _computeAddFilterBtnHidden(canModifyConfig, editingFilter) {
-    return !canModifyConfig || editingFilter;
-  }
-
-  _computeLoadingClass(loading) {
-    return loading ? 'loading' : '';
-  }
-
-  _getReviewersUrl(repoName) {
-    return `/projects/${encodeURIComponent(repoName)}/reviewers`;
-  }
-
-  _handleCreateSection() {
-    const section = {filter: '', reviewers: [], ccs: [], editing: true};
-    this._editingFilter = true;
-    this.push('_filterSections', section);
-  }
-
-  _handleCloseTap(e) {
-    e.preventDefault();
-    this.dispatchEvent(new CustomEvent('close', {
-      composed: true, bubbles: false,
-    }));
-  }
-
-  _handleReviewerChanged(e) {
-    this._filterSections = e.detail.result;
-    this._editingFilter = false;
+declare global {
+  interface HTMLElementTagNameMap {
+    'rv-edit-screen': RvEditScreen;
   }
 }
 
-customElements.define(RvEditScreen.is, RvEditScreen);
+@customElement('rv-edit-screen')
+export class RvEditScreen extends LitElement {
+  @property()
+  pluginRestApi!: RestPluginApi;
+
+  @property()
+  repoName!: RepoName;
+
+  @property()
+  loading = false;
+
+  @property()
+  canModifyConfig = false;
+
+  @state()
+  editingFilter = false;
+
+  @state()
+  filterSections: Section[] = [];
+
+  static override get styles() {
+    return [
+      css`
+        :host {
+          padding: var(--spacing-xl);
+          display: block;
+        }
+        .bottomButtons {
+          display: flex;
+          justify-content: flex-end;
+        }
+        gr-button {
+          margin-left: var(--spacing-m);
+        }
+        #filterSections {
+          width: 100%;
+        }
+      `,
+    ];
+  }
+
+  render() {
+    return html`
+      <div>
+        <h3 class="heading-3">Reviewers Config</h3>
+        <table id="filterSections">
+          <tbody>
+            ${this.renderEmpty()}
+            ${this.loading
+              ? html`<tr>
+                  <td>Loading...</td>
+                </tr>`
+              : this.filterSections.map(s => this.renderSection(s))}
+          </tbody>
+        </table>
+        <div class="bottomButtons">
+          <gr-button
+            id="addFilterBtn"
+            @click="${this.handleCreateSection}"
+            ?hidden="${!this.canModifyConfig || this.editingFilter}"
+          >
+            Add New Filter
+          </gr-button>
+          <gr-button id="closeButton" @click="${this.handleCloseTap}">
+            Close
+          </gr-button>
+        </div>
+      </div>
+    `;
+  }
+
+  private renderEmpty() {
+    if (this.loading || this.filterSections.length > 0) return;
+    return html`<tr>
+      <td>No filter defined yet.</td>
+    </tr>`;
+  }
+
+  private renderSection(section: Section) {
+    return html`
+      <tr>
+        <td>
+          <rv-filter-section
+            .filter="${section.filter}"
+            .reviewers="${section.reviewers}"
+            .ccs="${section.ccs}"
+            .reviewersUrl="${getReviewersUrl(this.repoName)}"
+            .repoName="${this.repoName}"
+            .pluginRestApi="${this.pluginRestApi}"
+            .canModifyConfig="${this.canModifyConfig}"
+            @reviewer-changed="${this.handleReviewerChanged}"
+          >
+          </rv-filter-section>
+        </td>
+      </tr>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.pluginRestApi
+      .get<Section[]>(getReviewersUrl(this.repoName))
+      .then(sections => {
+        this.filterSections = sections;
+      });
+  }
+
+  private handleCreateSection() {
+    const section = {filter: '', reviewers: [], ccs: [], editing: true};
+    this.filterSections = [...this.filterSections, section];
+    this.editingFilter = true;
+    fire(this, 'fit');
+  }
+
+  private handleCloseTap(e: Event) {
+    e.preventDefault();
+    fire(this, 'close');
+  }
+
+  private handleReviewerChanged(e: CustomEvent<Section[]>) {
+    // Even if just one reviewer is changed or deleted, then we still completely
+    // re-render everything from scratch.
+    this.filterSections = e.detail;
+    this.editingFilter = false;
+    fire(this, 'fit');
+  }
+}
