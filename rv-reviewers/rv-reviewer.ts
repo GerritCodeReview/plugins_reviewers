@@ -14,154 +14,254 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {htmlTemplate} from './rv-reviewer_html.js';
+import {customElement, property, state} from 'lit/decorators';
+import {css, html, LitElement} from 'lit';
+import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
+import {
+  AccountInfo,
+  GroupInfo,
+  RepoName,
+} from '@gerritcodereview/typescript-api/rest-api';
+import {fire} from './util';
 
-class RvReviewer extends Polymer.Element {
-  /** @returns {string} name of the component */
-  static get is() { return 'rv-reviewer'; }
+declare global {
+  interface HTMLElementTagNameMap {
+    'rv-reviewer': RvReviewer;
+  }
+}
 
-  /** @returns {?} template for this component */
-  static get template() { return htmlTemplate; }
+export enum Type {
+  REVIEWER = 'REVIEWER',
+  CC = 'CC',
+}
+
+export interface ReviewerDeletedEventDetail {
+  /**
+   * If true, then this means a reviewer addition was just canceled. Not server
+   * update required.
+   * If false, then the entry has to be deleted server side by the event
+   * handler.
+   */
+  editing: boolean;
+  type: Type;
+}
+
+export interface ReviewerAddedEventDetail {
+  reviewer: string;
+  type: Type;
+}
+
+type GroupNameToInfo = {[name: string]: GroupInfo};
+
+interface NameValue {
+  name: string;
+  value: string;
+}
+
+function computeValue(account: AccountInfo): string | undefined {
+  if (account.username) {
+    return account.username;
+  }
+  if (account.email) {
+    return account.email;
+  }
+  return String(account._account_id);
+}
+
+function computeName(account: AccountInfo): string | undefined {
+  if (account.email) {
+    return `${account.name} <${account.email}>`;
+  }
+  return account.name;
+}
+
+@customElement('rv-reviewer')
+export class RvReviewer extends LitElement {
+  /**
+   * Fired when the 'CANCEL' or 'DELETE' button for a reviewer was clicked.
+   *
+   * @event reviewer-deleted
+   */
 
   /**
-   * Defines properties of the component
+   * Fired when the 'ADD' button for a reviewer was clicked.
    *
-   * @returns {?}
+   * @event reviewer-added
    */
-  static get properties() {
-    return {
-      canModifyConfig: Boolean,
-      pluginRestAPi: Object,
-      repoName: String,
-      reviewer: String,
-      type: String,
-      _header: {
-        type: String,
-        computed: '_computeHeader(type)',
-      },
-      _reviewerSearchId: String,
-      _queryReviewers: {
-        type: Function,
-        value() {
-          return this._getReviewerSuggestions.bind(this);
-        },
-      },
-      _originalReviewer: String,
-      _deleted: Boolean,
-      _editing: {
-        type: Boolean,
-        computed: '_computeEditing(reviewer, _originalReviewer)',
-      },
-    };
+
+  @property()
+  canModifyConfig = false;
+
+  @property()
+  pluginRestApi!: RestPluginApi;
+
+  @property()
+  repoName!: RepoName;
+
+  @property()
+  type = Type.REVIEWER;
+
+  /**
+   * This is the value that is persisted on the server side. For new reviewers
+   * this is empty until the user clicks "ADD" and the data was saved.
+   */
+  @property()
+  reviewer = '';
+
+  /**
+   * This is value that the user has picked from the auto-completion. It will
+   * be used for saving (when the user clicks "ADD") and then assigned to the
+   * `reviewer` property.
+   */
+  @state()
+  selectedReviewer = '';
+
+  static override get styles() {
+    return [
+      css`
+        :host {
+          display: block;
+          padding: var(--spacing-s) 0;
+        }
+        #editReviewerInput {
+          display: block;
+          width: 250px;
+        }
+        .reviewerRow {
+          align-items: center;
+          display: flex;
+        }
+        #reviewerHeader,
+        #editReviewerInput,
+        #deleteCancelBtn,
+        #addBtn,
+        #reviewerField {
+          margin-left: var(--spacing-m);
+        }
+        #reviewerField {
+          width: 250px;
+          text-indent: 1px;
+          border: 1px solid var(--border-color);
+        }
+      `,
+    ];
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    this._originalReviewer = this.reviewer;
+  render() {
+    return html`
+      <div class="reviewerRow">
+        <span class="heading-3" id="reviewerHeader">
+          ${this.type === Type.CC ? 'CC' : 'Reviewer'}
+        </span>
+        ${this.isEditing()
+          ? this.renderAutocomplete()
+          : html`<td id="reviewerField">${this.reviewer}</td>`}
+        <gr-button
+          id="deleteCancelBtn"
+          @click="${this.handleDeleteCancel}"
+          ?hidden="${!this.canModifyConfig}"
+        >
+          ${this.isEditing() ? 'Cancel' : 'Delete'}
+        </gr-button>
+        <gr-button
+          id="addBtn"
+          @click="${this.handleAddReviewer}"
+          ?hidden="${!this.isEditing() || !this.selectedReviewer}"
+        >
+          Add
+        </gr-button>
+      </div>
+    `;
   }
 
-  _computeHeader(type) {
-    if (type === 'CC') {
-      return 'Cc';
-    }
-    return 'Reviewer';
+  renderAutocomplete() {
+    return html`
+      <span class="value">
+        <!--
+              TODO:
+              Investigate whether we could reuse gr-account-list.
+              If the REST API returns AccountInfo instead of an account
+              identifier String we should be able to use gr-account-list(size=1)
+              for all reviewers, including those who are non-editable
+              (#reviewerField below) and align the plugin with how accounts
+              are displayed in core Gerrit's UI.
+            -->
+        <gr-autocomplete
+          id="editReviewerInput"
+          .query="${(input: string) => this.getReviewerSuggestions(input)}"
+          .placeholder="Name Or Email"
+          @value-changed="${this.onReviewerSelected}"
+        >
+        </gr-autocomplete>
+      </span>
+    `;
   }
 
-  _computeEditing(reviewer, _originalReviewer) {
-    if (_originalReviewer === '') {
-      return true;
-    }
-    return reviewer === '';
+  onReviewerSelected(e: CustomEvent<{value: string}>) {
+    if (!e.detail.value) return;
+    this.selectedReviewer = e.detail.value;
   }
 
-  _computeDeleteCancel(reviewer, _originalReviewer) {
-    return this._computeEditing(reviewer, _originalReviewer) ?
-      'Cancel' : 'Delete';
+  /**
+   * "Editing" actually just means "adding". This component does not allow
+   * editing. You can only add new entries or delete existing ones.
+   */
+  isEditing() {
+    return this.reviewer === '';
   }
 
-  _computeHideAddButton(reviewer, _originalReviewer) {
-    return !(this._computeEditing(reviewer, _originalReviewer) &&
-      this._reviewerSearchId);
+  getReviewerSuggestions(input: string): Promise<NameValue[]> {
+    if (input.length === 0) return Promise.resolve([]);
+    const p1 = this.getSuggestedGroups(input);
+    const p2 = this.getSuggestedAccounts(input);
+    return Promise.all([p1, p2]).then(result => result.flat());
   }
 
-  _computeHideDeleteButton(canModifyConfig) {
-    return !canModifyConfig;
-  }
-
-  _getReviewerSuggestions(input) {
-    if (input.length === 0) { return Promise.resolve([]); }
-    const promises = [];
-    promises.push(this._getSuggestedGroups(input));
-    promises.push(this._getSuggestedAccounts(input));
-    return Promise.all(promises).then(result => {
-      return result.flat();
-    });
-  }
-
-  _getSuggestedGroups(input) {
+  getSuggestedGroups(input: string): Promise<NameValue[]> {
     const suggestUrl = `/groups/?suggest=${input}&p=${this.repoName}`;
-    return this.pluginRestApi.get(suggestUrl).then(groups => {
-      if (!groups) { return []; }
-      const groupSuggestions = [];
-      for (const key in groups) {
-        if (!groups.hasOwnProperty(key) || key.startsWith('user/')) {
-          continue;
-        }
-        groupSuggestions.push({
-          name: key,
-          value: key,
+    return this.pluginRestApi.get<GroupNameToInfo>(suggestUrl).then(groups => {
+      if (!groups) return [];
+      return Object.keys(groups)
+        .filter(name => !name.startsWith('user/'))
+        .map(name => {
+          return {name, value: name};
         });
-      }
-      return groupSuggestions;
     });
   }
 
-  _getSuggestedAccounts(input) {
+  getSuggestedAccounts(input: string): Promise<NameValue[]> {
     const suggestUrl = `/accounts/?suggest&q=${input}`;
-    return this.pluginRestApi.get(suggestUrl).then(accounts => {
-      const accountSuggestions = [];
-      let nameAndEmail;
-      let value;
-      if (!accounts) { return []; }
-      for (const key in accounts) {
-        if (!accounts.hasOwnProperty(key)) { continue; }
-        if (accounts[key].email) {
-          nameAndEmail = accounts[key].name +
-            ' <' + accounts[key].email + '>';
-        } else {
-          nameAndEmail = accounts[key].name;
-        }
-        if (accounts[key].username) {
-          value = accounts[key].username;
-        } else if (accounts[key].email) {
-          value = accounts[key].email;
-        } else {
-          value = accounts[key]._account_id;
-        }
-        accountSuggestions.push({
-          name: nameAndEmail,
-          value,
-        });
+    return this.pluginRestApi.get<AccountInfo[]>(suggestUrl).then(accounts => {
+      const accountSuggestions: NameValue[] = [];
+      if (!accounts) return [];
+      for (const account of accounts) {
+        const name = computeName(account);
+        const value = computeValue(account);
+        if (!name || !value) continue;
+        accountSuggestions.push({name, value});
       }
       return accountSuggestions;
     });
   }
 
-  _handleDeleteCancel() {
-    const detail = {editing: this._editing, type: this.type};
-    if (this._editing) {
+  handleDeleteCancel() {
+    const detail: ReviewerDeletedEventDetail = {
+      editing: this.isEditing(),
+      type: this.type,
+    };
+    if (this.isEditing()) {
       this.remove();
     }
-    this.dispatchEvent(
-        new CustomEvent('reviewer-deleted', {detail, bubbles: true}));
+    fire(this, 'reviewer-deleted', detail);
   }
 
-  _handleAddReviewer() {
-    const detail = {reviewer: this._reviewerSearchId, type: this.type};
-    this._originalReviewer = this.reviewer;
-    this.dispatchEvent(
-        new CustomEvent('reviewer-added', {detail, bubbles: true}));
+  handleAddReviewer() {
+    const detail: ReviewerAddedEventDetail = {
+      reviewer: this.selectedReviewer,
+      type: this.type,
+    };
+    this.reviewer = this.selectedReviewer;
+    this.selectedReviewer = '';
+    fire(this, 'reviewer-added', detail);
   }
 }
-
-customElements.define(RvReviewer.is, RvReviewer);

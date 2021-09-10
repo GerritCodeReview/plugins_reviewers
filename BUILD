@@ -1,6 +1,6 @@
 load("@rules_java//java:defs.bzl", "java_library")
 load("//tools/bzl:junit.bzl", "junit_tests")
-load("//tools/js:eslint.bzl", "eslint")
+load("//tools/js:eslint.bzl", "plugin_eslint")
 load(
     "//tools/bzl:plugin.bzl",
     "PLUGIN_DEPS",
@@ -8,6 +8,7 @@ load(
     "gerrit_plugin",
 )
 load("//tools/bzl:js.bzl", "gerrit_js_bundle")
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 
 gerrit_plugin(
     name = "reviewers",
@@ -20,9 +21,32 @@ gerrit_plugin(
     resources = glob(["src/main/resources/**/*"]),
 )
 
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    deps = [
+        "//plugins:tsconfig-plugins-base.json",
+    ],
+)
+
+ts_project(
+    name = "rv-reviewers-ts",
+    srcs = glob([
+        "rv-reviewers/**/*.ts",
+    ]),
+    incremental = True,
+    supports_workers = True,
+    tsc = "//tools/node_tools:tsc-bin",
+    tsconfig = ":tsconfig",
+    deps = [
+        "@plugins_npm//@gerritcodereview/typescript-api",
+        "@plugins_npm//lit",
+    ],
+)
+
 gerrit_js_bundle(
     name = "rv-reviewers",
-    srcs = glob(["rv-reviewers/*.js"]),
+    srcs = [":rv-reviewers-ts"],
     entry_point = "rv-reviewers/plugin.js",
 )
 
@@ -36,23 +60,4 @@ junit_tests(
     ],
 )
 
-# Define the eslinter for the plugin
-# The eslint macro creates 2 rules: lint_test and lint_bin
-eslint(
-    name = "lint",
-    srcs = glob([
-        "rv-reviewers/*.js",
-    ]),
-    config = ".eslintrc.json",
-    data = [],
-    extensions = [
-        ".js",
-    ],
-    ignore = ".eslintignore",
-    plugins = [
-        "@npm//eslint-config-google",
-        "@npm//eslint-plugin-html",
-        "@npm//eslint-plugin-import",
-        "@npm//eslint-plugin-jsdoc",
-    ],
-)
+plugin_eslint()
