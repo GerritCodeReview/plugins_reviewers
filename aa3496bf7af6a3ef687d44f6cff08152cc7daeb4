@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ce56946d_3cab121a",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-13T20:23:24Z",
+      "side": 1,
+      "message": "Accessing css vars should not be a problem at all. For example this reference to `--spacing-xl` is working fine. Let me know if you have a problem with css vars. They are working across the borders of shadow doms just fine. So we should not have issues with that. Sharing css *rules* is another matter, see my other comment.",
+      "parentUuid": "3e03dacd_63699f64",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0cb7d48a_8527ec6a",
         "filename": "rv-reviewers/rv-edit-screen.ts",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-09-13T14:13:20Z",
       "side": 1,
       "message": "Not related to this change, it seems as though the plugin no longer has access to polygerrit-ui/app/styles/shared-styles.ts.",
+      "range": {
+        "startLine": 78,
+        "startChar": 19,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042bfc2e_6a88a20c",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-13T20:23:24Z",
+      "side": 1,
+      "message": "Polymer based plugins can continue to use Gerrit\u0027s style files by referencing them with a style include in their template like so:\n\n  \u003cstyle include\u003d\"shared-styles\"\u003e\n    /* workaround for empty style block */\n  \u003c/style\u003e\n\nFor Lit components this won\u0027t work anymore. Instead we are explicitly sharing the css strings via a new plugin API, see this change for more details: https://gerrit-review.googlesource.com/c/gerrit/+/317791.\n\nI will leave this comment unresolved for making sure to sync past the above change before submitting.\n\nNote that we are trying to offer smaller and more targeted sets of shared style rules. `shared-styles` was too big a grab bag of stuff. Let me know if you would like to have access to other style rules. We should be able to make that happen. :-)",
+      "parentUuid": "0cb7d48a_8527ec6a",
       "range": {
         "startLine": 78,
         "startChar": 19,
