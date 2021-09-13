@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e03dacd_63699f64",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-13T14:13:20Z",
+      "side": 1,
+      "message": "Not related to this change, but it seems like the plugin no longer has access to vars declared in polygerrit-ui/app/styles/themes/app-theme.ts as it had before (on stable-3.4).",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb7d48a_8527ec6a",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-13T14:13:20Z",
+      "side": 1,
+      "message": "Not related to this change, it seems as though the plugin no longer has access to polygerrit-ui/app/styles/shared-styles.ts.",
+      "range": {
+        "startLine": 78,
+        "startChar": 19,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
