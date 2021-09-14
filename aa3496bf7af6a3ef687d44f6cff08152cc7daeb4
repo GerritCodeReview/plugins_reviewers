@@ -20,6 +20,40 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "98dfb3da_5feb0467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Thank you for this change.  Apologies about the many questions/comments",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a58458_3acad8a2",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "This is not returning the other styles files. Is this intended?\n\nshared-styles\ngr-menu-page-styles\ngr-subpage-styles?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3e03dacd_63699f64",
         "filename": "rv-reviewers/rv-edit-screen.ts",
         "patchSetId": 1
@@ -162,6 +196,193 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7bf66168_96fcc25b",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Put the second one on a new line so it\u0027s easier to see there\u0027s 2 stanzas?\n\nAdditionally, renderEmpty seems new?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79166347_9ce1ccfa",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Does this need the \u0027loading\u0027 class?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b44c66ba_71d6f2c7",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Should this be shown when loading?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba0d3131_2623a858",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Fits on one line. Which also would looke nicer because it\u0027s a \u003ctr\u003e which is 1 row 😄",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da249d2e_765457a2",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Consider moving the is.loading check to line 82 once instead of doing it per section. This would also avoid the whole map call.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70fad63d_7ea5d606",
+        "filename": "rv-reviewers/rv-filter-section.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Return shared-styles as well?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d88659_55cc0305",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "For my own edification: We seem to be inconsistent with this, are these stanzas necessary?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faddccfb_4baba927",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Does this need to return shared-styles as well?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72dfba74_fb9f32a7",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Is this weird layout to avoid extra whitespace in the span?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "477d8e60_10ec3997",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Consider putting this on a newline indented by 2 and pulling the \u003e in to the previous line",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b8f86e_e1352250",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Same comment about layout as above.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "466e4aba_863746f9",
         "filename": "rv-reviewers/rv-reviewer.ts",
         "patchSetId": 1
@@ -179,6 +400,176 @@
         "endLine": 156,
         "endChar": 48
       },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1037e4_5b2871cb",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Use `value` or alternatively just directly use e.detail.value everywhere and get rid of the local variable?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c3922b0_76e70a6f",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Very minor not.  Rather than rely on side-effects what about.\n\n```\nconst p1 \u003d this.getSuggestedGroups(input);\nconst p2 \u003d this.getSuggestedAccounts(input);\nreturn Promise.all([p1, p2]).then(result \u003d\u003e result.flat());",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "325a7190_baf67b0c",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Remove the braces then the return is implicit.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d64b84_3d42bb23",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": ".map(name \u003d\u003e .... ); fits on one line",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f23da3be_b9afb858",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Very minor nit:\n\nInstead of having side effects what about:\n\nconst name \u003d helperFunction(account);\nconst value \u003d helperFunction2(account);\n\nNo need to make these methods, just unexported functions at the bottom top of the file.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52535bdd_f72ce223",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Add comment at top of class for the event that gets fired by this class.\n\nAdditionally, this is adding composed\u003dtrue which didn\u0027t used to be the case?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51cb879a_e54fbd02",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Add comment at top of class for the event that gets fired by this class.\n\nAdditionally, this is adding composed\u003dtrue which didn\u0027t used to be the case?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f0b852_8dd0c7e6",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Should this also return shared-styles?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de5b909_8179e768",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "What does this extra line do?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c51b7b7_d13442cd",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-14T11:53:29Z",
+      "side": 1,
+      "message": "Rather than rely on side-effects, what about:\n\n```\nconst p1 \u003d this.getRepoAccess(this.repoName).then(access \u003d\u003e {\n  if (access[this.repoName]?.is_owner) {\n    this.canModifyConfig \u003d true;\n  }\n});\nconst p2 \u003d this.getCapabilities().then(capabilities \u003d\u003e {\n  if (capabilities[\u0027reviewers-modifyReviewersConfig\u0027]) {\n     this.canModifyConfig \u003d true;\n  }\n});\nPromise.all([p1, p2]).then(() \u003d\u003e { this.loading \u003d false; });\n```",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
