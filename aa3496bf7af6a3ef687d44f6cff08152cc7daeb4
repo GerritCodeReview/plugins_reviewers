@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4208a622_c76fcdd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-14T09:08:14Z",
+      "side": 1,
+      "message": "LGTM but then again I\u0027m a complete novice when it comes to Lit",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3e03dacd_63699f64",
         "filename": "rv-reviewers/rv-edit-screen.ts",
         "patchSetId": 1
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Accessing css vars should not be a problem at all. For example this reference to `--spacing-xl` is working fine. Let me know if you have a problem with css vars. They are working across the borders of shadow doms just fine. So we should not have issues with that. Sharing css *rules* is another matter, see my other comment.",
       "parentUuid": "3e03dacd_63699f64",
+      "range": {
+        "startLine": 59,
+        "startChar": 23,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9138ee31_721ffecc",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-14T09:08:14Z",
+      "side": 1,
+      "message": "Can confirm that the odd styling I saw locally seemed to appear on one particular workstation. It works as expected on up-to-date machines.",
+      "parentUuid": "ce56946d_3cab121a",
       "range": {
         "startLine": 59,
         "startChar": 23,
@@ -90,6 +131,53 @@
         "startChar": 19,
         "endLine": 78,
         "endChar": 28
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3130b595_8fa81647",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-14T09:08:14Z",
+      "side": 1,
+      "message": "Same as above, this seems to work as expected.\nTried this patch on 317791 and I couldn\u0027t discern any differences from an ocular examination. Any remaining styling issues seems to stem from my poor FE skills when writing the PG front-end :-).\nThe CSS of this plugin needed some love before this change, for me it\u0027s fine to merge this without taking 317791 into consideration.",
+      "parentUuid": "042bfc2e_6a88a20c",
+      "range": {
+        "startLine": 78,
+        "startChar": 19,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466e4aba_863746f9",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2021-09-14T09:08:14Z",
+      "side": 1,
+      "message": "How would this work with groups?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 48
       },
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
