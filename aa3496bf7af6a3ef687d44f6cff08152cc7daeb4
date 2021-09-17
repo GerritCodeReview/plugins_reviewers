@@ -457,6 +457,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be6d8d6b_46fb3492",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-17T12:42:08Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion on whether to use them or not, but consistency would be nice.  That\u0027s not a comment on this CL.",
+      "parentUuid": "315a0d22_4416188d",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "faddccfb_4baba927",
@@ -745,6 +763,24 @@
       "side": 1,
       "message": "That does not work for returning objects, because it is unclear to what the {} relates. :-)",
       "parentUuid": "325a7190_baf67b0c",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7cb0872_bb15bcab",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1139611
+      },
+      "writtenOn": "2021-09-17T12:42:08Z",
+      "side": 1,
+      "message": "Oh #til :)",
+      "parentUuid": "7e31c11c_c2af380b",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
