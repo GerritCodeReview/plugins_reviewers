@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "452be7ec_8bfa4cf9",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Yes, this is intended.\n\nWe don\u0027t want to share the huge `shared-styles` blob anymore with plugins.\n\nThe other styles could be exposed in the plugin api and used here, but I was trying to do without the additional styles, if not needed.",
+      "parentUuid": "42a58458_3acad8a2",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3e03dacd_63699f64",
         "filename": "rv-reviewers/rv-edit-screen.ts",
         "patchSetId": 1
@@ -211,6 +229,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de69ab14_ca671564",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "This is the doing of the prettier plugin and its config. I am open to changing that config, but unrelated to this change and migration.",
+      "parentUuid": "7bf66168_96fcc25b",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79166347_9ce1ccfa",
@@ -224,6 +260,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Does this need the \u0027loading\u0027 class?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe4d26d_62571601",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "No. The `.loading` class was a relict of the `subpage` styles.",
+      "parentUuid": "79166347_9ce1ccfa",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -245,6 +299,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d17502_5a6b6767",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "b44c66ba_71d6f2c7",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba0d3131_2623a858",
@@ -262,6 +334,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "771dd4cf_0486f9b9",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "prettier wants it on two lines.",
+      "parentUuid": "ba0d3131_2623a858",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da249d2e_765457a2",
@@ -275,6 +365,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Consider moving the is.loading check to line 82 once instead of doing it per section. This would also avoid the whole map call.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a40875f_ab41045e",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done, but typically I try to optimize for readability, not for performance. So avoiding calls it not a primary goal for me when coding.",
+      "parentUuid": "da249d2e_765457a2",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -298,6 +406,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e482f2d7_3eb36c33",
+        "filename": "rv-reviewers/rv-filter-section.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "No. See above.",
+      "parentUuid": "70fad63d_7ea5d606",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "70d88659_55cc0305",
         "filename": "rv-reviewers/rv-reviewer.ts",
         "patchSetId": 1
@@ -309,6 +435,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "For my own edification: We seem to be inconsistent with this, are these stanzas necessary?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315a0d22_4416188d",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "The stanzas are not necessary, but I am trying to consistently use them everywhere.\n\nI think this mostly enables being able to do things like `document.createElement(\u0027rv-reviewer\u0027)` in a type-safe way. But maybe I am missing something cooler?\n\nIf the team feels like this is too much bloat/churn compared to the usefulness, then I would also be happy to stop adding these stanzas. :-)",
+      "parentUuid": "70d88659_55cc0305",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -330,6 +474,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5c8fa8_bae936aa",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "No, see above.",
+      "parentUuid": "faddccfb_4baba927",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72dfba74_fb9f32a7",
@@ -343,6 +505,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Is this weird layout to avoid extra whitespace in the span?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6065b5d4_eb32e47c",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72dfba74_fb9f32a7",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -364,6 +544,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ffdec92_c7c2bd4b",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "477d8e60_10ec3997",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27b8f86e_e1352250",
@@ -377,6 +575,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Same comment about layout as above.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3010d34_bc07bf29",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27b8f86e_e1352250",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -404,6 +620,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d9d5fd_4ad0df6a",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "I have just copied this TODO verbatim from the old code. I have no idea, whether this would work or is a good idea. :-)",
+      "parentUuid": "466e4aba_863746f9",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 48
+      },
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf1037e4_5b2871cb",
@@ -417,6 +657,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Use `value` or alternatively just directly use e.detail.value everywhere and get rid of the local variable?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfcfe79e_cea8c5ab",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1037e4_5b2871cb",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -438,6 +696,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03504e73_7640bf69",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3922b0_76e70a6f",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "325a7190_baf67b0c",
@@ -451,6 +727,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Remove the braces then the return is implicit.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e31c11c_c2af380b",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "That does not work for returning objects, because it is unclear to what the {} relates. :-)",
+      "parentUuid": "325a7190_baf67b0c",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -472,6 +766,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88c0d98_f475e494",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Only if you could do the above.",
+      "parentUuid": "c5d64b84_3d42bb23",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f23da3be_b9afb858",
@@ -485,6 +797,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Very minor nit:\n\nInstead of having side effects what about:\n\nconst name \u003d helperFunction(account);\nconst value \u003d helperFunction2(account);\n\nNo need to make these methods, just unexported functions at the bottom top of the file.",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1603a09_83a38e91",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f23da3be_b9afb858",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -506,6 +836,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9dfb36f_e2b7793d",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Comment added.\n\nIt is a very useful default to just always fire with composed:true and bubbles:true. In this case we *could* also fire with composed:false, but from my experience it is not worth the effort. It is much more convenient to just use fire(). The only risk is that you are re-using an event name that is handled also somewhere else in the parent hierarchy. But if you have unique event names, then this is not an issue.",
+      "parentUuid": "52535bdd_f72ce223",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51cb879a_e54fbd02",
@@ -519,6 +867,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Add comment at top of class for the event that gets fired by this class.\n\nAdditionally, this is adding composed\u003dtrue which didn\u0027t used to be the case?",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f314d253_a0aa6402",
+        "filename": "rv-reviewers/rv-reviewer.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "51cb879a_e54fbd02",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -540,6 +906,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b70eed_4d35ee39",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "No. See above.",
+      "parentUuid": "e6f0b852_8dd0c7e6",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0de5b909_8179e768",
@@ -557,6 +941,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e35bd76_cf7c92ef",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "It repositions and refits the dialog into the center of the screen considering the new size of its content.",
+      "parentUuid": "0de5b909_8179e768",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c51b7b7_d13442cd",
@@ -570,6 +972,24 @@
       "writtenOn": "2021-09-14T11:53:29Z",
       "side": 1,
       "message": "Rather than rely on side-effects, what about:\n\n```\nconst p1 \u003d this.getRepoAccess(this.repoName).then(access \u003d\u003e {\n  if (access[this.repoName]?.is_owner) {\n    this.canModifyConfig \u003d true;\n  }\n});\nconst p2 \u003d this.getCapabilities().then(capabilities \u003d\u003e {\n  if (capabilities[\u0027reviewers-modifyReviewersConfig\u0027]) {\n     this.canModifyConfig \u003d true;\n  }\n});\nPromise.all([p1, p2]).then(() \u003d\u003e { this.loading \u003d false; });\n```",
+      "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc025253_cd3d3983",
+        "filename": "rv-reviewers/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T12:33:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c51b7b7_d13442cd",
       "revId": "aa3496bf7af6a3ef687d44f6cff08152cc7daeb4",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
