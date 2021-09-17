@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e84a045_abb65faa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T17:54:49Z",
+      "side": 1,
+      "message": "The renames were expected to fail the verifier. Fixing in the child change.",
+      "revId": "ee0aafdf6538c4123aa99b4ac8cbfa5b311ef821",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
