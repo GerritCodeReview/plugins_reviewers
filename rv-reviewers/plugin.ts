@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import './rv-reviewers.js';
+import '@gerritcodereview/typescript-api/gerrit';
+import './rv-reviewers';
 
-Gerrit.install(plugin => {
-  plugin.registerCustomComponent(
-      'repo-command', 'rv-reviewers');
+window.Gerrit.install(plugin => {
+  plugin.registerCustomComponent('repo-command', 'rv-reviewers');
 });
