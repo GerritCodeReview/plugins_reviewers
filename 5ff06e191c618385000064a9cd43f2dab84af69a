@@ -33,6 +33,24 @@
       "message": "This check is now superfluous",
       "revId": "5ff06e191c618385000064a9cd43f2dab84af69a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d76f06b_cea84c6c",
+        "filename": "rv-reviewers/rv-edit-screen.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2021-09-17T13:46:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735451f4_bcad5373",
+      "revId": "5ff06e191c618385000064a9cd43f2dab84af69a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
