@@ -32,7 +32,7 @@ ts_config(
 ts_project(
     name = "rv-reviewers-ts",
     srcs = glob([
-        "rv-reviewers/**/*.ts",
+        "web/**/*.ts",
     ]),
     incremental = True,
     supports_workers = True,
@@ -47,7 +47,7 @@ ts_project(
 gerrit_js_bundle(
     name = "rv-reviewers",
     srcs = [":rv-reviewers-ts"],
-    entry_point = "rv-reviewers/plugin.js",
+    entry_point = "web/plugin.js",
 )
 
 junit_tests(
