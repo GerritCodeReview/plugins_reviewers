@@ -81,7 +81,7 @@ export class RvReviewers extends LitElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <h3 class="heading-3">Reviewers Config</h3>
       <gr-button @click="${() => this.rvScreenOverlay?.open()}">
@@ -101,7 +101,7 @@ export class RvReviewers extends LitElement {
     `;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this.pluginRestApi = this.plugin.restApi();
     const p1 = this.getRepoAccess(this.repoName).then(access => {

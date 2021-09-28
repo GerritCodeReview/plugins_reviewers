@@ -147,7 +147,7 @@ export class RvReviewer extends LitElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div class="reviewerRow">
         <span class="heading-3" id="reviewerHeader">
