@@ -73,7 +73,7 @@ export class RvEditScreen extends LitElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div>
         <h3 class="heading-3">Reviewers Config</h3>
@@ -130,7 +130,7 @@ export class RvEditScreen extends LitElement {
     `;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this.pluginRestApi
       .get<Section[]>(getReviewersUrl(this.repoName))

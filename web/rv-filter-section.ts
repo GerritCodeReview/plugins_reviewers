@@ -81,7 +81,7 @@ export class RvFilterSection extends LitElement {
   @state()
   editingReviewer = false;
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this.originalFilter = this.filter;
   }
@@ -122,7 +122,7 @@ export class RvFilterSection extends LitElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div id="container">
         <div id="filter">
