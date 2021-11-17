@@ -1,12 +1,9 @@
 {
   "checks": {
     "zuul-check:plugins_reviewers": {
-      "state": "RUNNING",
-      "message": "Jobs have started running",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/status/change/324038,1",
-      "started": "2021-11-17T10:56:19Z",
+      "state": "NOT_STARTED",
       "created": "2021-11-17T10:54:20Z",
-      "updated": "2021-11-17T10:56:23Z"
+      "updated": "2021-11-17T10:56:28Z"
     }
   }
 }
