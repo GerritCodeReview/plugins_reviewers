@@ -88,6 +88,9 @@ class AddReviewers implements Runnable {
               .filter(c -> !existingReviewers.contains(c))
               .filter(r -> !reviewersToAdd.contains(r))
               .collect(Collectors.toSet());
+      if (reviewersToAdd.isEmpty() && ccsToAdd.isEmpty()) {
+        return;
+      }
 
       ReviewInput in = new ReviewInput();
       in.reviewers = new ArrayList<>(reviewers.size() + ccs.size());
