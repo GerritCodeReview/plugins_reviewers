@@ -67,7 +67,7 @@ public class ReviewerSuggest implements ReviewerSuggestion {
             .collect(toSet());
       }
     } catch (StorageException | QueryParseException x) {
-      logger.atSevere().withCause(x).log(x.getMessage());
+      logger.atSevere().withCause(x).log("%s", x.getMessage());
     }
     return ImmutableSet.of();
   }
