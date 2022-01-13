@@ -135,7 +135,7 @@ class PutReviewers implements RestModifyView<ProjectResource, Input> {
         md.setMessage(message.toString());
         try {
           forProject.commit(md);
-          projectCache.evict(projectName);
+          projectCache.evictAndReindex(projectName);
         } catch (IOException e) {
           if (e.getCause() instanceof ConfigInvalidException) {
             throw new ResourceConflictException(
