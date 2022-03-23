@@ -98,8 +98,8 @@ class ReviewersResolver {
         Account.Id id = result.asList().get(0).account().id();
         if (uploader == null || id.get() != uploader._accountId) {
           reviewers.add(id);
-          return true;
         }
+        return true;
       }
       return false;
     } catch (StorageException | IOException | ConfigInvalidException e) {
