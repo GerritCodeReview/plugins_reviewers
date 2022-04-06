@@ -1,12 +1,13 @@
 {
   "checks": {
     "zuul-check:plugins_reviewers": {
-      "state": "SCHEDULED",
-      "message": "Change has been enqueued in check",
-      "url": "https://ci.gerritcodereview.com/t/gerrit/status/change/334566,1",
+      "state": "FAILED",
+      "message": "Change failed",
+      "url": "https://ci.gerritcodereview.com/t/gerrit/buildset/e6838ec775b44a9982174de042577fb2",
       "started": "2022-04-06T14:28:10Z",
+      "finished": "2022-04-06T14:29:15Z",
       "created": "2022-04-06T14:28:10Z",
-      "updated": "2022-04-06T14:28:10Z"
+      "updated": "2022-04-06T14:29:16Z"
     }
   }
 }
