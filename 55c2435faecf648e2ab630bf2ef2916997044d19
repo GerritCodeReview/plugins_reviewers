@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ce1454_dab9a967",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/config/ConfigModule.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2022-04-06T14:10:17Z",
+      "side": 1,
+      "message": "License?",
+      "revId": "55c2435faecf648e2ab630bf2ef2916997044d19",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
