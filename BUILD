@@ -37,7 +37,6 @@ genrule2(
 polygerrit_plugin(
     name = "rv-reviewers",
     app = "reviewers-bundle.js",
-    plugin_name = "rv-reviewers",
 )
 
 rollup_bundle(
