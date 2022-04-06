@@ -16,6 +16,24 @@
       "message": "NIT: space",
       "revId": "9604ef95e16236706e2167d754d3b0c95573f9ef",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37dfa42b_738534bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/config/ConfigModule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2022-04-06T14:19:30Z",
+      "side": 1,
+      "message": "As in, newline between license and rest of file.",
+      "parentUuid": "e50c6f61_53bdac3c",
+      "revId": "9604ef95e16236706e2167d754d3b0c95573f9ef",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
