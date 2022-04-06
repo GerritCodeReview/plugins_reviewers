@@ -204,13 +204,13 @@ export class RvFilterSection extends LitElement {
       this.editingReviewer = false;
     } else {
       // The reviewer was not in edit mode, but DELETE was clicked.
-      this.putReviewer(reviewer, Action.REMOVE, type);
+      this.postReviewer(reviewer, Action.REMOVE, type);
     }
   }
 
   private handleReviewerAdded(e: CustomEvent<ReviewerAddedEventDetail>) {
     this.editingReviewer = false;
-    this.putReviewer(e.detail.reviewer, Action.ADD, e.detail.type).catch(
+    this.postReviewer(e.detail.reviewer, Action.ADD, e.detail.type).catch(
       err => {
         fire(this, 'show-alert', {message: err});
         throw err;
@@ -218,11 +218,11 @@ export class RvFilterSection extends LitElement {
     );
   }
 
-  private putReviewer(reviewer: string, action: Action, type: Type) {
+  private postReviewer(reviewer: string, action: Action, type: Type) {
     if (this.filter === '') throw new Error('empty filter');
     if (reviewer === '') throw new Error('empty reviewer');
     return this.pluginRestApi
-      .put<Section[]>(this.reviewersUrl, {
+      .post<Section[]>(this.reviewersUrl, {
         action,
         reviewer,
         type,
