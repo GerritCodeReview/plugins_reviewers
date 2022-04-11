@@ -16,6 +16,8 @@
  */
 import {htmlTemplate} from './rv-reviewer_html.js';
 
+const SYSTEM_GROUP_PREFIX = 'global%3A';
+
 class RvReviewer extends Polymer.Element {
   /** @returns {string} name of the component */
   static get is() { return 'rv-reviewer'; }
@@ -104,7 +106,9 @@ class RvReviewer extends Polymer.Element {
       if (!groups) { return []; }
       const groupSuggestions = [];
       for (const key in groups) {
-        if (!groups.hasOwnProperty(key) || key.startsWith('user/')) {
+        if (!groups.hasOwnProperty(key) ||
+             groups[key].id.startsWith(SYSTEM_GROUP_PREFIX) ||
+             key.startsWith('user/')) {
           continue;
         }
         groupSuggestions.push({
