@@ -223,6 +223,7 @@ export class RvReviewer extends LitElement {
       if (!groups) return [];
       return Object.keys(groups)
         .filter(name => !name.startsWith('user/'))
+        .filter(name => !groups[name].id.startsWith('global%3A'))
         .map(name => {
           return {name, value: name};
         });
