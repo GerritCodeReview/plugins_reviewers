@@ -40,7 +40,6 @@ ts_project(
     tsconfig = ":tsconfig",
     deps = [
         "@plugins_npm//@gerritcodereview/typescript-api",
-        "@plugins_npm//lit",
     ],
 )
 
