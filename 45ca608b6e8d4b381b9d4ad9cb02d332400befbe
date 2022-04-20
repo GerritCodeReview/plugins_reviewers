@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b48077_1d411413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-04-20T06:49:10Z",
+      "side": 1,
+      "message": "Thanks for the patch.\nJust let me understand this a little bit better first.",
+      "revId": "45ca608b6e8d4b381b9d4ad9cb02d332400befbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
