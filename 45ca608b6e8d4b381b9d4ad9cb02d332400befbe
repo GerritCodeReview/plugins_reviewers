@@ -16,6 +16,23 @@
       "message": "Thanks for the patch.\nJust let me understand this a little bit better first.",
       "revId": "45ca608b6e8d4b381b9d4ad9cb02d332400befbe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f650c837_8e3eab8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-04-20T06:54:02Z",
+      "side": 1,
+      "message": "FWICT the plugin still depends on lit:\nhttps://gerrit-review.googlesource.com/c/plugins/reviewers/+/335314/1/web/rv-reviewers.ts#21",
+      "revId": "45ca608b6e8d4b381b9d4ad9cb02d332400befbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
