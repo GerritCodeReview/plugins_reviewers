@@ -33,6 +33,24 @@
       "message": "FWICT the plugin still depends on lit:\nhttps://gerrit-review.googlesource.com/c/plugins/reviewers/+/335314/1/web/rv-reviewers.ts#21",
       "revId": "45ca608b6e8d4b381b9d4ad9cb02d332400befbe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "273df252_587b181a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-04-20T11:10:42Z",
+      "side": 1,
+      "message": "Seems to work anyway. The plugin has some CSS issues that I thought was related but it seems like it\u0027s an issue with importing the shared styles in a plugin.\n\nhttps://gerrit.googlesource.com/plugins/delete-project/+/5717badf4250dfe900c05fc00d0758a09ba77297/web/gr-delete-repo.ts#72",
+      "parentUuid": "f650c837_8e3eab8d",
+      "revId": "45ca608b6e8d4b381b9d4ad9cb02d332400befbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
