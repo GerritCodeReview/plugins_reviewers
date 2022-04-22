@@ -14,8 +14,8 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
-import autovaluegson.factory.shaded.com.google.common.collect.Lists;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Lists;
 import com.google.gerrit.entities.BranchNameKey;
 import com.google.gerrit.entities.PatchSet.Id;
 import com.google.gerrit.entities.RefNames;
