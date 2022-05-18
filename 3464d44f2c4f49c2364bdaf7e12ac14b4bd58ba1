@@ -34,6 +34,23 @@
       "parentUuid": "6a99eded_2d2603c3",
       "revId": "3464d44f2c4f49c2364bdaf7e12ac14b4bd58ba1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0933ea_a4765dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-05-18T15:04:29Z",
+      "side": 1,
+      "message": "OK, I can replicate it locally.\n\nGiven:\n\n  $ bazelisk query --output\u003dbuild @plugins_npm//@gerritcodereview/typescript-api\n\nproduces:\n\n```\n# /home/davido/.cache/bazel/_bazel_davido/496771e6fd159c87df977b2e99ede97d/external/plugins_npm/@gerritcodereview/typescript-api/BUILD.bazel:97:11\n_js_library(\n  name \u003d \"typescript-api\",\n  generator_name \u003d \"typescript-api\",\n  generator_function \u003d \"js_library\",\n  generator_location \u003d \"@gerritcodereview/typescript-api/BUILD.bazel:97:11\",\n  amd_names \u003d {},\n  deps \u003d [\"@plugins_npm//@gerritcodereview/typescript-api:typescript-api__contents\"],\n  is_windows \u003d select({\"@bazel_tools//src/conditions:host_windows\": True, \"//conditions:default\": False}),\n  named_module_srcs \u003d [],\n  package_name \u003d \"$node_modules$\",\n  package_path \u003d \"plugins\",\n  srcs \u003d [\"@plugins_npm//@gerritcodereview/typescript-api:typescript-api__files\"],\n)\n# Rule typescript-api instantiated at (most recent call last):\n#   /home/davido/.cache/bazel/_bazel_davido/496771e6fd159c87df977b2e99ede97d/external/plugins_npm/@gerritcodereview/typescript-api/BUILD.bazel:97:11     in \u003ctoplevel\u003e\n#   /home/davido/.cache/bazel/_bazel_davido/496771e6fd159c87df977b2e99ede97d/external/build_bazel_rules_nodejs/internal/js_library/js_library.bzl:414:16 in js_library\n# Rule _js_library defined at (most recent call last):\n#   /home/davido/.cache/bazel/_bazel_davido/496771e6fd159c87df977b2e99ede97d/external/build_bazel_rules_nodejs/internal/js_library/js_library.bzl:308:19 in \u003ctoplevel\u003e\n\nLoading: 0 packages loaded\n```\n\nWe could remove it now:\n\n   rm -rf /home/davido/.cache/bazel/_bazel_davido/496771e6fd159c87df977b2e99ede97d/external/plugins_npm/@gerritcodereview\n\nNow, if we re-run the build for this plugin in this state, it will re-reproduce CI breakage:\n\n```\n  $ bazelisk build -s --verbose_failures plugins/reviewers:rv-reviewers-ts\nINFO: Invocation ID: 63b5700a-5b50-460c-b364-79372771c11d\nINFO: Options provided by the client:\n  Inherited \u0027common\u0027 options: --isatty\u003d1 --terminal_columns\u003d149\nINFO: Reading rc options for \u0027build\u0027 from /home/davido/projects/gerrit3/.bazelrc:\n  \u0027build\u0027 options: --workspace_status_command\u003dpython3 ./tools/workspace_status.py --repository_cache\u003d~/.gerritcodereview/bazel-cache/repository --action_env\u003dPATH --disk_cache\u003d~/.gerritcodereview/bazel-cache/cas --java_language_version\u003d11 --java_runtime_version\u003dremotejdk_11 --tool_java_language_version\u003d11 --tool_java_runtime_version\u003dremotejdk_11 --incompatible_strict_action_env --announce_rc\nINFO: Reading rc options for \u0027build\u0027 from /home/davido/.bazelrc:\n  \u0027build\u0027 options: --experimental_generate_json_trace_profile --experimental_profile_cpu_usage\nERROR: /home/davido/projects/gerrit3/plugins/reviewers/BUILD:32:11: no such package \u0027@plugins_npm//@gerritcodereview/typescript-api\u0027: BUILD file not found in directory \u0027@gerritcodereview/typescript-api\u0027 of external repository @plugins_npm. Add a BUILD file to a directory to mark it as a package. and referenced by \u0027//plugins/reviewers:rv-reviewers-ts\u0027\nERROR: Analysis of target \u0027//plugins/reviewers:rv-reviewers-ts\u0027 failed; build aborted: Analysis failed\nINFO: Elapsed time: 0.266s\nINFO: 0 processes.\nFAILED: Build did NOT complete successfully (1 packages loaded, 0 targets configured)\n```\n\nStill, there are two separate issues:\n\n  1. Relying on non provided dependency: @plugins_npm//@gerritcodereview/typescript-api\n  2. Unused dependency on: @plugins_npm//@gerritcodereview/typescript-api\n\nBy solving 2. (this change) we would also solve 1.",
+      "revId": "3464d44f2c4f49c2364bdaf7e12ac14b4bd58ba1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
