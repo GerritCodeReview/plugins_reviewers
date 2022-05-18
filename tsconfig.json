@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig-plugins-base.json",
   "include": [
-    "web/**/*",
+    "web/**/*.ts",
   ]
 }
