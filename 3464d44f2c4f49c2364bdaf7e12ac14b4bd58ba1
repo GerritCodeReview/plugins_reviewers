@@ -16,6 +16,24 @@
       "message": "See also the ongoing efforts to fix the build on gerrit CI for this plugin: [1].\n\n@Ben, @Milutin, I cannot reproduce this breakage locally, but somehow this dependency: \n\n  \"@plugins_npm//@gerritcodereview/typescript-api\"\n  \nis not reliably provided.\n\n[1] https://gerrit-review.googlesource.com/c/gerrit-ci-scripts/+/335119",
       "revId": "3464d44f2c4f49c2364bdaf7e12ac14b4bd58ba1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d8ca501_1983ab2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-05-18T14:53:48Z",
+      "side": 1,
+      "message": "Example breakage on latest build against master branch: [2].\n\n[2] https://gerrit-ci.gerritforge.com/view/Plugins-master/job/plugin-reviewers-bazel-master/38/console",
+      "parentUuid": "6a99eded_2d2603c3",
+      "revId": "3464d44f2c4f49c2364bdaf7e12ac14b4bd58ba1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
