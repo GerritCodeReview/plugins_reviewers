@@ -38,9 +38,6 @@ ts_project(
     supports_workers = True,
     tsc = "//tools/node_tools:tsc-bin",
     tsconfig = ":tsconfig",
-    deps = [
-        "@plugins_npm//@gerritcodereview/typescript-api",
-    ],
 )
 
 gerrit_js_bundle(
