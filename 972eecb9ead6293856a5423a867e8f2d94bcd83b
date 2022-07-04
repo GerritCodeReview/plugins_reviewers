@@ -16,6 +16,23 @@
       "message": "Could you add tests that verifies this new feature?",
       "revId": "972eecb9ead6293856a5423a867e8f2d94bcd83b",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fe01ce5_4b0a71ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079507
+      },
+      "writtenOn": "2022-07-04T10:07:33Z",
+      "side": 1,
+      "message": "In my use case, I primarily use the repository inheritance to pass access and plugin configuration down to child repositories, and most of the repositories concern a fixed group of reviewers.\nA small number of those repositories however shall be reviewed by a smaller group of reviewers, while retaining all the other inherited permissions and settings.\n\nThis change allows to globally turn off the reviewer filter merge behaviour, allowing to override (and not only append) a reviewer filter configuration value.\n\n",
+      "revId": "972eecb9ead6293856a5423a867e8f2d94bcd83b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
