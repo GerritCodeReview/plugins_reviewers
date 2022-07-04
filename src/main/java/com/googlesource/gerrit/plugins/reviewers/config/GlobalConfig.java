@@ -26,10 +26,12 @@ public class GlobalConfig {
   private static final String KEY_ENABLE_REST = "enableREST";
   private static final String KEY_SUGGEST_ONLY = "suggestOnly";
   private static final String KEY_IGNORE_WIP = "ignoreWip";
+  private static final String KEY_MERGE_FILTERS = "mergeFilters";
 
   private final boolean enableREST;
   private final boolean suggestOnly;
   private final boolean ignoreWip;
+  private final boolean mergeFilters;
 
   @Inject
   GlobalConfig(PluginConfigFactory cfgFactory, @PluginName String pluginName) {
@@ -37,6 +39,7 @@ public class GlobalConfig {
     this.enableREST = cfg.getBoolean(pluginName, null, KEY_ENABLE_REST, true);
     this.suggestOnly = cfg.getBoolean(pluginName, null, KEY_SUGGEST_ONLY, false);
     this.ignoreWip = cfg.getBoolean(pluginName, null, KEY_IGNORE_WIP, true);
+    this.mergeFilters = cfg.getBoolean(pluginName, null, KEY_MERGE_FILTERS, true);
   }
 
   public boolean enableREST() {
@@ -49,5 +52,9 @@ public class GlobalConfig {
 
   public boolean ignoreWip() {
     return ignoreWip;
+  }
+
+  public boolean mergeFilters() {
+    return mergeFilters;
   }
 }

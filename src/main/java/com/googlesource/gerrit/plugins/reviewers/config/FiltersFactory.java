@@ -31,22 +31,29 @@ public class FiltersFactory {
 
   private final PluginConfigFactory configFactory;
   private final ReviewerFilterCollection.Factory filterCollectionFactory;
+  private final GlobalConfig globalConfig;
   private final String pluginName;
 
   @Inject
   public FiltersFactory(
       PluginConfigFactory configFactory,
       ReviewerFilterCollection.Factory filterCollectionFactory,
+      GlobalConfig globalConfig,
       @PluginName String pluginName) {
     this.configFactory = configFactory;
     this.filterCollectionFactory = filterCollectionFactory;
+    this.globalConfig = globalConfig;
     this.pluginName = pluginName;
   }
 
   public List<ReviewerFilter> withInheritance(Project.NameKey projectName) {
     Config cfg;
     try {
-      cfg = configFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
+      if (globalConfig.mergeFilters()) {
+        cfg = configFactory.getProjectPluginConfigWithMergedInheritance(projectName, pluginName);
+      } else {
+        cfg = configFactory.getProjectPluginConfigWithInheritance(projectName, pluginName);
+      }
     } catch (NoSuchProjectException e) {
       logger.atSevere().log("Unable to get config for project %s", projectName.get());
       cfg = new Config();
