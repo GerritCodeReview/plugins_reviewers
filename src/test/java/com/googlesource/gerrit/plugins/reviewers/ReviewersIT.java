@@ -24,14 +24,20 @@ import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.PushOneCommit;
 import com.google.gerrit.acceptance.TestAccount;
 import com.google.gerrit.acceptance.TestPlugin;
+import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.entities.Account;
 import com.google.gerrit.entities.BranchNameKey;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.api.changes.ReviewInput;
 import com.google.gerrit.extensions.api.changes.ReviewerInput;
 import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.client.ReviewerState;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import java.util.Set;
+
+import org.eclipse.jgit.internal.storage.dfs.InMemoryRepository;
+import org.eclipse.jgit.junit.TestRepository;
 import org.junit.Test;
 
 @NoHttpd
@@ -153,6 +159,20 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
     String changeId = createChange("refs/for/master").getChangeId();
     assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user.id()));
     assertThat(gApi.changes().id(changeId).get().reviewers.get(CC)).isNull();
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(pluginName = "reviewers", name = "reviewers.mergeFilters", value = "false")
+  public void reviewersOverriddenWithMergeFiltersFalse() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+    Project.NameKey childProject = projectOperations.newProject().parent(project).create();
+    TestRepository<?> metaConfig = checkoutRefsMetaConfig(cloneProject(childProject));
+    createFiltersFor(metaConfig, filter("*").reviewer(user2));
+    createFilters(filter("*").reviewer(user));
+    TestRepository<InMemoryRepository> childRepo = cloneProject(childProject);
+    String changeId = createChange(childRepo).getChangeId();
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(user2.id()));
   }
 
   private void addReviewer(String changeId, TestAccount user, ReviewerState state)
