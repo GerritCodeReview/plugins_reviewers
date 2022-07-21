@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a4655c_a72d0269",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1079507
+      },
+      "writtenOn": "2022-07-21T15:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbceb085_f13beb42",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 4
+      },
+      "revId": "5dec6c3fdd170763b72af276fd4e48a9a552019e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1647f3df_9b245756",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-05T07:23:24Z",
       "side": 1,
       "message": "\"Decides whether to merge the filter-sections from parent projects or not. If set to false filter-sections in child project will override filter-sections, with identical filters, in the parent project(s).\"",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "5dec6c3fdd170763b72af276fd4e48a9a552019e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce42d80b_4d59689a",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1079507
+      },
+      "writtenOn": "2022-07-21T15:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1647f3df_9b245756",
       "range": {
         "startLine": 34,
         "startChar": 0,
