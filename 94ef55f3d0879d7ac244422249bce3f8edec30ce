@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "860f68ae_62e05c66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-08-26T13:45:36Z",
+      "side": 1,
+      "message": "Thanks a lot Ben, much appreciated!",
+      "revId": "94ef55f3d0879d7ac244422249bce3f8edec30ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65200fe1_0a16ba1f",
+        "filename": "web/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-08-26T13:45:36Z",
+      "side": 1,
+      "message": "I don\u0027t know if this is useful information or potentially confusing for the end-users, potentially it could be hidden but available in the html so that admins and devs can track the provider. This is just a reflection, I have no strong feelings about it.",
+      "range": {
+        "startLine": 105,
+        "startChar": 10,
+        "endLine": 105,
+        "endChar": 76
+      },
+      "revId": "94ef55f3d0879d7ac244422249bce3f8edec30ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
