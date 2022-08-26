@@ -17,8 +17,9 @@
 import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
 import {PluginApi} from '@gerritcodereview/typescript-api/plugin';
+import '@gerritcodereview/typescript-api/gerrit';
 import {customElement, property, query, state} from 'lit/decorators';
-import {css, html, LitElement} from 'lit';
+import {css, CSSResult, html, LitElement} from 'lit';
 import './rv-edit-screen';
 
 // TODO: This should be defined and exposed by @gerritcodereview/typescript-api
@@ -68,6 +69,7 @@ export class RvReviewers extends LitElement {
 
   static override get styles() {
     return [
+      window.Gerrit.styles.font as CSSResult,
       css`
         :host {
           display: block;
@@ -77,16 +79,37 @@ export class RvReviewers extends LitElement {
           width: 50em;
           overflow: auto;
         }
+        h2 {
+          margin-top: var(--spacing-xxl);
+          margin-bottom: var(--spacing-s);
+        }
+        p {
+          padding: var(--spacing-m) 0;
+          margin: 0;
+        }
+        p .provided {
+          font-size: var(--font-size-small);
+          color: var(--deemphasized-text-color);
+        }
       `,
     ];
   }
 
   override render() {
     return html`
-      <h3 class="heading-3">Reviewers Config</h3>
-      <gr-button @click="${() => this.rvScreenOverlay?.open()}">
-        Reviewers Config
-      </gr-button>
+      <h2 class="heading-2">Edit reviewers config</h2>
+      <div>
+        <p>
+          Allows you to define rules for when specific groups or accounts should
+          automatically be added as reviewers or CC to a change.
+          <span class="provided">[provided by the 'reviewers' plugin]</span>
+        </p>
+      </div>
+      <div>
+        <gr-button @click="${() => this.rvScreenOverlay?.open()}">
+          Edit Reviewers Config
+        </gr-button>
+      </div>
       <gr-overlay id="rvScreenOverlay" with-backdrop>
         <rv-edit-screen
           .pluginRestApi="${this.pluginRestApi}"
