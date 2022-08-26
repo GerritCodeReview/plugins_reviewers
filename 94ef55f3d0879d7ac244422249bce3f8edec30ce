@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb655b22_76ef63da",
+        "filename": "web/rv-edit-screen.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1013302
+      },
+      "writtenOn": "2022-08-26T17:49:18Z",
+      "side": 1,
+      "message": "This is for being able to reference `window.Gerrit`: https://cs.opensource.google/gerrit/gerrit/gerrit/+/master:polygerrit-ui/app/api/gerrit.ts;l\u003d11;drc\u003d94fcbbc0a6ba92cd736fcc5307c045d6d3339eb3",
+      "parentUuid": "5f3c5a86_b493aff5",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 49
+      },
+      "revId": "94ef55f3d0879d7ac244422249bce3f8edec30ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65200fe1_0a16ba1f",
