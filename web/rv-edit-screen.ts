@@ -16,7 +16,8 @@
  */
 import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
-import {css, html, LitElement} from 'lit';
+import '@gerritcodereview/typescript-api/gerrit';
+import {css, CSSResult, html, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators';
 import './rv-filter-section';
 import {Section} from './rv-filter-section';
@@ -54,7 +55,12 @@ export class RvEditScreen extends LitElement {
 
   static override get styles() {
     return [
+      window.Gerrit.styles.font as CSSResult,
       css`
+        h3 {
+          margin: 0;
+          padding: 0 0 var(--spacing-xl) 0;
+        }
         :host {
           padding: var(--spacing-xl);
           display: block;
@@ -64,7 +70,7 @@ export class RvEditScreen extends LitElement {
           justify-content: flex-end;
         }
         gr-button {
-          margin-left: var(--spacing-m);
+          margin-left: var(--spacing-l);
         }
         #filterSections {
           width: 100%;
@@ -89,13 +95,14 @@ export class RvEditScreen extends LitElement {
         </table>
         <div class="bottomButtons">
           <gr-button
+            link
             id="addFilterBtn"
             @click="${this.handleCreateSection}"
             ?hidden="${!this.canModifyConfig || this.editingFilter}"
           >
             Add New Filter
           </gr-button>
-          <gr-button id="closeButton" @click="${this.handleCloseTap}">
+          <gr-button link id="closeButton" @click="${this.handleCloseTap}">
             Close
           </gr-button>
         </div>

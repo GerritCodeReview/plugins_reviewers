@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 import {customElement, property, state} from 'lit/decorators';
-import {css, html, LitElement} from 'lit';
+import {css, CSSResult, html, LitElement} from 'lit';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
+import '@gerritcodereview/typescript-api/gerrit';
 import {
   AccountInfo,
   GroupInfo,
@@ -118,6 +119,7 @@ export class RvReviewer extends LitElement {
 
   static override get styles() {
     return [
+      window.Gerrit.styles.font as CSSResult,
       css`
         :host {
           display: block;

@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {css, html, LitElement} from 'lit';
+import {css, CSSResult, html, LitElement, nothing} from 'lit';
 import {customElement, property, query, state} from 'lit/decorators';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
 import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
+import '@gerritcodereview/typescript-api/gerrit';
 import './rv-reviewer';
 import {
   ReviewerAddedEventDetail,
@@ -88,6 +89,7 @@ export class RvFilterSection extends LitElement {
 
   static override get styles() {
     return [
+      window.Gerrit.styles.font as CSSResult,
       css`
         :host {
           display: block;
@@ -125,45 +127,57 @@ export class RvFilterSection extends LitElement {
   override render() {
     return html`
       <div id="container">
-        <div id="filter">
-          <span class="heading-3">Filter</span>
-          <input
-            id="filterInput"
-            value="${this.filter}"
-            @input="${this.onFilterInput}"
-            ?disabled="${!this.canModifyConfig || this.originalFilter !== ''}"
-          />
-          <gr-button
-            @click="${() => this.remove()}"
-            ?hidden="${this.originalFilter !== '' && this.filter !== ''}"
-          >
-            Cancel
-          </gr-button>
-        </div>
+        ${this.renderFilter()}
         <div>
           ${this.reviewers.map(item =>
             this.renderReviewer(item, Type.REVIEWER)
           )}
           ${this.ccs.map(item => this.renderReviewer(item, Type.CC))}
-          <div id="addReviewer">
-            <gr-button
-              link
-              @click="${this.handleAddReviewer}"
-              ?disabled="${this.filter === ''}"
-              ?hidden="${!this.canModifyConfig || this.editingReviewer}"
-            >
-              Add Reviewer
-            </gr-button>
-            <gr-button
-              link
-              @click="${this.handleAddCc}"
-              ?disabled="${this.filter === ''}"
-              ?hidden="${!this.canModifyConfig || this.editingReviewer}"
-            >
-              Add CC
-            </gr-button>
-          </div>
+          ${this.renderAddReviewer()}
         </div>
+      </div>
+    `;
+  }
+
+  private renderFilter() {
+    return html`
+      <div id="filter">
+        <span class="heading-3">Filter</span>
+        <input
+          id="filterInput"
+          value="${this.filter}"
+          @input="${this.onFilterInput}"
+          ?disabled="${!this.canModifyConfig || this.originalFilter !== ''}"
+        />
+        <gr-button
+          @click="${() => this.remove()}"
+          ?hidden="${this.originalFilter !== '' && this.filter !== ''}"
+        >
+          Cancel
+        </gr-button>
+      </div>
+    `;
+  }
+
+  private renderAddReviewer() {
+    if (!this.canModifyConfig) return nothing;
+    if (this.editingReviewer) return nothing;
+    return html`
+      <div id="addReviewer">
+        <gr-button
+          link
+          @click="${this.handleAddReviewer}"
+          ?disabled="${this.filter === ''}"
+        >
+          Add Reviewer
+        </gr-button>
+        <gr-button
+          link
+          @click="${this.handleAddCc}"
+          ?disabled="${this.filter === ''}"
+        >
+          Add CC
+        </gr-button>
       </div>
     `;
   }
