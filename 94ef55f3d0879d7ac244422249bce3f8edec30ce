@@ -110,6 +110,30 @@
       },
       "revId": "94ef55f3d0879d7ac244422249bce3f8edec30ce",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "719e53f2_15e77980",
+        "filename": "web/rv-reviewers.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2022-08-29T11:07:43Z",
+      "side": 1,
+      "message": "A widget/icon sounds perfect to me. Discrete yet informative.",
+      "parentUuid": "52d2d8c1_f8a3df42",
+      "range": {
+        "startLine": 105,
+        "startChar": 10,
+        "endLine": 105,
+        "endChar": 76
+      },
+      "revId": "94ef55f3d0879d7ac244422249bce3f8edec30ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
