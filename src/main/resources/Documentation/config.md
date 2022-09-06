@@ -9,6 +9,7 @@ Global configuration of the @PLUGIN@ plugin is done in the
     enableREST = true
     suggestOnly = false
     ignoreWip = false
+    mergeFilters = true
 ```
 
 reviewers.enableREST
@@ -27,6 +28,12 @@ reviewers.ignoreWip
 :	Ignore changes in WIP state. When set to true changes in WIP state are not
 	considered when adding reviewers. Defaults to true. To enable adding
 	reviewers on changes in WIP state set this value to false.
+
+reviewers.mergeFilters
+:	Decides whether to merge the filter-sections from parent projects or not.
+	If set to false	filter-sections in child project will override
+	filter-sections, with identical filters, in the parent project(s).
+	Defaults to true.
 
 Per project configuration of the @PLUGIN@ plugin is done in the
 `reviewers.config` file of the project. Missing values are inherited
