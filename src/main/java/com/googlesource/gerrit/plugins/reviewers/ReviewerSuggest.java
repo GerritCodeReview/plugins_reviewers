@@ -62,7 +62,7 @@ public class ReviewerSuggest implements ReviewerSuggestion {
     try {
       Set<String> reviewers = util.findReviewers(changeId.get(), sections);
       if (!reviewers.isEmpty()) {
-        return resolver.resolve(reviewers, project, changeId.get(), null).stream()
+        return resolver.resolve(reviewers, project, changeId.get(), null, false).stream()
             .map(a -> suggestedReviewer(a))
             .collect(toSet());
       }
