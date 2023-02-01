@@ -67,6 +67,7 @@ class ReviewersResolver {
    * @param project the project name
    * @param changeNumber the change Id
    * @param uploader account to use to look up groups, or null if groups are not needed
+   * @param ignoreAccountVisibility if account visibiltiy should be ignored
    * @return set of {@link com.google.gerrit.entities.Account.Id}s.
    */
   @VisibleForTesting
@@ -74,10 +75,12 @@ class ReviewersResolver {
       Set<String> names,
       Project.NameKey project,
       int changeNumber,
-      @Nullable AccountInfo uploader) {
+      @Nullable AccountInfo uploader,
+      boolean ignoreAccountVisibility) {
     Set<Account.Id> reviewers = Sets.newHashSetWithExpectedSize(names.size());
     for (String name : names) {
-      if (resolveAccount(project, changeNumber, uploader, reviewers, name)) {
+      if (resolveAccount(
+          project, changeNumber, uploader, reviewers, name, ignoreAccountVisibility)) {
         continue;
       }
 
@@ -91,9 +94,13 @@ class ReviewersResolver {
       int changeNumber,
       @Nullable AccountInfo uploader,
       Set<Account.Id> reviewers,
-      String accountName) {
+      String accountName,
+      boolean ignoreAccountVisibility) {
     try {
-      AccountResolver.Result result = accountResolver.resolve(accountName);
+      AccountResolver.Result result =
+          ignoreAccountVisibility
+              ? accountResolver.resolveIgnoreVisibility(accountName)
+              : accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
         Account.Id id = result.asList().get(0).account().id();
         if (uploader == null || id.get() != uploader._accountId) {
