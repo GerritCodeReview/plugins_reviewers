@@ -20,7 +20,9 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gerrit.acceptance.AbstractDaemonTest;
 import com.google.gerrit.acceptance.NoHttpd;
 import com.google.gerrit.acceptance.TestAccount;
+import com.google.gerrit.acceptance.config.GerritConfig;
 import com.google.gerrit.acceptance.testsuite.group.GroupOperations;
+import com.google.gerrit.acceptance.testsuite.request.RequestScopeOperations;
 import com.google.gerrit.entities.Account;
 import com.google.inject.Inject;
 import java.util.Collections;
@@ -30,7 +32,7 @@ import org.junit.Test;
 
 @NoHttpd
 public class ReviewersResolverIT extends AbstractDaemonTest {
-
+  @Inject private RequestScopeOperations requestScopeOperations;
   @Inject private GroupOperations groupOperations;
   @Inject private ReviewersResolver resolver;
   private int change;
@@ -47,7 +49,8 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
             Collections.singleton(user.email()),
             project,
             change,
-            gApi.accounts().id(user.id().get()).get());
+            gApi.accounts().id(user.id().get()).get(),
+            false);
     assertThat(reviewers).isEmpty();
   }
 
@@ -58,8 +61,34 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
             ImmutableSet.of(user.email(), admin.email()),
             project,
             change,
-            gApi.accounts().id(admin.id().get()).get());
+            gApi.accounts().id(admin.id().get()).get(),
+            false);
     assertThat(reviewers).containsExactly(user.id());
+  }
+
+  @Test
+  @GerritConfig(name = "accounts.visibility", value = "NONE")
+  public void accountResolveIgnoreVisibility() throws Exception {
+    requestScopeOperations.setApiUser(user.id());
+
+    Set<Account.Id> reviewers =
+        resolver.resolve(
+            ImmutableSet.of(user.email(), admin.email()),
+            project,
+            change,
+            gApi.accounts().id(user.id().get()).get(),
+            false);
+
+    assertThat(reviewers).isEmpty();
+
+    reviewers =
+        resolver.resolve(
+            ImmutableSet.of(user.email(), admin.email()),
+            project,
+            change,
+            gApi.accounts().id(user.id().get()).get(),
+            true);
+    assertThat(reviewers).containsExactly(admin.id());
   }
 
   @Test
@@ -81,7 +110,8 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
             ImmutableSet.of(system.email(), group1, group2),
             project,
             change,
-            gApi.accounts().id(admin.id().get()).get());
+            gApi.accounts().id(admin.id().get()).get(),
+            false);
     assertThat(reviewers).containsExactly(system.id(), foo.id(), bar.id(), baz.id(), qux.id());
   }
 

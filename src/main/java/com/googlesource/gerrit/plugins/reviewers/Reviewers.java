@@ -110,11 +110,15 @@ class Reviewers
       /* Remove all reviewer identifiers (account-ids, group-ids) from ccs that are present in reviewers.
        * Further filtering of individual accounts is done in AddReviewers after the ids have been resolved into Accounts. */
       ccs.removeAll(reviewers);
+      // This listener is called after a revision was created to add reviewers
+      // according to the configs that project owners provided. Respecting
+      // account visibility here by checking if the caller (e.g. the user adding
+      // a new revision) does not make sense.
       final AddReviewers addReviewers =
           addReviewersFactory.create(
               c,
-              resolver.resolve(reviewers, projectName, changeNumber, uploader),
-              resolver.resolve(ccs, projectName, changeNumber, uploader));
+              resolver.resolve(reviewers, projectName, changeNumber, uploader, true),
+              resolver.resolve(ccs, projectName, changeNumber, uploader, true));
       workQueue.submit(addReviewers);
     } catch (QueryParseException e) {
       logger.atWarning().log(
