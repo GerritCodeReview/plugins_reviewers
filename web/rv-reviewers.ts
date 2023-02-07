@@ -22,13 +22,6 @@ import {customElement, property, query, state} from 'lit/decorators';
 import {css, CSSResult, html, LitElement} from 'lit';
 import './rv-edit-screen';
 
-// TODO: This should be defined and exposed by @gerritcodereview/typescript-api
-type GrOverlay = Element & {
-  open(): void;
-  close(): void;
-  fit(): void;
-};
-
 declare global {
   interface HTMLElementTagNameMap {
     'rv-reviewers': RvReviewers;
@@ -47,8 +40,8 @@ declare interface ProjectAccessInfo {
 
 @customElement('rv-reviewers')
 export class RvReviewers extends LitElement {
-  @query('#rvScreenOverlay')
-  rvScreenOverlay?: GrOverlay;
+  @query('#rvScreenModal')
+  rvScreenModal?: HTMLDialogElement;
 
   /** Guaranteed to be set by the `repo-command` endpoint. */
   @property({type: Object})
@@ -70,12 +63,13 @@ export class RvReviewers extends LitElement {
   static override get styles() {
     return [
       window.Gerrit.styles.font as CSSResult,
+      window.Gerrit.styles.modal as CSSResult,
       css`
         :host {
           display: block;
           margin-bottom: var(--spacing-xxl);
         }
-        #rvScreenOverlay {
+        #rvScreenModal {
           width: 50em;
           overflow: auto;
         }
@@ -101,21 +95,20 @@ export class RvReviewers extends LitElement {
         </p>
       </div>
       <div>
-        <gr-button @click="${() => this.rvScreenOverlay?.open()}">
+        <gr-button @click="${() => this.rvScreenModal?.showModal()}">
           Edit Reviewers Config
         </gr-button>
       </div>
-      <gr-overlay id="rvScreenOverlay" with-backdrop>
+      <dialog id="rvScreenModal">
         <rv-edit-screen
           .pluginRestApi="${this.pluginRestApi}"
           .repoName="${this.repoName}"
           .loading="${this.loading}"
           .canModifyConfig="${this.canModifyConfig}"
-          @close="${() => this.rvScreenOverlay?.close()}"
-          @fit="${() => this.rvScreenOverlay?.fit()}"
+          @close="${() => this.rvScreenModal?.close()}"
         >
         </rv-edit-screen>
-      </gr-overlay>
+      </dialog>
     `;
   }
 
