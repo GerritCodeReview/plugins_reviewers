@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3478d98_56fd0c87",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2023-02-08T10:32:47Z",
+      "side": 1,
+      "message": "For us it\u0027s really that we don\u0027t want to operate the added complexity that this carries. FanOut is a simple thread pool that we can easily look at using a thread dump etc.\n\nSo I would leave this in place for now.",
+      "parentUuid": "86539111_1187fc0d",
+      "range": {
+        "startLine": 57,
+        "startChar": 46,
+        "endLine": 57,
+        "endChar": 67
+      },
+      "revId": "2bd257ec036b3f0fce401856dab102ec76c67ad3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5cfc735_3f6a62a4",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-02-08T09:56:27Z",
       "side": 1,
       "message": "@UsedAt(UsedAt.Project.GOOGLE)?",
+      "revId": "2bd257ec036b3f0fce401856dab102ec76c67ad3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b280c1b_cdc8c006",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2023-02-08T10:32:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5cfc735_3f6a62a4",
       "revId": "2bd257ec036b3f0fce401856dab102ec76c67ad3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
