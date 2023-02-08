@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86539111_1187fc0d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-02-08T09:56:27Z",
+      "side": 1,
+      "message": "What are the benefits of the fan-out thread-pool?\nI.e. is it something we\u0027d want to make configurable in a follow-up?",
+      "range": {
+        "startLine": 57,
+        "startChar": 46,
+        "endLine": 57,
+        "endChar": 67
+      },
+      "revId": "2bd257ec036b3f0fce401856dab102ec76c67ad3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cfc735_3f6a62a4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-02-08T09:56:27Z",
+      "side": 1,
+      "message": "@UsedAt(UsedAt.Project.GOOGLE)?",
+      "revId": "2bd257ec036b3f0fce401856dab102ec76c67ad3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
