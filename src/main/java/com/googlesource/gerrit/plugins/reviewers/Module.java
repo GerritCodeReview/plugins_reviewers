@@ -36,22 +36,47 @@ import com.googlesource.gerrit.plugins.reviewers.config.ConfigModule;
 import com.googlesource.gerrit.plugins.reviewers.config.GlobalConfig;
 
 public class Module extends FactoryModule {
+  enum ThreadPool {
+    DIRECT,
+    WORK_QUEUE,
+    FAN_OUT
+  }
+
+  static class ForTest extends Module {
+    ForTest() {
+      super(true, false, ThreadPool.DIRECT);
+    }
+  }
+
   private final boolean enableREST;
   private final boolean suggestOnly;
+  private final ThreadPool threadPool;
 
   @Inject
   public Module(GlobalConfig cfg) {
-    this(cfg.enableREST(), cfg.suggestOnly());
+    this(cfg.enableREST(), cfg.suggestOnly(), ThreadPool.WORK_QUEUE);
   }
 
-  public Module(boolean enableREST, boolean suggestOnly) {
+  public Module(boolean enableREST, boolean suggestOnly, ThreadPool threadPool) {
     this.enableREST = enableREST;
     this.suggestOnly = suggestOnly;
+    this.threadPool = threadPool;
   }
 
   @Override
   protected void configure() {
-    bindWorkQueue();
+    switch (threadPool) {
+      case DIRECT:
+        bind(ReviewerWorkQueue.class).to(ReviewerWorkQueue.Direct.class);
+        break;
+      case WORK_QUEUE:
+        bind(ReviewerWorkQueue.class).to(ReviewerWorkQueue.Scheduled.class);
+        break;
+      case FAN_OUT:
+        bind(ReviewerWorkQueue.class).to(ReviewerWorkQueue.ScheduledFanOut.class);
+      default:
+        break;
+    }
     bind(CapabilityDefinition.class)
         .annotatedWith(Exports.named(MODIFY_REVIEWERS_CONFIG))
         .to(ModifyReviewersConfigCapability.class);
@@ -94,9 +119,5 @@ public class Module extends FactoryModule {
           }
         });
     install(new ConfigModule());
-  }
-
-  protected void bindWorkQueue() {
-    bind(ReviewerWorkQueue.class).to(ReviewerWorkQueue.Scheduled.class);
   }
 }
