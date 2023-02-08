@@ -40,7 +40,9 @@ import org.eclipse.jgit.junit.TestRepository;
 import org.junit.Test;
 
 @NoHttpd
-@TestPlugin(name = "reviewers", sysModule = "com.googlesource.gerrit.plugins.reviewers.TestModule")
+@TestPlugin(
+    name = "reviewers",
+    sysModule = "com.googlesource.gerrit.plugins.reviewers.Module$ForTest")
 public class ReviewersIT extends AbstractReviewersPluginTest {
 
   @Test

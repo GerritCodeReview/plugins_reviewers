@@ -16,13 +16,16 @@ package com.googlesource.gerrit.plugins.reviewers;
 
 import static com.google.common.util.concurrent.MoreExecutors.directExecutor;
 
+import com.google.gerrit.server.FanOutExecutor;
 import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 interface ReviewerWorkQueue {
   void submit(AddReviewers addReviewers);
 
-  static class Scheduled implements ReviewerWorkQueue {
+  class Scheduled implements ReviewerWorkQueue {
     private final WorkQueue workQueue;
 
     @Inject
@@ -36,11 +39,25 @@ interface ReviewerWorkQueue {
     }
   }
 
-  static class Direct implements ReviewerWorkQueue {
-
+  class Direct implements ReviewerWorkQueue {
     @Override
     public void submit(AddReviewers addReviewers) {
       directExecutor().execute(addReviewers);
+    }
+  }
+
+  class ScheduledFanOut implements ReviewerWorkQueue {
+    private final ExecutorService executor;
+
+    @Inject
+    ScheduledFanOut(@FanOutExecutor ExecutorService executor) {
+      this.executor = executor;
+    }
+
+    @Override
+    public void submit(AddReviewers addReviewers) {
+      @SuppressWarnings("unused")
+      Future<?> ignored = executor.submit(addReviewers);
     }
   }
 }
