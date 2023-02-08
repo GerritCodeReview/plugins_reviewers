@@ -25,6 +25,7 @@ import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.index.query.QueryParseException;
 import com.google.gerrit.server.change.ReviewerSuggestion;
 import com.google.gerrit.server.change.SuggestedReviewer;
+import com.google.gerrit.server.query.change.ChangeData;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
@@ -38,13 +39,18 @@ public class ReviewerSuggest implements ReviewerSuggestion {
   private final FiltersFactory filters;
   private final ReviewersFilterUtil util;
   private final ReviewersResolver resolver;
+  private final ChangeData.Factory changeDataFactory;
 
   @Inject
   public ReviewerSuggest(
-      FiltersFactory filters, ReviewersFilterUtil filterUtil, ReviewersResolver resolver) {
+      FiltersFactory filters,
+      ReviewersFilterUtil filterUtil,
+      ReviewersResolver resolver,
+      ChangeData.Factory changeDataFactory) {
     this.filters = filters;
     this.util = filterUtil;
     this.resolver = resolver;
+    this.changeDataFactory = changeDataFactory;
   }
 
   @Override
@@ -60,7 +66,8 @@ public class ReviewerSuggest implements ReviewerSuggestion {
     }
 
     try {
-      Set<String> reviewers = util.findReviewers(changeId.get(), sections);
+      ChangeData cd = changeDataFactory.create(project, changeId);
+      Set<String> reviewers = util.findReviewers(cd, sections);
       if (!reviewers.isEmpty()) {
         return resolver.resolve(reviewers, project, changeId.get(), null, false).stream()
             .map(a -> suggestedReviewer(a))

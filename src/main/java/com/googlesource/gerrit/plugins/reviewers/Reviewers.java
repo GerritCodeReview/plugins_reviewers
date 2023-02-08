@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.reviewers;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
@@ -24,6 +25,7 @@ import com.google.gerrit.extensions.events.PrivateStateChangedListener;
 import com.google.gerrit.extensions.events.RevisionCreatedListener;
 import com.google.gerrit.extensions.events.WorkInProgressStateChangedListener;
 import com.google.gerrit.index.query.QueryParseException;
+import com.google.gerrit.server.query.change.ChangeData;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.reviewers.config.FiltersFactory;
@@ -45,6 +47,7 @@ class Reviewers
   private final GlobalConfig config;
   private final FiltersFactory filters;
   private final ReviewersFilterUtil filterUtil;
+  private final ChangeData.Factory changeDataFactory;
 
   @Inject
   Reviewers(
@@ -53,13 +56,15 @@ class Reviewers
       ReviewerWorkQueue workQueue,
       GlobalConfig config,
       FiltersFactory filters,
-      ReviewersFilterUtil util) {
+      ReviewersFilterUtil util,
+      ChangeData.Factory changeDataFactory) {
     this.resolver = resolver;
     this.addReviewersFactory = addReviewersFactory;
     this.workQueue = workQueue;
     this.config = config;
     this.filters = filters;
     this.filterUtil = util;
+    this.changeDataFactory = changeDataFactory;
   }
 
   @Override
@@ -102,8 +107,9 @@ class Reviewers
     AccountInfo uploader = event.getWho();
     int changeNumber = c._number;
     try {
-      Set<String> reviewers = filterUtil.findReviewers(changeNumber, filters);
-      Set<String> ccs = filterUtil.findCcs(changeNumber, filters);
+      ChangeData cd = changeDataFactory.create(Project.nameKey(c.project), Change.id(c._number));
+      Set<String> reviewers = filterUtil.findReviewers(cd, filters);
+      Set<String> ccs = filterUtil.findCcs(cd, filters);
       if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
       }
