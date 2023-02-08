@@ -38,7 +38,7 @@ import com.googlesource.gerrit.plugins.reviewers.config.ConfigModule;
 import com.googlesource.gerrit.plugins.reviewers.config.GlobalConfig;
 
 public class Module extends FactoryModule {
-  enum ThreadPool {
+  public enum ThreadPool {
     DIRECT,
     WORK_QUEUE,
     FAN_OUT
