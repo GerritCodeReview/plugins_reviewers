@@ -20,7 +20,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.index.query.QueryParseException;
-import com.google.gerrit.server.CurrentUser;
 import com.google.gerrit.server.query.change.ChangeData;
 import com.google.gerrit.server.query.change.ChangeQueryBuilder;
 import com.google.inject.Inject;
@@ -29,13 +28,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ReviewersFilterUtil {
-  private final ChangeQueryBuilder queryBuilder;
-  private final Provider<CurrentUser> user;
+  private final Provider<ChangeQueryBuilder> queryBuilder;
 
   @Inject
-  public ReviewersFilterUtil(ChangeQueryBuilder queryBuilder, Provider<CurrentUser> user) {
+  public ReviewersFilterUtil(Provider<ChangeQueryBuilder> queryBuilder) {
     this.queryBuilder = queryBuilder;
-    this.user = user;
   }
 
   public Set<String> findReviewers(ChangeData cd, List<ReviewerFilter> filters)
@@ -73,6 +70,6 @@ public class ReviewersFilterUtil {
 
   boolean filterMatch(ChangeData cd, String filter) throws StorageException, QueryParseException {
     Preconditions.checkNotNull(filter);
-    return queryBuilder.asUser(user.get()).parse(filter).asMatchable().match(cd);
+    return queryBuilder.get().parse(filter).asMatchable().match(cd);
   }
 }
