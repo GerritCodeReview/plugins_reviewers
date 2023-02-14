@@ -29,13 +29,11 @@ import java.util.List;
 import java.util.Set;
 
 public class ReviewersFilterUtil {
-  private final ChangeQueryBuilder queryBuilder;
-  private final Provider<CurrentUser> user;
+  private final Provider<ChangeQueryBuilder> queryBuilder;
 
   @Inject
-  public ReviewersFilterUtil(ChangeQueryBuilder queryBuilder, Provider<CurrentUser> user) {
+  public ReviewersFilterUtil(Provider<ChangeQueryBuilder> queryBuilder) {
     this.queryBuilder = queryBuilder;
-    this.user = user;
   }
 
   public Set<String> findReviewers(ChangeData cd, List<ReviewerFilter> filters)
@@ -73,6 +71,6 @@ public class ReviewersFilterUtil {
 
   boolean filterMatch(ChangeData cd, String filter) throws StorageException, QueryParseException {
     Preconditions.checkNotNull(filter);
-    return queryBuilder.asUser(user.get()).parse(filter).asMatchable().match(cd);
+    return queryBuilder.get().parse(filter).asMatchable().match(cd);
   }
 }
