@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ad9572_9070662a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/config/ReviewerFilterCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-02-14T13:21:32Z",
+      "side": 1,
+      "message": "Return early instead?\n\n```\n    if (Strings.isNullOrEmpty(filterQuery) || \"*\".equals(filterQuery)) {\n      return Optional.empty();\n    }\n    try {\n      queryValidator.validateQuery(filterQuery);\n    } catch (QueryParseException qpe) {\n```\n\nAlternatively:\n```\n    if (!Strings.isNullOrEmpty(filterQuery) \u0026\u0026 !\"*\".equals(filterQuery)) {\n      try {\n        queryValidator.validateQuery(filterQuery);\n      } catch (QueryParseException qpe) {\n        validationErrorSink.ifPresent(ves -\u003e ves.error(ValidationError.create(qpe.getMessage())));\n        return Optional.of(qpe.getMessage());\n      }\n    }\n    return Optional.empty();\n```",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 39
+      },
+      "revId": "9e4b930bd4a25d91bd9c1ebc2cd76031334e9ce3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
