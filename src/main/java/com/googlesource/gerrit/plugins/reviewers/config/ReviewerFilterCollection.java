@@ -18,6 +18,7 @@ import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_CC
 import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.KEY_REVIEWER;
 import static com.googlesource.gerrit.plugins.reviewers.config.ForProject.SECTION_FILTER;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -89,7 +90,9 @@ class ReviewerFilterCollection {
    * ValidationError to the ValidationError.Sink and returns the error. */
   private Optional<String> checkForErrors(String filterQuery) {
     try {
-      queryValidator.validateQuery(filterQuery);
+      if (!Strings.isNullOrEmpty(filterQuery) && !"*".equals(filterQuery)) {
+        queryValidator.validateQuery(filterQuery);
+      }
     } catch (QueryParseException qpe) {
       validationErrorSink.ifPresent(ves -> ves.error(ValidationError.create(qpe.getMessage())));
       return Optional.of(qpe.getMessage());
