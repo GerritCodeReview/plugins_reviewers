@@ -16,6 +16,24 @@
       "message": "This causes the CI build for the 3.6 branch to fail[1]:\n\nplugins/reviewers/src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java:62: error: annotation type not applicable to this kind of declaration\n16:02:42   @UsedAt(Project.GOOGLE)\n16:02:42   ^\n16:02:42 Target //plugins/reviewers:reviewers failed to build\n\n\n[1] https://gerrit-ci.gerritforge.com/view/Plugins-stable-3.6/job/plugin-reviewers-bazel-master-stable-3.6/11/console",
       "revId": "db52f841d594c5e3227d41b86b5bee8e23cc27bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3845bc_77b6b559",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/Module.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1026112
+      },
+      "writtenOn": "2023-05-15T06:57:15Z",
+      "side": 1,
+      "message": "Looks like it doesn\u0027t have this annotation. You could either remove it from stable 3.6 or backport the change that adds this annotation to core.",
+      "parentUuid": "30e6256c_d56c59b5",
+      "revId": "db52f841d594c5e3227d41b86b5bee8e23cc27bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
