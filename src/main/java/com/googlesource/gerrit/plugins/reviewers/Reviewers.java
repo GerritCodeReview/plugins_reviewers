@@ -121,7 +121,7 @@ class Reviewers
           "Could not add default reviewers for change %d of project %s, filter is invalid: %s",
           changeNumber, projectName.get(), e.getMessage());
     } catch (StorageException x) {
-      logger.atSevere().withCause(x).log(x.getMessage());
+      logger.atSevere().withCause(x).log("%s", x.getMessage());
     }
   }
 }
