@@ -7,15 +7,6 @@ load(
     "PLUGIN_TEST_DEPS",
     "gerrit_plugin",
 )
-load("//tools/bzl:js.bzl", "gerrit_js_bundle")
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
-
-gerrit_plugin(
-    name = "reviewers",
-    srcs = glob(["src/main/java/**/*.java"]),
-    manifest_entries = [
-        "Gerrit-PluginName: reviewers",
-        "Gerrit-Module: com.googlesource.gerrit.plugins.reviewers.Module",
     ],
     resource_jars = [":rv-reviewers"],
     resources = glob(["src/main/resources/**/*"]),
