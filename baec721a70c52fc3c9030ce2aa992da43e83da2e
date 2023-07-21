@@ -16,6 +16,57 @@
       "message": "this was asked in discord at https://discord.com/channels/775374026587373568/775374026587373571/1131424450634600448",
       "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4c1386_ff6332c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2023-07-21T14:03:13Z",
+      "side": 1,
+      "message": "Thank you! I was reading the doc yesterday and left wondering where the reviewers.config file should have been put to.\n\nI have an extra suggestion to improve the formatting which is to add sub headers for \"global\" and \"per project\" configurations.\n\n\n---\n\nAs side track:\n* changing the configuration seems to require to be be an owner of the repository though I haven\u0027t checked which permission is required (I am assuming Owner).\n* there is a web UI to change the reviewers config (ex: https://gerrit-review.googlesource.com/admin/repos/plugins/reviewers,commands )",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69f0062_6d12a33f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2023-07-21T14:03:13Z",
+      "side": 1,
+      "message": "What puzzled me is the global configuration and per project configuration should probably be headers on their own instead of bold. Thus while at I suggest:\n```\n# Configuration\n\n## Global configuration\n\nThe global configuration of the @PLUGIN@ is done in the\n```\n\nand ...",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0326ff1_1e6cd671",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2023-07-21T14:03:13Z",
+      "side": 1,
+      "message": "... make the per project configuration a header as well:\n```\n## Per project configuration\n\nPer project configuration of the @PLUGIN@ plugin is done in the\n```\n\nWhich would gives the following rendering:\n\n\n\u003e # Configuration\n\u003e\n\u003e ## Global configuration\n\u003e \n\u003e The global configuration of the @PLUGIN@ is done in the\n\u003e ....\n\u003e \n\u003e \n\u003e ## Per project configuration\n\u003e \n\u003e Per project configuration of the @PLUGIN@ plugin is done in the\n\u003e ...",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
