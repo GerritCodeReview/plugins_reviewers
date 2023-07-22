@@ -35,6 +35,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6d3a4c_99405153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2023-07-22T08:45:31Z",
+      "side": 1,
+      "message": "Yes, this requires Owner or Administrator privileges",
+      "parentUuid": "9e4c1386_ff6332c6",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69f0062_6d12a33f",
@@ -52,6 +70,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b02eb2_712b2d6f",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2023-07-22T08:45:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d69f0062_6d12a33f",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0326ff1_1e6cd671",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-07-21T14:03:13Z",
       "side": 1,
       "message": "... make the per project configuration a header as well:\n```\n## Per project configuration\n\nPer project configuration of the @PLUGIN@ plugin is done in the\n```\n\nWhich would gives the following rendering:\n\n\n\u003e # Configuration\n\u003e\n\u003e ## Global configuration\n\u003e \n\u003e The global configuration of the @PLUGIN@ is done in the\n\u003e ....\n\u003e \n\u003e \n\u003e ## Per project configuration\n\u003e \n\u003e Per project configuration of the @PLUGIN@ plugin is done in the\n\u003e ...",
+      "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8576f9d_705a9651",
+        "filename": "src/main/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2023-07-22T08:45:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0326ff1_1e6cd671",
       "revId": "baec721a70c52fc3c9030ce2aa992da43e83da2e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
