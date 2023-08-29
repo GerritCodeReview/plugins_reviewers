@@ -16,6 +16,23 @@
       "message": "Looks great, thank you!",
       "revId": "75f2d3586d694d792d90ef99a8f78075e82181ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90cffabe_cfabd7a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010788
+      },
+      "writtenOn": "2023-08-29T15:44:20Z",
+      "side": 1,
+      "message": "Note: I do not have permission to submit change on plugins/reviewers, thus someone needs to submit it :]",
+      "revId": "75f2d3586d694d792d90ef99a8f78075e82181ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
