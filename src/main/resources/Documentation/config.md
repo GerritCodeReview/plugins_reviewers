@@ -48,8 +48,10 @@ in their own `reviewers.config` file.
 Editing per project configuration requires
 [Owner](Documentation/access-control.html#category_owner) or
 [Administrator](Documentation/access-control.html#administrators) privileges.
-Per project configuration can be edited in the Web UI, find corresponding actions
-on the project's [repo command page](Documentation/user-inline-edit.html).
+Per project configuration can be edited in the Web UI through the "Edit reviewers
+config" action on the project's repo command page. You could also choose to
+edit the reviewers.config file through the
+[inline edit feature](Documentation/user-inline-edit.html).
 
 ```
   [filter "*"]
