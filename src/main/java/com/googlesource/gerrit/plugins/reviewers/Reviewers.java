@@ -14,10 +14,13 @@
 
 package com.googlesource.gerrit.plugins.reviewers;
 
+import static com.google.gerrit.extensions.client.ChangeStatus.MERGED;
+
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Change;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.exceptions.StorageException;
+import com.google.gerrit.extensions.client.ChangeStatus;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.common.ChangeInfo;
 import com.google.gerrit.extensions.events.ChangeEvent;
@@ -94,6 +97,9 @@ class Reviewers
       return;
     }
     if (config.ignoreWip() && Boolean.TRUE.equals(c.workInProgress)) {
+      return;
+    }
+    if (c.status.equals(MERGED)) {
       return;
     }
     Project.NameKey projectName = Project.nameKey(c.project);
