@@ -104,7 +104,7 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   }
 
   @Test
-  public void privateBitFlippedAndReviewersAddedOnSubmit() throws Exception {
+  public void reviewersNotAddedOnSubmitOfPrivateChange() throws Exception {
     createFilters(filter("*").reviewer(user));
     PushOneCommit.Result r = createChange("refs/for/master%private");
     assertThat(r.getChange().change().isPrivate()).isTrue();
@@ -113,11 +113,26 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
     // This adds admin as reviewer
     gApi.changes().id(changeId).current().review(ReviewInput.approve());
     gApi.changes().id(changeId).current().submit();
-    assertThat(reviewersFor(changeId))
-        .containsExactlyElementsIn(ImmutableSet.of(admin.id(), user.id()));
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(admin.id()));
     ChangeInfo info = gApi.changes().id(changeId).get();
     assertThat(info.status).isEqualTo(ChangeStatus.MERGED);
     assertThat(info.isPrivate).isNull();
+  }
+
+  @Test
+  public void reviewersNotAddedOnPushOfWIPChange() throws Exception {
+    createFilters(filter("*").reviewer(user));
+    PushOneCommit.Result r = createChange("refs/for/master%wip");
+    assertThat(r.getChange().change().isWorkInProgress()).isTrue();
+    String changeId = r.getChangeId();
+    assertNoReviewersAddedFor(changeId);
+    // This adds admin as reviewer
+    gApi.changes().id(changeId).current().review(ReviewInput.approve());
+    pushToHeads("refs/heads/master", changeId);
+    assertThat(reviewersFor(changeId)).containsExactlyElementsIn(ImmutableSet.of(admin.id()));
+    ChangeInfo info = gApi.changes().id(changeId).get();
+    assertThat(info.status).isEqualTo(ChangeStatus.MERGED);
+    assertThat(info.workInProgress).isNull();
   }
 
   @Test
@@ -202,5 +217,10 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   private void assertNoReviewersAddedFor(String changeId) throws Exception {
     assertThat(gApi.changes().id(changeId).get().reviewers.get(REVIEWER)).isNull();
     assertThat(gApi.changes().id(changeId).get().reviewers.get(CC)).isNull();
+  }
+
+  private PushOneCommit.Result pushToHeads(String ref, String changeId) throws Exception {
+    PushOneCommit push = pushFactory.create(admin.newIdent(), testRepo, changeId);
+    return push.to(ref);
   }
 }
