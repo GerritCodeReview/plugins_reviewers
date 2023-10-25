@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6b9313_580816db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2023-10-25T14:19:28Z",
+      "side": 1,
+      "message": "Since the only way this can occur is when user has permission to push past review anyway, there is no effective change other than the avoidance of the Attention-Set status. (Which, if the user was so inclined, they could avoid by never pushing a change in the first place.)",
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
