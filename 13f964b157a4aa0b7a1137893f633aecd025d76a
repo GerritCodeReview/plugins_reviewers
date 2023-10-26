@@ -16,6 +16,69 @@
       "message": "Since the only way this can occur is when user has permission to push past review anyway, there is no effective change other than the avoidance of the Attention-Set status. (Which, if the user was so inclined, they could avoid by never pushing a change in the first place.)",
       "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fda5fee2_e2fde1f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-10-26T05:06:24Z",
+      "side": 1,
+      "message": "And the corresponding test for wip.",
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d7332c_0bdd5b5e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-10-26T05:06:24Z",
+      "side": 1,
+      "message": "```suggestion\n  public void reviewersNotAddedOnSubmitOfPrivateChange() throws Exception {\n```",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 56
+      },
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "169b3d7a_b9084e13",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2023-10-26T05:06:24Z",
+      "side": 1,
+      "message": "```suggestion\n    assertThat(reviewersFor(changeId))\n        .containsExactlyElementsIn(ImmutableSet.of(admin.id()));\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 75
+      },
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
