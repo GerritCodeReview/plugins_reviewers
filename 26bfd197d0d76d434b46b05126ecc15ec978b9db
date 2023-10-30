@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d28e3043_3b7bb618",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2023-10-30T14:37:40Z",
+      "side": 1,
+      "message": "I can\u0027t create issues on the issuetracker at the moment, so I can\u0027t create one to refer to if you would like one.",
+      "revId": "26bfd197d0d76d434b46b05126ecc15ec978b9db",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
