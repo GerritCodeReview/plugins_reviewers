@@ -58,6 +58,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f12b6fc_2fd65941",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2023-10-30T14:35:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2d7332c_0bdd5b5e",
+      "range": {
+        "startLine": 107,
+        "startChar": 15,
+        "endLine": 107,
+        "endChar": 56
+      },
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "169b3d7a_b9084e13",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-10-26T05:06:24Z",
       "side": 1,
       "message": "```suggestion\n    assertThat(reviewersFor(changeId))\n        .containsExactlyElementsIn(ImmutableSet.of(admin.id()));\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 75
+      },
+      "revId": "13f964b157a4aa0b7a1137893f633aecd025d76a",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30272946_190411a4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/reviewers/ReviewersIT.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1071857
+      },
+      "writtenOn": "2023-10-30T14:35:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "169b3d7a_b9084e13",
       "range": {
         "startLine": 116,
         "startChar": 4,
