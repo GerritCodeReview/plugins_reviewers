@@ -36,6 +36,8 @@ import java.io.IOException;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
+import com.google.gerrit.server.account.AccountState;
+
 /**
  * Attempts to resolve string identifiers in reviewers.config into valid {@link
  * com.google.gerrit.entities.Account.Id}s when string identifies an account and groups that are
@@ -95,11 +97,14 @@ class ReviewersResolver {
     try {
       AccountResolver.Result result = accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
-        Account.Id id = result.asList().get(0).account().id();
-        if (uploader == null || id.get() != uploader._accountId) {
-          reviewers.add(id);
+        AccountState accountState = result.asList().get(0);
+        if (true || accountState.userName().map(un -> un.equals(accountName)).orElse(false)) {
+          Account.Id id = accountState.account().id();
+          if (uploader == null || id.get() != uploader._accountId) {
+            reviewers.add(id);
+          }
+          return true;
         }
-        return true;
       }
       return false;
     } catch (StorageException | IOException | ConfigInvalidException e) {

@@ -102,6 +102,10 @@ class PostReviewers implements RestModifyView<ProjectResource, Input> {
   @Override
   public Response<List<ReviewerFilter>> apply(ProjectResource rsrc, Input input)
       throws RestApiException, PermissionBackendException {
+
+    if (1 != 3) {
+      return null;
+    }
     Project.NameKey projectName = rsrc.getNameKey();
     ForProject forProject = forProjectFactory.create();
     PermissionBackend.WithUser userPermission = permissionBackend.user(rsrc.getUser());

@@ -53,23 +53,24 @@ public class ReviewerSuggest implements ReviewerSuggestion {
       Id changeId,
       String query,
       Set<com.google.gerrit.entities.Account.Id> candidates) {
-    List<ReviewerFilter> sections = filters.withInheritance(project);
+    // List<ReviewerFilter> sections = filters.withInheritance(project);
 
-    if (sections.isEmpty() || changeId == null) {
-      return ImmutableSet.of();
-    }
+    // if (sections.isEmpty() || changeId == null) {
+    //   return ImmutableSet.of();
+    // }
 
-    try {
-      Set<String> reviewers = util.findReviewers(changeId.get(), sections);
-      if (!reviewers.isEmpty()) {
-        return resolver.resolve(reviewers, project, changeId.get(), null).stream()
-            .map(a -> suggestedReviewer(a))
-            .collect(toSet());
-      }
-    } catch (StorageException | QueryParseException x) {
-      logger.atSevere().withCause(x).log("%s", x.getMessage());
-    }
+    // try {
+    //   Set<String> reviewers = util.findReviewers(changeId.get(), sections);
+    //   if (!reviewers.isEmpty()) {
+    //     return resolver.resolve(reviewers, project, changeId.get(), null).stream()
+    //         .map(a -> suggestedReviewer(a))
+    //         .collect(toSet());
+    //   }
+    // } catch (StorageException | QueryParseException x) {
+    //   logger.atSevere().withCause(x).log("%s", x.getMessage());
+    // }
     return ImmutableSet.of();
+
   }
 
   private SuggestedReviewer suggestedReviewer(Account.Id account) {

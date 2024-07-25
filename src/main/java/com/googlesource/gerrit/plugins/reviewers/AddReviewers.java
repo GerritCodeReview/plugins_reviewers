@@ -65,7 +65,7 @@ class AddReviewers implements Runnable {
   public void run() {
     try (ManualRequestContext ctx =
         requestContext.openAs(Account.id(changeInfo.owner._accountId))) {
-      addReviewers();
+      //addReviewers();
     }
   }
 

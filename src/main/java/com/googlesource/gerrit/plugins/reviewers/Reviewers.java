@@ -83,6 +83,7 @@ class Reviewers
   }
 
   private void onEvent(ChangeEvent event) {
+    logger.atInfo().log("A reviewers event is happening");
     ChangeInfo c = event.getChange();
     /* Never add reviewers automatically to private changes. */
     if (Boolean.TRUE.equals(c.isPrivate)) {
@@ -106,6 +107,10 @@ class Reviewers
       Set<String> ccs = filterUtil.findCcs(changeNumber, filters);
       if (reviewers.isEmpty() && ccs.isEmpty()) {
         return;
+      }
+      logger.atInfo().log("Print all ccs");
+      for (String cc : ccs) {
+        logger.atInfo().log("CC: %s", cc);
       }
       /* Remove all reviewer identifiers (account-ids, group-ids) from ccs that are present in reviewers.
        * Further filtering of individual accounts is done in AddReviewers after the ids have been resolved into Accounts. */
