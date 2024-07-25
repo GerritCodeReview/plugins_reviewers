@@ -26,6 +26,7 @@ import com.google.gerrit.exceptions.StorageException;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.restapi.UnprocessableEntityException;
 import com.google.gerrit.server.account.AccountResolver;
+import com.google.gerrit.server.account.AccountState;
 import com.google.gerrit.server.account.GroupMembers;
 import com.google.gerrit.server.group.GroupResolver;
 import com.google.gerrit.server.project.NoSuchProjectException;
@@ -95,11 +96,14 @@ class ReviewersResolver {
     try {
       AccountResolver.Result result = accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
-        Account.Id id = result.asList().get(0).account().id();
-        if (uploader == null || id.get() != uploader._accountId) {
-          reviewers.add(id);
+        AccountState accountState = result.asList().get(0);
+        if (accountState.userName().map(un -> un.equals(accountName)).orElse(false)) {
+          Account.Id id = accountState.account().id();
+          if (uploader == null || id.get() != uploader._accountId) {
+            reviewers.add(id);
+          }
+          return true;
         }
-        return true;
       }
       return false;
     } catch (StorageException | IOException | ConfigInvalidException e) {
