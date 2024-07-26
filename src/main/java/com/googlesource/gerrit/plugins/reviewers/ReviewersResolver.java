@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.util.Set;
 import org.eclipse.jgit.errors.ConfigInvalidException;
 
+import com.google.gerrit.server.account.Emails;
+
 /**
  * Attempts to resolve string identifiers in reviewers.config into valid {@link
  * com.google.gerrit.entities.Account.Id}s when string identifies an account and groups that are
@@ -49,15 +51,18 @@ class ReviewersResolver {
   private final AccountResolver accountResolver;
   private final Provider<GroupResolver> groupResolver;
   private final GroupMembers groupMembers;
+  private final Emails emails;
 
   @Inject
   ReviewersResolver(
       AccountResolver accountResolver,
       Provider<GroupResolver> groupResolver,
-      GroupMembers groupMembers) {
+      GroupMembers groupMembers,
+      Emails emails) {
     this.accountResolver = accountResolver;
     this.groupResolver = groupResolver;
     this.groupMembers = groupMembers;
+    this.emails = emails;
   }
 
   /**
@@ -97,8 +102,8 @@ class ReviewersResolver {
       AccountResolver.Result result = accountResolver.resolve(accountName);
       if (result.asList().size() == 1) {
         AccountState accountState = result.asList().get(0);
-        if (accountState.userName().map(un -> un.equals(accountName)).orElse(false)) {
-          Account.Id id = accountState.account().id();
+        Account.Id id = accountState.account().id();
+        if (isCorrectAccountName(accountState, accountName, id)) {
           if (uploader == null || id.get() != uploader._accountId) {
             reviewers.add(id);
           }
@@ -111,6 +116,14 @@ class ReviewersResolver {
           "For the change %d of project %s: failed to resolve account %s.",
           changeNumber, project, accountName);
       return true;
+    }
+  }
+
+  private boolean isCorrectAccountName(AccountState accountState, String accountName, Account.Id id) {
+    try {
+      return accountState.userName().map(un -> un.equals(accountName)).orElse(false) || emails.getAccountFor(accountName).stream().anyMatch(i -> i.equals(id));
+    } catch (IOException ex) {
+      return false;
     }
   }
 
