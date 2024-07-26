@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a45768d_7e1f9d5a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/reviewers/ReviewersResolver.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-07-26T11:51:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the issue be fixed by:\n```suggestion\n      AccountResolver.Result result \u003d accountResolver.resolveExact(accountName);\n```",
+      "range": {
+        "startLine": 97,
+        "startChar": 54,
+        "endLine": 97,
+        "endChar": 61
+      },
+      "revId": "7f11d96be97611cd3d2a8dac034db89f7314406f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
