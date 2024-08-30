@@ -99,8 +99,8 @@ class ReviewersResolver {
     try {
       AccountResolver.Result result =
           ignoreAccountVisibility
-              ? accountResolver.resolveIgnoreVisibility(accountName)
-              : accountResolver.resolve(accountName);
+              ? accountResolver.resolveExactIgnoreVisibility(accountName)
+              : accountResolver.resolveExact(accountName);
       if (result.asList().size() == 1) {
         Account.Id id = result.asList().get(0).account().id();
         if (uploader == null || id.get() != uploader._accountId) {

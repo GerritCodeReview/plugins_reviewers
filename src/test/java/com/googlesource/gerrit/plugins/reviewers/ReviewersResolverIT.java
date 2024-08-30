@@ -115,6 +115,22 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
     assertThat(reviewers).containsExactly(system.id(), foo.id(), bar.id(), baz.id(), qux.id());
   }
 
+  @Test
+  public void accountExactResolve() throws Exception {
+    String username = "user1";
+    String almostMatchingUsername = "user";
+    accountCreator.create(username);
+
+    Set<Account.Id> reviewers =
+        resolver.resolve(
+            ImmutableSet.of(almostMatchingUsername),
+            project,
+            change,
+            gApi.accounts().id(admin.id().get()).get(),
+            false);
+    assertThat(reviewers).isEmpty();
+  }
+
   private TestAccount createTestAccount(String name, String group) throws Exception {
     name = name(name);
     return accountCreator.create(name, name + "@example.com", name + " full name", null, group);
