@@ -16,6 +16,23 @@
       "message": "The new approach make use of two new additions to core.",
       "revId": "2304fa19869a40e77ade24e2e0ed543d19dc3bfa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4d4bde_cb4b3393",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1014252
+      },
+      "writtenOn": "2024-09-02T12:39:17Z",
+      "side": 1,
+      "message": "Should we cut a stable-3.8, stable-3.9 and stable-3.10 branch since the \"latest\" stable- branch is for stable-3.7 which implies that master should work for all later branches, with this change it won\u0027t?",
+      "revId": "2304fa19869a40e77ade24e2e0ed543d19dc3bfa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
