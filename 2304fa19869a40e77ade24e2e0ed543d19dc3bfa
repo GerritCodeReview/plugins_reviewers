@@ -33,6 +33,24 @@
       "message": "Should we cut a stable-3.8, stable-3.9 and stable-3.10 branch since the \"latest\" stable- branch is for stable-3.7 which implies that master should work for all later branches, with this change it won\u0027t?",
       "revId": "2304fa19869a40e77ade24e2e0ed543d19dc3bfa",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c73c8e_088fdd90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1135623
+      },
+      "writtenOn": "2024-09-02T13:10:11Z",
+      "side": 1,
+      "message": "I tested and builded master against stable-3.8,3.9,3.10 and it works, so I think it is safe to assume that it works for those Gerrit versions. I am not an owner of this repo so Rikard created the branches.",
+      "parentUuid": "3d4d4bde_cb4b3393",
+      "revId": "2304fa19869a40e77ade24e2e0ed543d19dc3bfa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
