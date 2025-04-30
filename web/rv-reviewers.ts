@@ -18,7 +18,7 @@ import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
 import {PluginApi} from '@gerritcodereview/typescript-api/plugin';
 import '@gerritcodereview/typescript-api/gerrit';
-import {customElement, property, query, state} from 'lit/decorators';
+import {customElement, property, query, state} from 'lit/decorators.js';
 import {css, CSSResult, html, LitElement} from 'lit';
 import './rv-edit-screen';
 

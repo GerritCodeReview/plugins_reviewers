@@ -18,7 +18,7 @@ import {RepoName} from '@gerritcodereview/typescript-api/rest-api';
 import {RestPluginApi} from '@gerritcodereview/typescript-api/rest';
 import '@gerritcodereview/typescript-api/gerrit';
 import {css, CSSResult, html, LitElement} from 'lit';
-import {customElement, property, state} from 'lit/decorators';
+import {customElement, property, state} from 'lit/decorators.js';
 import './rv-filter-section';
 import {Section} from './rv-filter-section';
 import {fire} from './util';
