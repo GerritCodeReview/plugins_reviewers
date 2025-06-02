@@ -119,7 +119,7 @@ public class ReviewersResolverIT extends AbstractDaemonTest {
   public void accountExactResolve() throws Exception {
     String username = "user1";
     String almostMatchingUsername = "user";
-    accountCreator.create(username);
+    var unused = accountCreator.create(username);
 
     Set<Account.Id> reviewers =
         resolver.resolve(
