@@ -1,14 +1,14 @@
+load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
 load("@rules_java//java:defs.bzl", "java_library")
+load("//tools/bzl:js.bzl", "gerrit_js_bundle")
 load("//tools/bzl:junit.bzl", "junit_tests")
-load("//tools/js:eslint.bzl", "plugin_eslint")
 load(
     "//tools/bzl:plugin.bzl",
     "PLUGIN_DEPS",
     "PLUGIN_TEST_DEPS",
     "gerrit_plugin",
 )
-load("//tools/bzl:js.bzl", "gerrit_js_bundle")
-load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
+load("//tools/js:eslint.bzl", "plugin_eslint")
 
 gerrit_plugin(
     name = "reviewers",
