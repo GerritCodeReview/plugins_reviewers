@@ -1,13 +1,6 @@
+load("@com_googlesource_gerrit_bazlets//:gerrit_plugin.bzl", "gerrit_plugin", "gerrit_plugin_tests")
 load("@npm//@bazel/typescript:index.bzl", "ts_config", "ts_project")
-load("@rules_java//java:defs.bzl", "java_library")
 load("//tools/bzl:js.bzl", "gerrit_js_bundle")
-load("//tools/bzl:junit.bzl", "junit_tests")
-load(
-    "//tools/bzl:plugin.bzl",
-    "PLUGIN_DEPS",
-    "PLUGIN_TEST_DEPS",
-    "gerrit_plugin",
-)
 load("//tools/js:eslint.bzl", "plugin_eslint")
 
 gerrit_plugin(
@@ -49,12 +42,12 @@ gerrit_js_bundle(
     entry_point = "web/plugin.js",
 )
 
-junit_tests(
+gerrit_plugin_tests(
     name = "reviewers_tests",
     size = "small",
     srcs = glob(["src/test/java/**/*.java"]),
     tags = ["reviewers"],
-    deps = PLUGIN_DEPS + PLUGIN_TEST_DEPS + [
+    deps = [
         ":reviewers__plugin",
     ],
 )
