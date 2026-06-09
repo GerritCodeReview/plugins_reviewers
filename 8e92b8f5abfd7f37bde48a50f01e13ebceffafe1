@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e408471_9977d46d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1065256
+      },
+      "writtenOn": "2026-06-09T11:11:37Z",
+      "side": 1,
+      "message": "Zuul seems to have an issue. Followup change with only formatting change verified positively.",
+      "revId": "8e92b8f5abfd7f37bde48a50f01e13ebceffafe1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
