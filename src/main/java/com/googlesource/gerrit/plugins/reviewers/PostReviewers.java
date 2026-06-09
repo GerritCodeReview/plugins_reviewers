@@ -176,13 +176,13 @@ class PostReviewers implements RestModifyView<ProjectResource, Input> {
     try {
       UnresolvableAccountException accountException;
       try {
-        accountResolver.resolve(reviewer).asUnique();
+        var unused = accountResolver.resolve(reviewer).asUnique();
         return;
       } catch (UnresolvableAccountException e) {
         accountException = e;
       }
       try {
-        groupResolver.get().parse(reviewer);
+        var unused = groupResolver.get().parse(reviewer);
       } catch (UnprocessableEntityException e) {
         throw new ResourceNotFoundException(
             "Account or group '" + reviewer + "' not found\n" + accountException.getMessage());

@@ -31,6 +31,6 @@ public class ReviewersQueryValidator {
   }
 
   void validateQuery(String query) throws QueryParseException {
-    queryBuilder.get().parse(query);
+    var unused = queryBuilder.get().parse(query);
   }
 }
