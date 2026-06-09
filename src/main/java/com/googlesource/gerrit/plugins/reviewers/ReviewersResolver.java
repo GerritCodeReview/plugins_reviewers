@@ -125,7 +125,8 @@ class ReviewersResolver {
       String group) {
     try {
       Set<Account.Id> accounts =
-          groupMembers.listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
+          groupMembers
+              .listAccounts(groupResolver.get().parse(group).getGroupUUID(), project)
               .stream()
               .filter(Account::isActive)
               .map(Account::id)
