@@ -16,5 +16,5 @@
  */
 __plugindir = 'reviewers';
 module.exports = {
-  extends: '../eslint.config.js',
+  extends: '../../eslint.config.js',
 };
