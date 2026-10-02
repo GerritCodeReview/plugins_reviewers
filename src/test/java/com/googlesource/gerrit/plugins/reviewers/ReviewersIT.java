@@ -55,6 +55,25 @@ public class ReviewersIT extends AbstractReviewersPluginTest {
   }
 
   @Test
+  public void addReviewersWhenChangeNotYetIndexed() throws Exception {
+    TestAccount user2 = accountCreator.user2();
+    PushOneCommit.Result r = createChange();
+    String changeId = project.get() + "~" + r.getChange().getId().get();
+    ChangeInfo changeInfo =
+        gApi.changes().id(project.get(), r.getChange().getId().get()).get();
+    indexer.delete(project, r.getChange().getId());
+
+    plugin
+        .getSysInjector()
+        .getInstance(AddReviewers.Factory.class)
+        .create(changeInfo, ImmutableSet.of(user.id()), ImmutableSet.of(user2.id()))
+        .run();
+
+    assertThat(reviewersFor(changeId)).containsExactly(user.id());
+    assertThat(ccsFor(changeId)).containsExactly(user2.id());
+  }
+
+  @Test
   public void addReviewerMatchingReviewerAndCc() throws Exception {
     TestAccount user2 = accountCreator.user2();
     createFilters(filter("*").cc(user).cc(user2), filter("^a.txt").reviewer(user2));

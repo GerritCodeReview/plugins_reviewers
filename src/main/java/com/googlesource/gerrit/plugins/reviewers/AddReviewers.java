@@ -74,7 +74,7 @@ class AddReviewers implements Runnable {
       // TODO(davido): Switch back to using changes API again,
       // when it supports batch mode for adding reviewers
       Set<Account.Id> existingReviewers =
-          gApi.changes().id(changeInfo._number).reviewers().stream()
+          gApi.changes().id(changeInfo.project, changeInfo._number).reviewers().stream()
               .map(r -> Account.id(r._accountId))
               .collect(Collectors.toSet());
       /* Don't add, or change state of, already existing reviewers. */
@@ -105,7 +105,7 @@ class AddReviewers implements Runnable {
         input.reviewer = account.toString();
         in.reviewers.add(input);
       }
-      gApi.changes().id(changeInfo._number).current().review(in);
+      gApi.changes().id(changeInfo.project, changeInfo._number).current().review(in);
     } catch (RestApiException e) {
       logger.atSevere().withCause(e).log("Couldn't add reviewers to the change");
     }
